@@ -1,4 +1,4 @@
-var backend_url = 'http://projectunderdev.com/app-ternium/backend-admin';
+var backend_url = 'http://projectsunderdev.com/app-ternium/backend-admin';
 
 $(document).ready(function(){
     var facebook = new FacebookPlugin();
