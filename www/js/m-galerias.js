@@ -1,0 +1,1 @@
+var url = 'http://html5cooks.com/ternium/ternium/galerias/getGaleriasJSON';

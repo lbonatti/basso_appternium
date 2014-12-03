@@ -1,0 +1,95 @@
+body {
+    width: 350px;
+    margin: 0 auto;
+}
+.page-content{
+    background-color: #fff;
+}
+.texto{
+    color: #7D7D7D;
+    text-shadow: none;
+}
+.texto.title {
+    text-transform: uppercase;
+}
+
+.texto.t1{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+ .ultimo-elemento{
+    margin-bottom: 84px !important;
+}
+
+
+ .resultado{
+    margin: 5px 12px;
+    padding: 9px 38px 9px 15px;
+    position: relative;
+    width: 300px;
+    font-size: 16px;
+}
+
+ .resultado span{
+    color: #000000;
+     text-transform: uppercase;
+}
+
+ .valor{
+    margin: 5px 0 5px 29px;
+    font-size: 15px;
+     line-height: 20px;
+     position: relative;
+}
+ .valor.ultimo{
+    border-bottom: 0px;
+}
+
+ .valor .texto{
+    width: 200px;
+    display: inline-block;
+}
+
+ .valor .medida{
+     text-align: right;
+     color: #FF0000;
+}
+ .paso5 .boton{
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+ .valor .texto.mas {
+    color: #F90 !important;
+}
+
+ .valor.child {
+    margin-left: 50px;
+    font-size: 13px;
+     color: #000 !important;
+}
+
+ .luzViga{
+    margin: 0 auto;
+}
+ .luzViga .texto{
+    margin: 0 auto;
+}
+ .luzViga .texto.aclaracion{
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+    padding: 0 0 30px;
+}
+ .luzViga .bx-viewport{
+    background: none no-repeat 0 0 scroll transparent !important;
+}
+ .luzViga .bx-viewport .bx-clone{
+    display: none;
+}
+ .grupo.tipoEntrepiso {
+    display: none;
+}

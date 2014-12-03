@@ -1,0 +1,138 @@
+
+#register .field{
+    margin: 5px 5%;
+    width: 90%;
+    display: block;
+    background-color: #3D464B;
+    color: #fff;
+    border: 1px solid #7D7978;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    outline: none;
+    background-repeat: no-repeat;
+    background-size: 26px;
+    font-size: 17px;
+}
+#register .field:focus{
+    border: 1px solid #EE9209;
+}
+#register .password{
+    background-size: 17px;
+    background-position: 96%;
+}
+
+#register .dia{
+    width: 25%;
+    padding-left: 8px !important;
+}
+
+#register .mes{
+    width: 25%;
+    margin-left: 0%;
+    padding-left: 8px !important;
+}
+
+#register .anio{
+    width: 30%;
+    margin-left: 0%;
+    padding-left: 2px !important;
+}
+
+#register a.page-back{
+    background-image: url(../img/arrow-back-2.png);
+    display: block;
+    width: 56px;
+    height: 55px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+#register label{
+    width: 100%;
+    float: left;
+    text-shadow: none;
+    color: #b5b5b5;
+    font-family: roboto-regular;
+    font-size: 14px;
+    margin-top: 4px;
+    padding-left: 5%;
+    margin-bottom: 7px;
+}
+
+#register .boton{
+    clear: both;
+    margin: 18px 5%;
+    margin-bottom:0px;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-decoration: none;
+
+}
+
+
+#register {
+    background-color: #3D464B;
+    background-image: none;
+}
+
+#register .titulo {
+    font-family: roboto-thin;
+    margin-top: 15px;
+}
+
+#register .subtitulo {
+    margin: 4px auto;
+    width: 178px;
+    font-family: roboto-thin;
+    font-size: 16px;
+    text-shadow: none;
+    text-align: center;
+    color: #b5b5b5;
+    padding: 0px 0px;
+}
+
+#register select{
+    margin: 5px 5%;
+    float: left;
+    width: 90%;
+    font-family: roboto-regular;
+    border: 1px solid #666;
+    box-sizing: border-box !important;
+    font-size: 17px;
+    background-color: #3D464B;
+    outline: none;
+    color: #666;
+    padding: 12px !important;
+    margin-top: 0px;
+
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-image: url(../img/feedback-arrow.png);
+    background-repeat: no-repeat;
+    background-size: 42px;
+    background-position: 100% 3px;
+}
+
+#register .ingreso-fb{
+    float: left;
+    width: 90%;
+    margin: 18px 5%;
+}

@@ -1,0 +1,233 @@
+.slider-home{
+    height: 30%;
+    min-height: 144px;
+    background-color: #FF9900;
+}
+
+.option{
+    background-color: #F7F5F6;
+    float: left;
+    /*width: 50vw;
+    height: 50vw;*/
+
+    width:50%;
+    padding-top:50%;
+    height: 0px;
+
+    border: 1px solid #DBD9DA;
+    box-sizing: border-box;
+    /*height: 30%;*/
+    /*min-height: 150px;*/
+    text-align: center;
+    text-decoration: none;
+    border-right: none;
+    margin-bottom: 1px;
+    position: relative;
+}
+.option.vacio{
+    background-color: #FFF;
+}
+.option.izq{
+    border-left: none;
+    border-top: none;
+}
+.option.der{
+    border-right: none;
+    border-top: none;
+}
+.option img{
+    margin-top: 22%;
+    width: 83px;
+}
+.option b{
+    width: 100%;
+    display: block;
+    color: #7B7B7B;
+    font-size: 17px;
+    font-family: "roboto-thin";
+    padding: 0px 19px;
+    box-sizing: border-box;
+    /*margin-top: 65%;*/ /*-6px*/
+    position: absolute;top:67%;
+}
+
+
+.bx-wrapper{
+    margin-bottom:33px !important;
+    left: 0px !important;
+}
+
+.bx-viewport{
+    height: 30%;
+    min-height: 144px;
+    background-color: #FF9900 !important;
+    border: none !important;
+    left: 0px !important;
+}
+.bx-pager{
+    background-color: #FF9900 !important;
+    height: 25px;
+    border-bottom: 1px solid #E78C00;
+}
+.bx-pager a{
+    background-color: #FFF !important;
+    width: 8px !important;
+    height: 8px !important;
+}
+.bx-pager a.active{
+    background-color: #FF9900 !important;
+    border:2px solid #FFf !important;
+    width: 4px !important;
+    height: 4px !important;
+    line-height: 0.8;
+}
+
+.bxslider li{
+    height: 120px;
+}
+.bxslider li img{
+    width: 90px;
+    height: 70%;
+    margin-left: 7%;
+    margin-top: 11px;
+    float: left;
+}
+
+.bxslider li div.titulo{
+    width: 60%;
+    float: left;
+    font-family: "roboto-thin";
+    color: #fff;
+    text-shadow: none;
+    font-size: 35px;
+    text-overflow: ellipsis;
+    margin-top: 13px;
+}
+.bxslider li div.fecha{
+    width: 60%;
+    float: left;
+    font-family: "roboto-thin";
+    color: #fff;
+    text-shadow: none;
+    font-size: 22px;
+}
+
+.ini1, .ini2, .ini3, .ini4, .ini5, .ini6{
+    background-image: url(../img/svg/iconos-pantalla-inicio.svg);
+    background-size: 720%;
+}
+
+.ini1{
+    /*background-image: url(../img/inicio/i1.png);*/
+    background-position: 5.5% 50%;
+}
+.ini2{
+    /*background-image: url(../img/inicio/i2.png);*/
+    background-position: 24% 47%;
+}
+.ini3{
+    /*background-image: url(../img/inicio/i3.png);*/
+    background-position: 41% 47%;
+}
+.ini4{
+   /*background-image: url(../img/inicio/i4.png);*/
+    background-position: 56.5%  47%;
+}
+.ini5{
+   /* background-image: url(../img/inicio/i5.png);*/
+    background-position: 72.5% 47%;
+}
+.ini6{
+    /*background-image: url(../img/inicio/i6.png);*/
+    background-position: 89.0% 47%;
+}
+
+.ini1,.ini2,.ini3,.ini4,.ini5,.ini6{
+    /*background-size: 100%;*/
+    background-repeat: no-repeat;
+}
+
+
+.shadow{
+    opacity: 0.6;
+    background-color: #000;
+    width: 100%;
+    position: absolute;
+    z-index: 9990;
+}
+#dlg-calculo-mas,
+#dlg-del-calculo{
+    background-color: #F7F5F6;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    top: 10px;
+    z-index: 9999;
+}
+#dlg-del-calculo .titulo{
+    font-family: roboto-regular;
+    color: #495456;
+    padding: 23px;
+    font-size: 21px;
+    background-image: url(../img/warning.png);
+    background-repeat: no-repeat;
+    background-position: 90% 22px;
+    background-size: 28px;
+}
+#dlg-calculo-mas .mensaje,
+#dlg-del-calculo .mensaje{
+    font-family: roboto-thin;
+    color: #495456;
+    padding: 15px 23px;
+    font-size: 14px;
+}
+#dlg-calculo-mas .boton,
+#dlg-del-calculo .boton{
+    margin: 32px 23px;
+    margin-bottom: 20px;
+    width: 255px;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 11px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+.btn-settings{
+    background-image: url(../img/settings.png);
+    display: block;
+    width: 56px;
+    height: 55px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+
+
+#dlg-del-calculo .cancelar{
+    font-family: roboto-thin;
+    text-align: center;
+    color: #495456;
+}
+.dialogo{
+    display: none;
+}
+
+#dlg-calculo-mas {
+    background-color: #F7F5F6;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    top: 10px;
+    z-index: 9999;
+}
+

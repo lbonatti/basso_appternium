@@ -1,0 +1,330 @@
+
+#m1-csf-1 {
+    background-color: #F7F5F6;
+    background-image: none;
+}
+#m1-csf-1 .page-content{
+    background-color: #fff;
+}
+#m1-csf-1 .texto{
+    color: #7D7D7D;
+    font-family: "roboto-regular";
+    text-shadow: none;
+}
+#m1-csf-1 .t1{
+    text-align: center;
+    width: 79%;
+    margin: 16px auto;
+    margin-bottom: 15px;
+}
+#m1-csf-1 .t2{
+    width: 25%;
+    padding-left: 14px;
+    box-sizing: border-box;
+    float: left;
+    padding-top: 27px;
+    clear: both;
+    margin-top: 15px;
+}
+#m1-csf-1 .t3{
+    width: 25%;
+    padding-right: 14px;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    padding-top: 27px;
+    margin-top: 15px;
+}
+
+#m1-csf-1 input{
+    outline: none;
+    color: #FF9900;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #D6D4D5;
+    width: 50%;
+    float: left;
+    text-align: right;
+    font-size: 38px;
+    font-family: roboto-thin;
+    height: 44px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+#m1-csf-1 .i1{
+
+}
+#m1-csf-1 .i2{
+
+}
+
+#m1-csf-1 .pa{
+    margin-top: 32px;
+    width: 100%;
+    float: left;
+    margin-bottom: 0px;
+}
+#m1-csf-1 div.paredes{
+    width: 50% !important;
+}
+#m1-csf-1 input.paredes{
+    width: 25% !important;
+}
+
+#m1-csf-1 .grupo{
+    float: left;
+    width: 100%;
+}
+
+#m1-csf-1 .grupo .texto{
+    text-align: center;
+    padding: 32px;
+    padding-bottom: 12px;
+    padding-top: 16px;
+}
+#m1-csf-1 .grupo .op1{
+    font-family: roboto-regular;
+    text-shadow: none;
+    width: 45%;
+    float: left;
+    border: 1px solid #D6D4D5;
+    border-right: none;
+    margin-left: 5%;
+    color: #7D7D7D;
+    padding: 11px;
+    box-sizing: border-box;
+    text-align: center;
+    text-shadow: none;
+    font-size: 17px;
+    height: 43px;
+}
+
+#m1-csf-1 .grupo .op2{
+    font-family: roboto-regular;
+    font-size: 17px;
+    height: 43px;
+    text-shadow: none;
+    width: 45%;
+    float: left;
+    border: 1px solid #D6D4D5;
+    color: #7D7D7D;
+    padding: 11px;
+    box-sizing: border-box;
+    text-align: center;
+    text-shadow: none;
+}
+
+#m1-csf-1 .grupo .selected{
+    background-image: url(../img/check.png);
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 100% 0%;
+    background-color: #FF3300;
+    color: #fff;
+
+    padding-right: 45px;
+
+}
+
+#m1-csf-1 .boton{
+    clear: both;
+    margin: 18px 5%;
+    margin-bottom:0px;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+#m1-csf-1 .ultimo-elemento{
+    margin-bottom: 84px !important;
+}
+
+#m1-csf-1 .techo{
+    border: 1px solid #E0DEDF;
+    margin: -1px 15px;
+    padding: 10px 23px;
+}
+#m1-csf-1 .techo.selected{
+    color: #fff;
+    background-color: #FF3300;
+    background-image: url(../img/check.png);
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 100% 0%;
+    padding-right: 45px;
+}
+
+
+#m1-csf-1 .pie{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 58px;
+    background-color: #555;
+}
+
+#m1-csf-1 .pie div{
+    width: 20%;
+    float: left;
+    background-color: #495456;
+    height: 100%;
+    text-shadow: none;
+    color: #fff;
+    font-family: roboto-thin;
+    font-size: 13px;
+    text-align: center;
+    padding-top: 31px;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: 50% 11%;
+}
+#m1-csf-1 .pie div.disabled{
+    opacity: 0.4;
+}
+
+#m1-csf-1 .pie .p1{
+    background-image: url(../img/steel-frame/1.png);
+}
+#m1-csf-1 .pie .p2{
+    background-image: url(../img/steel-frame/2.png);
+}
+#m1-csf-1 .pie .p3{
+    background-image: url(../img/steel-frame/3.png);
+}
+#m1-csf-1 .pie .p4{
+    background-image: url(../img/steel-frame/4.png);
+}
+#m1-csf-1 .pie .p5{
+    background-image: url(../img/steel-frame/5.png);
+}
+
+#m1-csf-1 .pie .selected{
+    background-color: #fff;
+    color: #495456;
+    font-family: roboto-regular;
+}
+
+
+#m1-csf-1 .pie .p1.selected{
+     background-image: url(../img/steel-frame/1-selected.png);
+ }
+#m1-csf-1 .pie .p2.selected{
+    background-image: url(../img/steel-frame/2-selected.png);
+}
+#m1-csf-1 .pie .p3.selected{
+    background-image: url(../img/steel-frame/3-selected.png);
+}
+#m1-csf-1 .pie .p4.selected{
+    background-image: url(../img/steel-frame/4-selected.png);
+}
+#m1-csf-1 .pie .p5.selected{
+    background-image: url(../img/steel-frame/5-selected.png);
+}
+
+
+#m1-csf-1 .paso3 .t1{
+    margin: 22px auto;
+    margin-bottom: 13px;
+}
+#m1-csf-1 .paso3 input{
+    margin-left: 5%;
+    width: 70%;
+}
+#m1-csf-1 .paso3 .aclaracion{
+    text-align: center;
+    color: #999;
+    font-family: roboto-thin;
+    font-size: 13px;
+    padding: 28px 17px;
+    float: left;
+}
+
+#m1-csf-1 .resultado{
+    margin: 0px 12px;
+    border: 1px solid #DFDFDF;
+    background-color: #E6E6E6;
+    padding: 9px 15px;
+    padding-right: 38px;
+    position: relative;
+}
+
+#m1-csf-1 .resultado span{
+
+}
+#m1-csf-1 .resultado .mas{
+    height: 39px;
+    width: 39px;
+    background-color: #FF9900;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    background-image: url(../img/plus.png);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 16px;
+}
+
+#m1-csf-1 .valor{
+    margin: 11px 12px;
+    margin-left: 29px;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+#m1-csf-1 .valor.ultimo{
+    border-bottom: 0px;
+}
+
+#m1-csf-1 .valor .texto{
+    max-width: 74%;
+    display: block;
+    float: left;
+}
+
+#m1-csf-1 .valor .medida{
+    float: right;
+}
+#m1-csf-1 .paso5 .boton{
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+
+
+
+.dot-menu{
+    background-image: url(../img/dot-menu.png);
+    display: block;
+    width: 56px;
+    height: 55px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.dot-menu.selected{
+    background-image: url(../img/dot-menu-selected.png);
+}
+.menu-options{
+    position: absolute;
+    right: 0px;
+    background-color: #495456;
+    text-shadow: none;
+    color: #fff;
+    font-family: roboto-regular;
+    width: 240px;
+    border: 1px solid #3C4749;
+}
+.menu-options div{
+    padding: 12px 21px;
+    border-bottom: 1px solid #3C4749;
+}

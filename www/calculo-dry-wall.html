@@ -1,0 +1,127 @@
+
+<div data-role="page" id="m1-cdw-1">
+    <div class="page-header" >
+        <a href="#" class="open-menu"></a>
+        <h1>Proyecto 1</h1>
+        <a id="back-dw" class="page-back"></a>
+        <a class="dot-menu"></a>
+        <div class="menu-options">
+            <div class="editar">Editar</div>
+            <div class="duplicar" >Duplicar</div>
+            <div class="eliminar">Eliminar</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="paso paso1">
+            <div class="texto t1">Metros lineales de las paredes interiores</div>
+
+            <div class="texto t2">Largo</div>
+            <input data-role="none" class="i1" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2">Altura</div>
+            <input data-role="none" class="i2" />
+            <div class="texto t3">mts.</div>
+
+            <div class="grupo">
+                <div class="texto">Espesor del perfil</div>
+                <div class="op1 selected">35</div>
+                <div class="op2">70</div>
+            </div>
+
+            <div class="grupo">
+                <div class="texto">Tipo de placa</div>
+                <div class="op1">Simple</div>
+                <div class="op2 selected">Doble</div>
+            </div>
+
+            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+        </div>
+
+        <div class="paso paso2">
+            <div class="texto t1">Metros de cielo raso</div>
+
+            <div class="texto t2">Largo</div>
+            <input data-role="none" class="i1" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2">Ancho</div>
+            <input data-role="none" class="i2" />
+            <div class="texto t3">mts.</div>
+
+            <div class="boton siguiente-paso">Siguiente paso</div>
+
+        </div>
+
+        <div class="paso paso3">
+            <div class="texto t1">Computo aproximado de materiales</div>
+
+
+            <div class="resultado">
+                <span class="texto">1. Perfiles PGC</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">100 X 0,9 Montantes </span>
+                <span class="texto medida">700 ml.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">200 X 2,00</span>
+                <span class="texto medida">60 ml.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">2. Perfiles PGU</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">100 X 0,9 </span>
+                <span class="texto medida">311 ml.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">200 X 1,25</span>
+                <span class="texto medida">104 ml.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">3. Anclajes</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Anclaje químico con varilla roscada</span>
+                <span class="texto medida">13 U.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">4. Placas de roca de yeso</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">Placa de yeso para paredes</span>
+                <span class="texto medida">231 mt2.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Placa de yeso para cielo rasos</span>
+                <span class="texto medida">231 mt2.</span>
+            </div>
+
+
+            <div class="boton">Descargar PDF</div>
+            <div class="boton ultimo-elemento">Compartir PDF</div>
+        </div>
+
+        <div class="pie">
+            <div class="p1 selected">Dimensiones</div>
+            <div class="p2 disabled">Cielo raso</div>
+            <div class="p3 disabled">Resultados</div>
+        </div>
+
+
+    </div>
+
+    <script>
+        eventosDryWall()
+    </script>
+</div>

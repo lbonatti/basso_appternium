@@ -1,0 +1,40 @@
+
+<div data-role="page" id="m-u-c">
+    <div class="page-header" >
+        <a href="#" class="open-menu"></a>
+        <h1>Conversor de medidas</h1>
+        <a  class="page-back"></a>
+    </div>
+    <div class="page-content">
+
+        <div class="panel-1">
+			<div class="left"></div>
+			<div class="right">
+				<div class="sliderMedidas">
+					<ul class="bxslider">
+						<li>Milímetros</li>
+						<li>Centímetros</li>
+						<li>Pulgadas</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div class="panel-2">
+
+        </div>
+        <div class="panel-3">
+
+        </div>
+
+    </div>
+
+    <script>
+		$(document).ready(function(){
+			$('ul.bxslider').bxSlider({
+				mode: 'vertical',
+				startSlide: '1'
+			});
+		})
+        //eventosConversor()
+    </script>
+</div>

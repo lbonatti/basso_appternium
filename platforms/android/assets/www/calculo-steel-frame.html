@@ -1,0 +1,180 @@
+
+<div data-role="page" id="m1-csf-1">
+    <div class="page-header" >
+        <a href="#" class="open-menu"></a>
+        <h1 class="projectName">Proyecto 1</h1>
+        <a  id="back-sf"  class="page-back"></a>
+        <a class="dot-menu"></a>
+        <div class="menu-options">
+            <div class="editar">Editar</div>
+            <div class="duplicar" >Duplicar</div>
+            <div class="eliminar">Eliminar</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="paso paso1">
+
+            <div class="grupo cantPlantas">
+                <div class="texto">Cantidad de plantas</div>
+                <div class="op1 selected" data-value="1" >1 planta</div>
+                <div class="op2" data-value="2">2 plantas</div>
+            </div>
+
+            <div class="grupo tipoEntrepiso">
+                <div class="texto">Tipo de entrepiso</div>
+                <div class="op1" data-value="seco">Seco</div>
+                <div class="op2 selected" data-value="humedo">Húmedo</div>
+            </div>
+
+            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+        </div>
+
+        <div class="paso paso2">
+            <div class="texto t1">Planta baja</div>
+
+            <div class="texto t2">Ancho</div>
+            <input data-role="none" class="i1" type="number"/>
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2">Largo</div>
+            <input data-role="none" class="i2" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2">Altura</div>
+            <input data-role="none" class="i3" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2 paredes">Paredes interiores</div>
+            <input data-role="none" class="i4 paredes" />
+            <div class="texto t3">mts.</div>
+
+            <div class="plantaAltaBlock">
+
+                <div class="texto t1 pa">Planta alta</div>
+
+
+                <div class="boton copyTo">Copiar valores de planta baja</div>
+
+                <div class="texto t2">Ancho</div>
+                <input data-role="none" class="i5" />
+                <div class="texto t3">mts.</div>
+
+                <div class="texto t2">Largo</div>
+                <input data-role="none" class="i6" />
+                <div class="texto t3">mts.</div>
+
+                <div class="texto t2">Altura</div>
+                <input data-role="none" class="i7" />
+                <div class="texto t3">mts.</div>
+
+                <div class="texto t2 paredes">Paredes interiores</div>
+                <input data-role="none" class="i8 paredes" />
+                <div class="texto t3">mts.</div>
+
+            </div>
+
+            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+        </div>
+
+        <div class="paso paso3">
+            <div class="texto t1">Metros lineales de aberturas en paneles portantes</div>
+
+            <input data-role="none" class="i9" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto aclaracion">
+                Aclaración<br>Lorem ipsum dolor sit amet, consecteur adipiscing elit. Aliquam egestas, quam id sodales ullamcorper, massa ipsum adipiscing elit, ac bibendum.
+            </div>
+            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+        </div>
+
+        <div class="paso paso4">
+            <div class="texto t1">Tipo de techo</div>
+
+            <div class="texto techo op1 selected">Cubierta inclinada/cabriadas</div>
+            <div class="texto techo op2">Cubierta inclinada/vigas a 10°</div>
+            <div class="texto techo op3">Cubierta plana/vigas</div>
+
+
+            <div class="boton ultimo-elemento siguiente-paso">Finalizar cálculo</div>
+
+        </div>
+
+        <div class="paso paso5">
+            <div class="texto t1">Cómputo aproximado de materiales</div>
+
+
+            <div class="resultado">
+                <span class="texto">1. Perfiles PGC</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">100 X 0,9 Montantes </span>
+                <span class="texto medida">700 ml.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">200 X 2,00</span>
+                <span class="texto medida">60 ml.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">2. Perfiles PGU</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">100 X 0,9 </span>
+                <span class="texto medida">311 ml.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">200 X 1,25</span>
+                <span class="texto medida">104 ml.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">3. Anclajes</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Anclaje químico con varilla roscada</span>
+                <span class="texto medida">13 U.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">4. Placas de roca de yeso</span>
+                <div class="mas"></div>
+            </div>
+            <div class="valor">
+                <span class="texto">Placa de yeso para paredes</span>
+                <span class="texto medida">231 mt2.</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Placa de yeso para cielo rasos</span>
+                <span class="texto medida">231 mt2.</span>
+            </div>
+
+
+            <div class="boton">Descargar PDF</div>
+            <div class="boton ultimo-elemento">Compartir PDF</div>
+        </div>
+
+        <div class="pie">
+            <div class="p1 selected">Plantas</div>
+            <div class="p2 disabled">Dimen.</div>
+            <div class="p3 disabled">Abert.</div>
+            <div class="p4 disabled">Techo</div>
+            <div class="p5 disabled">Result.</div>
+        </div>
+
+
+    </div>
+
+    <script>
+        eventosSteelFrame()
+    </script>
+</div>
+
+
+
+

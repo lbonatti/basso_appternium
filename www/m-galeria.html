@@ -1,0 +1,157 @@
+
+<div data-role="page" id="m3-g">
+    <div class="page-header" >
+        <a href="#" class="open-menu"></a>
+        <h1>Galería Steel Frame</h1>
+        <a  class="page-back"></a>
+    </div>
+    <div class="page-content">
+
+		<ul class="tabs">
+			<li class="tab-link" data-tab="interiores">Interiores</li>
+			<li class="tab-link current" data-tab="exteriores">Exteriores</li>
+			<li class="tab-link" data-tab="aberturas">Aberturas</li>
+		</ul>
+
+		<div id="interiores" class="tab-content">
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="exteriores" class="tab-content current">
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="aberturas" class="tab-content">
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+
+			<div class="img-content">
+				<img src="http://www.unmo.ba/unsis/assets/plugins/jcrop/demos/demo_files/image1.jpg" />
+				<div class="infoImg">
+					<span>
+						Terminación exterior<br/>
+						<span>Barrio Privado. Ciudad de México</span>
+					</span>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <script>
+		$(document).ready(function(){
+
+			$('ul.tabs li').click(function(){
+				var tab_id = $(this).attr('data-tab');
+
+
+				$('ul.tabs li').removeClass('current');
+				$('.tab-content').removeClass('current');
+
+				$(this).addClass('current');
+				$("#"+tab_id).addClass('current');
+			})
+
+		})
+    </script>
+</div>

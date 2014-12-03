@@ -1,0 +1,178 @@
+
+<div data-role="page" id="m1-ct-1">
+    <div class="page-header" >
+        <a href="#" class="open-menu"></a>
+        <h1>Proyecto 1</h1>
+        <a  id="back-t"  class="page-back"></a>
+        <a class="dot-menu"></a>
+        <div class="menu-options">
+            <div class="editar">Editar</div>
+            <div class="duplicar" >Duplicar</div>
+            <div class="eliminar">Eliminar</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="paso paso1">
+
+            <div class="texto t1">Superficie de techo</div>
+
+            <div class="texto t2">Largo</div>
+            <input data-role="none" class="i1" type="number" />
+            <div class="texto t3">mts.</div>
+
+            <div class="texto t2">Ancho</div>
+            <input data-role="none" class="i2" type="number" />
+            <div class="texto t3">mts.</div>
+
+
+            <div class="grupo chapaTipo">
+                <div class="texto">Tipo de chapa</div>
+                <div class="op1 selected">Acanalada</div>
+                <div class="op2">Trapezoidal</div>
+            </div>
+
+            <div class="texto t1 pa">Modelo</div>
+            <div class="chapaModeloTrapezoidal" style="display: none;">
+                <div class="modelo selected">
+                    <span class="texto">T-101</span>
+                    <div class="mas"></div>
+                </div>
+                <div class="modelo">
+                    <span class="texto">T-98</span>
+                    <div class="mas"></div>
+                </div>
+                <div class="modelo">
+                    <span class="texto">T-90</span>
+                    <div class="mas"></div>
+                </div>
+            </div>
+            <div class="chapaModeloAcanalada">
+                <div class="modelo selected">
+                    <span class="texto">A-1086</span>
+                    <div class="mas"></div>
+                </div>
+            </div>
+
+
+            <div class="texto t1">Color</div>
+            <div class="color">
+                <div class="texto op1">Blanco Nieve</div>
+                <div class="texto op2">Celeste</div>
+                <div class="texto op3 selected">Azul Millenium</div>
+                <div class="texto op4">Rojo teja</div>
+                <div class="texto op5">Verde Inglés</div>
+                <div class="texto op6">Gris pizarra</div>
+                <div class="texto op7">Negro</div>
+            </div>
+
+            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+
+
+            <div id="infoBlock">
+                <a href="#" class="infoClose">X</a>
+
+                <div class="modelData1">
+                    <h1>Modelo</h1>
+                    <h2>Chapa Trapezoidal A-1086</h2>
+                    <h3>
+                        Ancho total: 1100<br/>
+                        Ancho Útil: 1,01mm.
+                    </h3>
+                    <p>Detalles</p>
+                    <p>1. El tornillo puede aplicarse en la cresta o en el valle.</p>
+                    <p>2. De 4 a 6 tornillos x m2.</p>
+                </div>
+                <div class="modelData2">
+                    <h1>Modelo</h1>
+                    <h2>Chapa Trapezoidal T-101</h2>
+                    <h3>
+                        Ancho total: 1100<br/>
+                        Ancho Útil: 1,01mm.
+                    </h3>
+                    <p>Detalles</p>
+                    <p>1. El tornillo puede aplicarse en la cresta o en el valle.</p>
+                    <p>2. De 4 a 6 tornillos x m2.</p>
+                </div>
+                <div class="modelData3">
+                    <h1>Modelo</h1>
+                    <h2>Chapa Trapezoidal T-98</h2>
+                    <h3>
+                        Ancho total: 1100<br/>
+                        Ancho Útil: 1,01mm.
+                    </h3>
+                    <p>Detalles</p>
+                    <p>1. El tornillo puede aplicarse en la cresta o en el valle.</p>
+                    <p>2. De 4 a 6 tornillos x m2.</p>
+                </div>
+                <div class="modelData4">
+                    <h1>Modelo</h1>
+                    <h2>Chapa Trapezoidal T-90</h2>
+                    <h3>
+                        Ancho total: 1100<br/>
+                        Ancho Útil: 1,01mm.
+                    </h3>
+                    <p>Detalles</p>
+                    <p>1. El tornillo puede aplicarse en la cresta o en el valle.</p>
+                    <p>2. De 4 a 6 tornillos x m2.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="paso paso2">
+            <div class="texto resultado-techo">32</div>
+            <div class="texto resultado-medida">m2.</div>
+            <div class="texto resultado-leyenda">De techo a cubrir</div>
+
+            <div class="resultado">
+                <span class="texto">1. Chapas para techo</span>
+
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Cantidad</span>
+                <span class="texto medida resultado-chapas">44 U.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">2. Aislación</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Lana de vidio</span>
+                <span class="texto medida resultado-aislacion">32 m2.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">3. Tornillos</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Cantidad</span>
+                <span class="texto medida resultado-tornillos">154 U.</span>
+            </div>
+
+
+            <!--<div class="boton">Descargar PDF</div>-->
+            <!--<div class="boton ultimo-elemento">Compartir PDF</div>-->
+            <div class="boton ultimo-elemento">Guardar</div>
+
+        </div>
+
+        <div class="pie">
+            <div class="p1 selected">Techo</div>
+            <div class="p2 disabled">Resultados</div>
+        </div>
+
+
+    </div>
+
+    <script>
+        eventosTechos()
+    </script>
+</div>
+
+
+
+

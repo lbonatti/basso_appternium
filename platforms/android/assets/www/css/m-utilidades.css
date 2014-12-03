@@ -1,0 +1,43 @@
+.option span{
+    clear: both;
+    float: left;
+    font-size: 12px;
+    width: 100%;
+}
+#m4-u .option b{
+    top: 58%;
+}
+.option.disabled b{
+    color:#D2D0D1;
+
+}
+
+.option.disabled img{
+    /*opacity: 0.3;*/
+}
+
+#m4-u .util1,#m4-u .util2,#m4-u .util3,#m4-u .util4{
+    background-size: 472%;
+    background-image: url(../img/svg/iconos-utilidades.svg);
+}
+
+#m4-u .util1{
+   /* background-image: url(../img/util/ut1.png);*/
+    background-position: 16% 49%;
+}
+#m4-u .util2{
+    background-size: 100%;
+    background-image: url(../img/util/ut2.png);
+}
+#m4-u .util3{
+    /*background-image: url(../img/util/ut3.png);*/
+    background-position: 50% 49%;
+    opacity: 0.4;
+}
+#m4-u .util4{
+    /*background-image: url(../img/util/ut4.png);*/
+    background-position: 82% 49%;
+    opacity: 0.4;
+}
+
+

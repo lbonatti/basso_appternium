@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="841.89px" height="595.28px" viewBox="0 0 841.89 595.28" enable-background="new 0 0 841.89 595.28" xml:space="preserve">
+<path fill="#40403E" d="M707.27,301.833v-51.296h-56.021v51.296h-5.727v10.981h67.926v-10.981H707.27z M657.987,279.78h19.444
+	v18.852h-19.444V279.78z M681.085,279.78h19.444v18.852h-19.444V279.78z M700.529,276.128h-19.444v-18.851h19.444V276.128z
+	 M677.432,257.277v18.851h-19.444v-18.851H677.432z M709.796,309.162h-60.621v-3.677h60.621V309.162z"/>
+<polygon fill="#40403E" points="160.011,277.33 160.011,265.292 153.265,265.292 153.265,270.584 137.688,255.008 137.69,255.005 
+	132.92,250.235 132.918,250.237 132.916,250.235 128.146,255.006 128.147,255.008 98.675,284.481 103.445,289.251 106.444,286.253 
+	106.444,312.748 113.189,312.748 113.189,279.507 132.918,259.778 152.647,279.507 152.647,312.484 159.393,312.484 
+	159.393,286.253 162.391,289.251 167.161,284.48 "/>
+<path fill="#40403E" d="M530.771,260.831v-6.674h-5.67v-4.129h-6.674v4.129h-42.695v-4.129h-6.674v4.129h-5.925v6.674h5.925v41.45
+	h-5.925v6.674h5.925v3.463h6.674v-3.463h42.695v3.463h6.674v-3.463h5.669v-6.674h-5.669v-41.45H530.771z M518.428,302.281h-42.695
+	v-41.45h42.695V302.281z"/>
+<g>
+	<g>
+		<path fill="#40403E" d="M873.911,257.614c-0.003-1.568-1.135-2.842-2.532-2.842h-5.061v-2.27c0-1.569-1.133-2.841-2.528-2.841
+			h-5.055c-1.403,0-2.532,1.272-2.532,2.841v2.27h-5.06c-1.396,0-2.531,1.271-2.531,2.842v4.923h25.299V257.614z"/>
+		<polygon fill="#40403E" points="877.872,255.809 877.872,262.503 879.896,262.503 879.896,306.269 842.658,306.269 
+			842.658,262.503 844.391,262.503 844.391,255.809 835.965,255.809 835.965,312.962 886.589,312.962 886.589,255.809 		"/>
+		<rect x="851.106" y="273.841" fill="#40403E" width="21.128" height="3.627"/>
+		<rect x="851.106" y="290.395" fill="#40403E" width="21.128" height="3.627"/>
+		<rect x="851.106" y="282.117" fill="#40403E" width="12.2" height="3.627"/>
+	</g>
+</g>
+<path fill="#40403E" d="M349.297,284.507l-8.084-8.085v-11.086h-6.74v4.347l-14.622-14.622l0.002-0.001l-4.765-4.766l-0.002,0.001
+	l-0.001-0.001l-4.765,4.766l0.001,0.001l-29.445,29.447l4.765,4.765l2.672-2.672v26.148h6.74V279.86l5.169-5.17v9.474h-3.719v3.652
+	h36.731v-3.652h-3.371v-9.561l4.609,4.61v0.24v33.031h6.74v-26.531l3.319,3.319L349.297,284.507z M303.873,271.04l9.345-9.345
+	v22.469h-9.345V271.04z M326.212,284.164h-9.344v-22.555l9.344,9.344V284.164z"/>
+<g>
+	<text transform="matrix(1 0 0 1 -79.7207 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Planta</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 112.3413 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Techo</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 277.707 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Cielo raso</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 449.5811 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Dimensiones</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 644.0586 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Aberturas</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 821.6152 357.1211)" fill="#868281" font-family="'Roboto-Regular'" font-size="16.1077">Resultados</text>
+</g>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-163.674" y1="249.472" x2="1005.663" y2="249.472"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-163.674" y1="313.228" x2="1005.663" y2="313.228"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-84.564" y1="234.009" x2="-84.564" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-14.399" y1="234.009" x2="-14.399" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="99.031" y1="234.009" x2="99.031" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="167.196" y1="234.009" x2="167.196" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="277.626" y1="234.009" x2="277.626" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="348.792" y1="234.009" x2="348.792" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="461.675" y1="234.009" x2="461.675" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="532.84" y1="234.009" x2="532.84" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="643.271" y1="234.009" x2="643.271" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="714.436" y1="234.009" x2="714.436" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="824.866" y1="234.009" x2="824.866" y2="329.692"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="896.031" y1="234.009" x2="896.031" y2="329.692"/>
+<g>
+	<polygon fill="#40403E" points="-51.27,270.121 -57.944,270.121 -57.944,256.48 -60.985,256.48 -60.985,249.806 -51.27,249.806 	
+		"/>
+	<polygon fill="#40403E" points="-27.229,313.995 -84.543,313.995 -84.563,249.817 -74.241,249.817 -74.241,256.491 
+		-77.888,256.491 -77.871,307.321 -33.903,307.321 -33.903,283.939 -21.414,283.939 -21.456,256.499 -54.727,256.48 
+		-54.723,249.806 -14.792,249.829 -14.73,290.613 -27.229,290.613 	"/>
+	<g>
+		<defs>
+			<polygon id="SVGID_1_" points="-29.672,287.655 -28.869,309.15 -57.782,309.15 -57.782,256.717 -19.025,256.717 -18.422,287.855 
+							"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_2_)">
+			<g>
+				
+					<rect x="-61.025" y="223.157" transform="matrix(0.6911 0.7227 -0.7227 0.6911 169.8203 124.2198)" fill="#40403E" width="1.205" height="75.273"/>
+				
+					<rect x="-55.771" y="228.411" transform="matrix(0.6911 0.7227 -0.7227 0.6911 175.2407 122.0454)" fill="#40403E" width="1.205" height="75.272"/>
+				
+					<rect x="-50.516" y="233.666" transform="matrix(0.6911 0.7227 -0.7227 0.6911 180.6615 119.8708)" fill="#40403E" width="1.205" height="75.273"/>
+				
+					<rect x="-45.261" y="238.921" transform="matrix(0.6911 0.7227 -0.7227 0.6911 186.0823 117.696)" fill="#40403E" width="1.205" height="75.272"/>
+				
+					<rect x="-40.007" y="244.175" transform="matrix(0.6907 0.7231 -0.7231 0.6907 191.6001 115.6573)" fill="#40403E" width="1.205" height="75.272"/>
+				
+					<rect x="-34.752" y="249.43" transform="matrix(0.6907 0.7231 -0.7231 0.6907 197.0248 113.4824)" fill="#40403E" width="1.205" height="75.272"/>
+				
+					<rect x="-29.497" y="254.685" transform="matrix(0.6907 0.7231 -0.7231 0.6907 202.4504 111.3078)" fill="#40403E" width="1.205" height="75.273"/>
+			</g>
+		</g>
+	</g>
+</g>
+<path fill="#FFFFFF" d="M706.664,160.574V109.78h-55.473v50.794h-5.67v10.873h67.26v-10.873H706.664z M657.865,138.737h19.254
+	v18.667h-19.254V138.737z M680.736,138.737h19.254v18.667h-19.254V138.737z M699.99,135.121h-19.254v-18.667h19.254V135.121z
+	 M677.119,116.454v18.667h-19.254v-18.667H677.119z M709.166,167.831h-60.027v-3.642h60.027V167.831z"/>
+<polygon fill="#FFFFFF" points="159.356,136.341 159.356,124.431 152.683,124.431 152.683,129.667 137.272,114.256 137.274,114.254 
+	132.555,109.535 132.553,109.537 132.551,109.535 127.831,114.255 127.833,114.257 98.675,143.416 103.395,148.135 106.361,145.168 
+	106.361,171.381 113.035,171.381 113.035,138.494 132.553,118.976 152.071,138.495 152.071,171.12 158.745,171.12 158.745,145.168 
+	161.711,148.135 166.431,143.415 "/>
+<g>
+	<polygon fill="#FFFFFF" points="-51.27,128.754 -57.944,128.754 -57.944,115.113 -60.985,115.113 -60.985,108.439 -51.27,108.439 	
+		"/>
+	<polygon fill="#FFFFFF" points="-27.229,172.628 -84.543,172.628 -84.563,108.45 -74.241,108.45 -74.241,115.124 -77.888,115.124 
+		-77.871,165.954 -33.903,165.954 -33.903,142.572 -21.414,142.572 -21.456,115.131 -54.727,115.113 -54.723,108.439 
+		-14.792,108.461 -14.73,149.246 -27.229,149.246 	"/>
+	<g>
+		<defs>
+			<polygon id="SVGID_3_" points="-29.672,146.288 -28.869,167.783 -57.782,167.783 -57.782,115.35 -19.025,115.35 -18.422,146.488 
+							"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_4_)">
+			
+				<rect x="-61.025" y="81.789" transform="matrix(0.6911 0.7227 -0.7227 0.6911 67.65 80.5558)" fill="#FFFFFF" width="1.205" height="75.273"/>
+			
+				<rect x="-55.771" y="87.044" transform="matrix(0.6911 0.7227 -0.7227 0.6911 73.0704 78.3814)" fill="#FFFFFF" width="1.205" height="75.272"/>
+			
+				<rect x="-50.516" y="92.299" transform="matrix(0.6911 0.7227 -0.7227 0.6911 78.4912 76.2068)" fill="#FFFFFF" width="1.205" height="75.273"/>
+			
+				<rect x="-45.261" y="97.554" transform="matrix(0.6911 0.7227 -0.7227 0.6911 83.912 74.032)" fill="#FFFFFF" width="1.205" height="75.272"/>
+			
+				<rect x="-40.007" y="102.808" transform="matrix(0.6907 0.7231 -0.7231 0.6907 89.3725 71.9334)" fill="#FFFFFF" width="1.205" height="75.272"/>
+			
+				<rect x="-34.752" y="108.062" transform="matrix(0.6907 0.7231 -0.7231 0.6907 94.7973 69.7585)" fill="#FFFFFF" width="1.205" height="75.272"/>
+			
+				<rect x="-29.497" y="113.318" transform="matrix(0.6907 0.7231 -0.7231 0.6907 100.2229 67.5839)" fill="#FFFFFF" width="1.205" height="75.273"/>
+		</g>
+	</g>
+</g>
+<path fill="#FFFFFF" d="M530.771,119.464v-6.674h-5.67v-4.129h-6.674v4.129h-42.695v-4.129h-6.674v4.129h-5.925v6.674h5.925v41.45
+	h-5.925v6.674h5.925v3.463h6.674v-3.463h42.695v3.463h6.674v-3.463h5.669v-6.674h-5.669v-41.45H530.771z M518.428,160.914h-42.695
+	v-41.45h42.695V160.914z"/>
+<g>
+	<path fill="#FFFFFF" d="M873.948,116.411c-0.003-1.563-1.131-2.833-2.524-2.833h-5.046v-2.263c0-1.564-1.129-2.833-2.521-2.833
+		h-5.04c-1.398,0-2.524,1.268-2.524,2.833v2.263h-5.045c-1.392,0-2.523,1.268-2.523,2.833v4.908h25.224V116.411z"/>
+	<polygon fill="#FFFFFF" points="877.897,114.611 877.897,121.285 879.915,121.285 879.915,164.921 842.788,164.921 
+		842.788,121.285 844.516,121.285 844.516,114.611 836.114,114.611 836.114,171.595 886.589,171.595 886.589,114.611 	"/>
+	<rect x="851.211" y="132.59" fill="#FFFFFF" width="21.065" height="3.616"/>
+	<rect x="851.211" y="149.094" fill="#FFFFFF" width="21.065" height="3.616"/>
+	<rect x="851.211" y="140.841" fill="#FFFFFF" width="12.164" height="3.616"/>
+</g>
+<path fill="#FFFFFF" d="M348.63,143.416l-8.006-8.006v-10.978h-6.674v4.304l-14.479-14.479l0.002-0.001l-4.719-4.719l-0.002,0.001
+	l-0.001-0.001l-4.719,4.719l0.001,0.001l-29.158,29.16l4.719,4.719l2.646-2.646v25.893h6.674v-32.567l5.119-5.119v9.381h-3.683
+	v3.616h36.373v-3.616h-3.338v-9.467l4.564,4.564v0.238v32.709h6.674v-26.273l3.287,3.287L348.63,143.416z M303.648,130.079
+	l9.254-9.254v22.25h-9.254V130.079z M325.771,143.076h-9.253V120.74l9.253,9.253V143.076z"/>
+<text transform="matrix(1 0 0 1 -79.7207 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Planta</text>
+<text transform="matrix(1 0 0 1 112.3413 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Techo</text>
+<text transform="matrix(1 0 0 1 277.707 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Cielo raso</text>
+<text transform="matrix(1 0 0 1 449.5811 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Dimensiones</text>
+<text transform="matrix(1 0 0 1 644.0586 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Aberturas</text>
+<text transform="matrix(1 0 0 1 821.6152 215.7534)" fill="#FFFFFF" font-family="'Roboto-Regular'" font-size="16.1077">Resultados</text>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-163.674" y1="107.105" x2="1005.663" y2="107.105"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-163.674" y1="173.86" x2="1005.663" y2="173.86"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-85.564" y1="92.642" x2="-85.564" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="-14.399" y1="92.642" x2="-14.399" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="96.031" y1="92.642" x2="96.031" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="167.196" y1="92.642" x2="167.196" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="277.626" y1="92.642" x2="277.626" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="348.792" y1="92.642" x2="348.792" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="461.675" y1="92.642" x2="461.675" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="532.84" y1="92.642" x2="532.84" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="643.271" y1="92.642" x2="643.271" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="714.436" y1="92.642" x2="714.436" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="824.866" y1="92.642" x2="824.866" y2="188.325"/>
+<line fill="none" stroke="#868281" stroke-width="0.5758" stroke-miterlimit="10" x1="896.031" y1="92.642" x2="896.031" y2="188.325"/>
+</svg>

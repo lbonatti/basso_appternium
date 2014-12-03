@@ -1,0 +1,91 @@
+#recuperar-pwd .boton{
+    clear: both;
+    margin: 18px 5%;
+    margin-bottom:0px;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+#recuperar-pwd .ultimo-elemento{
+    margin-bottom: 84px !important;
+}
+
+#recuperar-pwd {
+    background-color: #3D464B;
+    background-image: none;
+}
+
+#recuperar-pwd .subtitulo {
+    margin: 38px auto;
+    width: 252px;
+    font-family: roboto-thin;
+    font-size: 16px;
+    text-shadow: none;
+    text-align: center;
+    color: #b5b5b5;
+    padding: 0px 0px;
+}
+#recuperar-pwd input{
+    margin: 7px 5%;
+    width: 90%;
+    border: 1px solid #666;
+    padding: 11px 21px;
+    box-sizing: border-box;
+    background-color: #3D4749;
+    font-size: 17px;
+    font-family: roboto-regular;
+
+    background-image: url(../img/mail.png);
+    background-repeat: no-repeat;
+    background-position: 98% -1px;
+    outline: none;
+    color: #fff;
+}
+#recuperar-pwd input:focus{
+    border: 1px solid #EE9209;
+}
+
+
+
+/***********************************************/
+
+
+#password-enviada {
+    background-color: #3D464B;
+    background-image: none;
+}
+
+#password-enviada .boton{
+    clear: both;
+    margin: 82px 5%;
+    margin-bottom:0px;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+#password-enviada .subtitulo {
+    margin: 38px auto;
+    width: 252px;
+    font-family: roboto-thin;
+    font-size: 16px;
+    text-shadow: none;
+    text-align: center;
+    color: #b5b5b5;
+    padding: 0px 0px;
+}
