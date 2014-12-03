@@ -69,13 +69,10 @@
     </gap:config-file>
 
 
-
-
-    <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0" />
-        <param name="APP_ID" value="883848108306441" />
-        <param name="APP_NAME" value="ternium" />
-    </gap:plugin>
-
+<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
+    <param name="APP_ID" value="883848108306441" />
+    <param name="APP_NAME" value="ternium" />
+</gap:plugin>
 
 
     <icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
