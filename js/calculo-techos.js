@@ -1,3 +1,4 @@
+var values;
 function eventosTechos(){
     initNuevoCalculoT();
 
@@ -100,7 +101,7 @@ function roof_save_step(){
         t_modelo = $.trim( $('#m1-ct-1 .paso1 .modelo.selected .texto').html() );
         t_color = $.trim( $('#m1-ct-1 .paso1 .color .selected').html() );
 
-        var values = {name: t_name, largo: t_largo, ancho: t_ancho, tipo: t_tipo, modelo: t_modelo, color: t_color};
+        values = {name: t_name, largo: t_largo, ancho: t_ancho, tipo: t_tipo, modelo: t_modelo, color: t_color};
         setEstadoPie(2,false);
 
         calculateResult(values);
@@ -133,7 +134,7 @@ function calculateResult(values){
     $('#m1-ct-1 .paso2 .resultado-aislacion').html(aislacion + ' m2.');
     $('#m1-ct-1 .paso2 .resultado-tornillos').html(cantTornillos + ' U.');
 
-    saveNewCalcTechos(values);
+    //save
 }
 
 function saveNewCalcTechos(values){
@@ -170,7 +171,6 @@ function saveNewCalcTechos(values){
     }
 
     localStorage.setItem('calculos', JSON.stringify(calculos));
-    sessionStorage.clear();
 }
 
 function initNuevoCalculoT(){
@@ -178,6 +178,7 @@ function initNuevoCalculoT(){
     estadoST=0;
     pasoSTactual = 1;
     pasoSTmaximo = 1;
+    $('#m1-ct-1 .projectName').html(sessionStorage.getItem("projectName"));
 }
 
 function initEditarCalculoT(id){}
@@ -202,4 +203,89 @@ function openInfo(block){
 }
 function closeInfo(){
     $('#infoBlock').fadeOut();
+}
+
+function generateDivRenderT(){
+    var $html = $('#myRenderSaveT').clone();
+    var $this = $('.paso2 .boton.savePDFT');
+    var $_rt = $html.find('.resultado-techo').text();
+    var $_rm = $html.find('.resultado-medida').text();
+    var $_rl = $html.find('.resultado-leyenda').text();
+    $html.find('.resultado-techo').html($_rt + ' ' + $_rm + ' ' + $_rl).css('font-size','20px').css('text-transform','uppercase').css('text-align','center');
+    $html.find('.boton.savePDFT').remove();
+    $html.find('.resultado-medida').remove();
+    $html.find('.resultado-leyenda').remove();
+    $html = $html.html();
+
+    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+    saveNewCalcTechos(values);
+
+    //Animamos el boton
+    var dots = 0;
+    var _op = 0.6;
+    $this.animate({opacity:0.6})
+    $this.html('Generando PDF<span id="dots"></span>')
+    var animateLoading = setInterval(function(){
+        if(_op == 0 || _op == 0.6){
+            _op = 1;
+        }else{
+            _op = 0.6;
+        }
+        $this.animate({opacity:_op})
+        if(dots < 3) {
+            $('#dots').append('.');
+            dots++;
+        } else {
+            $('#dots').html('');
+            dots = 0;
+        }
+    },600)
+
+    var request;
+    var the_link;
+        request = $.ajax({
+            type: 'POST',
+            url: url_webservices+'/download-pdf.php',
+            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            dataType: 'text'
+        });
+
+        request.done(function (response, textStatus, jqXHR){
+            the_link = response;
+
+            clearInterval(animateLoading);
+            $this.animate({opacity:1})
+            $this.html('GUARDAR');
+            console.log("Comenzando descarga de PDF");
+
+            var fileTransfer = new FileTransfer();
+            var uri = encodeURI(the_link);
+            var filePath = "/mnt/sdcard/AppTernium/Calculos/Techos/"+projectName+'.pdf';
+            fileTransfer.download(
+                uri,
+                filePath,
+                function(entry) {
+                    document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+                },
+                function(error) {
+                    document.getElementById("id11").innerHTML="download error source " + error.source;
+                    document.getElementById("id11").innerHTML="download error target " + error.target;
+                    document.getElementById("id11").innerHTML="upload error code" + error.code;
+                    alert('Se ha producido un error al guardar.')
+                },
+                true,
+                {
+                }
+            );
+            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');
+            sessionStorage.clear();
+            //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "Ha ocurrido un error: "+
+                textStatus, errorThrown
+            );
+        });
 }

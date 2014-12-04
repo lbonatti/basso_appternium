@@ -248,11 +248,13 @@ var fLoca = Math.pow((Math.pow((26/18),2)+1),(1/2));
 /* PARA PB y PA */
 function PGC100_calcPanelesExternos(ancho,largo,alto){
     var $calc = ((ancho * 2 + largo * 2)/0.4)*alto*1.3;
+    console.log('P. Externos: ' + $calc.toFixed(0))
     return $calc.toFixed(0)
 }
 /* PARA PB y PA */
 function PGC100_calcPanelesInternos(paredesInternas,alto){
     var $calc = ((paredesInternas/0.4)*alto)*1.3
+    console.log('P. Internos: ' + $calc.toFixed(0))
     return $calc.toFixed(0);
 }
 /* SOLO PB */
@@ -263,17 +265,23 @@ function PGC100_calcTecho2Aguas(largo,ancho){
     var $h = 1.15*$a/4;
     var $calc2 = ($a + 3*$b + 2*$h) * 1.1;
     var $calc = $calc2 * $calc1 * 1.1;
+
+    console.log('Techo a 2 aguas: ' + $calc.toFixed(0))
     return $calc.toFixed(0);
 }
 /* SOLO PB */
 function PGC100_calcTimpanos(ancho){
     var $h = 1.15*ancho/4;
     var $calc = ((ancho * $h/2)/0.4)*2;
+
+    console.log('Timpanos: ' + $calc.toFixed(0))
     return $calc.toFixed(0);
 }
 /* SOLO SI HAY PA */
 function PGC100_calcEscaleras(alto){
     var $calc = fLoca * alto * 2 * 1.3;
+
+    console.log('Escaleras: ' + $calc.toFixed(0))
     return $calc.toFixed(0);
 }
 function PGC100(altoPB, anchoPB, largoPB, paredesInternasPB, altoPA, anchoPA, largoPA, paredesInternasPA, plantas, tipoTecho){

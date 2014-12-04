@@ -118,8 +118,6 @@ function dw_calculateResult(){
 
     $('#m1-cdw-1 .tornillosT1').html(tornillosT1 + ' U.');
     $('#m1-cdw-1 .tornillosT2').html(tornillosT2 + ' U.');
-
-    saveNewCalcDryWall();
 }
 
 function saveNewCalcDryWall(){
@@ -158,7 +156,6 @@ function saveNewCalcDryWall(){
     }
 
     localStorage.setItem('calculos', JSON.stringify(calculos));
-    sessionStorage.clear();
 }
 
 function initNuevoCalculoDW(){
@@ -203,4 +200,85 @@ function dw_tornillosT2(largoPI, altoPI){
     var result = 0;
     result = Math.ceil( ( largoPI * altoPI ) * 30 );
     return result;
+}
+
+function generateDivRenderDW(){
+    var $html = $('#myRenderSaveDW').clone();
+    var $this = $('.paso3 .boton.savePDFDW');
+    $html.find('.boton.savePDFDW').remove();
+    $html = $html.html();
+
+    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+    saveNewCalcDryWall();
+
+    //Animamos el boton
+    var dots = 0;
+    var _op = 0.6;
+    $this.animate({opacity:0.6})
+    $this.html('Generando PDF<span id="dots"></span>')
+    var animateLoading = setInterval(function(){
+        if(_op == 0 || _op == 0.6){
+            _op = 1;
+        }else{
+            _op = 0.6;
+        }
+        $this.animate({opacity:_op})
+        if(dots < 3) {
+            $('#dots').append('.');
+            dots++;
+        } else {
+            $('#dots').html('');
+            dots = 0;
+        }
+    },600)
+
+    var request;
+    var the_link;
+    if(!the_link){
+        request = $.ajax({
+            type: 'POST',
+            url: url_webservices+'/download-pdf.php',
+            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            dataType: 'text'
+        });
+
+        request.done(function (response, textStatus, jqXHR){
+            the_link = response;
+
+            clearInterval(animateLoading);
+            $this.animate({opacity:1})
+            $this.html('GUARDAR');
+            console.log("Comenzando descarga de PDF");
+
+            var fileTransfer = new FileTransfer();
+            var uri = encodeURI(the_link);
+            var filePath = "/mnt/sdcard/AppTernium/Calculos/Dry Wall/"+sessionStorage.getItem('projectName')+'.pdf';
+            fileTransfer.download(
+                uri,
+                filePath,
+                function(entry) {
+                    document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+                },
+                function(error) {
+                    document.getElementById("id11").innerHTML="download error source " + error.source;
+                    document.getElementById("id11").innerHTML="download error target " + error.target;
+                    document.getElementById("id11").innerHTML="upload error code" + error.code;
+                    alert('Se ha producido un error al guardar.')
+                },
+                true,
+                {
+                }
+            );
+            sessionStorage.clear();
+            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');
+            //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "Ha ocurrido un error: "+
+                textStatus, errorThrown
+            );
+        });
+    }
 }

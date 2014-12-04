@@ -1,7 +1,8 @@
+var projectName = '';
 function eventosNuevoCalculo(){
     $('#m1-nuevo-calculo a.option').on('click', function(e){
         var $this = $(this);
-        var projectName = $.trim($('.projectName').val());
+        projectName = $.trim($('.projectName').val());
         if( ! $this.hasClass('vacio') ){
             if(projectName.length === 0 ){
                 alert('Debe ingresar un nombre de proyecto');

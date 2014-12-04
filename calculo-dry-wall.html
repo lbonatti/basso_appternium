@@ -53,63 +53,68 @@
 
         </div>
 
-        <div class="paso paso3">
-            <div class="texto t1">Computo aproximado de materiales</div>
+		<div id="myRenderSaveDW">
+
+			<div class="paso paso3">
+				<div class="texto t1">Computo aproximado de materiales</div>
 
 
-            <div class="resultado montante">
-                <span class="texto">1. Montante <b>35cm</b></span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Paneles interiores</span>
-                <span class="texto medida montantePaneles">60 ml.</span>
-            </div>
+				<div class="resultado montante">
+					<span class="texto">1. Montante 35cm</span>
+				</div>
+				<div class="valor ultimo">
+					<span class="texto">Paneles interiores</span>
+					<span class="texto medida montantePaneles">60 ml.</span>
+				</div>
 
 
-            <div class="resultado solera">
-                <span class="texto">2. Solera <b>35cm</b></span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Paneles interiores</span>
-                <span class="texto medida soleraPaneles">311 ml.</span>
-            </div>
+				<div class="resultado solera">
+					<span class="texto">2. Solera 35cm</span>
+				</div>
+				<div class="valor ultimo">
+					<span class="texto">Paneles interiores</span>
+					<span class="texto medida soleraPaneles">311 ml.</span>
+				</div>
 
 
-            <div class="resultado">
-                <span class="texto">3. Aislación</span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Aislación Acústica para Paredes Interiores</span>
-                <span class="texto medida soleraAislacion">311 m<sup>2</sup>.</span>
-            </div>
+				<div class="resultado">
+					<span class="texto">3. Aislación</span>
+				</div>
+				<div class="valor ultimo">
+					<span class="texto">Aislación Acústica para Paredes Interiores</span>
+					<span class="texto medida soleraAislacion">311 m2.</span>
+				</div>
 
 
-            <div class="resultado">
-                <span class="texto">4. Placas de Yeso</span>
-            </div>
-            <div class="valor">
-                <span class="texto">Placa de Yeso para Paredes</span>
-                <span class="texto medida soleraYesoParedes">311 m<sup>2</sup>.</span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Placa de Yeso para cielorrasos</span>
-                <span class="texto medida soleraYesoCielorrasos">311 m<sup>2</sup>.</span>
-            </div>
+				<div class="resultado">
+					<span class="texto">4. Placas de Yeso</span>
+				</div>
+				<div class="valor">
+					<span class="texto">Placa de Yeso para Paredes</span>
+					<span class="texto medida soleraYesoParedes">311 m2.</span>
+				</div>
+				<div class="valor ultimo">
+					<span class="texto">Placa de Yeso para cielorrasos</span>
+					<span class="texto medida soleraYesoCielorrasos">311 m2.</span>
+				</div>
 
-            <div class="resultado">
-                <span class="texto">5. Tornillos</span>
-            </div>
-            <div class="valor">
-                <span class="texto">T1 Aguja para unión de estructura DryWall</span>
-                <span class="texto medida tornillosT1">13 U.</span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">T2 Aguja para placa yeso</span>
-                <span class="texto medida tornillosT2">13 U.</span>
-            </div>
+				<div class="resultado">
+					<span class="texto">5. Tornillos</span>
+				</div>
+				<div class="valor">
+					<span class="texto">T1 Aguja para unión de estructura DryWall</span>
+					<span class="texto medida tornillosT1">13 U.</span>
+				</div>
+				<div class="valor ultimo">
+					<span class="texto">T2 Aguja para placa yeso</span>
+					<span class="texto medida tornillosT2">13 U.</span>
+				</div>
+				<div class="boton ultimo-elemento savePDFDW">GUARDAR</div>
+			</div>
 
-            <div class="boton ultimo-elemento savePDF">GUARDAR</div>
-        </div>
+		</div>
+
+
 
         <div class="pie">
             <div class="p1 selected">Dimensiones</div>
@@ -121,6 +126,9 @@
     </div>
 
     <script>
+		$('.boton.savePDFDW').on('click',function(){
+			generateDivRenderDW();
+		})
         eventosDryWall()
     </script>
 </div>

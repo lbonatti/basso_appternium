@@ -143,7 +143,7 @@ function setEstadoPie(paso, tab) {
         $('#back-' + tipoC).show();
         $('.dot-menu').hide();
 
-        if (tipoC == 'sf' && paso == 5) modoLectura();
+        if (paso == 5) modoLectura();
     } else if (estadoST == 1) { //SoloLectura
         todasPestanas.removeClass('disabled').removeClass('selected');
         pestana.addClass('selected');
@@ -160,14 +160,14 @@ function setEstadoPie(paso, tab) {
 
     }
     if (paso == 5){
-        //saveNewCalc();
         $('.pie .p5').removeClass('disabled');
     }
 }
 function modoLectura(){
     estadoST=1;
     $('#back-'+tipoC).hide();
-    $('.dot-menu').show()
+    $('.dot-menu').show();
+    $('#m1-csf-1 .paso input[type=number]').attr('disabled', 'disabled');
 }
 function esconderDotMenu(){
     $('.menu-options').hide();
@@ -253,10 +253,10 @@ function st_save_step2(redirect){
         } else if ($.trim($('#m1-csf-1 .paso2 .i8').val()).length === 0) {
             alert('Completa la cantidad de paredes de la planta 2');
         } else {
-            p2Ancho = $.trim($('#m1-csf-1 .paso2 .i1').val());
-            p2Largo = $.trim($('#m1-csf-1 .paso2 .i2').val());
-            p2Alto = $.trim($('#m1-csf-1 .paso2 .i3').val());
-            p2Paredes = $.trim($('#m1-csf-1 .paso2 .i4').val());
+            p2Ancho = $.trim($('#m1-csf-1 .paso2 .i5').val());
+            p2Largo = $.trim($('#m1-csf-1 .paso2 .i6').val());
+            p2Alto = $.trim($('#m1-csf-1 .paso2 .i7').val());
+            p2Paredes = $.trim($('#m1-csf-1 .paso2 .i8').val());
             itsOk = 2;
         }
     }else if(itsOk === 1){
@@ -338,7 +338,6 @@ function saveNewCalc(){
     }
 
     localStorage.setItem('calculos', JSON.stringify(calculos));
-    sessionStorage.clear();
 }
 
 function calculateSF(){
@@ -508,47 +507,83 @@ function calculateSF(){
 
     $('.paso5 span[data-result=perfilPGU200]').html(perfilPGU);
     $('.paso5 span[data-result=pgu200]').html($pgu200 + ' ml.');
-
-    saveNewCalc();
 }
 
-function generateDivRender(){
+function generateDivRenderSF(){
     var $html = $('.paso5 #myRenderSave').clone();
+    var $this = $('.boton.savePDF');
     $html.find('span.showMore').remove()
     $html = $html.html();
+
+    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+    saveNewCalc();
+
+    //Animamos el boton
+    var dots = 0;
+    var _op = 0.6;
+    $this.animate({opacity:0.6})
+    $this.html('Generando PDF<span id="dots"></span>')
+    var animateLoading = setInterval(function(){
+        if(_op == 0 || _op == 0.6){
+            _op = 1;
+        }else{
+            _op = 0.6;
+        }
+        $this.animate({opacity:_op})
+        if(dots < 3) {
+            $('#dots').append('.');
+            dots++;
+        } else {
+            $('#dots').html('');
+            dots = 0;
+        }
+    },600)
+
     var request;
+    var the_link;
+    if(!the_link){
+        request = $.ajax({
+            type: 'POST',
+            url: url_webservices+'/download-pdf.php',
+            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            dataType: 'html'
+        });
 
-    if (app.isAndroid()) {
-        navigator.app.loadUrl('http://docs.google.com/viewer?url=http://projectsunderdev.com/app-ternium/www/tmp/cq73bwsbp_04-12-2014_09-08-50.pdf', { openExternal:true } );
-    } else {
-        window.location.href = 'http://docs.google.com/viewer?url=http://projectsunderdev.com/app-ternium/www/tmp/cq73bwsbp_04-12-2014_09-08-50.pdf';
+        request.done(function (response, textStatus, jqXHR){
+            the_link = response;
+
+            clearInterval(animateLoading);
+            $this.animate({opacity:1})
+            $this.html('GUARDAR');
+            console.log("Comenzando descarga de PDF");
+            var fileTransfer = new FileTransfer();
+            var uri = encodeURI(the_link);
+            var filePath = "/mnt/sdcard/AppTernium/Calculos/Steel Frame/"+projectName+'.pdf';
+            fileTransfer.download(
+                uri,
+                filePath,
+                function(entry) {
+                    document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+                },
+                function(error) {
+                    document.getElementById("id11").innerHTML="download error source " + error.source;
+                    document.getElementById("id11").innerHTML="download error target " + error.target;
+                    document.getElementById("id11").innerHTML="upload error code" + error.code;
+                    alert('Se ha producido un error al guardar.')
+                },
+                true,
+                {
+                }
+            );
+            sessionStorage.clear();
+            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "Ha ocurrido un error: "+
+                textStatus, errorThrown
+            );
+        });
     }
-
-
-
-
-    //request = $.ajax({
-    //    type: 'POST',
-    //    url: url_webservices+'/download-pdf.php',
-    //    data: {content:$html},
-    //    dataType: 'html'
-    //});
-    //
-    //request.done(function (response, textStatus, jqXHR){
-    //    // Log a message to the console
-    //    console.log("Comenzando descarga de PDF");
-    //    //console.log(response);
-    //    window.open( response, '_blank' );
-    //    //window.location.assign( response )
-    //});
-    //
-    //// Callback handler that will be called on failure
-    //request.fail(function (jqXHR, textStatus, errorThrown){
-    //    // Log the error to the console
-    //    console.error(
-    //        "Ha ocurrido un error: "+
-    //        textStatus, errorThrown
-    //    );
-    //});
-
 }

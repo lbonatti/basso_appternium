@@ -15,8 +15,8 @@ function menuLateral(){
     boton_menu('m-inicio');
     $('.menu .item').click(function(e){
         e.preventDefault();
-        if($(this).hasClass('selected')){
-        }else{
+        //if($(this).hasClass('selected')){
+        //}else{
             var href = $(this).attr('href');
             //$('.menu .item').removeClass('selected');
             //$(this).addClass('selected');
@@ -24,7 +24,7 @@ function menuLateral(){
             //$('#header h1').html($(this).attr('data-title'));
             $.mobile.changePage(href, { /*transition: 'none'*/ });
 
-        }
+        //}
         snapper.close();
     });
 
