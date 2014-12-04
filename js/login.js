@@ -1,5 +1,3 @@
-var backend_url = 'http://projectsunderdev.com/app-ternium/backend-admin';
-
 $(document).ready(function(){
     var facebook = new FacebookPlugin();
 
@@ -12,7 +10,7 @@ $(document).ready(function(){
             facebook.FBProfile(function(profile){
 
                 $.ajax({
-                    url:"http://html5cooks.com/ternium/ternium/users/login_facebook",
+                    url:backend_url+"/users/login_facebook",
                     type:'GET',
                     data:{email: profile.email, uid: profile.id},
                     success:function(result){
@@ -71,7 +69,7 @@ $(document).ready(function(){
         if(sendOk){
             $.ajax({
                 url:backend_url+"/users/login",
-                type:'POST',
+				type:'POST',
                 data:{username: username, password: pass},
                 success:function(result){
                     if(result.Default && result.Default != null){

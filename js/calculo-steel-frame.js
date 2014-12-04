@@ -29,18 +29,21 @@ function eventosSteelFrame(){
         setEstadoPie(1,true);
     });
     $('#m1-csf-1 .pie .p2').click(function(){
-        snapper.enable();
+        $('#m1-csf-1 .paso1 .siguiente-paso')[0].click();
         setEstadoPie(2,true);
     });
     $('#m1-csf-1 .pie .p3').click(function(){
+        $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
         snapper.enable();
         setEstadoPie(3,true);
     });
     $('#m1-csf-1 .pie .p4').click(function(){
+        $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
         snapper.enable();
         setEstadoPie(4,true);
     });
     $('#m1-csf-1 .pie .p5').click(function(){
+        $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
         snapper.enable();
         setEstadoPie(5,true);
     });
@@ -126,10 +129,6 @@ function setEstadoPie(paso, tab) {
     var pestana = $('.pie .p' + paso);
     var todasPestanas = $('.pie div');
 
-    if (paso > 1) {
-        if (tab)
-            if (pestana.hasClass('disabled'))return;
-    }
     if (paso > pasoSTmaximo) pasoSTmaximo = paso;
     pasoSTactual = paso;
     var pestanasAnteriores = $('.pie div:lt(' + (pasoSTmaximo) + ')');
@@ -161,9 +160,8 @@ function setEstadoPie(paso, tab) {
 
     }
     if (paso == 5){
-        saveNewCalc();
+        //saveNewCalc();
         $('.pie .p5').removeClass('disabled');
-        $('.paso input[type=number]').attr('disabled', 'disabled');
     }
 }
 function modoLectura(){
@@ -340,7 +338,7 @@ function saveNewCalc(){
     }
 
     localStorage.setItem('calculos', JSON.stringify(calculos));
-    //sessionStorage.clear();
+    sessionStorage.clear();
 }
 
 function calculateSF(){
@@ -511,6 +509,7 @@ function calculateSF(){
     $('.paso5 span[data-result=perfilPGU200]').html(perfilPGU);
     $('.paso5 span[data-result=pgu200]').html($pgu200 + ' ml.');
 
+    saveNewCalc();
 }
 
 function generateDivRender(){
@@ -521,7 +520,7 @@ function generateDivRender(){
 
     request = $.ajax({
         type: 'POST',
-        url: '../webservices/download-pdf.php',
+        url: url_webservices+'/download-pdf.php',
         data: {content:$html},
         dataType: 'html'
     });

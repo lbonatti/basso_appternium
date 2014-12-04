@@ -2,7 +2,7 @@
 <div data-role="page" id="m1-cdw-1">
     <div class="page-header" >
         <a href="#" class="open-menu"></a>
-        <h1>Proyecto 1</h1>
+        <h1 class="projectName">Proyecto 1</h1>
         <a id="back-dw" class="page-back"></a>
         <a class="dot-menu"></a>
         <div class="menu-options">
@@ -16,23 +16,23 @@
             <div class="texto t1">Metros lineales de las paredes interiores</div>
 
             <div class="texto t2">Largo</div>
-            <input data-role="none" class="i1" />
+            <input data-role="none" class="i1" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
             <div class="texto t2">Altura</div>
-            <input data-role="none" class="i2" />
+            <input data-role="none" class="i2" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
-            <div class="grupo">
+            <div class="grupo espesor">
                 <div class="texto">Espesor del perfil</div>
-                <div class="op1 selected">35</div>
-                <div class="op2">70</div>
+                <div class="op1 selected" data-value="1">35</div>
+                <div class="op2" data-value="2">70</div>
             </div>
 
-            <div class="grupo">
+            <div class="grupo placa">
                 <div class="texto">Tipo de placa</div>
-                <div class="op1">Simple</div>
-                <div class="op2 selected">Doble</div>
+                <div class="op1" data-value="1">Simple</div>
+                <div class="op2 selected" data-value="2">Doble</div>
             </div>
 
             <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
@@ -42,11 +42,11 @@
             <div class="texto t1">Metros de cielo raso</div>
 
             <div class="texto t2">Largo</div>
-            <input data-role="none" class="i1" />
+            <input data-role="none" class="i1" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
             <div class="texto t2">Ancho</div>
-            <input data-role="none" class="i2" />
+            <input data-role="none" class="i2" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
             <div class="boton siguiente-paso">Siguiente paso</div>
@@ -57,59 +57,58 @@
             <div class="texto t1">Computo aproximado de materiales</div>
 
 
+            <div class="resultado montante">
+                <span class="texto">1. Montante <b>35cm</b></span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Paneles interiores</span>
+                <span class="texto medida montantePaneles">60 ml.</span>
+            </div>
+
+
+            <div class="resultado solera">
+                <span class="texto">2. Solera <b>35cm</b></span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Paneles interiores</span>
+                <span class="texto medida soleraPaneles">311 ml.</span>
+            </div>
+
+
             <div class="resultado">
-                <span class="texto">1. Perfiles PGC</span>
-                <div class="mas"></div>
+                <span class="texto">3. Aislación</span>
+            </div>
+            <div class="valor ultimo">
+                <span class="texto">Aislación Acústica para Paredes Interiores</span>
+                <span class="texto medida soleraAislacion">311 m<sup>2</sup>.</span>
+            </div>
+
+
+            <div class="resultado">
+                <span class="texto">4. Placas de Yeso</span>
             </div>
             <div class="valor">
-                <span class="texto">100 X 0,9 Montantes </span>
-                <span class="texto medida">700 ml.</span>
+                <span class="texto">Placa de Yeso para Paredes</span>
+                <span class="texto medida soleraYesoParedes">311 m<sup>2</sup>.</span>
             </div>
             <div class="valor ultimo">
-                <span class="texto">200 X 2,00</span>
-                <span class="texto medida">60 ml.</span>
+                <span class="texto">Placa de Yeso para cielorrasos</span>
+                <span class="texto medida soleraYesoCielorrasos">311 m<sup>2</sup>.</span>
             </div>
 
-
             <div class="resultado">
-                <span class="texto">2. Perfiles PGU</span>
-                <div class="mas"></div>
+                <span class="texto">5. Tornillos</span>
             </div>
             <div class="valor">
-                <span class="texto">100 X 0,9 </span>
-                <span class="texto medida">311 ml.</span>
+                <span class="texto">T1 Aguja para unión de estructura DryWall</span>
+                <span class="texto medida tornillosT1">13 U.</span>
             </div>
             <div class="valor ultimo">
-                <span class="texto">200 X 1,25</span>
-                <span class="texto medida">104 ml.</span>
+                <span class="texto">T2 Aguja para placa yeso</span>
+                <span class="texto medida tornillosT2">13 U.</span>
             </div>
 
-
-            <div class="resultado">
-                <span class="texto">3. Anclajes</span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Anclaje químico con varilla roscada</span>
-                <span class="texto medida">13 U.</span>
-            </div>
-
-
-            <div class="resultado">
-                <span class="texto">4. Placas de roca de yeso</span>
-                <div class="mas"></div>
-            </div>
-            <div class="valor">
-                <span class="texto">Placa de yeso para paredes</span>
-                <span class="texto medida">231 mt2.</span>
-            </div>
-            <div class="valor ultimo">
-                <span class="texto">Placa de yeso para cielo rasos</span>
-                <span class="texto medida">231 mt2.</span>
-            </div>
-
-
-            <div class="boton">Descargar PDF</div>
-            <div class="boton ultimo-elemento">Compartir PDF</div>
+            <div class="boton ultimo-elemento savePDF">GUARDAR</div>
         </div>
 
         <div class="pie">
