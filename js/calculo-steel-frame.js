@@ -518,28 +518,37 @@ function generateDivRender(){
     $html = $html.html();
     var request;
 
-    request = $.ajax({
-        type: 'POST',
-        url: url_webservices+'/download-pdf.php',
-        data: {content:$html},
-        dataType: 'html'
-    });
+    if (app.isAndroid()) {
+        navigator.app.loadUrl('http://docs.google.com/viewer?url=http://projectsunderdev.com/app-ternium/www/tmp/cq73bwsbp_04-12-2014_09-08-50.pdf', { openExternal:true } );
+    } else {
+        window.location.href = 'http://docs.google.com/viewer?url=http://projectsunderdev.com/app-ternium/www/tmp/cq73bwsbp_04-12-2014_09-08-50.pdf';
+    }
 
-    request.done(function (response, textStatus, jqXHR){
-        // Log a message to the console
-        console.log("Comenzando descarga de PDF");
-        //console.log(response);
-        window.open( response, '_blank' );
-        //window.location.assign( response )
-    });
 
-    // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // Log the error to the console
-        console.error(
-            "Ha ocurrido un error: "+
-            textStatus, errorThrown
-        );
-    });
+
+
+    //request = $.ajax({
+    //    type: 'POST',
+    //    url: url_webservices+'/download-pdf.php',
+    //    data: {content:$html},
+    //    dataType: 'html'
+    //});
+    //
+    //request.done(function (response, textStatus, jqXHR){
+    //    // Log a message to the console
+    //    console.log("Comenzando descarga de PDF");
+    //    //console.log(response);
+    //    window.open( response, '_blank' );
+    //    //window.location.assign( response )
+    //});
+    //
+    //// Callback handler that will be called on failure
+    //request.fail(function (jqXHR, textStatus, errorThrown){
+    //    // Log the error to the console
+    //    console.error(
+    //        "Ha ocurrido un error: "+
+    //        textStatus, errorThrown
+    //    );
+    //});
 
 }

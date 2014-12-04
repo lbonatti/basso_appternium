@@ -1,90 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<widget xmlns     = "http://www.w3.org/ns/widgets"
-        xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.app.basso.ternium"
-        versionCode = "100"
-        version   = "1.0.0">
-
-   <name>Ternium</name>
-
-   <description>
-	Ternium app
-   </description>
-
-   <author href="http://phonegap.com" email="support@phonegap.com">
-	DevTeam FourR
-   </author>
-
-   <!--
-       If you do not want any permissions to be added to your app, add the
-       following tag to your config.xml; you will still have the INTERNET
-       permission on your app, which PhoneGap requires.
-   -->
-    <preference name="permissions"                value="none"/> 
-
-    <!-- Customize your app and platform with the preference element. -->
-    <preference name="phonegap-version"           value="3.5.0" />          <!-- all: current version of PhoneGap -->
-    <preference name="orientation"                value="portrait" />       <!-- all: default means both landscape and portrait are enabled -->
-    <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
-    <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
-    <preference name="webviewbounce"              value="false"/>
-    <preference name="UIWebViewBounce"            value="false" />
-	<preference name="DisallowOverscroll"         value="true" />
-    <preference name="prerendered-icon"           value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
-    <preference name="stay-in-webview"            value="true" />          <!-- ios: external links should open in the default browser, 'true' would use the webview the app lives in -->
-    <preference name="ios-statusbarstyle"         value="black-translucent" /> <!-- black-translucent   ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
-    <preference name="detect-data-types"          value="true" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
-    <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
-    <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
-  <!--  <preference name="android-minSdkVersion"      value="7" />               android: MIN SDK version supported on the target device. MAX version is blank by default.
-    <preference name="android-installLocation"    value="auto" />           android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
-
-
-
-    <preference name="show-splash-screen-spinner" value="false" />
-    <preference name="auto-hide-splash-screen" value="false" />
-
-    <gap:splash src="Default-568h@2x.png"     gap:platform="ios"     width="640" height="1136" />
-
-    <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-
-    <gap:config-file platform="ios" parent="UIStatusBarHidden">
-        <false/>
-    </gap:config-file>
-
-    <feature name="StatusBar">
-        <param name="ios-package" value="CDVStatusBar" onload="true" />
-    </feature>
-
-	<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true">
-		<true/>
-	</gap:config-file>
-
-    <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>1.0.0</string>
-    </gap:config-file>
-    <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-        <string>100</string>
-    </gap:config-file>
-
-
+<widget xmlns = "http://www.w3.org/ns/widgets"
+xmlns:gap = "http://phonegap.com/ns/1.0"
+id = "com.app.basso.ternium"
+versionCode = "100"
+version = "1.0.0">
+<name>Ternium</name>
+<description>
+Ternium app
+</description>
+<author href="http://phonegap.com" email="support@phonegap.com">
+DevTeam FourR
+</author>
+<!--
+If you do not want any permissions to be added to your app, add the
+following tag to your config.xml; you will still have the INTERNET
+permission on your app, which PhoneGap requires.
+-->
+<preference name="permissions" value="none"/>
+<!-- Customize your app and platform with the preference element. -->
+<preference name="phonegap-version" value="3.5.0" /> <!-- all: current version of PhoneGap -->
+<preference name="orientation" value="portrait" /> <!-- all: default means both landscape and portrait are enabled -->
+<preference name="target-device" value="universal" /> <!-- all: possible values handset, tablet, or universal -->
+<preference name="fullscreen" value="true" /> <!-- all: hides the status bar at the top of the screen -->
+<preference name="webviewbounce" value="false"/>
+<preference name="UIWebViewBounce" value="false" />
+<preference name="DisallowOverscroll" value="true" />
+<preference name="prerendered-icon" value="true" /> <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
+<preference name="stay-in-webview" value="true" /> <!-- ios: external links should open in the default browser, 'true' would use the webview the app lives in -->
+<preference name="ios-statusbarstyle" value="black-translucent" /> <!-- black-translucent ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
+<preference name="detect-data-types" value="true" /> <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
+<preference name="exit-on-suspend" value="false" /> <!-- ios: if set to true, app will terminate when home button is pressed -->
+<preference name="disable-cursor" value="false" /> <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
+<!-- <preference name="android-minSdkVersion" value="7" /> android: MIN SDK version supported on the target device. MAX version is blank by default.
+<preference name="android-installLocation" value="auto" /> android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+<preference name="show-splash-screen-spinner" value="false" />
+<preference name="auto-hide-splash-screen" value="false" />
+<gap:splash src="Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
+<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+<gap:config-file platform="ios" parent="UIStatusBarHidden">
+<false/>
+</gap:config-file>
+<feature name="StatusBar">
+<param name="ios-package" value="CDVStatusBar" onload="true" />
+</feature>
+<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true">
+<true/>
+</gap:config-file>
+<gap:config-file platform="ios" parent="CFBundleVersion">
+<string>1.0.0</string>
+</gap:config-file>
+<gap:config-file platform="ios" parent="CFBundleShortVersionString">
+<string>100</string>
+</gap:config-file>
 <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
-    <param name="APP_ID" value="883848108306441" />
-    <param name="APP_NAME" value="ternium" />
+<param name="APP_ID" value="883848108306441" />
+<param name="APP_NAME" value="ternium" />
 </gap:plugin>
-
-
-    <icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
-    <icon src="icons/ios/icon-57_at_2x.png" gap:platform="ios" width="114" height="114" />
-    <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
-    <icon src="icons/ios/icon-72_at_2x.png" gap:platform="ios" width="144" height="144" />
-    <icon src="icons/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
-    <icon src="icons/ios/icon-76_at_2x.png" gap:platform="ios" width="152" height="152" />
-    <icon src="icons/ios/icon-120.png" gap:platform="ios" width="120" height="120" />
-    
-    <access origin="*" subdomains="true"/> <!-- allow local pages -->
-    <content src="index.html" />
+<icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
+<icon src="icons/ios/icon-57_at_2x.png" gap:platform="ios" width="114" height="114" />
+<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+<icon src="icons/ios/icon-72_at_2x.png" gap:platform="ios" width="144" height="144" />
+<icon src="icons/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
+<icon src="icons/ios/icon-76_at_2x.png" gap:platform="ios" width="152" height="152" />
+<icon src="icons/ios/icon-120.png" gap:platform="ios" width="120" height="120" />
+<access origin="*" subdomains="true"/> <!-- allow local pages -->
+<content src="index.html" />
 </widget>
-
-
