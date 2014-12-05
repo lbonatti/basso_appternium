@@ -48,38 +48,18 @@
     <gap:splash src="Default-568h@2x.png"     gap:platform="ios"     width="640" height="1136" />
 
     <gap:plugin name="com.phonegap.plugin.statusbar" />
-	<gap:plugin name="fork.cordova.file" version="1.2.1" />
 
-    <gap:config-file platform="ios" parent="UIStatusBarHidden">
-        <false/>
-    </gap:config-file>
 
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
-
-
-
-	<gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance" overwrite="true">
-		<true/>
-	</gap:config-file>
-
-    <gap:config-file platform="ios" parent="CFBundleVersion">
-        <string>1.0.0</string>
-    </gap:config-file>
-    <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-        <string>100</string>
-    </gap:config-file>
-
-
-
 
     <gap:plugin name="com.phonegap.plugins.facebookconnect">
         <param name="APP_ID" value="883848108306441" />
         <param name="APP_NAME" value="ternium" />
     </gap:plugin>
 
-
+<gap:plugin name="fork.cordova.file" version="1.2.1" />
 <gap:plugin name="com.chanthu.evri.gcs-file-transfer" version="1.0.0" />
 <gap:plugin name="org.li8.inappbrowser" version="0.1" />
 
