@@ -556,7 +556,7 @@ function generateDivRenderSF(){
             $this.animate({opacity:1})
             $this.html('GUARDAR');
             console.log("Comenzando descarga de PDF");
-            var fileTransfer = new FileTransfer();
+            /*var fileTransfer = new FileTransfer();
             var uri = encodeURI(the_link);
             var filePath = "/mnt/sdcard/AppTernium/Calculos/Steel Frame/"+projectName+'.pdf';
             fileTransfer.download(
@@ -574,9 +574,10 @@ function generateDivRenderSF(){
                 true,
                 {
                 }
-            );
+            );*/
             sessionStorage.clear();
-            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');
+			window.open(the_link, "_system");
+            /*alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');*/
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){
