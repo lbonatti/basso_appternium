@@ -59,12 +59,15 @@
         <param name="APP_NAME" value="ternium" />
     </gap:plugin>
 
-<gap:plugin name="com.coconutcenter.file" version="1.3.1" />
-    <gap:plugin name="com.coconutcenter.file-transfer" version="0.4.6" />
-    
-
+	<gap:plugin name="org.apache.cordova.media" />
+    <gap:plugin name="com.coconutcenter.file-transfer" />
+	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.file" />
+	<gap:plugin name="org.apache.cordova.media-capture" />
+	<gap:plugin name="org.apache.cordova.vibration" />
+	<gap:plugin name="org.apache.cordova.dialogs" />
+	
     <gap:plugin name="org.li8.inappbrowser" version="0.1" />
-
 
 
     <icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
