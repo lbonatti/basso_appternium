@@ -265,7 +265,7 @@ function generateDivRenderT(){
                 uri,
                 filePath,
                 function(entry) {
-                    document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+                    document.getElementById("id11").innerHTML="download complete: " + entry.toURL();
                 },
                 function(error) {
                     document.getElementById("id11").innerHTML="download error source " + error.source;
