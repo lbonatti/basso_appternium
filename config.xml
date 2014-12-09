@@ -60,7 +60,7 @@
     </gap:plugin>
 
 	<gap:plugin name="org.apache.cordova.media" />
-    <gap:plugin name="com.coconutcenter.file-transfer" />
+    <gap:plugin name="com.chanthu.evri.gcs-file-transfer" />
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="my.org.apache.cordova.file" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
