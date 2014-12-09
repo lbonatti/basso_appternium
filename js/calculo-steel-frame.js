@@ -574,10 +574,10 @@ function generateDivRenderSF(){
                 true,
                 {
                 }
-            );*/
+            );
+			alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');*/
             sessionStorage.clear();
 			window.open(the_link, "_system");
-            /*alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');*/
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){

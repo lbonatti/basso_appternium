@@ -258,7 +258,7 @@ function generateDivRenderT(){
             $this.html('GUARDAR');
             console.log("Comenzando descarga de PDF");
 
-            var fileTransfer = new FileTransfer();
+            /*var fileTransfer = new FileTransfer();
             var uri = encodeURI(the_link);
             var filePath = "/mnt/sdcard/AppTernium/Calculos/Techos/"+projectName+'.pdf';
             fileTransfer.download(
@@ -277,8 +277,9 @@ function generateDivRenderT(){
                 {
                 }
             );
-            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');
+            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');*/
             sessionStorage.clear();
+			window.open(the_link, "_system");
             //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 

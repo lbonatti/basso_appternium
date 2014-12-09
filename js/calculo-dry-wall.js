@@ -249,7 +249,7 @@ function generateDivRenderDW(){
             $this.animate({opacity:1})
             $this.html('GUARDAR');
             console.log("Comenzando descarga de PDF");
-
+/*
             var fileTransfer = new FileTransfer();
             var uri = encodeURI(the_link);
             var filePath = "/mnt/sdcard/AppTernium/Calculos/Dry Wall/"+sessionStorage.getItem('projectName')+'.pdf';
@@ -269,8 +269,9 @@ function generateDivRenderDW(){
                 {
                 }
             );
+            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');*/
             sessionStorage.clear();
-            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');
+			window.open(the_link, "_system");
             //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 
