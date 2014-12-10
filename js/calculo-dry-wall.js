@@ -1,4 +1,4 @@
-
+var stepComplete = 0;
 
 function eventosDryWall(){
     initNuevoCalculoDW();
@@ -15,10 +15,20 @@ function eventosDryWall(){
         setEstadoPie(1,true);
     });
     $('#m1-cdw-1 .pie .p2').click(function(){
-        setEstadoPie(2,true);
+        if(stepCompleted >= 1) {
+            $('#m1-cdw-1 .paso1 .siguiente-paso')[0].click();
+            setEstadoPie(2, true);
+        }else{
+            alert('Debe completar los pasos anteriores.');
+        }
     });
     $('#m1-cdw-1 .pie .p3').click(function(){
-        setEstadoPie(3,true);
+        if(stepCompleted == 99) {
+            $('#m1-cdw-1 .paso2 .siguiente-paso')[0].click();
+            setEstadoPie(3, true);
+        }else{
+            alert('Debe completar los pasos anteriores.');
+        }
     });
 
     $('.paso1').show();
@@ -28,15 +38,15 @@ function eventosDryWall(){
 
     setEstadoPie(1,true);
 
-    setTimeout(function(){
-        $('#back-dw').unbind('click').click(function(){
-            if(pasoSTactual>1){
-                setEstadoPie(pasoSTactual-1);
-            }else{
-                window.history.back();
-            }
-        })
-    },500);
+    $('#back-dw').on('click',function(e){
+        e.preventDefault();
+        if(pasoSTactual>1){
+            setEstadoPie(pasoSTactual-1);
+        }else{
+            window.history.back();
+        }
+    });
+
 
 
 }
@@ -60,6 +70,9 @@ function dry_wall_save_step1(){
         sessionStorage.setItem("dw-s1-ap", altoParedes);
         sessionStorage.setItem("dw-s1-ep", espesorPerfil);
         sessionStorage.setItem("dw-s1-tp", tipoPlaca);
+        if(stepCompleted < 1){
+            stepCompleted = 1;
+        }
         setEstadoPie(2,false);
     }
 }
@@ -78,6 +91,9 @@ function dry_wall_save_step2(){
     }else{
         sessionStorage.setItem("dw-s2-lcr", largoCieloRaso);
         sessionStorage.setItem("dw-s2-acr", anchoCieloRaso);
+        if(stepCompleted < 2){
+            stepCompleted = 2;
+        }
         setEstadoPie(3,false);
         dw_calculateResult();
     }
@@ -85,6 +101,7 @@ function dry_wall_save_step2(){
 
 
 function dw_calculateResult(){
+    stepCompleted = 99;
     var largoParedes = parseFloat(sessionStorage.getItem('dw-s1-lp'));
     var altoParedes = parseFloat(sessionStorage.getItem('dw-s1-ap'));
     var espesorPerfil = parseFloat(sessionStorage.getItem('dw-s1-ep'));
@@ -247,32 +264,30 @@ function generateDivRenderDW(){
 
             clearInterval(animateLoading);
             $this.animate({opacity:1})
-            $this.html('GUARDAR');
+            $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-/*
-            var fileTransfer = new FileTransfer();
-            var uri = encodeURI(the_link);
-            var filePath = "/mnt/sdcard/AppTernium/Calculos/Dry Wall/"+sessionStorage.getItem('projectName')+'.pdf';
-            fileTransfer.download(
-                uri,
-                filePath,
-                function(entry) {
-                    document.getElementById("id11").innerHTML="download complete: " + entry.toURL();
-                },
-                function(error) {
-                    document.getElementById("id11").innerHTML="download error source " + error.source;
-                    document.getElementById("id11").innerHTML="download error target " + error.target;
-                    document.getElementById("id11").innerHTML="upload error code" + error.code;
-                    alert('Se ha producido un error al guardar.')
-                },
-                true,
-                {
-                }
-            );
-            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');*/
+            //var fileTransfer = new FileTransfer();
+            //var uri = encodeURI(the_link);
+            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Dry Wall/"+sessionStorage.getItem('projectName')+'.pdf';
+            //fileTransfer.download(
+            //    uri,
+            //    filePath,
+            //    function(entry) {
+            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+            //    },
+            //    function(error) {
+            //        document.getElementById("id11").innerHTML="download error source " + error.source;
+            //        document.getElementById("id11").innerHTML="download error target " + error.target;
+            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
+            //        alert('Se ha producido un error al guardar.')
+            //    },
+            //    true,
+            //    {
+            //    }
+            //);
+            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');
             sessionStorage.clear();
-			window.open(the_link, "_system");
-            //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){

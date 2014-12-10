@@ -53,6 +53,7 @@
     position: absolute;
 }
 
+.page-header a.backBtn,
 .page-header a.page-back{
     background-image: url(../img/arrow-back.png);
     display: block;

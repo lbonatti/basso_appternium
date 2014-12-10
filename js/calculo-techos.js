@@ -65,15 +65,15 @@ function eventosTechos(){
 
     setEstadoPie(1,true);
 
-    setTimeout(function(){
-        $('#back-t').unbind('click').click(function(){
-            if(pasoSTactual>1){
-                setEstadoPie(pasoSTactual-1);
-            }else{
-                window.history.back();
-            }
-        })
-    },500);
+    $('#back-t').on('click',function(e){
+        e.preventDefault();
+        if(pasoSTactual>1){
+            setEstadoPie(pasoSTactual-1);
+        }else{
+            window.history.back();
+        }
+    });
+
 
 }
 
@@ -255,32 +255,31 @@ function generateDivRenderT(){
 
             clearInterval(animateLoading);
             $this.animate({opacity:1})
-            $this.html('GUARDAR');
+            $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-
-            /*var fileTransfer = new FileTransfer();
-            var uri = encodeURI(the_link);
-            var filePath = "/mnt/sdcard/AppTernium/Calculos/Techos/"+projectName+'.pdf';
-            fileTransfer.download(
-                uri,
-                filePath,
-                function(entry) {
-                    document.getElementById("id11").innerHTML="download complete: " + entry.toURL();
-                },
-                function(error) {
-                    document.getElementById("id11").innerHTML="download error source " + error.source;
-                    document.getElementById("id11").innerHTML="download error target " + error.target;
-                    document.getElementById("id11").innerHTML="upload error code" + error.code;
-                    alert('Se ha producido un error al guardar.')
-                },
-                true,
-                {
-                }
-            );
-            alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');*/
-            sessionStorage.clear();
-			window.open(the_link, "_system");
+            //var fileTransfer = new FileTransfer();
+            //var uri = encodeURI(the_link);
+            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Techos/"+projectName+'.pdf';
+            //fileTransfer.download(
+            //    uri,
+            //    filePath,
+            //    function(entry) {
+            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+            //    },
+            //    function(error) {
+            //        document.getElementById("id11").innerHTML="download error source " + error.source;
+            //        document.getElementById("id11").innerHTML="download error target " + error.target;
+            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
+            //        alert('Se ha producido un error al guardar.')
+            //    },
+            //    true,
+            //    {
+            //    }
+            //);
+            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');
             //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+            sessionStorage.clear();
+            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){

@@ -3,6 +3,8 @@ var pasoSTactual = 1;
 var pasoSTmaximo = 1;
 var tipoC="t"; // sf dw t
 
+var stepCompleted = 0;
+
 function eventosSteelFrame(){
     initNuevoCalculoSF();
 
@@ -33,19 +35,31 @@ function eventosSteelFrame(){
         setEstadoPie(2,true);
     });
     $('#m1-csf-1 .pie .p3').click(function(){
-        $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
-        snapper.enable();
-        setEstadoPie(3,true);
+        if(stepCompleted >= 2){
+            $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
+            snapper.enable();
+            setEstadoPie(3,true);
+        }else{
+            alert('Debe completar los pasos anteriores.');
+        }
     });
     $('#m1-csf-1 .pie .p4').click(function(){
-        $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
-        snapper.enable();
-        setEstadoPie(4,true);
+        if(stepCompleted >= 3){
+            $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
+            snapper.enable();
+            setEstadoPie(4,true);
+        }else{
+            alert('Debe completar los pasos anteriores.');
+        }
     });
     $('#m1-csf-1 .pie .p5').click(function(){
-        $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
-        snapper.enable();
-        setEstadoPie(5,true);
+        if(stepCompleted == 99) {
+            $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
+            snapper.enable();
+            setEstadoPie(5, true);
+        }else{
+            alert('Debe completar los pasos anteriores.');
+        }
     });
 
 
@@ -63,15 +77,15 @@ function eventosSteelFrame(){
 
     setEstadoPie(1,true);
 
-    setTimeout(function(){
-        $('#back-sf').unbind('click').click(function(){
-            if(pasoSTactual>1){
-                setEstadoPie(pasoSTactual-1);
-            }else{
-                window.history.back();
-            }
-        })
-    },500);
+
+    $('#back-sf').on('click',function(e){
+        e.preventDefault();
+        if(pasoSTactual>1){
+            setEstadoPie(pasoSTactual-1);
+        }else{
+            window.history.back();
+        }
+    });
 
 
     $('.plantaAltaBlock .copyTo').on('click', function(){
@@ -274,6 +288,9 @@ function st_save_step2(redirect){
         sessionStorage.setItem("st-s2-p2-alto", p2Alto);
         sessionStorage.setItem("st-s2-p2-paredes", p2Paredes);
         if(redirect){
+            if(stepCompleted < 2){
+                stepCompleted = 2;
+            }
             setEstadoPie(3,false);
         }
     }
@@ -284,6 +301,9 @@ function st_save_step3(){
         alert('Debe ingresar un valor para continuar.');
     }else{
         sessionStorage.setItem("st-s3-mts", mts);
+        if(stepCompleted < 3){
+            stepCompleted = 3;
+        }
         setEstadoPie(4,false);
     }
 }
@@ -341,6 +361,7 @@ function saveNewCalc(){
 }
 
 function calculateSF(){
+    stepCompleted = 99;
     var projectName = sessionStorage.getItem('projectName');
     var entrepiso = sessionStorage.getItem('st-s1-entrepiso');
     var plantas = parseFloat(sessionStorage.getItem('st-s1-plantas'));
@@ -554,30 +575,31 @@ function generateDivRenderSF(){
 
             clearInterval(animateLoading);
             $this.animate({opacity:1})
-            $this.html('GUARDAR');
+            $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-            /*var fileTransfer = new FileTransfer();
-            var uri = encodeURI(the_link);
-            var filePath = "/mnt/sdcard/AppTernium/Calculos/Steel Frame/"+projectName+'.pdf';
-            fileTransfer.download(
-                uri,
-                filePath,
-                function(entry) {
-                    document.getElementById("id11").innerHTML="download complete: " + entry.toURL();
-                },
-                function(error) {
-                    document.getElementById("id11").innerHTML="download error source " + error.source;
-                    document.getElementById("id11").innerHTML="download error target " + error.target;
-                    document.getElementById("id11").innerHTML="upload error code" + error.code;
-                    alert('Se ha producido un error al guardar.')
-                },
-                true,
-                {
-                }
-            );
-			alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');*/
+            //var fileTransfer = new FileTransfer();
+            //var uri = encodeURI(the_link);
+            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Steel Frame/"+projectName+'.pdf';
+            //fileTransfer.download(
+            //    uri,
+            //    filePath,
+            //    function(entry) {
+            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+            //    },
+            //    function(error) {
+            //        document.getElementById("id11").innerHTML="download error source " + error.source;
+            //        document.getElementById("id11").innerHTML="download error target " + error.target;
+            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
+            //        alert('Se ha producido un error al guardar.')
+            //    },
+            //    true,
+            //    {
+            //    }
+            //);
+            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');
             sessionStorage.clear();
-			window.open(the_link, "_system");
+            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){

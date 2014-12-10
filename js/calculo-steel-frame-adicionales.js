@@ -91,7 +91,7 @@ function adicional_placas_yeso_cielorraso(anchoPB, largoPB, anchoPA, largoPA){
 
 function adicional_diafragmas_paneles(anchoPB, largoPB, altoPB, anchoPA, largoPA, altoPA, tipoTecho){
     var $_tmp1 = (anchoPB*2 + largoPB*2);
-    var $_tmp2 = (anchoPA * 2) + (largoPA * 2)
+    var $_tmp2 = (anchoPA * 2) + (largoPA * 2);
     var $_tmp3 = ((anchoPB * 1.15) / 4 );
     var pb_cond = ( ( anchoPB * 1.15 ) / 2);
 
@@ -173,7 +173,7 @@ function adicional_anclajes(anchoPB, largoPB){
 }
 
 function adicional_tornillos(anchoPB, largoPB, paredesInterioresPB, alturaPB , anchoPA, largoPA, paredesInterioresPA, alturaPA, tipoTecho, plantas, entrepiso){
-    var J20 = PGC200_techoCubiertaPlana(largoPB,anchoPB)
+    var J20 = PGC200_techoCubiertaPlana(largoPB,anchoPB);
     var J19 = anchoPB < largoPB ? anchoPB : largoPB;
     var $rigidizadores = 0;
     var $nudosCabriadas = 0;
@@ -184,14 +184,14 @@ function adicional_tornillos(anchoPB, largoPB, paredesInterioresPB, alturaPB , a
     var $mtsTecho = anchoPB * largoPB;
     var $mtsEntrepisos = anchoPA * largoPA;
 
-    var $total_paraPerfilesT1 = Math.ceil(($mtsMuros + $mtsTecho + $mtsEntrepisos) * 15 * 1.15)
+    var $total_paraPerfilesT1 = Math.ceil(($mtsMuros + $mtsTecho + $mtsEntrepisos) * 15 * 1.15);
 
     //Tornillos Hexagonales
-    var $mtsEncuentrosPanelesMuros = (Math.ceil(((anchoPB*2+largoPB*2+paredesInterioresPB)/3.5)+((anchoPA*2+largoPA*2+paredesInterioresPA)/3.5)))*alturaPB
+    var $mtsEncuentrosPanelesMuros = (Math.ceil(((anchoPB*2+largoPB*2+paredesInterioresPB)/3.5)+((anchoPA*2+largoPA*2+paredesInterioresPA)/3.5)))*alturaPB;
     var $mtsEncuentrosMuroTecho = anchoPB*2+largoPB*2+anchoPA*2+largoPA*2;
     var $hexagonales1 = Math.ceil(($mtsEncuentrosPanelesMuros + $mtsEncuentrosMuroTecho)*7*1.15);
 
-    switch (tipoTecho){
+    switch(tipoTecho){
         case 1:
             var $cabriadas = largoPB / 0.4 + 1;
             $nudosCabriadas = Math.ceil($cabriadas * 12);
@@ -200,17 +200,17 @@ function adicional_tornillos(anchoPB, largoPB, paredesInterioresPB, alturaPB , a
             $rigidizadores = Math.ceil((J20/J19)*2);
             break;
         case 3:
-            $rigidizadores = Math.ceil((largoPB/J20)*2);
+            $rigidizadores = Math.ceil((J20/largoPB)*2);
             break
     }
 
     if (plantas > 1) {
-        var $_tmp = largoPA/0.4
+        var $_tmp = largoPA/0.4;
         var $rigidizadores_entrepiso = Math.ceil($_tmp * 2 * 1.3);
     }else{
         $rigidizadores_entrepiso = 0;
     }
-    var $hexagonales2 = ($nudosCabriadas + $rigidizadores + $rigidizadores_entrepiso) * 5 * 1.15
+    var $hexagonales2 = ($nudosCabriadas + $rigidizadores + $rigidizadores_entrepiso) * 5 * 1.15;
     var $total_hexagonales = Math.ceil($hexagonales1 + $hexagonales2);
 
     //Tornillos T2 para Diafragma con alas para OSB
@@ -219,8 +219,8 @@ function adicional_tornillos(anchoPB, largoPB, paredesInterioresPB, alturaPB , a
     var $total_t2_diafragma =  ($_T2_1 + $_T2_2) * 27;
 
     //Tornillos T2 para Placa de yeso
-    var $_t2_1 = adicional_placas_yeso_paredes(anchoPB, largoPB, alturaPB, paredesInterioresPB, anchoPA, largoPA, alturaPA, paredesInterioresPA)
-    var $_t2_2 = adicional_placas_yeso_cielorraso(anchoPB, largoPB, anchoPA, largoPA)
+    var $_t2_1 = adicional_placas_yeso_paredes(anchoPB, largoPB, alturaPB, paredesInterioresPB, anchoPA, largoPA, alturaPA, paredesInterioresPA);
+    var $_t2_2 = adicional_placas_yeso_cielorraso(anchoPB, largoPB, anchoPA, largoPA);
     var $total_t2_placaYeso = Math.ceil(($_t2_1 + $_t2_2)*15);
 
     var $total_tornillos =  $total_paraPerfilesT1 + $total_hexagonales + $total_t2_diafragma + $total_t2_placaYeso;
@@ -248,25 +248,25 @@ var fLoca = Math.pow((Math.pow((26/18),2)+1),(1/2));
 /* PARA PB y PA */
 function PGC100_calcPanelesExternos(ancho,largo,alto){
     var $calc = ((ancho * 2 + largo * 2)/0.4)*alto*1.3;
-    console.log('P. Externos: ' + $calc.toFixed(0))
-    return $calc.toFixed(0)
+    console.log('P. Externos: ' + $calc.toFixed(0));
+    return $calc.toFixed(0);
 }
 /* PARA PB y PA */
 function PGC100_calcPanelesInternos(paredesInternas,alto){
-    var $calc = ((paredesInternas/0.4)*alto)*1.3
-    console.log('P. Internos: ' + $calc.toFixed(0))
+    var $calc = ((paredesInternas/0.4)*alto)*1.3;
+    console.log('P. Internos: ' + $calc.toFixed(0));
     return $calc.toFixed(0);
 }
 /* SOLO PB */
 function PGC100_calcTecho2Aguas(largo,ancho){
     var $calc1 = (largo/0.4)+1;
-    var $a = ancho
+    var $a = ancho;
     var $b = 1.15*$a/2;
     var $h = 1.15*$a/4;
     var $calc2 = ($a + 3*$b + 2*$h) * 1.1;
     var $calc = $calc2 * $calc1 * 1.1;
 
-    console.log('Techo a 2 aguas: ' + $calc.toFixed(0))
+    console.log('Techo a 2 aguas: ' + $calc.toFixed(0));
     return $calc.toFixed(0);
 }
 /* SOLO PB */
@@ -274,14 +274,14 @@ function PGC100_calcTimpanos(ancho){
     var $h = 1.15*ancho/4;
     var $calc = ((ancho * $h/2)/0.4)*2;
 
-    console.log('Timpanos: ' + $calc.toFixed(0))
+    console.log('Timpanos: ' + $calc.toFixed(0));
     return $calc.toFixed(0);
 }
 /* SOLO SI HAY PA */
 function PGC100_calcEscaleras(alto){
     var $calc = fLoca * alto * 2 * 1.3;
 
-    console.log('Escaleras: ' + $calc.toFixed(0))
+    console.log('Escaleras: ' + $calc.toFixed(0));
     return $calc.toFixed(0);
 }
 function PGC100(altoPB, anchoPB, largoPB, paredesInternasPB, altoPA, anchoPA, largoPA, paredesInternasPA, plantas, tipoTecho){
@@ -289,7 +289,7 @@ function PGC100(altoPB, anchoPB, largoPB, paredesInternasPB, altoPA, anchoPA, la
     if (plantas > 1){
         $calcEscaleras = PGC100_calcEscaleras(altoPB);
         var $calcPanelesExternos = parseFloat(PGC100_calcPanelesExternos(anchoPB,largoPB,altoPB)) + parseFloat(PGC100_calcPanelesExternos(anchoPA,largoPA,altoPA));
-        var $calcPanelesInternos = parseFloat(PGC100_calcPanelesInternos(paredesInternasPB,altoPB)) +  parseFloat(PGC100_calcPanelesInternos(paredesInternasPA,altoPA))
+        var $calcPanelesInternos = parseFloat(PGC100_calcPanelesInternos(paredesInternasPB,altoPB)) +  parseFloat(PGC100_calcPanelesInternos(paredesInternasPA,altoPA));
     }else{
         $calcPanelesExternos = PGC100_calcPanelesExternos(anchoPB,largoPB,altoPB);
         $calcPanelesInternos = PGC100_calcPanelesInternos(paredesInternasPB,altoPB);
@@ -347,7 +347,7 @@ function PGU100(largoPB,anchoPB, altoPB, paredesInternasPB, largoPA ,anchoPA, al
         var $escaleras = PGU100_escaleras(altoPB);
     }else{
         $panelesExternos = PGU100_panelesExternos(anchoPB,largoPB);
-        $panelesInternos = PGU100_panelesInternos(paredesInternasPB)
+        $panelesInternos = PGU100_panelesInternos(paredesInternasPB);
         $escaleras = 0;
     }
     if (tipoTecho == 1){
@@ -368,25 +368,25 @@ function PGU100(largoPB,anchoPB, altoPB, paredesInternasPB, largoPA ,anchoPA, al
 /* SI TECHO = CUBIERTA PLANA/VIGAS(3) */
 function PGC200_techoCubiertaPlana(largo,ancho){
     var $calc = (largo / 0.4) * ancho * 1.3;
-    return Math.ceil($calc)
+    return Math.ceil($calc);
 }
 /* SI HAY PA */
 function PGC200_dintelesAberturas(aberturas){
-    var $calc = aberturas * 2 * 1.1
-    return Math.ceil($calc)
+    var $calc = aberturas * 2 * 1.1;
+    return Math.ceil($calc);
 }
 function PGC200(largoPB, anchoPB, largoPA, anchoPA, aberturas, tipoTecho, plantas){
 
     var $dintelesAberturas = PGC200_dintelesAberturas(aberturas);
 
     if(tipoTecho == 3){
-        var $techoCubiertaPlana = PGC200_techoCubiertaPlana(largoPB,anchoPB)
+        var $techoCubiertaPlana = PGC200_techoCubiertaPlana(largoPB,anchoPB);
     }else{
         $techoCubiertaPlana = 0;
     }
 
     if(plantas > 1){
-        var $entrepisos = PGC200_techoCubiertaPlana(largoPA,anchoPA)
+        var $entrepisos = PGC200_techoCubiertaPlana(largoPA,anchoPA);
     }else{
         $entrepisos = 0;
     }

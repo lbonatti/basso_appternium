@@ -82,7 +82,11 @@
     text-shadow: none;
     font-size: 23px;
 }
-
+#loginForm .ui-btn.ui-submit{
+    height: 0px;
+    overflow: hidden;
+    border: none;
+}
 .ingreso-fb{
     margin: 13px auto;
     width: 86%;
@@ -103,26 +107,23 @@
 }
 
 .btn-footer{
-    position: fixed;
+    background: url(../img/login/arrow.png) no-repeat right center scroll #7D7D7D;
     bottom: 0px;
-    background-color: #7D7D7D;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 11px 32px;
-    padding-right: 58px;
-    text-shadow: none;
-    text-decoration: none;
     color: #C8C8C8;
     font-size: 18px;
+    height: 43px;
+    line-height: 43px;
     text-align: center;
-    background-image: url(../img/login/arrow.png);
-    background-repeat: no-repeat;
-    background-position: 100% 0;
-    background-size: 56px;
+    text-decoration: none;
+    text-indent: -20px;
+    text-shadow: none;
+    position: fixed;
+    width: 100%;
 }
 
 .cuenta-nueva{
-    bottom: 47px;
+    border-bottom: 2px solid #767676;
+    bottom: 43px;
 }
 
 .sin-cuenta{

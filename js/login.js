@@ -38,6 +38,12 @@ $(document).ready(function(){
         window.location.href="m-inicio.html";
     });
 
+    $('#page-1 #loginForm').on('submit', function(e){
+        $('#page-1 .ingreso').trigger('click');
+        e.preventDefault();
+        return false;
+    });
+
     $('#page-1 .ingreso').on('click', function(e){ //LOGIN
 
         e.preventDefault();
@@ -67,7 +73,6 @@ $(document).ready(function(){
          * test@gmail.com
          * master
          *
-         * TODO: Cambiar url
          */
         if(sendOk){
             $.ajax({
