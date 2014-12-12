@@ -490,44 +490,44 @@ function calculateSF(){
 
 
     //TOTALES EN DIVS
-    $('.paso5 span[data-result=pgc100]').text($pgc100_total + ' ml.');
-    $('.paso5 span[data-result=pgu100]').text($pgu100_total + ' ml.');
-    $('.paso5 span[data-result=anclajes]').text($anclajes_total + ' U.');
+    $('.paso5 span[data-result=pgc100]').text( Math.round($pgc100_total) + ' ml.');
+    $('.paso5 span[data-result=pgu100]').text( Math.round($pgu100_total) + ' ml.');
+    $('.paso5 span[data-result=anclajes]').text( Math.round($anclajes_total) + ' U.');
     //Diagrafagmas de rigidización
-    $('.paso5 span[data-result=diafragma1]').text($exteriores_techos_timpanos + ' ml.');
-    $('.paso5 span[data-result=diafragma2]').text($entrepisos_escaleras + ' ml.');
+    $('.paso5 span[data-result=diafragma1]').text( Math.round($exteriores_techos_timpanos) + ' ml.');
+    $('.paso5 span[data-result=diafragma2]').text(  Math.round($entrepisos_escaleras) + ' ml.');
     //AISLACIONES
-    $('.paso5 span[data-result=aislaciones1]').html($aislaciones1 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=aislaciones2]').html($aislaciones2 + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones1]').html( Math.round($aislaciones1) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones2]').html( Math.round($aislaciones2) + ' m<sup>2</sup>.');
 
     var $aislacionesTitulo1 = $aislaciones3 + $aislaciones4;
-    $('.paso5 span[data-result=aislaciones3]').html($aislacionesTitulo1 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=aislaciones4]').html($aislaciones3 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=aislaciones5]').html($aislaciones4 + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones3]').html( Math.round($aislacionesTitulo1) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones4]').html( Math.round($aislaciones3) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones5]').html( Math.round($aislaciones4) + ' m<sup>2</sup>.');
 
-    $('.paso5 span[data-result=aislaciones6]').html($aislaciones5 + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones6]').html( Math.round($aislaciones5) + ' m<sup>2</sup>.');
 
     var $aislacionesTitulo2 = $aislaciones6 + $aislaciones7;
-    $('.paso5 span[data-result=aislaciones7]').html($aislacionesTitulo2 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=aislaciones8]').html($aislaciones6 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=aislaciones9]').html($aislaciones7 + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones7]').html( Math.round($aislacionesTitulo2) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones8]').html( Math.round($aislaciones6) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=aislaciones9]').html( Math.round($aislaciones7) + ' m<sup>2</sup>.');
     //PLACAS YESO
-    $('.paso5 span[data-result=placasYeso1]').html($placasYeso1 + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=placasYeso2]').html($placasYeso2 + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=placasYeso1]').html( Math.round($placasYeso1) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=placasYeso2]').html( Math.round($placasYeso2) + ' m<sup>2</sup>.');
     //TERMINACION EXTERIOR
-    $('.paso5 span[data-result=terminacionExteriorRevestimiento]').html($terminacionExteriorRevestimiento + ' m<sup>2</sup>.');
-    $('.paso5 span[data-result=terminacionExteriorCubierta]').html($terminacionExteriorCubierta + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=terminacionExteriorRevestimiento]').html( Math.round($terminacionExteriorRevestimiento) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=terminacionExteriorCubierta]').html( Math.round($terminacionExteriorCubierta) + ' m<sup>2</sup>.');
     //TORNILLOS
     $('.paso5 span[data-result=tornillosT1]').html($tornillosT1 + ' U.');
-    $('.paso5 span[data-result=tornillosHexagonales]').html($tornillosHexagonales + ' U.');
+    $('.paso5 span[data-result=tornillosHexagonales]').html( Math.round($tornillosHexagonales) + ' U.');
     $('.paso5 span[data-result=tornillosT2]').html($tornillosT2 + ' U.');
     $('.paso5 span[data-result=tornillosT2Yeso]').html($tornillosT2Yeso + ' U.');
     //PERFILES DINAMICOS
     $('.paso5 span[data-result=perfilPGC200]').html(perfilPGC);
-    $('.paso5 span[data-result=pgc200]').html($pgc200 + ' ml.');
+    $('.paso5 span[data-result=pgc200]').html( Math.round($pgc200) + ' ml.');
 
     $('.paso5 span[data-result=perfilPGU200]').html(perfilPGU);
-    $('.paso5 span[data-result=pgu200]').html($pgu200 + ' ml.');
+    $('.paso5 span[data-result=pgu200]').html( Math.round($pgu200) + ' ml.');
 }
 
 function generateDivRenderSF(){
