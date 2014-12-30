@@ -4,12 +4,12 @@
         <a href="#" class="open-menu"></a>
         <h1 class="projectName">Proyecto 1</h1>
         <a  id="back-t"  class="backBtn"></a>
-        <a class="dot-menu"></a>
-        <div class="menu-options">
-            <div class="editar">Editar</div>
-            <div class="duplicar" >Duplicar</div>
-            <div class="eliminar">Eliminar</div>
-        </div>
+        <!--<a class="dot-menu"></a>-->
+        <!--<div class="menu-options">-->
+            <!--<div class="editar">Editar</div>-->
+            <!--<div class="duplicar" >Duplicar</div>-->
+            <!--<div class="eliminar">Eliminar</div>-->
+        <!--</div>-->
     </div>
     <div class="page-content">
         <div class="paso paso1">
@@ -157,7 +157,9 @@
 
             <!--<div class="boton">Descargar PDF</div>-->
             <!--<div class="boton ultimo-elemento">Compartir PDF</div>-->
-            <div class="boton ultimo-elemento savePDFT">Ver PDF</div>
+            <div class="boton savePDFT">Ver PDF</div>
+			<div class="boton saveCalc">Guardar cálculo</div>
+			<div class="boton ultimo-elemento shareCalc">Compartir</div>
 
         </div>
 
@@ -173,6 +175,12 @@
 		$('.boton.savePDFT').on('click',function(){
 			generateDivRenderT();
 		})
+		//Guardar calculo en APP
+		$('.boton.saveCalc').on('click',function(){
+			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+			saveNewCalcTechos(values);
+		})
+
         eventosTechos()
     </script>
 </div>

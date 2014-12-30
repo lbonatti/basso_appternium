@@ -10,7 +10,19 @@ function eventosRecuperarPwd(){
         if(email.length === 0){
             alert('El email es requerido.');
         }else{
-            $.mobile.changePage('password-enviada.html')
+            $.ajax({
+                url:backend_url+"/users/lost_password",
+                type:'POST',
+                data:{email: email},
+                success:function(result){
+                    if(result.Default && result.Default != null){
+                        $.mobile.changePage('password-enviada.html');
+                    }
+                },
+                error:function(error){
+                    alert(JSON.stringify(error));
+                }
+            });
         }
 
     })

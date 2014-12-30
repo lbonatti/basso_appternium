@@ -10,16 +10,21 @@
         <div class="titulo">Ayúdenos a mejorar</div>
         <div class="subtitulo">Queremos seguir mejorando día a día.<br>Por eso nos interesa su opinión.</div>
 
-        <select data-role="none" data-theme="none">
-            <option>Consulta</option>
-            <option>Sugerencia</option>
-        </select>
+        <select class="comentarios" data-role="none" data-theme="none"></select>
 
         <textarea data-role="none"></textarea>
         <div class="boton ultimo-elemento">Enviar</div>
     </div>
 
     <script>
+        $.ajax({
+            url: backend_url + "/comentarios/lists",
+            success: function(result) {
+                $.each(result.Default, function(key, value) {
+                    $('.comentarios').append($('<option>', { value : value.Comentario.id }).text(value.Comentario.nombre));
+                });
+            }
+        });
         eventosFeedback()
     </script>
 </div>

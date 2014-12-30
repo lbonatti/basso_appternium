@@ -1,7 +1,6 @@
-var urlProveedores="../../ws/proveedoresList.php";
+var urlProveedores= backend_url+"/proveedores/lists";
 //var urlPaises="../../ws/paisesList.php";
-var urlPaises="http://html5cooks.com/ternium/ternium/paises/lists";
-
+var urlPaises= backend_url+"/paises/lists";
 
 
 var paisesDropDown,paisesJson;
@@ -39,7 +38,7 @@ function cargarProveedores(){
         $('#m5-pl .page-content').append(r);
 
         $('#m5-pl .proveedor').click(function(){
-            localStorage.idProveedor=$(this).attr('data-id');
+            sessionStorage.idProveedor=$(this).attr('data-id');
             $.mobile.changePage('m-proveedores.html');
         })
     });
@@ -73,7 +72,7 @@ function cargarPaises(ddPais,ddProvincia){
 }
 
 function cargarProveedor(){
-    var idProveedor=localStorage.idProveedor;
+    var idProveedor=sessionStorage.idProveedor;
 
 
     $.getJSON( urlProveedores, function(data){

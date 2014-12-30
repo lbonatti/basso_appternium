@@ -69,7 +69,53 @@ function getDataRegister(){
         pais_id: $('#register .pais').val(),
         provincia_id: $('#register .provincia').val(),
         profesion_id: $('#register .profesion').val(),
-        role:2
+        role: 2
     };
+}
+
+function getDataFbRegister() {
+    var userEmail = sessionStorage.getItem("username");
+    var lastName = sessionStorage.getItem("last_name");
+    var firstName = sessionStorage.getItem("first_name");
+    var birthDate = sessionStorage.getItem("birthday");
+    var $pais_id;
+
+    $.ajax({
+        async: false,
+        url: backend_url+"/paises/get_default",
+        success: function(result) {
+            $pais_id = JSON.stringify(parseInt(result.result));
+        },
+        error: function(result) {
+            alert(JSON.stringify(result));
+        }
+    });
+
+    if (!$pais_id) {
+        return;
+    }
+
+    var data = {
+        nombre: firstName,
+        apellido: lastName,
+        email: userEmail,
+        username: userEmail,
+        fecha_nacimiento: birthDate,
+        password: 'default',
+        pais_id: $pais_id,
+        role: 2
+    };
+
+    $.ajax({
+        url: backend_url+"/users/registro",
+        data: data,
+        success: function(result) {
+            window.location.href = "m-inicio.html";
+        },
+        error: function(error) {
+            mensaje('El registro no se pudo realizar.');
+            JSON.stringify(error);
+        }
+    });
 }
 

@@ -1,5 +1,44 @@
-#m-u-c{
+#m-u-c{}
 
+
+#m-u-c .left{
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 60%;
+}
+#m-u-c .right{
+    float: right;
+    height: 100%;
+    position: relative;
+    width: 38%;
+}
+
+#m-u-c .left input,
+#m-u-c .left .resultField{
+    background: url("../img/util/bg-input-conversor.png") no-repeat scroll right bottom transparent;
+    border: medium none;
+    bottom: 0;
+    color: #fff;
+    font-family: 'roboto-thin';
+    font-size: 50px;
+    height: 64px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 240px;
+}
+#m-u-c .left .resultField{
+    background: none no-repeat scroll 0 0 transparent;
+}
+#m-u-c .left .arrowResult{
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
 }
 #m-u-c .panel-1{
     background-color: #3D464B;
@@ -12,4 +51,55 @@
 #m-u-c .panel-3{
     background-color: #F7F5F6;
     height: 20%;
+}
+#m-u-c .panel-3 .result{
+    height: 100%;
+    position: relative;
+    width: 98%;
+}
+#m-u-c .panel-3 .result p{
+    bottom: 0;
+    font-family: roboto-thin;
+    font-size: 30px;
+    height: 84px;
+    left: 10%;
+    line-height: 40px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+}
+#m-u-c .panel-3 .result p span.to{
+    font-family: roboto-regular;
+}
+
+#m-u-c .swiper-container,
+#m-u-c .swiper-container2{
+    color: #fff;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 350px;
+    text-align: center;
+    width: 100%;
+}
+#m-u-c .swiper-slide{
+    color: #fff;
+    display: block;
+    font-family: roboto-regular;
+    font-size: 20px;
+    float: none;
+    line-height: 40px;
+    margin: 0 auto;
+    opacity: 0.4;
+    transition: all 300ms ease 0s;
+    vertical-align: middle;
+    width: 140px;
+}
+#m-u-c .swiper-slide-active{
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #fff;
+    opacity: 1;
+}
+#m-u-c .swiper-slide p{
+    margin: 0;
+    text-shadow: none;
 }

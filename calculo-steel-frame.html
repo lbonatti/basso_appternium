@@ -295,8 +295,10 @@
 
 			<div id="renderCanvas"></div>
 
-			<div class="boton ultimo-elemento savePDF">Ver PDF</div>
-			<a href="" style="display: none" class="downloadPDF" download>Descargar PDF</a>
+			<div class="boton savePDF">Ver PDF</div>
+			<div class="boton saveCalc">Guardar cálculo</div>
+			<div class="boton ultimo-elemento shareCalc">Compartir</div>
+
         </div>
 
         <div class="pie">
@@ -346,19 +348,31 @@
         </style>
 
     <script>
+
 		$(document).ready(function(){
 			setTimeout(function () {
-				var mySwiper = new Swiper('.swiper-container',{
-					mode:'horizontal',
-					initialSlide: 2,
-					centeredSlides: true,
-					slidesPerView: 'auto'
-				});
+				if( !sessionStorage.getItem('swiperActive')){
+					var mySwiper = new Swiper('.swiper-container',{
+						mode:'horizontal',
+						initialSlide: 2,
+						centeredSlides: true,
+						slidesPerView: 'auto'
+					});
+				}else{
+					sessionStorage.removeItem('swiperActive');
+				}
 			},400)
 		})
 
+		//Mostrar PDF
 		$('.boton.savePDF').on('click',function(){
 			generateDivRenderSF();
+		})
+
+		//Guardar calculo en APP
+		$('.boton.saveCalc').on('click',function(){
+			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+			saveNewCalc();
 		})
 
 		$('.paso1 .cantPlantas div.op1, .paso1 .cantPlantas div.op2').on('click',function(){

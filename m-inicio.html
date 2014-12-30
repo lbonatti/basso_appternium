@@ -27,8 +27,10 @@
     <link rel="stylesheet" href="css/menu.css" />
 
     <script src="js/service.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/sync.js"></script>
     <script src="js/m-inicio.js"></script>
-	<script src="js/calculo-steel-frame-adicionales.js"></script>
+    <script src="js/calculo-steel-frame-adicionales.js"></script>
     <script src="js/calculo-steel-frame.js"></script>
     <script src="js/calculo-dry-wall.js"></script>
     <script src="js/calculo-techos.js"></script>
@@ -37,6 +39,7 @@
     <script src="js/m-proveedores-list.js"></script>
     <script src="js/m-feedback.js"></script>
     <script src="js/mensaje-enviado.js"></script>
+    <script src="js/facebookConnectPlugin.js"></script>
 
 
 
@@ -51,18 +54,19 @@
     <link rel="stylesheet" href="css/m-conversor.css" />
     <link rel="stylesheet" href="css/m-proveedores.css" />
     <link rel="stylesheet" href="css/m-proveedores-list.css" />
-	<link rel="stylesheet" href="css/m-galeria.css" />
+    <link rel="stylesheet" href="css/m-galeria.css" />
     <link rel="stylesheet" href="css/mensaje-enviado.css" />
     <link rel="stylesheet" href="css/u-ajustes.css" />
-
-
-
 
     <script src="plugins/bxslider/jquery.bxslider.min.js"></script>
     <link href="plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />
 </head>
 
 <body>
+
+	<div id="syncOverlay" style="position: fixed;width: 100%;height: 100%;z-index: 9999;background-color: red;">
+		<div class="text"></div>
+	</div>
 
     <div class="snap-drawer snap-drawer-left menu">
         <div class="titulo">Menú</div>
@@ -92,21 +96,21 @@
             </div>
             <div class="page-content">
                 <ul class="bxslider"  data-snap-ignore="1">
-                    <li>
-                        <img src="img/icon.png" />
-                        <div class="titulo">Casa Batlló</div>
-                        <div class="fecha">08 Noviembre</div>
-                    </li>
-                    <li>
-                        <img src="img/icon.png" />
-                        <div class="titulo">Casa Batlló</div>
-                        <div class="fecha">09 Noviembre</div>
-                    </li>
-                    <li>
-                        <img src="img/icon.png" />
-                        <div class="titulo">Casa Batlló</div>
-                        <div class="fecha">10 Noviembre</div>
-                    </li>
+                    <!--<li>-->
+                        <!--<img src="img/icon.png" />-->
+                        <!--<div class="titulo">Casa Batlló</div>-->
+                        <!--<div class="fecha">08 Noviembre</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<img src="img/icon.png" />-->
+                        <!--<div class="titulo">Casa Batlló</div>-->
+                        <!--<div class="fecha">09 Noviembre</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<img src="img/icon.png" />-->
+                        <!--<div class="titulo">Casa Batlló</div>-->
+                        <!--<div class="fecha">10 Noviembre</div>-->
+                    <!--</li>-->
                 </ul>
 
 
@@ -130,7 +134,7 @@
 		<div class="boton">Cerrar</div>
 	</div>
 
-    <div id="dlg-del-calculo" class="dialogo">
+    <div id="dlg-del-calculo" class="dialogo" data-action="delete">
         <div class="titulo">Atención</div>
         <div class="mensaje">¿Está seguro que desea eliminar este cálculo?</div>
 
@@ -145,6 +149,8 @@
         <div class="boton">Aceptar</div>
     </div>
 
-
+    <script type="text/javascript">
+        
+    </script>
 </body>
 </html>

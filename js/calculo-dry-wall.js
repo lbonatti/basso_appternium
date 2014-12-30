@@ -1,7 +1,62 @@
-var stepComplete = 0;
+var stepCompleted = 0;
 
 function eventosDryWall(){
-    initNuevoCalculoDW();
+
+    if(sessionStorage.getItem('aEditar')){
+
+        var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+        sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
+        var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
+        db_customQuery($getEditable, function(result) {
+            if(result.length > 0) {
+                var editablePName = result[0].project_name;
+                var editablePVars = $.parseJSON(result[0].data).vars;
+
+                // Cargar campos con data.
+
+                // Titulo
+                $('#m1-cdw-1 .projectName').text(editablePName);
+
+                // Alto paredes
+                $('#m1-cdw-1 .paso1 .i1').val(editablePVars.largoParedes);
+
+                // largo paredes
+                $('#m1-cdw-1 .paso1 .i2').val(editablePVars.altoParedes);
+
+                // espesor perfil
+                if(editablePVars.espesorPerfil == '1'){
+                    $('#m1-cdw-1 .paso1 .espesor .op1').trigger('click');
+                }else{
+                    $('#m1-cdw-1 .paso1 .espesor .op2').trigger('click');
+                }
+
+                // tipo placa
+                if(editablePVars.tipoPlaca == '1'){
+                    $('#m1-cdw-1 .paso1 .placa .op1').trigger('click');
+                }else{
+                    $('#m1-cdw-1 .paso1 .placa .op2').trigger('click');
+                }
+
+                // ancho cielo raso
+                $('#m1-cdw-1 .paso2 .i1').val(editablePVars.largoCieloRaso);
+
+                // largo cielo raso
+                $('#m1-cdw-1 .paso2 .i2').val(editablePVars.anchoCieloRaso);
+
+
+                stepCompleted = 1; // Habilita 2da pestaña
+
+            }else{
+                alertMsg('Error al cargar el proyecto', '', 'none', 'Editar Proyecto', 1, function(){
+                    $.mobile.changePage("m-mis-calculos.html");
+                });
+            }
+        });
+
+
+    }else{
+        initNuevoCalculoDW();
+    }
 
     $('#m1-cdw-1 .paso1 .siguiente-paso').click(function(){
         dry_wall_save_step1();
@@ -19,7 +74,8 @@ function eventosDryWall(){
             $('#m1-cdw-1 .paso1 .siguiente-paso')[0].click();
             setEstadoPie(2, true);
         }else{
-            alert('Debe completar los pasos anteriores.');
+            alertMsg('Debe completar los pasos anteriores.','dlg-dw')
+            //alert('Debe completar los pasos anteriores.');
         }
     });
     $('#m1-cdw-1 .pie .p3').click(function(){
@@ -27,7 +83,7 @@ function eventosDryWall(){
             $('#m1-cdw-1 .paso2 .siguiente-paso')[0].click();
             setEstadoPie(3, true);
         }else{
-            alert('Debe completar los pasos anteriores.');
+            alertMsg('Debe completar los pasos anteriores.','dlg-dw')
         }
     });
 
@@ -58,11 +114,11 @@ function dry_wall_save_step1(){
     var tipoPlaca = $('#m1-cdw-1 .paso1 .placa .selected').data('value');
 
     if( largoParedes.length === 0 || isNaN( largoParedes ) ){
-        alert('Debe ingresar el largo de las paredes interiores (numérico con punto decimal).');
+        alertMsg('Debe ingresar el largo de las paredes interiores (numérico con punto decimal).','dlg-dw');
         $(this).val('');
         return;
     }else if( altoParedes.length === 0 || isNaN( altoParedes ) ){
-        alert('Debe ingresar el ancho las paredes interiores (numérico con punto decimal).');
+        alertMsg('Debe ingresar el ancho las paredes interiores (numérico con punto decimal).','dlg-dw');
         $(this).val('');
         return;
     }else{
@@ -81,11 +137,11 @@ function dry_wall_save_step2(){
     var anchoCieloRaso = $.trim( $('#m1-cdw-1 .paso2 .i2').val() );
 
     if( largoCieloRaso.length === 0 || isNaN( largoCieloRaso ) ){
-        alert('Debe ingresar el largo del cielo raso (numérico con punto decimal).');
+        alertMsg('Debe ingresar el largo del cielo raso (numérico con punto decimal).','dlg-dw');
         $(this).val('');
         return;
     }else if( anchoCieloRaso.length === 0 || isNaN( anchoCieloRaso ) ){
-        alert('Debe ingresar el ancho del cielo raso (numérico con punto decimal).');
+        alertMsg('Debe ingresar el ancho del cielo raso (numérico con punto decimal).','dlg-dw');
         $(this).val('');
         return;
     }else{
@@ -139,17 +195,9 @@ function dw_calculateResult(){
 
 function saveNewCalcDryWall(){
     var calculos;
-
-    if (localStorage.calculos){ // Existe calculos
-        calculos = $.parseJSON(localStorage.calculos);
-        if(! calculos.tipo.dry_wall){ // Crear tipo dry_wall
-            calculos.tipo['dry_wall'] = {};
-        }
-    }else{
-        // Crear variables calculos y tipo dry_wall
-        localStorage.setItem('calculos', JSON.stringify( {"tipo": { "dry_wall": {}  } } ) );
-        calculos = $.parseJSON(localStorage.calculos);
-    }
+    var currentTime = getCurrentTime();
+    sessionStorage.setItem('calculos', JSON.stringify( {"tipo": { "dry_wall": {}  } } ) );
+    calculos = $.parseJSON(sessionStorage.calculos);
 
     var $_name = sessionStorage.getItem('projectName');
     var $_largoParedes = sessionStorage.getItem('dw-s1-lp');
@@ -172,7 +220,60 @@ function saveNewCalcDryWall(){
         }
     }
 
-    localStorage.setItem('calculos', JSON.stringify(calculos));
+    sessionStorage.setItem('calculos', JSON.stringify(calculos));
+
+    //Aquí procesaremos el web services que guardará el calculo en la BD
+    //Mandamos el string de JSON a la BD -> ¡¡¡ SOLO EL STRING DEL CALCULO  !!!
+    // ID calculo, ID usuario, tipo de calculo (1=SF, 2=DW, 3=T), json con los datos del calculo
+    // con el success del ajax (guardado en la BD remota) cambiamos el valor sinc = 1 del calculo en sessionStorage
+    var $user = sessionStorage.getItem('username');
+    var $dataSaveBD = JSON.stringify(calculos.tipo.dry_wall[$_name]);
+    var $calcType = 2;
+    if (estadoST == 0) { //Si el calculo es nuevo
+        //Guardamos en bd local el calculo
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
+        if (logged == true){
+            var values = [sessionStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar','dlg-dw');
+                }
+            })
+        }else{
+            var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar','dlg-dw');
+                }
+            })
+        }
+    }else if(estadoST == 2){ //Si el calculo ya existe y fue editado
+        var pName = sessionStorage.getItem('projectName');
+        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
+        db_updateQueryEdit($query, function(result,updatedID) {
+            if(result == 'ok'){
+                alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
+                $('.boton.saveCalc').fadeOut(600);
+                modoLectura();
+                newSave = 1;
+            }
+        })
+    }
+    // Si el usuario es anonimo, solo tendremos acceso a la variable local, asi que no haremos nada.
+    // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar
+    // los calculos a la BD remota)
+    estadoST = 1;
+    $('#back-sf').hide();
 }
 
 function initNuevoCalculoDW(){
@@ -181,6 +282,13 @@ function initNuevoCalculoDW(){
     pasoSTactual = 1;
     pasoSTmaximo = 1;
     $('#m1-cdw-1 .projectName').html(sessionStorage.getItem("projectName"));
+}
+function initEditarCalculoDW(){
+    tipoC='dw';
+    estadoST=2;
+    pasoSTactual = 1;
+    pasoSTmaximo = 2;
+    $('#m1-cdw-1 .paso input[type=number]').removeAttr('disabled');
 }
 
 function dw_montante_paneles_interiores(largoPI, alturaPI){
@@ -223,10 +331,9 @@ function generateDivRenderDW(){
     var $html = $('#myRenderSaveDW').clone();
     var $this = $('.paso3 .boton.savePDFDW');
     $html.find('.boton.savePDFDW').remove();
+    $html.find('.boton.saveCalc').remove();
+    $html.find('.boton.shareCalc').remove();
     $html = $html.html();
-
-    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-    saveNewCalcDryWall();
 
     //Animamos el boton
     var dots = 0;
@@ -255,7 +362,7 @@ function generateDivRenderDW(){
         request = $.ajax({
             type: 'POST',
             url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
             dataType: 'text'
         });
 
@@ -266,27 +373,6 @@ function generateDivRenderDW(){
             $this.animate({opacity:1})
             $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-            //var fileTransfer = new FileTransfer();
-            //var uri = encodeURI(the_link);
-            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Dry Wall/"+sessionStorage.getItem('projectName')+'.pdf';
-            //fileTransfer.download(
-            //    uri,
-            //    filePath,
-            //    function(entry) {
-            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
-            //    },
-            //    function(error) {
-            //        document.getElementById("id11").innerHTML="download error source " + error.source;
-            //        document.getElementById("id11").innerHTML="download error target " + error.target;
-            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
-            //        alert('Se ha producido un error al guardar.')
-            //    },
-            //    true,
-            //    {
-            //    }
-            //);
-            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Dry Wall/'+projectName+'.pdf');
-            sessionStorage.clear();
             window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 

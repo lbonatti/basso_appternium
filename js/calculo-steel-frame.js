@@ -1,12 +1,113 @@
 var estadoST = 0; // 0=Nuevo   1=SoloLectura   2=Editando
 var pasoSTactual = 1;
 var pasoSTmaximo = 1;
-var tipoC="t"; // sf dw t
+var tipoC="sf"; // sf dw t
 
 var stepCompleted = 0;
 
 function eventosSteelFrame(){
-    initNuevoCalculoSF();
+
+    if(sessionStorage.getItem('aEditar')){
+
+        var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+        sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
+        sessionStorage.setItem('swiperActive', 1); // bandera para evitar inicializar el slider luego.
+
+        var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
+        db_customQuery($getEditable, function(result) {
+            if(result.length > 0) {
+                var editablePName = result[0].project_name;
+                var editablePVars = $.parseJSON(result[0].data).vars;
+
+                // Cargar campos con data.
+
+                // Titulo
+                $('#m1-csf-1 .projectName').text(editablePName);
+
+                // Cantidad de plantas
+                if(editablePVars.plantas.cuantas == '1'){
+                    $('#m1-csf-1 .paso1 .cantPlantas .op1').trigger('click');
+                }else{
+                    $('#m1-csf-1 .paso1 .cantPlantas .op2').trigger('click');
+                }
+
+                // Tipo de entrepiso
+                if(editablePVars.entrepiso == 'seco') {
+                    $('#m1-csf-1 .paso1 .tipoEntrepiso .op1').trigger('click');
+                }else{
+                    $('#m1-csf-1 .paso1 .tipoEntrepiso .op2').trigger('click');
+                }
+
+                //Luz maxima, reinicializar slider
+                var theSlide = 0;
+                switch (editablePVars.luzmax){
+                    case 4:
+                        theSlide = 0;
+                        break;
+                    case 4.5:
+                        theSlide = 1;
+                        break;
+                    case 5:
+                        theSlide = 2;
+                        break;
+                    case 5.5:
+                        theSlide = 3;
+                        break;
+                    case 6:
+                        theSlide = 4;
+                        break;
+                }
+
+                var mySwiper = new Swiper('.swiper-container',{
+                    mode:'horizontal',
+                    initialSlide: theSlide,
+                    centeredSlides: true,
+                    slidesPerView: 'auto'
+                });
+                snapper.disable(); // Deshabilitar Menu lateral en primer paso.
+
+                // Plantas
+                $('#m1-csf-1 .paso2 .i1').val(editablePVars.plantas[1].ancho);
+                $('#m1-csf-1 .paso2 .i2').val(editablePVars.plantas[1].largo);
+                $('#m1-csf-1 .paso2 .i3').val(editablePVars.plantas[1].alto);
+                $('#m1-csf-1 .paso2 .i4').val(editablePVars.plantas[1].paredes);
+
+                if(editablePVars.plantas.cuantas == '2') {
+                    $('#m1-csf-1 .paso2 .i5').val(editablePVars.plantas[2].ancho);
+                    $('#m1-csf-1 .paso2 .i6').val(editablePVars.plantas[2].largo);
+                    $('#m1-csf-1 .paso2 .i7').val(editablePVars.plantas[2].alto);
+                    $('#m1-csf-1 .paso2 .i8').val(editablePVars.plantas[2].paredes);
+                }
+
+                // Metros Lineales
+                $('#m1-csf-1 .paso3 .i9').val(editablePVars.aberturas);
+
+                // Tipo de techo
+                switch (editablePVars.tipo_techo) {
+                    case 1:
+                        $('#m1-csf-1 .paso4 .techo.op1').trigger('click');
+                        break;
+                    case 2:
+                        $('#m1-csf-1 .paso4 .techo.op2').trigger('click');
+                        break;
+                    case 3:
+                        $('#m1-csf-1 .paso4 .techo.op3').trigger('click');
+                        break;
+                }
+
+                stepCompleted = 3; // Habilita hasta la 4ta pestaña
+
+            }else{
+                alertMsg('Error al cargar el proyecto', '', 'none', 'Editar Proyecto', 1, function(){
+                    $.mobile.changePage("m-mis-calculos.html");
+                });
+            }
+        });
+
+
+    }else{
+        initNuevoCalculoSF();
+    }
 
     $('#m1-csf-1 .paso1 .siguiente-paso').click(function(){
         st_save_step1();
@@ -40,7 +141,7 @@ function eventosSteelFrame(){
             snapper.enable();
             setEstadoPie(3,true);
         }else{
-            alert('Debe completar los pasos anteriores.');
+            alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
         }
     });
     $('#m1-csf-1 .pie .p4').click(function(){
@@ -49,7 +150,7 @@ function eventosSteelFrame(){
             snapper.enable();
             setEstadoPie(4,true);
         }else{
-            alert('Debe completar los pasos anteriores.');
+            alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
         }
     });
     $('#m1-csf-1 .pie .p5').click(function(){
@@ -58,7 +159,7 @@ function eventosSteelFrame(){
             snapper.enable();
             setEstadoPie(5, true);
         }else{
-            alert('Debe completar los pasos anteriores.');
+            alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
         }
     });
 
@@ -120,7 +221,7 @@ function eventosCalculosGenerales(){
     });
 
     $('.menu-options .editar').click(function(){
-        estadoST = 2;
+        initEditarCalculoSF()
         setEstadoPie(1,false);
         esconderDotMenu();
     });
@@ -131,11 +232,24 @@ function eventosCalculosGenerales(){
 
     $('.menu-options .eliminar').click(function(){
         blockScreen();
-        $('#dlg-del-calculo').show();
+        $('#dlg-del-calculo[data-action=delete]').show();
     });
 
     $('.menu-options').hide();
 
+
+    //Delete Project
+    $('#dlg-del-calculo[data-action=delete] .boton').on('click',function(){
+            var currentProjectName = $('h1.projectName').text();
+            var jsonCalc = $.parseJSON(sessionStorage.getItem('calculos'))
+            if(jsonCalc.tipo.steel_frame[currentProjectName]){
+                delete jsonCalc.tipo.steel_frame[currentProjectName];
+                sessionStorage.setItem('calculos', JSON.stringify(jsonCalc));
+                alertMsg('El calculo '+ currentProjectName + ' ha sido borrado.', '', 'none', 'Borrar calculo', 1);
+            }else{
+                alertMsg('No se puede eliminar el cálculo ya que no se encuentra guardado.', '', 'none', '', 1);
+            }
+    })
 
 }
 
@@ -157,7 +271,6 @@ function setEstadoPie(paso, tab) {
         $('#back-' + tipoC).show();
         $('.dot-menu').hide();
 
-        if (paso == 5) modoLectura();
     } else if (estadoST == 1) { //SoloLectura
         todasPestanas.removeClass('disabled').removeClass('selected');
         pestana.addClass('selected');
@@ -169,12 +282,13 @@ function setEstadoPie(paso, tab) {
         $('#back-' + tipoC).show();
         $('.dot-menu').hide();
 
-        if (tipoC == 'sf' && paso == 5) modoLectura();
         $('.pie .p5').addClass('disabled');
-
     }
     if (paso == 5){
         $('.pie .p5').removeClass('disabled');
+        if(estadoST==2){
+            $('.boton.saveCalc').show().html('Guardar edición');
+        }
     }
 }
 function modoLectura(){
@@ -182,6 +296,7 @@ function modoLectura(){
     $('#back-'+tipoC).hide();
     $('.dot-menu').show();
     $('#m1-csf-1 .paso input[type=number]').attr('disabled', 'disabled');
+    $('.pie div').addClass('disabled').removeClass('selected');
 }
 function esconderDotMenu(){
     $('.menu-options').hide();
@@ -206,9 +321,10 @@ function initNuevoCalculoSF(){
 
 function initEditarCalculoSF(){
     tipoC='sf';
-    estadoST=1;
+    estadoST=2;
     pasoSTactual = 1;
     pasoSTmaximo = 4;
+    $('#m1-csf-1 .paso input[type=number]').removeAttr('disabled');
 }
 
 function st_save_step1(){
@@ -242,13 +358,13 @@ function st_save_step2(redirect){
     itsOk = 0;
 
     if( $.trim( $('#m1-csf-1 .paso2 .i1').val() ).length === 0 ){
-        alert('Completa el ancho de la planta 1');
+        alertMsg('Completa el ancho de la planta 1', '', 'none', '', 1);
     }else if( $.trim( $('#m1-csf-1 .paso2 .i2').val() ).length === 0 ){
-        alert('Completa el largo de la planta 1');
+        alertMsg('Completa el largo de la planta 1', '', 'none', '', 1);
     }else if( $.trim( $('#m1-csf-1 .paso2 .i3').val() ).length === 0 ){
-        alert('Completa el alto de la planta 1');
+        alertMsg('Completa el alto de la planta 1', '', 'none', '', 1);
     }else if( $.trim( $('#m1-csf-1 .paso2 .i4').val() ).length === 0 ){
-        alert('Completa la cantidad de paredes de la planta 1');
+        alertMsg('Completa la cantidad de paredes de la planta 1', '', 'none', '', 1);
     }else {
         p1Ancho = $.trim($('#m1-csf-1 .paso2 .i1').val());
         p1Largo = $.trim($('#m1-csf-1 .paso2 .i2').val());
@@ -259,13 +375,13 @@ function st_save_step2(redirect){
 
     if(sessionStorage.getItem("st-s1-plantas") === '2') {
         if ($.trim($('#m1-csf-1 .paso2 .i5').val()).length === 0) {
-            alert('Completa el ancho de la planta 2');
+            alertMsg('Completa el ancho de la planta 2', '', 'none', '', 1);
         } else if ($.trim($('#m1-csf-1 .paso2 .i6').val()).length === 0) {
-            alert('Completa el largo de la planta 2');
+            alertMsg('Completa el largo de la planta 2', '', 'none', '', 1);
         } else if ($.trim($('#m1-csf-1 .paso2 .i7').val()).length === 0) {
-            alert('Completa el alto de la planta 2');
+            alertMsg('Completa el alto de la planta 2', '', 'none', '', 1);
         } else if ($.trim($('#m1-csf-1 .paso2 .i8').val()).length === 0) {
-            alert('Completa la cantidad de paredes de la planta 2');
+            alertMsg('Completa la cantidad de paredes de la planta 2', '', 'none', '', 1);
         } else {
             p2Ancho = $.trim($('#m1-csf-1 .paso2 .i5').val());
             p2Largo = $.trim($('#m1-csf-1 .paso2 .i6').val());
@@ -298,7 +414,7 @@ function st_save_step2(redirect){
 function st_save_step3(){
     var mts = $.trim( $('#m1-csf-1 .paso3 .i9').val() );
     if(mts.length === 0){
-        alert('Debe ingresar un valor para continuar.');
+        alertMsg('Debe ingresar un valor para continuar.', '', 'none', '', 1);
     }else{
         sessionStorage.setItem("st-s3-mts", mts);
         if(stepCompleted < 3){
@@ -314,50 +430,95 @@ function st_save_step4(){ //Almacenar tipo de techo
 
 function saveNewCalc(){
     var calculos;
+    var currentTime = getCurrentTime();
 
-    if (localStorage.calculos){ // Existe calculos
-        calculos = $.parseJSON(localStorage.calculos);
-        if(! calculos.tipo.steel_frame){ // Crear tipo steel_frame
-            calculos.tipo['steel_frame'] = {};
-        }
-    }else{
-        // Crear variables calculos y tipo steel_frame
-        localStorage.setItem('calculos', JSON.stringify( {"tipo": { "steel_frame": {}  } } ) );
-        calculos = $.parseJSON(localStorage.calculos);
-    }
+    sessionStorage.setItem('calculos', JSON.stringify( {"tipo": { "steel_frame": {}  } } ) );
+    calculos = $.parseJSON(sessionStorage.calculos);
 
-    var $_1 = sessionStorage.getItem('projectName');
-    var $_2 = sessionStorage.getItem('st-s1-entrepiso');
-    var $_3 = parseFloat(sessionStorage.getItem('st-s1-plantas'));
-    var $_4 = parseFloat(sessionStorage.getItem('st-s2-p1-alto'));
-    var $_5 = parseFloat(sessionStorage.getItem('st-s2-p1-ancho'));
-    var $_6 = parseFloat(sessionStorage.getItem('st-s2-p1-largo'));
-    var $_7 = parseFloat(sessionStorage.getItem('st-s2-p1-paredes'));
-    var $_8 = parseFloat(sessionStorage.getItem('st-s2-p2-alto'));
-    var $_9 = parseFloat(sessionStorage.getItem('st-s2-p2-ancho'));
-    var $_10 = parseFloat(sessionStorage.getItem('st-s2-p2-largo'));
-    var $_11 = parseFloat(sessionStorage.getItem('st-s2-p2-paredes'));
-    var $_12 = parseFloat(sessionStorage.getItem('st-s3-mts'));
-    var $_13 = parseFloat(sessionStorage.getItem('st-s4-tipotecho'));
-    var $_14 = parseFloat(sessionStorage.getItem('st-s1-luz'));
+    var projectName = sessionStorage.getItem('projectName');
+    var entrepiso = sessionStorage.getItem('st-s1-entrepiso');
+    var plantas = parseFloat(sessionStorage.getItem('st-s1-plantas'));
+    var altoPB = parseFloat(sessionStorage.getItem('st-s2-p1-alto'));
+    var anchoPB = parseFloat(sessionStorage.getItem('st-s2-p1-ancho'));
+    var largoPB = parseFloat(sessionStorage.getItem('st-s2-p1-largo'));
+    var paredesInternasPB = parseFloat(sessionStorage.getItem('st-s2-p1-paredes'));
+    var altoPA = parseFloat(sessionStorage.getItem('st-s2-p2-alto'));
+    var anchoPA = parseFloat(sessionStorage.getItem('st-s2-p2-ancho'));
+    var largoPA = parseFloat(sessionStorage.getItem('st-s2-p2-largo'));
+    var paredesInternasPA = parseFloat(sessionStorage.getItem('st-s2-p2-paredes'));
+    var aberturas = parseFloat(sessionStorage.getItem('st-s3-mts'));
+    var tipoTecho = parseFloat(sessionStorage.getItem('st-s4-tipotecho'));
+    var luzmax = parseFloat(sessionStorage.getItem('st-s1-luz'));
 
     //Si hay datos en CALCULOS, concatenamos el nuevo proyecto
-    calculos.tipo.steel_frame[$_1] =
+    calculos.tipo.steel_frame[projectName] =
     {
         "vars": {
-            "tipo_techo": $_13,
-            "aberturas": $_12,
-            "entrepiso": $_2,
-            "luzmax":$_14,
+            "tipo_techo": tipoTecho,
+            "aberturas": aberturas,
+            "entrepiso": entrepiso,
+            "luzmax":luzmax,
             "plantas": {
-                "cuantas": $_3,
-                "1": {"alto": $_4, "ancho": $_5, "largo": $_6, "paredes": $_7},
-                "2": {"alto": $_8, "ancho": $_9, "largo": $_10, "paredes": $_11}
+                "cuantas": plantas,
+                "1": {"alto": altoPB, "ancho": anchoPB, "largo": largoPB, "paredes": paredesInternasPB},
+                "2": {"alto": altoPA, "ancho": anchoPA, "largo": largoPA, "paredes": paredesInternasPA}
             }
         }
     }
 
-    localStorage.setItem('calculos', JSON.stringify(calculos));
+    sessionStorage.setItem('calculos', JSON.stringify(calculos));
+    //Aquí procesaremos el web services que guardará el calculo en la BD
+    //Mandamos el string de JSON a la BD -> ¡¡¡ SOLO EL STRING DEL CALCULO  !!!
+    // ID calculo, ID usuario, tipo de calculo (1=SF, 2=DW, 3=T), json con los datos del calculo
+    // con el success del ajax (guardado en la BD remota) cambiamos el valor sinc = 1 del calculo en sessionStorage
+    var $user = sessionStorage.getItem('username');
+    var $dataSaveBD = JSON.stringify(calculos.tipo.steel_frame[projectName]);
+    var $calcType = 1;
+    if (estadoST == 0) { //Si el calculo es nuevo
+        //Guardamos en bd local el calculo
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
+        if (logged == true){
+            var values = [sessionStorage.getItem('userId'),projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                }
+            })
+        }else{
+            var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                }
+            })
+        }
+    }else if(estadoST == 2){ //Si el calculo ya existe y fue editado
+        var pName = sessionStorage.getItem('projectName');
+        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
+        db_updateQueryEdit($query, function(result,updatedID) {
+            if(result == 'ok'){
+                alertMsg('El calculo '+projectName+' ha sido editado', '', 'none', '', 1);
+                $('.boton.saveCalc').fadeOut(600);
+                modoLectura();
+                newSave = 1;
+            }
+        })
+    }
+    // Si el usuario es anonimo, solo tendremos acceso a la variable local, asi que no haremos nada.
+    // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar
+    // los calculos a la BD remota)
+    estadoST = 1;
+    $('#back-sf').hide();
 }
 
 function calculateSF(){
@@ -537,7 +698,7 @@ function generateDivRenderSF(){
     $html = $html.html();
 
     //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-    saveNewCalc();
+    //saveNewCalc();
 
     //Animamos el boton
     var dots = 0;
@@ -566,7 +727,7 @@ function generateDivRenderSF(){
         request = $.ajax({
             type: 'POST',
             url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
             dataType: 'html'
         });
 
@@ -577,27 +738,6 @@ function generateDivRenderSF(){
             $this.animate({opacity:1})
             $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-            //var fileTransfer = new FileTransfer();
-            //var uri = encodeURI(the_link);
-            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Steel Frame/"+projectName+'.pdf';
-            //fileTransfer.download(
-            //    uri,
-            //    filePath,
-            //    function(entry) {
-            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
-            //    },
-            //    function(error) {
-            //        document.getElementById("id11").innerHTML="download error source " + error.source;
-            //        document.getElementById("id11").innerHTML="download error target " + error.target;
-            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
-            //        alert('Se ha producido un error al guardar.')
-            //    },
-            //    true,
-            //    {
-            //    }
-            //);
-            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Steel Frame/'+projectName+'.pdf');
-            sessionStorage.clear();
             window.open( the_link, '_system', 'location=yes,toolbar=yes' );
 
         });

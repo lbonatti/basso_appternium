@@ -1,40 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ternium</title>
+    <meta charset="utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
 
-<div data-role="page" id="m-u-c">
-    <div class="page-header" >
-        <a href="#" class="open-menu"></a>
-        <h1>Conversor de medidas</h1>
-        <a  class="page-back"></a>
-    </div>
-    <div class="page-content">
-
-        <div class="panel-1">
-			<div class="left"></div>
-			<div class="right">
-				<div class="sliderMedidas">
-					<ul class="bxslider">
-						<li>Milímetros</li>
-						<li>Centímetros</li>
-						<li>Pulgadas</li>
-					</ul>
-				</div>
-			</div>
-        </div>
-        <div class="panel-2">
-
-        </div>
-        <div class="panel-3">
-
-        </div>
-
-    </div>
-
-    <script>
-		$(document).ready(function(){
-			$('ul.bxslider').bxSlider({
-				mode: 'vertical',
-				startSlide: '1'
-			});
-		})
-        //eventosConversor()
+    <script type="text/javascript">
+        var backend_url = 'http://projectsunderdev.com/app-ternium/backend-admin';
+        var url_webservices = 'http://projectsunderdev.com/app-ternium/webservices'
     </script>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/jqm/jquery.mobile-1.3.2.min.js"></script>
+    <link rel="stylesheet" href="js/jqm/jquery.mobile-1.3.2.min.css"/>
+
+    <script src="cordova.js"></script>
+
+    <script src="js/snap.js"></script>
+    <script src="js/main.js"></script>
+
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/snap.css"/>
+    <link rel="stylesheet" href="css/menu.css"/>
+
+    <script src="js/service.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/m-inicio.js"></script>
+    <script src="js/calculo-steel-frame-adicionales.js"></script>
+    <script src="js/calculo-steel-frame.js"></script>
+    <script src="js/calculo-dry-wall.js"></script>
+    <script src="js/calculo-techos.js"></script>
+    <script src="js/m-nuevo-calculo.js"></script>
+    <script src="js/m-mis-calculos.js"></script>
+    <script src="js/m-proveedores-list.js"></script>
+    <script src="js/m-feedback.js"></script>
+    <script src="js/mensaje-enviado.js"></script>
+    <script src="js/facebookConnectPlugin.js"></script>
+
+
+    <link rel="stylesheet" href="css/inicio.css"/>
+    <link rel="stylesheet" href="css/m-nuevo-calculo.css"/>
+    <link rel="stylesheet" href="css/calculo-dry-wall.css"/>
+    <link rel="stylesheet" href="css/calculo-steel-frame.css"/>
+    <link rel="stylesheet" href="css/calculo-techos.css"/>
+    <link rel="stylesheet" href="css/m-mis-calculos.css"/>
+    <link rel="stylesheet" href="css/m-utilidades.css"/>
+    <link rel="stylesheet" href="css/m-feedback.css"/>
+    <link rel="stylesheet" href="css/m-conversor.css"/>
+    <link rel="stylesheet" href="css/m-proveedores.css"/>
+    <link rel="stylesheet" href="css/m-proveedores-list.css"/>
+    <link rel="stylesheet" href="css/m-galeria.css"/>
+    <link rel="stylesheet" href="css/mensaje-enviado.css"/>
+    <link rel="stylesheet" href="css/u-ajustes.css"/>
+
+    <script src="plugins/bxslider/jquery.bxslider.min.js"></script>
+    <link href="plugins/bxslider/jquery.bxslider.css" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div id="syncOverlay" style="position: fixed;width: 100%;height: 100%;z-index: 9999;background-color: red;">
+    <div class="text"></div>
 </div>
+
+<div class="snap-drawer snap-drawer-left menu">
+    <div class="titulo">Menú</div>
+    <a data-role="none" rel="external" class="item selected" href="m-inicio.html" data-title="Inicio">Inicio</a>
+    <a data-role="none" rel="external" class="item" href="m-nuevo-calculo.html" data-title="Nuevo cálculo">Nuevo cálculo</a>
+    <a data-role="none" rel="external" class="item" href="m-mis-calculos.html" data-title="Mis cálculos">Mis cálculos</a>
+    <a data-role="none" rel="external" class="item" href="m-galeria.html" data-title="Galeria">Galería steel frame</a>
+    <a data-role="none" rel="external" class="item" href="m-utilidades.html" data-title="Utilidades">Utilidades</a>
+    <a data-role="none" rel="external" class="item" href="m-proveedores-list.html" data-title="Proveedores">Proveedores</a>
+    <a data-role="none" rel="external" class="item" href="m-feedback.html" data-title="Feedback">Feedback</a>
+    <a data-role="none" rel="external" class="item" href="#" data-title="Logout">Cerrar sesión</a>
+</div>
+
+
+<div class="snap-content" id="content">
+    <div data-role="page" id="m-u-c">
+        <div class="page-header">
+            <a href="#" class="open-menu"></a>
+
+            <h1>Conversor de medidas</h1>
+            <a class="page-back"></a>
+
+            <link href="js/idangerous/idangerous.swiper.css" rel="stylesheet"/>
+            <script src="js/idangerous/idangerous.swiper.js"></script>
+
+            <script type="text/javascript">
+                var field1Val = 0;
+                var activeSlide1Unit = 0;
+                var activeSlide2Unit = 0;
+                var mySwiper;
+                var mySwiper2;
+
+                $(document).ready(function () {
+
+                    $('.field_1').on('input', function () {
+                        calcConversion();
+                    });
+                    mySwiper = new Swiper('.swiper-container', {
+                        mode: 'vertical',
+                        initialSlide: 1,
+                        centeredSlides: true,
+                        slidesPerView: 'auto',
+                        onSlideChangeEnd: function (swiper, direction) {
+                            calcConversion();
+                        }
+                    });
+                    mySwiper2 = new Swiper('.swiper-container2', {
+                        mode: 'vertical',
+                        initialSlide: 1,
+                        centeredSlides: true,
+                        slidesPerView: 'auto',
+                        onSlideChangeEnd: function (swiper, direction) {
+                            calcConversion();
+                        }
+                    });
+                });
+
+                function calcConversion() {
+                    if ($.trim($('.field_1').val()).length > 0) {
+                        field1Val = parseInt($('.field_1').val());
+                    } else {
+                        field1Val = 0;
+                    }
+                    activeSlide1Unit = $('.panel-1 .swiper-slide-active').attr('data-unit');
+                    activeSlide2Unit = $('.panel-2 .swiper-slide-active').attr('data-unit');
+
+                    if (field1Val === 0) {
+                        alertMsg('Debes completar la medida 1', '', '', 'Campo Necesario', 1);
+                    } else {
+                        var operation = activeSlide1Unit + activeSlide2Unit;
+                        switch (parseInt(operation)) {
+                            case 14:
+                                //mm a pies
+                                $('.resultField').text((field1Val * 0.0033).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Milímetro');
+                                $('.result .to').text('0,0033 Pie');
+                                break;
+                            case 15:
+                                //mm a pulgadas
+                                $('.resultField').text((field1Val * 0.0394).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Milímetro');
+                                $('.result .to').text('0,0394 Pulgadas');
+                                break;
+                            case 16:
+                                //mm a millas
+                                $('.resultField').text((field1Val * 0.000001).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Milímetro');
+                                $('.result .to').text('0,000001 Milla');
+                                break;
+                            case 24:
+                                //cm a pies
+                                $('.resultField').text((field1Val * 0.0328).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Centímetro');
+                                $('.result .to').text('0,0328 Pie');
+                                break;
+                            case 25:
+                                //cm a pulgadas
+                                $('.resultField').text((field1Val * 0.3937).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Centímetro');
+                                $('.result .to').text('0.3937 Pulgada');
+                                break;
+                            case 26:
+                                //cm a millas
+                                $('.resultField').text((field1Val * 0.000006).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Centímetro');
+                                $('.result .to').text('0,000006 Milla');
+                                break;
+                            case 34:
+                                //pulgadas a pies
+                                $('.resultField').text((field1Val * 0.0833).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Pulgada');
+                                $('.result .to').text('0,0833 Pie');
+                                break;
+                            case 35:
+                                //pulgadas a pulgadas
+                                $('.resultField').text((field1Val).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Pulgada');
+                                $('.result .to').text('1 Pulgada');
+                                break;
+                            case 36:
+                                //pulgadas a millas
+                                $('.resultField').text((field1Val * 0.000016).toFixed(4).toString().replace(/\./g, ','));
+
+                                $('.result .from').text('1 Pulgada');
+                                $('.result .to').text('0,000016 Milla');
+                                break;
+                        }
+                    }
+                }
+            </script>
+        </div>
+        <div class="page-content">
+
+            <div class="panel-1">
+                <div class="left">
+                    <input type="text" class="field_1" data-role="none" type="number" step="0.01" step="0.01"/>
+                </div>
+                <div class="right">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" data-unit="1">
+                                <p>Milímetros</p>
+                            </div>
+                            <div class="swiper-slide" data-unit="2">
+                                <p>Centímetros</p>
+                            </div>
+                            <div class="swiper-slide" data-unit="3">
+                                <p>Pulgadas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-2">
+                <div class="left">
+                    <img src="./img/util/img-arrow-result.jpg" class="arrowResult"/>
+
+                    <p class="resultField">0</p>
+                </div>
+                <div class="right">
+                    <div class="swiper-container2">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" data-unit="4">
+                                <p>Pies</p>
+                            </div>
+                            <div class="swiper-slide" data-unit="5">
+                                <p>Pulgadas</p>
+                            </div>
+                            <div class="swiper-slide" data-unit="6">
+                                <p>Millas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-3">
+                <div class="result">
+                    <p>
+                        <span class="from">1 Centimetro</span> = <br/>
+                        <span class="to">0,3353534 Pulgadas</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

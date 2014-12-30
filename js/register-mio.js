@@ -3,11 +3,6 @@ function eventosRegister(){
         window.history.back();
     });
 
-
-
-
-
-
     var facebook  = new FacebookPlugin();
 
     $('#register .confirmar').click(function(ev){
@@ -37,59 +32,33 @@ function eventosRegister(){
 
         if(!ok)return;
 
-        /*
         $.ajax({
-            url:"http://html5cooks.com/ternium/ternium/users/registro",
+            async: false,
+            url: backend_url + "/users/registro",
             data: getDataRegister(),
-            success:function(result){
-                alert(JSON.stringify(result));
+            success: function(result) {
+                if (result.error) {
+                    mensaje(JSON.stringify(result.error));
+                    ok = false;
+                }
             },
             error:function(error){
                 alert(JSON.stringify(error));
             }
-        });*/
+        });
+
+        if (!ok) {
+            return;
+        }
+
         mensaje('El registro fue correcto. Puede iniciar sesión.');
         window.history.back();
-
     });
 
-    $('.ingreso-fb').click(function(ev){
+    $('.fbRegister').click(function(ev){
         ev.preventDefault();
 
-
-
-
-        var data = getDataRegister();
-
-        facebook.FBLoginStatus(function(response){
-            if(response){
-                data['uid'] = response.userID;
-                $.ajax({
-                    url:"http://html5cooks.com/ternium/ternium/users/registro",
-                    data: data,
-                    success:function(result){
-                        alert(JSON.stringify(result));
-                    },
-                    error:function(error){
-                        alert(JSON.stringify(error));
-                    }
-                });
-            }else{
-                facebook.FBLogin(function(response){
-                    data['uid'] = response.userID;
-                    $.ajax({
-                        url:"http://html5cooks.com/ternium/ternium/users/registro",
-                        data: data,
-                        success:function(result){
-                            alert(JSON.stringify(result));
-                        },
-                        error:function(error){
-                            alert(JSON.stringify(error));
-                        }
-                    });
-                });
-            }
-        });
+        registerFb();
     });
 
     $('.pais').change(function(){

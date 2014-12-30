@@ -1,6 +1,61 @@
 var values;
 function eventosTechos(){
-    initNuevoCalculoT();
+
+    if(sessionStorage.getItem('aEditar')){
+
+        var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+        sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
+        var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
+        db_customQuery($getEditable, function(result) {
+            if(result.length > 0) {
+                var editablePName = result[0].project_name;
+                var editablePVars = $.parseJSON(result[0].data).vars;
+
+                // Cargar campos con data.
+
+                // Titulo
+                $('#m1-ct-1 .projectName').text(editablePName);
+
+                // p1 largo
+                $('#m1-ct-1 .paso1 .i1').val(editablePVars.largo);
+
+                // p1 ancho
+                $('#m1-ct-1 .paso1 .i2').val(editablePVars.ancho);
+
+                // p1 tipo
+                if(editablePVars.tipo == 'Acanalada'){
+                    $('#m1-ct-1 .paso1 .chapaTipo .op1').trigger('click');
+                }else{
+                    $('#m1-ct-1 .paso1 .chapaTipo .op2').trigger('click');
+                }
+
+                // p1 modelo
+                $('#m1-ct-1 .paso1 .modelo .texto').each(function(index){
+                    var $this = $(this);
+                    if ($this.text() == editablePVars.modelo){
+                        $this.trigger('click');
+                    }
+                });
+
+                // p1 color
+                $('#m1-ct-1 .paso1 .color .texto').each(function(index){
+                    var $this = $(this);
+                    if ($this.text() == editablePVars.color){
+                        $this.trigger('click');
+                    }
+                });
+
+            }else{
+                alertMsg('Error al cargar el proyecto', '', 'none', 'Editar Proyecto', 1, function(){
+                    $.mobile.changePage("m-mis-calculos.html");
+                });
+            }
+        });
+
+
+    }else{
+        initNuevoCalculoT();
+    }
 
     $('#m1-ct-1 .paso1 .siguiente-paso').click(function(){
         roof_save_step();
@@ -86,11 +141,11 @@ function roof_save_step(){
     var t_color = '';
 
     if( $.trim( $('#m1-ct-1 .paso1 .i1').val() ).length === 0 || isNaN($.trim($('#m1-ct-1 .paso1 .i1').val() ) ) ){
-        alert('Debe ingresar el largo del techo (numérico con punto decimal).');
+        alertMsg('Debe ingresar el largo del techo (numérico con punto decimal).', '', 'none', '', 1);
         $(this).val('');
         return;
     }else if( $.trim( $('#m1-ct-1 .paso1 .i2').val() ).length === 0 || isNaN($.trim($('#m1-ct-1 .paso1 .i2').val() ) ) ){
-        alert('Debe ingresar el ancho del techo (numérico con punto decimal).');
+        alertMsg('Debe ingresar el largo del techo (numérico con punto decimal).', '', 'none', '', 1);
         $(this).val('');
         return;
     }else{
@@ -139,17 +194,10 @@ function calculateResult(values){
 
 function saveNewCalcTechos(values){
     var calculos;
+    var currentTime = getCurrentTime();
 
-    if (localStorage.calculos){ // Existe calculos
-        calculos = $.parseJSON(localStorage.calculos);
-        if(! calculos.tipo.techos){ // Crear tipo techos
-            calculos.tipo['techos'] = {};
-        }
-    }else{
-        // Crear variables calculos y tipo techos
-        localStorage.setItem('calculos', JSON.stringify( {"tipo": { "techos": {}  } } ) );
-        calculos = $.parseJSON(localStorage.calculos);
-    }
+    sessionStorage.setItem('calculos', JSON.stringify( {"tipo": { "techos": {}  } } ) );
+    calculos = $.parseJSON(sessionStorage.calculos);
 
     var $_name = sessionStorage.getItem('projectName');
     var $_largo = values.largo;
@@ -170,7 +218,59 @@ function saveNewCalcTechos(values){
         }
     }
 
-    localStorage.setItem('calculos', JSON.stringify(calculos));
+    sessionStorage.setItem('calculos', JSON.stringify(calculos));
+    //Aquí procesaremos el web services que guardará el calculo en la BD
+    //Mandamos el string de JSON a la BD -> ¡¡¡ SOLO EL STRING DEL CALCULO  !!!
+    // ID calculo, ID usuario, tipo de calculo (1=SF, 2=DW, 3=T), json con los datos del calculo
+    // con el success del ajax (guardado en la BD remota) cambiamos el valor sinc = 1 del calculo en sessionStorage
+    var $user = sessionStorage.getItem('username');
+    var $dataSaveBD = JSON.stringify(calculos.tipo.techos[$_name]);
+    var $calcType = 3;
+    if (estadoST == 0) { //Si el calculo es nuevo
+        //Guardamos en bd local el calculo
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
+        if (logged == true){
+            var values = [sessionStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                }
+            })
+        }else{
+            var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok'){
+                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                    newSave = 1;
+                }else{
+                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                }
+            })
+        }
+    }else if(estadoST == 2){ //Si el calculo ya existe y fue editado
+        var pName = sessionStorage.getItem('projectName');
+        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
+        db_updateQueryEdit($query, function(result,updatedID) {
+            if(result == 'ok'){
+                alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', '', 1);
+                $('.boton.saveCalc').fadeOut(600);
+                modoLectura();
+                newSave = 1;
+            }
+        });
+    }
+    // Si el usuario es anonimo, solo tendremos acceso a la variable local, asi que no haremos nada.
+    // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar
+    // los calculos a la BD remota)
+    estadoST = 1;
+    $('#back-sf').hide();
 }
 
 function initNuevoCalculoT(){
@@ -181,7 +281,13 @@ function initNuevoCalculoT(){
     $('#m1-ct-1 .projectName').html(sessionStorage.getItem("projectName"));
 }
 
-function initEditarCalculoT(id){}
+function initEditarCalculoT(){
+    tipoC='t';
+    estadoST=2;
+    pasoSTactual = 1;
+    pasoSTmaximo = 1;
+    $('#m1-ct-1 .paso input[type=number]').removeAttr('disabled');
+}
 
 function openInfo(block){
     $('#infoBlock').fadeIn();
@@ -217,9 +323,6 @@ function generateDivRenderT(){
     $html.find('.resultado-leyenda').remove();
     $html = $html.html();
 
-    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-    saveNewCalcTechos(values);
-
     //Animamos el boton
     var dots = 0;
     var _op = 0.6;
@@ -246,7 +349,7 @@ function generateDivRenderT(){
         request = $.ajax({
             type: 'POST',
             url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: localStorage.getItem('session_code')},
+            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
             dataType: 'text'
         });
 
@@ -257,28 +360,6 @@ function generateDivRenderT(){
             $this.animate({opacity:1})
             $this.html('Ver PDF');
             console.log("Comenzando descarga de PDF");
-            //var fileTransfer = new FileTransfer();
-            //var uri = encodeURI(the_link);
-            //var filePath = "/mnt/sdcard/AppTernium/Calculos/Techos/"+projectName+'.pdf';
-            //fileTransfer.download(
-            //    uri,
-            //    filePath,
-            //    function(entry) {
-            //        document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
-            //    },
-            //    function(error) {
-            //        document.getElementById("id11").innerHTML="download error source " + error.source;
-            //        document.getElementById("id11").innerHTML="download error target " + error.target;
-            //        document.getElementById("id11").innerHTML="upload error code" + error.code;
-            //        alert('Se ha producido un error al guardar.')
-            //    },
-            //    true,
-            //    {
-            //    }
-            //);
-            //alert('El archivo se ha almacenado en sdcard/AppTernium/Calculos/Techos/'+projectName+'.pdf');
-            //window.open( the_link, '_system', 'location=yes,toolbar=yes' );
-            sessionStorage.clear();
             window.open( the_link, '_system', 'location=yes,toolbar=yes' );
         });
 

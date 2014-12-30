@@ -1,78 +1,41 @@
 var projectName = '';
+if (sessionStorage.getItem('username') == 'anonimo'){
+    var logged = false;
+}else if(sessionStorage.getItem('userId')){
+    var logged = true;
+}
 function eventosNuevoCalculo(){
     $('#m1-nuevo-calculo a.option').on('click', function(e){
         var $this = $(this);
+        e.preventDefault();
+        e.stopPropagation();
+
         projectName = $.trim($('.projectName').val());
         if( ! $this.hasClass('vacio') ){
             if(projectName.length === 0 ){
-                alert('Debe ingresar un nombre de proyecto');
-                e.preventDefault();
+                alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Duplicar Calculo', 1);
             }else{
-                sessionStorage.setItem("projectName", projectName);
-                if( $this.hasClass('calc1') ){
-                    if( ifProjectExists(projectName, 1) ){
-                        alert('El nombre de proyecto ingresado ya ha sido utilizado');
-                        e.preventDefault();
+                //Hacemos un select para saber si el nombre del projecto ingresado ya existe.
+                var tipo;
+                var calcUrl;
+                if ($this.hasClass('calc1')) {tipo = 1;}
+                else if ($this.hasClass('calc2')) {tipo = 2;}
+                else if ($this.hasClass('calc3')) {tipo = 3;}
+                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND user_id='+sessionStorage.getItem('userId');
+                db_customQuery($query, function(pleaseWork) {
+                    if(pleaseWork.length > 0){
+                        alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Duplicar Calculo', 1);
                     }else{
-                        initNuevoCalculoSF();
+                        sessionStorage.setItem("projectName", projectName);
+                        switch (tipo){
+                            case 1: initNuevoCalculoSF(); $.mobile.changePage("calculo-steel-frame.html"); break;
+                            case 2: initNuevoCalculoDW(); $.mobile.changePage("calculo-dry-wall.html"); break;
+                            case 3: initNuevoCalculoT(); $.mobile.changePage("calculo-techos.html"); break;
+                        }
                     }
-                }else if ( $this.hasClass('calc2') ){
-                    if( ifProjectExists(projectName, 2) ){
-                        alert('El nombre de proyecto ingresado ya ha sido utilizado');
-                        e.preventDefault();
-                    }else{
-                        initNuevoCalculoDW();
-                    }
-                }else{
-                    if( ifProjectExists(projectName, 3) ){
-                        alert('El nombre de proyecto ingresado ya ha sido utilizado');
-                        e.preventDefault();
-                    }else{
-                        initNuevoCalculoT();
-                    }
-                }
+                });
+                //;
             }
         }
     });
-
-}
-
-function ifProjectExists(projectName, tipo){
-
-    var $salida = 0; //No existe el proyecto
-
-    if (localStorage.getItem('calculos')){
-        var $_this = $.parseJSON(localStorage.getItem('calculos'));
-
-        switch (tipo){
-            case 1:
-                if( $_this.tipo.steel_frame ){ /* Si aun no existe el tipo. */
-                    $salida = searchName(projectName, $_this.tipo.steel_frame); /* Si existe el tipo, controlar que no exista el proyecto.*/
-                }
-                break;
-            case 2:
-                if( $_this.tipo.dry_wall ){
-                    $salida = searchName(projectName, $_this.tipo.dry_wall);
-                }
-                break;
-            case 3:
-                if( $_this.tipo.techos ){
-                    $salida = searchName(projectName, $_this.tipo.techos);
-                }
-                break;
-        }
-    }
-    return $salida
-}
-
-/* Recorre el tipo de proyecto buscando si existe el nombre. */
-function searchName(projectName, varType){
-    var $existe = 0;
-    $.each(varType,function(pName,temp){
-        if (projectName.toLowerCase() == pName.toLowerCase()){
-            $existe = 1;
-        }
-    });
-
-    return $existe;
 }

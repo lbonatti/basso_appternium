@@ -1,16 +1,20 @@
-
-
+var newSave = 1;
+if (sessionStorage.getItem('username') != 'anonimo'){
+    setInterval(function(){
+        if($('.page-header h1').text() == 'Inicio' && newSave == 1){
+            syncDB();
+            newSave = 0;
+        }
+    },1000);
+}
 $(document).ready(function(){
-
     esAnonimo();
 
     cargarSlide();
 
     menuLateral();
 
-    $('.bxslider').bxSlider({
-        controls:false
-    });
+    loadMainSlider();
 
     $('.shadow').click(function(){
         unblockScreen();
@@ -47,28 +51,64 @@ $(document).ready(function(){
 
 });
 
+function loadMainSlider(){
+
+    var $getEditable = 'SELECT * FROM calculos WHERE remove = 0 ORDER BY modified DESC LIMIT 10';
+    db_customQuery($getEditable, function(result) {
+        if (result.length > 0) {
+
+            for(var i = 0; i < result.length; i++){
+                var pSlideName = result[i].project_name;
+                var pSlideType = result[i].calc_type;
+                var pSlideModDate = result[i].modified;
+
+                $('#m-inicio .bxslider').append('<li><img src="img/icon'+pSlideType+'.png" /><div class="titulo">'+pSlideName+'</div><div class="fecha">'+pSlideModDate+'</div></li>');
+
+            }
+
+            $('.bxslider').bxSlider({
+                controls:false
+            });
+        }else{
+
+            $('#m-inicio .bxslider').append('<li><div class="titulo" style="text-align: center;width: 100%;">No se encontraron proyectos</div><div class="fecha"></div></li>');
+
+            $('.bxslider').bxSlider({
+                controls:false,
+                infiniteLoop: false,
+                touchEnabled: false,
+                pager: false
+            });
+        }
+    });
+
+
+
+}
+
 function esAnonimo(){
-    var username = localStorage.getItem('username');
+    var username = sessionStorage.getItem('username');
     if(username === 'anonimo'){
+        sessionStorage.setItem('userId',0);
         $('.menu-options .perfil').hide();
     }
 }
 
 function cargarSlide(){
-    var userType = localStorage.getItem("username");
+    var userType = sessionStorage.getItem("username");
 
     if(userType !== 'anonimo'){
-        var userID = localStorage.getItem("userId");
+        var userID = sessionStorage.getItem("userId");
 
         $.ajax({
-            url:"http://projectsunderdev.com/app-ternium/ws/sliderHome.php",
+            url:url_webservices+"/sliderHome.php",
             type:'POST',
             data:{userID: userID},
             success:function(result){
-                console.log(result);
+                //console.log(result);
             },
             error:function(error){
-                console.log(error);
+                //console.log(error);
             }
         });
 
@@ -76,7 +116,6 @@ function cargarSlide(){
     }else{
         console.log('es anonimo');
     }
-
 }
 
 
@@ -138,7 +177,42 @@ function blockScreen(){
 function unblockScreen(){
     $('.shadow').hide();
     $('.dialogo').hide();
+    $('.alertMsg').remove();
     esconderDotMenu();
 }
 
+$(document).on("click",'.alertMsg .boton',function(evt){
+    $(this).parent().remove();
+    $('.shadow').css('height','0');
+});
+
+
+//Type 1: OK, type 2: Ok/Cancel
+function alertMsg(text, id, action, title, type, cb){
+    type = type || 1;
+    title = title || 'Atención';
+    action = action || '';
+    cb = cb || ''; // The Callback.
+    var $html = '';
+
+    $html += '<div id="'+id+'" class="dialogo alertMsg" data-action="'+action+'">';
+
+    $html += '<div class="titulo">'+title+'</div>';
+    $html += '<div class="mensaje">'+text+'</div>';
+    $html += '<div class="boton">Aceptar</div>';
+
+    if (type == 2){
+        $html += '<div class="cancelar">Cancelar</div>';
+    }
+
+    $html += '</div>'; //Cierra dlg
+
+    $('.shadow').css('height','100%').show();
+    $('.snap-content').after($html);
+    $('.alertMsg').show();
+
+    if(typeof cb == "function"){
+        $('.dialogo.alertMsg .boton').on('click', function(){ cb(); });
+    }
+}
 

@@ -1,40 +1,17 @@
 $(document).ready(function(){
     var _sessionCode = randomString();
-    localStorage.setItem('session_code', _sessionCode);
+    sessionStorage.setItem('session_code', _sessionCode);
 
     var facebook = new FacebookPlugin();
 
     $('#page-1 .ingreso-fb').click(function(ev){
         ev.preventDefault();
-
-        facebook.FBLogin(function(response){
-            alert(JSON.stringify(response));
-
-            facebook.FBProfile(function(profile){
-
-                $.ajax({
-                    url:backend_url+"/users/login_facebook",
-                    type:'GET',
-                    data:{email: profile.email, uid: profile.id},
-                    success:function(result){
-                        if(result.Default && result.Default != null){
-                            alert('User OK');
-                        }else{
-                            alert('User Fail');
-                        }
-                        alert(JSON.stringify(result));
-                    },
-                    error:function(error){
-                        alert(JSON.stringify(error));
-                    }
-                });
-            });
-        });
+        login();
     });
 
     $('#page-1 .btn-footer.sin-cuenta').on('click', function(e) { //LOGIN
         e.preventDefault();
-        localStorage.setItem("username", 'anonimo');
+        sessionStorage.setItem("username", 'anonimo');
         window.location.href="m-inicio.html";
     });
 
@@ -56,7 +33,6 @@ $(document).ready(function(){
         if($.trim(username).length === 0 ){
             mensaje('El email es requerido.');
             return;
-            sendOk = 0;
         }else{
             sendOk = 1;
         }
@@ -64,7 +40,6 @@ $(document).ready(function(){
         if($.trim(pass).length === 0){
             mensaje('La contraseña no puede ser vacía.');
             return;
-            sendOk = 0;
         }else{
             sendOk = 1;
         }
@@ -77,12 +52,12 @@ $(document).ready(function(){
         if(sendOk){
             $.ajax({
                 url:backend_url+"/users/login",
-				type:'POST',
+                type:'POST',
                 data:{username: username, password: pass},
                 success:function(result){
                     if(result.Default && result.Default != null){
-                        localStorage.setItem("userId", result.Default.User.id);
-                        localStorage.setItem("username", username);
+                        sessionStorage.setItem("userId", result.Default.User.id);
+                        sessionStorage.setItem("username", username);
                         window.location.href="m-inicio.html";
                     }else{
                         mensaje(result.Message);
