@@ -17,6 +17,8 @@ function eventosRecuperarPwd(){
                 success:function(result){
                     if(result.Default && result.Default != null){
                         $.mobile.changePage('password-enviada.html');
+                    } else {
+                        mensaje(JSON.stringify(result.Message));
                     }
                 },
                 error:function(error){
