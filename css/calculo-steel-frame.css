@@ -316,14 +316,15 @@
     background-image: url(../img/dot-menu-selected.png);
 }
 .menu-options{
+    background-color: #495456;
+    border: 1px solid #3C4749;
+    color: #fff;
+    display: none;
+    font-family: roboto-regular;
     position: absolute;
     right: 0px;
-    background-color: #495456;
     text-shadow: none;
-    color: #fff;
-    font-family: roboto-regular;
     width: 240px;
-    border: 1px solid #3C4749;
 }
 .menu-options div{
     padding: 12px 21px;

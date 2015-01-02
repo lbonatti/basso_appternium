@@ -233,12 +233,51 @@
     z-index: 9999;
 }
 #syncOverlay {
+    background: url('../img/bg-black-80.png') repeat 0 0 scroll transparent;
     display: none;
-    opacity: 0;
-    visibility: hidden;
-    z-index: -99999 !important;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
 }
-
+#syncOverlay .ulContainer{
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+#syncOverlay ul{
+    bottom: 0;
+    color: #ff9900;
+    height: 28px;
+    list-style: circle inside none;
+    margin: auto 0;
+    min-width: 320px;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+#syncOverlay li{
+    margin: 0 auto;
+    text-align: left;
+    width: 320px;
+}
+#syncOverlay li.first{
+    list-style: outside none none;
+}
+#syncOverlay li.first p{
+    font-size: 20px;
+    line-height: 28px;
+}
+#syncOverlay li p{
+    color: #ff9900;
+    display: inline-block;
+    font-family: roboto-regular;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+}
 
 .alertMsg {
     background-color: #F7F5F6;

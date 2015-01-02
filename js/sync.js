@@ -9,12 +9,10 @@ function syncDB()
     if (!userId) return;
     
     contSync = $('#syncOverlay');
-    contSyncMessage = $('#syncOverlay .text');
+    contSyncMessage = $('#syncOverlay ul');
 
     // Mostrar un estado en la pantalla que se está sincronizando y no deja hacer nada
-    contSync.fadeIn(600, function() {
-        contSyncMessage.html('Iniciando sincronización');
-    });
+    contSync.fadeIn(600);
 
     // Traer todos los calculos que están onlien y chequear si están en local. El que no está se inserva en local.
     syncLoad();
@@ -23,16 +21,21 @@ function syncDB()
 function syncEnd()
 {
     // Ocultar el overlay que bloquea la aplicación
-    contSyncMessage.html('Finalizando sincronización');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Finalizando sincronización &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
     setTimeout(function () {
-        contSync.fadeOut(600);
+        contSync.fadeOut(600, function(){
+            contSync.find('li').remove();
+            contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
+        });
     }, 2000);
 }
 
 /* Se sincroniza con los calculos online */
 function syncLoad()
 {
-    contSyncMessage.html('Volcando los datos desde la web');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
     
     // Ajax para traer todos los calculos del usuario que están online.
     var $calculosOnline;
@@ -85,7 +88,8 @@ function syncLoad()
 /* Son los creados y aún no están sincronizados */
 function syncNew()
 {
-    contSyncMessage.html('Sincronizando nuevos cálculos');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
 
     //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
     var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0";
@@ -101,7 +105,8 @@ function syncNew()
 /* Son los creados y editados antes de ser sincronizados */
 function syncNewEdit()
 {
-    contSyncMessage.html('Sincronizando nuevos cálculos');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
     $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0";
@@ -117,7 +122,8 @@ function syncNewEdit()
 /* Son los que ya están sinos pero fueron editados */
 function syncEdit()
 {
-    contSyncMessage.html('Sincronizando cálculos editados');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
     $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0";
@@ -134,7 +140,8 @@ function syncEdit()
 /* Son los que fueron borrados */
 function syncDeleted()
 {
-    contSyncMessage.html('Sincronizando cálculos eliminados');
+    contSync.find('img').remove();
+    contSyncMessage.append('<li><p>Sincronizando cálculos eliminados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
 
     //Buscamos todos aquellos de la DB local que han sido eliminados y actualizamos la BD
     $query = "SELECT * FROM calculos WHERE remove=1";
@@ -164,12 +171,14 @@ function _ajaxSendSync(rows, _action, _callback){
                 })
             }
         } else {
-            contSyncMessage.html('Error sincronizando');
+            contSync.find('img').remove();
+            contSyncMessage.append('<li><p>Error sincronizando</p></li>');
         }
         setTimeout(_callback, 1500);
         //_callback();
     }).error(function (jqXHR, textStatus, errorThrown) {
-        contSyncMessage.html('Error sincronizando');
+        contSync.find('img').remove();
+        contSyncMessage.append('<li><p>Error sincronizando</p></li>');
         syncEnd();
     });
 }
