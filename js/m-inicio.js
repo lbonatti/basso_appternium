@@ -39,7 +39,7 @@ $(document).ready(function(){
     });
 
     $('.menu-options .terminos').click(function(){
-
+        $.mobile.changePage('u-tos.html');
     });
     $('.menu-options .logout').click(function(){
         window.location.href='login.html';

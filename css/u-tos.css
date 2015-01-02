@@ -1,0 +1,89 @@
+#u-tos .page-content{
+    position: relative;
+}
+#u-tos .boton{
+    clear: both;
+    margin: 18px 5%;
+    margin-bottom:0px;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: roboto-thin;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+#u-tos .ultimo-elemento{
+    margin-bottom: 84px !important;
+}
+#u-tos .titulo{
+    background-color: #FF9900;
+    text-align: center;
+    text-shadow: none;
+    color: #fff;
+    font-size: 37px;
+    font-family: roboto-thin;
+    height: 100px;
+    line-height: 100px;
+    padding: 0;
+}
+#u-tos .map{
+    background-color: #FEC671;
+    width: 50px;
+    height: 50px;
+    float: left;
+    background-image: url(../img/proveedores/pin.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#u-tos .subtitulo{
+    left: 50px;
+    right: 0px;
+    position: absolute;
+    height: 50px;
+    background-color: #FFB647;
+    font-family: roboto-regular;
+    text-shadow: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+}
+#u-tos .imgs{
+    clear: both;
+    padding: 14px;
+}
+
+#u-tos .imgs div{
+    float: left;
+    margin-right: 2%;
+    background-color: #E8E8E8;
+    position: relative;
+    width: 23%;
+    height: 0;
+    padding-bottom: 23%;
+}
+
+#u-tos .descripcion{
+    clear: both;
+    padding: 14px 40px;
+    color: #888;
+    font-family: roboto-thin;
+    margin-bottom: 4px;
+}
+
+#u-tos .info{
+    padding: 2px 14px;
+    color: #888;
+    font-family: roboto-regular;
+}
+
+#u-tos .info span{
+    font-family: roboto-thin;
+}
+
+
