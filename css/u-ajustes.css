@@ -47,3 +47,43 @@
     background-repeat: no-repeat;
     background-size: 100%;
 }
+
+#u-ajustes .opcion.email,
+#u-ajustes .opcion.pwd{
+    display: none;
+}
+
+.alertMsg.editField .titulo{
+    background: none no-repeat 0 0 scroll transparent;
+}
+.alertMsg.editField .mensaje{
+    font-size: 18px;
+}
+.alertMsg.editField input{
+    background: url('../img/bg-editInput.jpg') no-repeat right 41px scroll transparent;
+    border: none;
+    border-bottom: 1px solid #fe9901;
+    color: #FF9900;
+    display: block;
+    font-size: 24px;
+    font-family: roboto-thin;
+    height: 44px;
+    line-height: 44px;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 235px;
+}
+.alertMsg.editField p.error{
+    color: #dd0000;
+    display: none;
+    font-family: roboto-regular;
+    text-align: center;
+}
+.alertMsg.editField .boton{
+    margin: 32px auto 0;
+}
+.alertMsg.editField .boton.closeDialog{
+    background: none no-repeat 0 0 scroll transparent;
+    color: #666;
+    margin: 10px auto;
+}

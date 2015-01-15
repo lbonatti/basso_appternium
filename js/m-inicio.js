@@ -35,14 +35,14 @@ $(document).ready(function(){
     });
 
     $('.menu-options .contacto').click(function(){
-
+        $.mobile.changePage('m-feedback.html');
     });
 
     $('.menu-options .terminos').click(function(){
         $.mobile.changePage('u-tos.html');
     });
     $('.menu-options .logout').click(function(){
-        window.location.href='login.html';
+        theLogOut();
     });
 
     esconderUserMenu();
@@ -161,7 +161,7 @@ function boton_menu(pag){
     }
 
     $('.menu a[data-title="Logout"]').click(function(){
-        window.location.href="login.html";
+        theLogOut();
     });
 }
 
@@ -180,12 +180,6 @@ function unblockScreen(){
     $('.alertMsg').remove();
     esconderDotMenu();
 }
-
-$(document).on("click",'.alertMsg .boton',function(evt){
-    $(this).parent().remove();
-    $('.shadow').css('height','0');
-});
-
 
 //Type 1: OK, type 2: Ok/Cancel
 function alertMsg(text, id, action, title, type, cb){
@@ -210,6 +204,13 @@ function alertMsg(text, id, action, title, type, cb){
     $('.shadow').css('height','100%').show();
     $('.snap-content').after($html);
     $('.alertMsg').show();
+
+
+    $('.alertMsg .boton').on("click",function(e){
+        e.preventDefault();
+        $(this).parent().remove();
+        $('.shadow').css('height','0');
+    });
 
     if(typeof cb == "function"){
         $('.dialogo.alertMsg .boton').on('click', function(){ cb(); });

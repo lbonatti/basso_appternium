@@ -130,12 +130,18 @@
     <script>
 		$('.boton.savePDFDW').on('click',function(){
 			generateDivRenderDW();
-		})
+		});
 
 		$('.boton.saveCalc').on('click',function(){
 			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
 			saveNewCalcDryWall();
-		})
+		});
+
+		$('.boton.shareCalc').on('click',function(){
+			var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName');
+			sharePDF('Descarga de PDF', 'PDF con calculos de Dry Wall', filename, 'dry-wall');
+		});
+
         eventosDryWall()
     </script>
 </div>

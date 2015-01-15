@@ -375,6 +375,11 @@
 			saveNewCalc();
 		})
 
+		$('.boton.shareCalc').on('click',function(){
+			var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName');
+			sharePDF('Descarga de PDF', 'PDF con calculos de Steel Frame', filename, 'steel_frame');
+		});
+
 		$('.paso1 .cantPlantas div.op1, .paso1 .cantPlantas div.op2').on('click',function(){
 			var _this = $(this).data('value');
 			if (_this == 2){

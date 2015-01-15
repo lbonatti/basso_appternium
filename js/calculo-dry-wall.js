@@ -328,17 +328,13 @@ function dw_tornillosT2(largoPI, altoPI){
 }
 
 function generateDivRenderDW(){
-    var $html = $('#myRenderSaveDW').clone();
     var $this = $('.paso3 .boton.savePDFDW');
-    $html.find('.boton.savePDFDW').remove();
-    $html.find('.boton.saveCalc').remove();
-    $html.find('.boton.shareCalc').remove();
-    $html = $html.html();
+    var $html = generateHtml('dry-wall');
 
     //Animamos el boton
     var dots = 0;
     var _op = 0.6;
-    $this.animate({opacity:0.6})
+    $this.animate({opacity:0.6});
     $this.html('Generando PDF<span id="dots"></span>')
     var animateLoading = setInterval(function(){
         if(_op == 0 || _op == 0.6){
@@ -346,7 +342,7 @@ function generateDivRenderDW(){
         }else{
             _op = 0.6;
         }
-        $this.animate({opacity:_op})
+        $this.animate({opacity:_op});
         if(dots < 3) {
             $('#dots').append('.');
             dots++;
@@ -354,33 +350,27 @@ function generateDivRenderDW(){
             $('#dots').html('');
             dots = 0;
         }
-    },600)
+    },600);
 
-    var request;
     var the_link;
-    if(!the_link){
-        request = $.ajax({
-            type: 'POST',
-            url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
-            dataType: 'text'
-        });
+    var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName');
 
-        request.done(function (response, textStatus, jqXHR){
-            the_link = response;
+    var request = createPDF($html, filename);
 
-            clearInterval(animateLoading);
-            $this.animate({opacity:1})
-            $this.html('Ver PDF');
-            console.log("Comenzando descarga de PDF");
-            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
-        });
+    request.done(function (response, textStatus, jqXHR){
+        the_link = response;
 
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            console.error(
-                "Ha ocurrido un error: "+
-                textStatus, errorThrown
-            );
-        });
-    }
+        clearInterval(animateLoading);
+        $this.animate({opacity:1})
+        $this.html('Ver PDF');
+        console.log("Comenzando descarga de PDF");
+        window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(
+            "Ha ocurrido un error: "+
+            textStatus, errorThrown
+        );
+    });
 }

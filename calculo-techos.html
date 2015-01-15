@@ -174,17 +174,19 @@
     <script>
 		$('.boton.savePDFT').on('click',function(){
 			generateDivRenderT();
-		})
+		});
 		//Guardar calculo en APP
 		$('.boton.saveCalc').on('click',function(){
 			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
 			saveNewCalcTechos(values);
-		})
+		});
+        $('.boton.shareCalc').on('click',function(){
+            var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName');
 
+            sharePDF('Descarga de PDF', 'PDF con calculos de Techos', filename, 'techo');
+        });
         eventosTechos()
     </script>
 </div>
-
-
 
 

@@ -692,11 +692,8 @@ function calculateSF(){
 }
 
 function generateDivRenderSF(){
-    var $html = $('.paso5 #myRenderSave').clone();
     var $this = $('.boton.savePDF');
-    $html.find('span.showMore').remove()
-    $html = $html.html();
-
+    var $html = generateHtml('steel-frame');
     //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
     //saveNewCalc();
 
@@ -721,32 +718,26 @@ function generateDivRenderSF(){
         }
     },600)
 
-    var request;
     var the_link;
-    if(!the_link){
-        request = $.ajax({
-            type: 'POST',
-            url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
-            dataType: 'html'
-        });
+    var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName');
 
-        request.done(function (response, textStatus, jqXHR){
-            the_link = response;
+    var request = createPDF($html, filename);
 
-            clearInterval(animateLoading);
-            $this.animate({opacity:1})
-            $this.html('Ver PDF');
-            console.log("Comenzando descarga de PDF");
-            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+    request.done(function (response, textStatus, jqXHR){
+        the_link = response;
 
-        });
+        clearInterval(animateLoading);
+        $this.animate({opacity:1})
+        $this.html('Ver PDF');
+        console.log("Comenzando descarga de PDF");
+        window.open( the_link, '_system', 'location=yes,toolbar=yes' );
 
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            console.error(
-                "Ha ocurrido un error: "+
-                textStatus, errorThrown
-            );
-        });
-    }
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(
+            "Ha ocurrido un error: "+
+            textStatus, errorThrown
+        );
+    });
 }

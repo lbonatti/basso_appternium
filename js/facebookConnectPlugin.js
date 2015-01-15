@@ -210,6 +210,7 @@ function getEmail(){
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
             sessionStorage.setItem("username", theEmail);
+            sessionStorage.setItem("fbLogged", 1);
             window.location.href="m-inicio.html";
         },
         function (response) { alert(JSON.stringify(response)) });

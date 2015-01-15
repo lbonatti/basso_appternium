@@ -41,3 +41,60 @@ if (!String.prototype.startsWith) {
         }
     });
 }
+
+function sharePDF(title, text, filename, type)
+{
+    var $html = generateHtml(type);
+    createPDF($html, filename);
+
+    var urlToFile = url_webservices+'/download-pdf.php?pdf=' + filename + '.pdf';
+
+    if ($.trim(filename).length > 0 ) {
+        window.plugins.socialsharing.share(null, null, null, urlToFile);
+    } else {
+        alertMsg('No se encontró el nombre del archivo, reintente.', '', '', 'Ocurrió un error al compartir', '', '');
+    }
+}
+
+function createPDF($html, filename)
+{
+    return $.ajax({
+        type: 'POST',
+        url: url_webservices+'/download-pdf.php',
+        data: {content:$html, fileName: filename},
+        dataType: 'text'
+    });
+}
+
+function generateHtml(type)
+{
+    var $html;
+    var $_rt;
+    var $_rm;
+    var $_rl;
+    switch (type) {
+        case 'techo':
+            $html = $('#myRenderSaveT').clone();
+            $_rt = $html.find('.resultado-techo').text();
+            $_rm = $html.find('.resultado-medida').text();
+            $_rl = $html.find('.resultado-leyenda').text();
+
+            $html.find('.resultado-techo').html($_rt + ' ' + $_rm + ' ' + $_rl).css('font-size','20px').css('text-transform','uppercase').css('text-align','center');
+            $html.find('.boton.savePDFT').remove();
+            $html.find('.resultado-medida').remove();
+            $html.find('.resultado-leyenda').remove();
+        break;
+        case 'steel-frame':
+            $html = $('.paso5 #myRenderSave').clone();
+            $html.find('span.showMore').remove();
+        break;
+        case 'dry-wall':
+            $html = $('#myRenderSaveDW').clone();
+            $html.find('.boton.savePDFDW').remove();
+            $html.find('.boton.saveCalc').remove();
+            $html.find('.boton.shareCalc').remove();
+        break;
+    }
+
+    return $html.html();
+}

@@ -311,30 +311,23 @@ function closeInfo(){
     $('#infoBlock').fadeOut();
 }
 
-function generateDivRenderT(){
-    var $html = $('#myRenderSaveT').clone();
+function generateDivRenderT()
+{
     var $this = $('.paso2 .boton.savePDFT');
-    var $_rt = $html.find('.resultado-techo').text();
-    var $_rm = $html.find('.resultado-medida').text();
-    var $_rl = $html.find('.resultado-leyenda').text();
-    $html.find('.resultado-techo').html($_rt + ' ' + $_rm + ' ' + $_rl).css('font-size','20px').css('text-transform','uppercase').css('text-align','center');
-    $html.find('.boton.savePDFT').remove();
-    $html.find('.resultado-medida').remove();
-    $html.find('.resultado-leyenda').remove();
-    $html = $html.html();
+    var $html = generateHtml('techo');
 
     //Animamos el boton
     var dots = 0;
     var _op = 0.6;
-    $this.animate({opacity:0.6})
-    $this.html('Generando PDF<span id="dots"></span>')
+    $this.animate({opacity:0.6});
+    $this.html('Generando PDF<span id="dots"></span>');
     var animateLoading = setInterval(function(){
         if(_op == 0 || _op == 0.6){
             _op = 1;
         }else{
             _op = 0.6;
         }
-        $this.animate({opacity:_op})
+        $this.animate({opacity:_op});
         if(dots < 3) {
             $('#dots').append('.');
             dots++;
@@ -342,31 +335,27 @@ function generateDivRenderT(){
             $('#dots').html('');
             dots = 0;
         }
-    },600)
+    },600);
 
-    var request;
     var the_link;
-        request = $.ajax({
-            type: 'POST',
-            url: url_webservices+'/download-pdf.php',
-            data: {content:$html, fileName: sessionStorage.getItem('session_code')},
-            dataType: 'text'
-        });
+    var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName');
 
-        request.done(function (response, textStatus, jqXHR){
-            the_link = response;
+    var request = createPDF($html, filename);
 
-            clearInterval(animateLoading);
-            $this.animate({opacity:1})
-            $this.html('Ver PDF');
-            console.log("Comenzando descarga de PDF");
-            window.open( the_link, '_system', 'location=yes,toolbar=yes' );
-        });
+    request.done(function (response, textStatus, jqXHR){
+        the_link = response;
 
-        request.fail(function (jqXHR, textStatus, errorThrown){
-            console.error(
-                "Ha ocurrido un error: "+
-                textStatus, errorThrown
-            );
-        });
+        clearInterval(animateLoading);
+        $this.animate({opacity:1});
+        $this.html('Ver PDF');
+        console.log("Comenzando descarga de PDF");
+        window.open( the_link, '_system', 'location=yes,toolbar=yes' );
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(
+            "Ha ocurrido un error: "+
+            textStatus, errorThrown
+        );
+    });
 }

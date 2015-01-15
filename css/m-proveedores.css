@@ -92,3 +92,53 @@
 }
 
 
+/* Formulario de contacto */
+#m5-p #provForm{
+    display: none;
+    clear: both;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+}
+#m5-p #provForm .campo{
+    outline: none;
+    color: #FF9900;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #D6D4D5;
+    display: block;
+    font-size: 22px;
+    font-family: 'roboto-thin';
+    height: 44px;
+    line-height: 44px;
+    margin: 0 auto 20px;
+    padding: 0px 20px;
+    width: 90%;
+}
+#m5-p #provForm .campo.textMsg{
+    border: 1px solid #D6D4D5;
+    height: 120px;
+}
+#m5-p #provForm .ui-btn{
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    border: none;
+}
+#m5-p #provForm .errors{
+    display: none;
+    text-align: center;
+    margin: 0 0 20px;
+}
+#m5-p #provForm .errors p{
+    color: #c73e14;
+    font-weight: bold;
+    margin: 0;
+}
+#m5-p #provForm .sendMail{
+    display: block;
+    float: none;
+    margin: 0 auto 30px;
+    text-decoration: none;
+    width: 100%;
+}

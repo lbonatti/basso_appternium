@@ -49,6 +49,15 @@
 
     <gap:plugin name="com.phonegap.plugin.statusbar" />
 
+    <!--Plugin para info de disposivo-->
+    <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
+    <!--Plugin para dialogs -->
+    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
+    <!--Plugin para enviar correo-->
+    <gap:plugin name="de.appplant.cordova.plugin.email-composer" />
+    <!--Plugin para compartir-->
+    <gap:plugin name="nl.x-services.plugins.socialsharing" />
+
     <gap:config-file platform="ios" parent="UIStatusBarHidden">
         <false/>
     </gap:config-file>
