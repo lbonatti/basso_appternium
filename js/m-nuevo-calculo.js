@@ -13,7 +13,7 @@ function eventosNuevoCalculo(){
         projectName = $.trim($('.projectName').val());
         if( ! $this.hasClass('vacio') ){
             if(projectName.length === 0 ){
-                alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Duplicar Calculo', 1);
+                alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Nuevo Calculo', 1);
             }else{
                 //Hacemos un select para saber si el nombre del projecto ingresado ya existe.
                 var tipo;

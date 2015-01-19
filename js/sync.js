@@ -5,7 +5,9 @@ var userId = 0;
 function syncDB()
 {
     userId = sessionStorage.getItem("userId");
-    
+
+
+
     if (!userId) return;
     
     contSync = $('#syncOverlay');
@@ -14,8 +16,13 @@ function syncDB()
     // Mostrar un estado en la pantalla que se está sincronizando y no deja hacer nada
     contSync.fadeIn(600);
 
+
+    //Aplicar a los projectos con user 0 (anonimo) el user logueado actualmente.
+    db_update('calculos', 'user_id=' + sessionStorage.getItem('userId'), 'user_id=0');
+
     // Traer todos los calculos que están onlien y chequear si están en local. El que no está se inserva en local.
     syncLoad();
+
 }
 
 function syncEnd()
@@ -36,7 +43,6 @@ function syncLoad()
 {
     contSync.find('img').remove();
     contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
-    
     // Ajax para traer todos los calculos del usuario que están online.
     var $calculosOnline;
     $.ajax({
@@ -56,7 +62,7 @@ function syncLoad()
     db_customQuery($query, function(rows) {
         $calculosLocales = rows;
 
-        if ($calculosOnline.length > 0) {
+        if ($calculosOnline && $calculosOnline.length > 0) {
             $.each($calculosOnline, function(key, value) {
                 if ($calculosLocales) {
                     $.each($calculosLocales, function(k, val) {

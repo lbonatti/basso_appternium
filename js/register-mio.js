@@ -14,6 +14,12 @@ function eventosRegister(){
             mensaje('El email es requerido.');
             return;
         }
+        if( ! validateEmail( $('#register .username').val() ) ){
+            ok=false;
+            mensaje('El email es incorrecto.');
+            return;
+        }
+
         if($('#register .pass1').val()==''){
             ok=false;
             mensaje('La contraseña no puede ser vacía.');
@@ -41,6 +47,11 @@ function eventosRegister(){
                     mensaje(JSON.stringify(result.error));
                     ok = false;
                 }
+                sessionStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
+                sessionStorage.setItem("userId", result.Default.User.id);
+                sessionStorage.setItem("username", result.Default.User.email);
+                sessionStorage.setItem("fbLogged", 0);
+                window.location.href="m-inicio.html";
             },
             error:function(error){
                 alert(JSON.stringify(error));
@@ -51,8 +62,8 @@ function eventosRegister(){
             return;
         }
 
-        mensaje('El registro fue correcto. Puede iniciar sesión.');
-        window.history.back();
+        //mensaje('El registro fue correcto. Puede iniciar sesión.');
+        //window.history.back();
     });
 
     $('.fbRegister').click(function(ev){

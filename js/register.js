@@ -75,6 +75,7 @@ function getDataRegister(){
 
 function getDataFbRegister() {
     var userEmail = sessionStorage.getItem("username");
+    var userID = sessionStorage.getItem("userId");
     var lastName = sessionStorage.getItem("last_name");
     var firstName = sessionStorage.getItem("first_name");
     var birthDate = sessionStorage.getItem("birthday");
@@ -96,6 +97,7 @@ function getDataFbRegister() {
     }
 
     var data = {
+        uid: userID,
         nombre: firstName,
         apellido: lastName,
         email: userEmail,
@@ -110,6 +112,8 @@ function getDataFbRegister() {
         url: backend_url+"/users/registro",
         data: data,
         success: function(result) {
+            sessionStorage.setItem("fbLogged", 1);
+            switchFbId();
             window.location.href = "m-inicio.html";
         },
         error: function(error) {

@@ -53,7 +53,7 @@ $(document).ready(function(){
 
 function loadMainSlider(){
 
-    var $getEditable = 'SELECT * FROM calculos WHERE remove = 0 ORDER BY modified DESC LIMIT 10';
+    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+sessionStorage.getItem('userId') + ' AND remove = 0 ORDER BY modified DESC LIMIT 10';
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
 

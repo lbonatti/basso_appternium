@@ -182,12 +182,13 @@ var login = function () {
     }
     facebookConnectPlugin.login( ["email"],
         function (response) {
-            var uID = '/'+response.authResponse.userID;
-            getEmail();
+            var uID = response.authResponse.userID;
+            getEmail(uID);
         },
         function (response) {
             var theR = JSON.stringify(response);
-            alert(theR);
+            mensaje('Error al intentar loguearse con Facebook');
+            //console.log(theR);
         });
 }
 var registerFb = function () {
@@ -197,37 +198,47 @@ var registerFb = function () {
     }
     facebookConnectPlugin.login( ["email"],
         function (response) {
-            getRegEmail();
+            var uID = response.authResponse.userID;
+            getRegEmail(uID);
         },
         function (response) {
             mensaje('Error al intentar registrarse con Facebook');
         });
 }
 
-function getEmail(){
+function getEmail(uID){
     facebookConnectPlugin.api( "me/?fields=email", ["email"],
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
             sessionStorage.setItem("username", theEmail);
+            sessionStorage.setItem("userId", uID);
             sessionStorage.setItem("fbLogged", 1);
+            switchFbId();
             window.location.href="m-inicio.html";
         },
-        function (response) { alert(JSON.stringify(response)) });
+        function (response) {
+            var theR = JSON.stringify(response);
+            mensaje('Error al obtener los datos de usuario de Facebook');
+        });
 }
-function getRegEmail(){
+function getRegEmail(uID){
     facebookConnectPlugin.api( "me/?fields=email,birthday,first_name,last_name", ["email", "public_profile"],
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
             sessionStorage.setItem("username", theEmail);
+            sessionStorage.setItem("userId", uID);
             sessionStorage.setItem("last_name", JSON.stringify(response.last_name).replace(/"/g , ''));
             sessionStorage.setItem("first_name", JSON.stringify(response.first_name).replace(/"/g , ''));
             sessionStorage.setItem("birthday", response.birthday ? JSON.stringify(response.birthday).replace(/"/g , '') : '00-00-0000');
 
             return getDataFbRegister();
         },
-        function (response) { alert(JSON.stringify(response)) });
+        function (response) {
+            var theR = JSON.stringify(response);
+            mensaje('Error al obtener los datos de usuario de Facebook');
+        });
 }
 function showEmail(){
     facebookConnectPlugin.api( "me/?fields=email", ["email"],
@@ -259,6 +270,10 @@ var getStatus = function () {
 }
 var logout = function () {
     facebookConnectPlugin.logout(
-        function (response) { alert(JSON.stringify(response)) },
-        function (response) { alert(JSON.stringify(response)) });
+        function (response) {
+            //alert(JSON.stringify(response));
+        },
+        function (response) {
+            //alert(JSON.stringify(response));
+        });
 }
