@@ -42,18 +42,50 @@ if (!String.prototype.startsWith) {
     });
 }
 
-function sharePDF(title, text, filename, type)
+var urlToFile;
+function sharePDF(filename, type)
 {
     var $html = generateHtml(type);
-    createPDF($html, filename);
+    callAjaxPdf($html, filename);
 
-    var urlToFile = url_webservices+'/download-pdf.php?pdf=' + filename + '.pdf';
+    animateBtnEnd('shareCalc', 'Compartir');
 
     if ($.trim(filename).length > 0 ) {
         window.plugins.socialsharing.share(null, null, null, urlToFile);
     } else {
         alertMsg('No se encontró el nombre del archivo, reintente.', '', '', 'Ocurrió un error al compartir', '', '');
     }
+}
+
+function viewPDF(filename, type)
+{
+    var $html = generateHtml(type);
+    callAjaxPdf($html, filename);
+
+    animateBtnEnd('savePDF', 'Ver PDF');
+
+    window.open( urlToFile, '_system', 'location=yes,toolbar=yes' );
+}
+
+function callAjaxPdf($html, filename)
+{
+    $.ajax({
+        type: 'POST',
+        url: url_webservices+'/download-pdf.php',
+        data: {
+            content: $html,
+            fileName: filename,
+            calc_type: sessionStorage.getItem('calc_type'),
+            project_name: sessionStorage.getItem('projectName')
+        },
+        async: false,
+        success: function(data) {
+            urlToFile = data;
+        },
+        error: function(error) {
+            console.log(JSON.stringify(error));
+        }
+    });
 }
 
 function createPDF($html, filename)
@@ -68,6 +100,7 @@ function createPDF($html, filename)
 
 function generateHtml(type)
 {
+
     var $html;
     var $_rt;
     var $_rm;
@@ -80,21 +113,31 @@ function generateHtml(type)
             $_rl = $html.find('.resultado-leyenda').text();
 
             $html.find('.resultado-techo').html($_rt + ' ' + $_rm + ' ' + $_rl).css('font-size','20px').css('text-transform','uppercase').css('text-align','center');
-            $html.find('.boton.savePDFT').remove();
+            $html.find('.boton.savePDF').remove();
             $html.find('.resultado-medida').remove();
             $html.find('.resultado-leyenda').remove();
         break;
         case 'steel-frame':
-            $html = $('.paso5 #myRenderSave').clone();
+        case 'steel_frame':
+            $html = $('#myRenderSave').clone();
             $html.find('span.showMore').remove();
         break;
         case 'dry-wall':
             $html = $('#myRenderSaveDW').clone();
-            $html.find('.boton.savePDFDW').remove();
+            $html.find('.boton.savePDF').remove();
             $html.find('.boton.saveCalc').remove();
             $html.find('.boton.shareCalc').remove();
         break;
     }
 
     return $html.html();
+}
+
+function animateBtnStart($this, animateText){
+    //Animamos el boton
+    $this.html(animateText + ' <img src="./img/ajax-loader.gif"/>');
+}
+function animateBtnEnd(btnClass, btnText) {
+    var $this = $('.boton.'+btnClass);
+    $this.html(btnText);
 }

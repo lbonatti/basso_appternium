@@ -362,22 +362,35 @@
 					sessionStorage.removeItem('swiperActive');
 				}
 			},400)
-		})
+		});
 
 		//Mostrar PDF
 		$('.boton.savePDF').on('click',function(){
-			generateDivRenderSF();
-		})
+			var $this = $(this);
+			animateBtnStart( $this , 'Abriendo PDF ');
+			setTimeout(function(){
+				generateDivRenderSF();
+			}, 1000);
+		});
 
 		//Guardar calculo en APP
 		$('.boton.saveCalc').on('click',function(){
-			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-			saveNewCalc();
-		})
+			var $this = $(this);
+			animateBtnStart($this, 'Guardando ');
+			setTimeout(function() {
+				//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+				saveNewCalc();
+			}, 1000);
+		});
 
 		$('.boton.shareCalc').on('click',function(){
-			var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName');
-			sharePDF('Descarga de PDF', 'PDF con calculos de Steel Frame', filename, 'steel_frame');
+			var $this = $(this);
+			animateBtnStart($this, 'Cargando ');
+
+			setTimeout(function() {
+				var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
+				sharePDF(filename, 'steel-frame');
+			}, 1000);
 		});
 
 		$('.paso1 .cantPlantas div.op1, .paso1 .cantPlantas div.op2').on('click',function(){

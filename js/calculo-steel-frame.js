@@ -519,6 +519,9 @@ function saveNewCalc(){
     // los calculos a la BD remota)
     estadoST = 1;
     $('#back-sf').hide();
+
+    animateBtnEnd( 'saveCalc' , 'Guardar calculo ');
+
 }
 
 function calculateSF(){
@@ -692,52 +695,8 @@ function calculateSF(){
 }
 
 function generateDivRenderSF(){
-    var $this = $('.boton.savePDF');
-    var $html = generateHtml('steel-frame');
-    //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-    //saveNewCalc();
 
-    //Animamos el boton
-    var dots = 0;
-    var _op = 0.6;
-    $this.animate({opacity:0.6})
-    $this.html('Generando PDF<span id="dots"></span>')
-    var animateLoading = setInterval(function(){
-        if(_op == 0 || _op == 0.6){
-            _op = 1;
-        }else{
-            _op = 0.6;
-        }
-        $this.animate({opacity:_op})
-        if(dots < 3) {
-            $('#dots').append('.');
-            dots++;
-        } else {
-            $('#dots').html('');
-            dots = 0;
-        }
-    },600)
-
-    var the_link;
     var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName');
+    viewPDF(filename, 'steel-frame');
 
-    var request = createPDF($html, filename);
-
-    request.done(function (response, textStatus, jqXHR){
-        the_link = response;
-
-        clearInterval(animateLoading);
-        $this.animate({opacity:1})
-        $this.html('Ver PDF');
-        console.log("Comenzando descarga de PDF");
-        window.open( the_link, '_system', 'location=yes,toolbar=yes' );
-
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        console.error(
-            "Ha ocurrido un error: "+
-            textStatus, errorThrown
-        );
-    });
 }

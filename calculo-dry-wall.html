@@ -109,7 +109,7 @@
 					<span class="texto">T2 Aguja para placa yeso</span>
 					<span class="texto medida tornillosT2">13 U.</span>
 				</div>
-				<div class="boton savePDFDW">Ver PDF</div>
+				<div class="boton savePDF">Ver PDF</div>
 				<div class="boton saveCalc">Guardar cálculo</div>
 				<div class="boton ultimo-elemento shareCalc">Compartir</div>
 			</div>
@@ -128,18 +128,33 @@
     </div>
 
     <script>
-		$('.boton.savePDFDW').on('click',function(){
-			generateDivRenderDW();
+		//Mostrar PDF
+		$('.boton.savePDF').on('click',function(){
+			var $this = $(this);
+			animateBtnStart( $this , 'Abriendo PDF ');
+			setTimeout(function(){
+				generateDivRenderDW();
+			}, 1000);
 		});
 
+		//Guardar calculo en APP
 		$('.boton.saveCalc').on('click',function(){
-			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-			saveNewCalcDryWall();
+			var $this = $(this);
+			animateBtnStart($this, 'Guardando ');
+			setTimeout(function() {
+				//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+				saveNewCalcDryWall();
+			}, 1000);
 		});
 
 		$('.boton.shareCalc').on('click',function(){
-			var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName');
-			sharePDF('Descarga de PDF', 'PDF con calculos de Dry Wall', filename, 'dry-wall');
+			var $this = $(this);
+			animateBtnStart($this, 'Cargando ');
+
+			setTimeout(function() {
+				var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
+				sharePDF(filename, 'dry-wall');
+			}, 1000);
 		});
 
         eventosDryWall()

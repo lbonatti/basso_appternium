@@ -56,20 +56,29 @@ function eventosMisCalculos(){
         sessionStorage.setItem("projectName", pName);
         sessionStorage.setItem('aEditar', pId); // Generar bandera de edicion
         // Redireccionar con estado de edicion segun tipo.
-        switch (pType){
+        switch (pType) {
             case 'sf':
                 initEditarCalculoSF();
-                $.mobile.changePage("calculo-steel-frame.html");
+                page = "calculo-steel-frame.html";
+                $calc_type = 'Steelframe';
+
                 break;
             case 'dw':
                 initEditarCalculoDW();
-                $.mobile.changePage("calculo-dry-wall.html");
+                page = "calculo-dry-wall.html";
+                $calc_type = 'Drywall';
+
                 break;
             case 't':
                 initEditarCalculoT();
-                $.mobile.changePage("calculo-techos.html");
+                page = "calculo-techos.html";
+                $calc_type = 'Techos';
+
                 break;
         }
+        sessionStorage.setItem('calc_type', $calc_type);
+
+        $.mobile.changePage(page);
     });
 
     $('.duplicar').on('click', function () {

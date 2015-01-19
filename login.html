@@ -76,11 +76,11 @@
 <script src="js/register-mio.js"></script>
 
 <script>
+
+    deviceBackBtn();
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady()
     {
-        deviceBackBtn();
-
         var deviceID = device.uuid;
         var devicePlatform = device.platform;
 

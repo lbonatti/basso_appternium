@@ -157,7 +157,7 @@
 
             <!--<div class="boton">Descargar PDF</div>-->
             <!--<div class="boton ultimo-elemento">Compartir PDF</div>-->
-            <div class="boton savePDFT">Ver PDF</div>
+            <div class="boton savePDF">Ver PDF</div>
 			<div class="boton saveCalc">Guardar cálculo</div>
 			<div class="boton ultimo-elemento shareCalc">Compartir</div>
 
@@ -172,19 +172,35 @@
     </div>
 
     <script>
-		$('.boton.savePDFT').on('click',function(){
-			generateDivRenderT();
-		});
-		//Guardar calculo en APP
-		$('.boton.saveCalc').on('click',function(){
-			//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-			saveNewCalcTechos(values);
-		});
-        $('.boton.shareCalc').on('click',function(){
-            var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName');
-
-            sharePDF('Descarga de PDF', 'PDF con calculos de Techos', filename, 'techo');
+        //Mostrar PDF
+        $('.boton.savePDF').on('click',function(){
+            var $this = $(this);
+            animateBtnStart( $this , 'Abriendo PDF ');
+            setTimeout(function(){
+                generateDivRenderT();
+            }, 1000);
         });
+
+        //Guardar calculo en APP
+        $('.boton.saveCalc').on('click',function(){
+            var $this = $(this);
+            animateBtnStart($this, 'Guardando ');
+            setTimeout(function() {
+                //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+                saveNewCalcTechos(values);
+            }, 1000);
+        });
+
+        $('.boton.shareCalc').on('click',function(){
+            var $this = $(this);
+            animateBtnStart($this, 'Cargando ');
+
+            setTimeout(function() {
+                var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
+                sharePDF(filename, 'techo');
+            }, 1000);
+        });
+
         eventosTechos()
     </script>
 </div>
