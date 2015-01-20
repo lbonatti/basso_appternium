@@ -1,9 +1,14 @@
-function eventosProveedoresList(){
+function eventosProveedoresList()
+{
+    contSync = $('#syncOverlay');
+    contSyncMessage = $('#syncOverlay ul');
+    contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
+    contSync.fadeIn(1000);
 
     cargarPaises('#m5-pl .dd-pais','#m5-pl .dd-provincia');
 
     //cargarProveedores();
-
+    contSync.fadeOut();
 }
 
 
@@ -71,34 +76,39 @@ function eventosProveedores(){
 
         if(sendOk){
             showError('Enviando...');
-            window.plugin.email.isAvailable(
-                function (isAvailable) {
-                    if (isAvailable) {
-                        /* Puede enviar */
-                        sendTheMail(myName, myEmail, subject, textMsg);
-                    } else {
-                        /* No puede enviar */
-                        alertMsg('No hay ningun correo configurado', '', '', '', '', '');
-                    }
-                }
-            );
+
+            sendTheMail(myName, myEmail, subject, textMsg);
+            //
+            //window.plugin.email.isAvailable(
+            //    function (isAvailable) {
+            //        if (isAvailable) {
+            //            /* Puede enviar */
+            //            sendTheMail(myName, myEmail, subject, textMsg);
+            //        } else {
+            //            /* No puede enviar */
+            //            alertMsg('No hay ningun correo configurado', '', '', '', '', '');
+            //        }
+            //    }
+            //);
         }
+
         return;
     });
 
 }
 
-function sendTheMail(name, mail, sub, msg){
-
+function sendTheMail(name, mail, sub, msg) {
     var to = $('#m5-p .info2 span').html();
     var text = '<p>Contacto desde App Ternium</p><p>Usuario: '+name+' ( '+mail+' )</p><p>Asunto: '+sub+'</p><p>Mensaje: '+msg+'</p>';
 
-    window.plugin.email.open({
-        to:      [to],
-        subject: sub,
-        body:    text,
-        isHtml:  true
-    });
+    document.location.href = "mailto:"+to+'?subject='+sub+'&body='+text;
+
+    //window.plugin.email.open({
+    //    to:      [to],
+    //    subject: sub,
+    //    body:    text,
+    //    isHtml:  true
+    //});
 }
 
 function showError(msg){

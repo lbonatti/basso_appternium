@@ -20,13 +20,19 @@
 
     <script>
 		$(document).ready(function() {
-                    
-                    
-                        setTimeout(function (){
-                            updateGaleria($('ul.tabs li.current').attr('data-tab'));
-                        }, 2000);
+			contSync = $('#syncOverlay');
+			contSyncMessage = $('#syncOverlay ul');
+			contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
+			contSync.fadeIn(2000);
+
+			setTimeout(function (){
+				updateGaleria($('ul.tabs li.current').attr('data-tab'));
+			}, 2000);
+
 
 			$('ul.tabs li').click(function() {
+				contSync.fadeIn(1000);
+
 				var $tab = $(this);
 				var tab_id = $tab.attr('data-tab');
 
@@ -55,6 +61,8 @@
 						});
 					}
 				});
+
+				contSync.fadeOut();
 			}
 
 		})

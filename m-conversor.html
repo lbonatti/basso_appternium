@@ -100,10 +100,11 @@
                 var activeSlide2Unit = 0;
                 var mySwiper;
                 var mySwiper2;
-
+                var first = 0;
                 $(document).ready(function () {
 
                     $('.field_1').on('input', function () {
+                        first = 1;
                         calcConversion();
                     });
                     mySwiper = new Swiper('.swiper-container', {
@@ -112,7 +113,11 @@
                         centeredSlides: true,
                         slidesPerView: 'auto',
                         onSlideChangeEnd: function (swiper, direction) {
-                            console.log(direction);
+                            first = 1;
+                            calcConversion();
+                        },
+                        onTouchEnd: function (swiper) {
+                            first = 1;
                             calcConversion();
                         }
                     });
@@ -122,9 +127,23 @@
                         centeredSlides: true,
                         slidesPerView: 'auto',
                         onSlideChangeEnd: function (swiper, direction) {
+                            first = 1;
+                            calcConversion();
+                        },
+                        onTouchEnd: function (swiper) {
+                            first = 1;
                             calcConversion();
                         }
                     });
+
+                    mySwiper.wrapperTransitionEnd(function () {
+                        first = 1;
+                        calcConversion();
+                    }, true);
+                    mySwiper2.wrapperTransitionEnd(function () {
+                        first = 1;
+                        calcConversion();
+                    }, true);
                 });
 
                 function calcConversion() {
@@ -136,11 +155,10 @@
                     activeSlide1Unit = $('.panel-1 .swiper-slide-active').attr('data-unit');
                     activeSlide2Unit = $('.panel-2 .swiper-slide-active').attr('data-unit');
 
-                    if (field1Val === 0) {
+                    if (field1Val === 0 && first == 1) {
                         alertMsg('Debes completar la medida 1', '', '', 'Campo Necesario', 1);
                     } else {
                         var operation = activeSlide1Unit + activeSlide2Unit;
-                        console.log(operation);
                         switch (parseInt(operation)) {
                             case 14:
                                 //mm a pies

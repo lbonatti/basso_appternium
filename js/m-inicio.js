@@ -7,14 +7,20 @@ if (sessionStorage.getItem('username') != 'anonimo'){
         }
     },1000);
 }
-$(document).ready(function(){
+
+$(document).on("pageshow", function(event) {
+    if ($('.bx-wrapper').length == 0) {
+        $('#m-inicio .bxslider').html('');
+        loadMainSlider();
+    }
+});
+
+$(document).ready(function() {
     esAnonimo();
 
     cargarSlide();
 
     menuLateral();
-
-    loadMainSlider();
 
     $('.shadow').click(function(){
         unblockScreen();
@@ -51,12 +57,11 @@ $(document).ready(function(){
 
 });
 
-function loadMainSlider(){
-
+function loadMainSlider() {
+    $('#m-inicio .bxslider').html('');
     var $getEditable = 'SELECT * FROM calculos WHERE user_id='+sessionStorage.getItem('userId') + ' AND remove = 0 ORDER BY modified DESC LIMIT 10';
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
-
             for(var i = 0; i < result.length; i++){
                 var pSlideName = result[i].project_name;
                 var pSlideType = result[i].calc_type;
@@ -66,23 +71,23 @@ function loadMainSlider(){
 
             }
 
-            $('.bxslider').bxSlider({
+            $bxSliderOptions = {
                 controls:false
-            });
-        }else{
+            };
+        } else {
 
             $('#m-inicio .bxslider').append('<li style="width: 500px !important;"><div class="titulo" style="text-align: center;width: 100%;">No se encontraron proyectos</div><div class="fecha"></div></li>');
 
-            $('.bxslider').bxSlider({
+            $bxSliderOptions = {
                 controls:false,
                 infiniteLoop: false,
                 touchEnabled: false,
                 pager: false
-            });
+            };
         }
+
+        $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
     });
-
-
 
 }
 
@@ -97,7 +102,7 @@ function esAnonimo(){
 function cargarSlide(){
     var userType = sessionStorage.getItem("username");
 
-    if(userType !== 'anonimo'){
+    if (userType !== 'anonimo') {
         var userID = sessionStorage.getItem("userId");
 
         $.ajax({
@@ -111,9 +116,7 @@ function cargarSlide(){
                 //console.log(error);
             }
         });
-
-
-    }else{
+    } else {
         console.log('es anonimo');
     }
 }
