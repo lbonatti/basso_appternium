@@ -71,7 +71,7 @@ function loadMainSlider(){
             });
         }else{
 
-            $('#m-inicio .bxslider').append('<li><div class="titulo" style="text-align: center;width: 100%;">No se encontraron proyectos</div><div class="fecha"></div></li>');
+            $('#m-inicio .bxslider').append('<li style="width: 500px !important;"><div class="titulo" style="text-align: center;width: 100%;">No se encontraron proyectos</div><div class="fecha"></div></li>');
 
             $('.bxslider').bxSlider({
                 controls:false,

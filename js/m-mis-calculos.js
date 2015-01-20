@@ -164,54 +164,63 @@ function showMisCalculos(){
     var $first_letter;
 
     db_customQuery($query,function(result){
-        $.each(result,function(i,v){
-
-            $first_letter = (v.project_name.slice(0,1)).toUpperCase();
-            abcd[$first_letter][i] = result[i];
-
-        })
-
+        
         $html += '<div class="content">'
+        if (result.length == 0)
+        {
+            $html += '<p align="center">No hay cálculos guardados.</div>';
+        }
+        else
+        {
+        
+            $.each(result,function(i,v){
 
-        $.each(abcd,function(index,value){
-            if (!$.isEmptyObject(value)){
-                $html += '<div class="letra">'+index+'</div>';
-                $html += '<div class="letraContainer">';
-                $first = true;
-                $.each(value,function(index2,value2){
-                    if($first == true){
-                        $class = 'primero';
-                        $first = false;
-                    }else{
-                        $class = '';
-                    }
-                    $html += '<div class="proyecto '+$class+'" data-snap-ignore="1" data-project-id="'+value2._id+'">';
-                    $html += '<div class="panel">';
+                $first_letter = (v.project_name.slice(0,1)).toUpperCase();
+                abcd[$first_letter][i] = result[i];
 
-                    //ICONO
-                    if (value2.calc_type == 1) {$icono['icono'] = 'sf'; $icono['txt'] = 'Steel Frame';}
-                    else if(value2.calc_type == 2) {$icono['icono'] = 'dw'; $icono['txt'] = 'DryWall';}
-                    else if(value2.calc_type == 3) {$icono['icono'] = 't'; $icono['txt'] = 'Techos';}
-                    $html += '<div class="icono '+$icono.icono+'">'+$icono.txt+'</div>';
+            })
 
-                    //INFO
-                    $html += '<div class="info">';
-                    $html += '<div class="titulo">'+value2.project_name+'</div>';
 
-                    //FECHA
-                    $tmp = value2.created.split(' ');
-                    $tmp = $tmp[0].split('-');
-                    $date['dia'] = $tmp[2];
-                    $date['mes'] = $tmp[1];
-                    $date['año'] = $tmp[0];
-                    $html += '<div class="fecha">Fecha: '+$date['dia']+' / '+$date['mes']+' / '+$date['año']+'</div>';
-                    $html += '</div>'; //cierre fecha;
-                    $html += '<div class="editar">Editar</div><div class="duplicar">Duplicar</div><div class="eliminar">Eliminar</div></div></div>';
-                })
+            $.each(abcd,function(index,value){
+                if (!$.isEmptyObject(value)){
+                    $html += '<div class="letra">'+index+'</div>';
+                    $html += '<div class="letraContainer">';
+                    $first = true;
+                    $.each(value,function(index2,value2){
+                        if($first == true){
+                            $class = 'primero';
+                            $first = false;
+                        }else{
+                            $class = '';
+                        }
+                        $html += '<div class="proyecto '+$class+'" data-snap-ignore="1" data-project-id="'+value2._id+'">';
+                        $html += '<div class="panel">';
 
-                $html += '</div>'; //letraContainer
-            }
-        })
+                        //ICONO
+                        if (value2.calc_type == 1) {$icono['icono'] = 'sf'; $icono['txt'] = 'Steel Frame';}
+                        else if(value2.calc_type == 2) {$icono['icono'] = 'dw'; $icono['txt'] = 'DryWall';}
+                        else if(value2.calc_type == 3) {$icono['icono'] = 't'; $icono['txt'] = 'Techos';}
+                        $html += '<div class="icono '+$icono.icono+'">'+$icono.txt+'</div>';
+
+                        //INFO
+                        $html += '<div class="info">';
+                        $html += '<div class="titulo">'+value2.project_name+'</div>';
+
+                        //FECHA
+                        $tmp = value2.created.split(' ');
+                        $tmp = $tmp[0].split('-');
+                        $date['dia'] = $tmp[2];
+                        $date['mes'] = $tmp[1];
+                        $date['año'] = $tmp[0];
+                        $html += '<div class="fecha">Fecha: '+$date['dia']+' / '+$date['mes']+' / '+$date['año']+'</div>';
+                        $html += '</div>'; //cierre fecha;
+                        $html += '<div class="boton editar">Editar</div><div class="boton duplicar">Duplicar</div><div class="boton eliminar">Eliminar</div></div></div>';
+                    })
+
+                    $html += '</div>'; //letraContainer
+                }
+            });
+        }
         $html += '</div>';
 
         $('#m2-mc .paso.paso1').html($html);

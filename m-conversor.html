@@ -112,6 +112,7 @@
                         centeredSlides: true,
                         slidesPerView: 'auto',
                         onSlideChangeEnd: function (swiper, direction) {
+                            console.log(direction);
                             calcConversion();
                         }
                     });
@@ -139,6 +140,7 @@
                         alertMsg('Debes completar la medida 1', '', '', 'Campo Necesario', 1);
                     } else {
                         var operation = activeSlide1Unit + activeSlide2Unit;
+                        console.log(operation);
                         switch (parseInt(operation)) {
                             case 14:
                                 //mm a pies

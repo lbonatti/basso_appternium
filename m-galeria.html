@@ -20,7 +20,11 @@
 
     <script>
 		$(document).ready(function() {
-			updateGaleria($('ul.tabs li.current').attr('data-tab'));
+                    
+                    
+                        setTimeout(function (){
+                            updateGaleria($('ul.tabs li.current').attr('data-tab'));
+                        }, 2000);
 
 			$('ul.tabs li').click(function() {
 				var $tab = $(this);

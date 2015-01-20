@@ -6,8 +6,6 @@ function syncDB()
 {
     userId = sessionStorage.getItem("userId");
 
-
-
     if (!userId) return;
     
     contSync = $('#syncOverlay');
