@@ -83,7 +83,7 @@ function callAjaxPdf($html, filename)
             urlToFile = data;
         },
         error: function(error) {
-            console.log(JSON.stringify(error));
+            alertMsg(JSON.stringify(error), '', '', 'Error PDF', '', '');
         }
     });
 }

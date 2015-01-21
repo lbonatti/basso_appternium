@@ -42,6 +42,31 @@ $(document).on("pageshow", function(event) {
 });
 
 $(document).ready(function() {
+    $('.btn-settings').click(function(){
+        if($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+            $('.menu-options').hide();
+        }else{
+            $(this).addClass('selected');
+            $('.menu-options').show();
+        }
+    });
+
+    $('.menu-options .perfil').click(function(){
+        $.mobile.changePage('u-ajustes.html');
+    });
+
+    $('.menu-options .contacto').click(function(){
+        $.mobile.changePage('m-feedback.html');
+    });
+
+    $('.menu-options .terminos').click(function(){
+        $.mobile.changePage('u-tos.html');
+    });
+    $('.menu-options .logout').click(function(){
+        theLogOut();
+    });
+
     esAnonimo();
 
     cargarSlide();
