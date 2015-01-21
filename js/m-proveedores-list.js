@@ -2,7 +2,7 @@ function eventosProveedoresList()
 {
     contSync = $('#syncOverlay');
     contSyncMessage = $('#syncOverlay ul');
-    contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
+    contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     contSync.fadeIn(0);
 
     cargarPaises('#m5-pl .dd-pais','#m5-pl .dd-provincia');

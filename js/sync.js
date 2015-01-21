@@ -26,12 +26,12 @@ function syncDB()
 function syncEnd()
 {
     // Ocultar el overlay que bloquea la aplicación
-    contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Finalizando sincronización &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSync.find('span').remove();
+    contSyncMessage.append('<li><p>Finalizando sincronización &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     setTimeout(function () {
         contSync.fadeOut(600, function(){
             contSync.find('li').remove();
-            contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
+            contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span> </p></li>');
         });
     }, 2000);
 }
@@ -40,7 +40,7 @@ function syncEnd()
 function syncLoad()
 {
     contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     // Ajax para traer todos los calculos del usuario que están online.
     var $calculosOnline;
     $.ajax({
@@ -93,7 +93,7 @@ function syncLoad()
 function syncNew()
 {
     contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
     var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0";
@@ -110,7 +110,7 @@ function syncNew()
 function syncNewEdit()
 {
     contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
     $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0";
@@ -127,7 +127,7 @@ function syncNewEdit()
 function syncEdit()
 {
     contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
     $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0";
@@ -145,7 +145,7 @@ function syncEdit()
 function syncDeleted()
 {
     contSync.find('img').remove();
-    contSyncMessage.append('<li><p>Sincronizando cálculos eliminados &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /></p></li>');
+    contSyncMessage.append('<li><p>Sincronizando cálculos eliminados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que han sido eliminados y actualizamos la BD
     $query = "SELECT * FROM calculos WHERE remove=1";
