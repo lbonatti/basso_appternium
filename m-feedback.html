@@ -20,15 +20,16 @@
         contSync = $('#syncOverlay');
         contSyncMessage = $('#syncOverlay ul');
         contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
-        contSync.fadeIn(1000);
+        contSync.fadeIn(0);
         $.ajax({
             url: backend_url + "/comentarios/lists",
             success: function(result) {
+                contSync.fadeOut(0);
+
                 $.each(result.Default, function(key, value) {
                     $('.comentarios').append($('<option>', { value : value.Comentario.id }).text(value.Comentario.nombre));
                 });
 
-                contSync.fadeOut();
             }
         });
         eventosFeedback()

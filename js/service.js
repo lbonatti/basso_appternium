@@ -25,6 +25,10 @@ function cargarProveedores(){
 
     $('#m5-pl .proveedor').remove();
     $.getJSON( urlProveedores, function( data ) {
+
+        contSync = $('#syncOverlay');
+        contSync.fadeOut(0);
+
         var r="";
         $.each( data.Default, function( key, val ) {
             if(val.Proveedore.provincia_id==idProv){

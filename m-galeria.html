@@ -19,19 +19,20 @@
     </div>
 
     <script>
+		var contSync;
 		$(document).ready(function() {
 			contSync = $('#syncOverlay');
 			contSyncMessage = $('#syncOverlay ul');
 			contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<img src="img/ajax-loader.gif" /> </p></li>');
-			contSync.fadeIn(2000);
+			contSync.fadeIn(0);
 
 			setTimeout(function (){
 				updateGaleria($('ul.tabs li.current').attr('data-tab'));
-			}, 2000);
+			}, 1000);
 
 
 			$('ul.tabs li').click(function() {
-				contSync.fadeIn(1000);
+				contSync.fadeIn(0);
 
 				var $tab = $(this);
 				var tab_id = $tab.attr('data-tab');
@@ -55,6 +56,7 @@
 						nombre: id
 					},
 					success: function(result) {
+						contSync.fadeOut(0);
 						$.each(result.Default, function(key, value) {
 							var $galeria = value.Galeria;
 							$('#'+id).append('<div class="img-content"><img src="'+backend_url+'/app/webroot/uploads/galerias/'+$galeria.imagen+'" /><div class="infoImg"><span>'+$galeria.titulo+'<br/><span>'+$galeria.descripcion+'</span></span></div></div>');
@@ -62,7 +64,7 @@
 					}
 				});
 
-				contSync.fadeOut();
+				//contSync.fadeOut(0);
 			}
 
 		})

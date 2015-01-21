@@ -13,18 +13,6 @@ $(document).on("pageshow", function(event) {
         $('#m-inicio .bxslider').html('');
         loadMainSlider();
     }
-});
-
-$(document).ready(function() {
-    esAnonimo();
-
-    cargarSlide();
-
-    menuLateral();
-
-    $('.shadow').click(function(){
-        unblockScreen();
-    });
 
     $('.btn-settings').click(function(){
         if($(this).hasClass('selected')){
@@ -49,6 +37,19 @@ $(document).ready(function() {
     });
     $('.menu-options .logout').click(function(){
         theLogOut();
+    });
+
+});
+
+$(document).ready(function() {
+    esAnonimo();
+
+    cargarSlide();
+
+    menuLateral();
+
+    $('.shadow').click(function(){
+        unblockScreen();
     });
 
     esconderUserMenu();
