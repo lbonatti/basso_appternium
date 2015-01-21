@@ -39,7 +39,7 @@ function syncEnd()
 /* Se sincroniza con los calculos online */
 function syncLoad()
 {
-    contSync.find('img').remove();
+    contSync.find('span').remove();
     contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     // Ajax para traer todos los calculos del usuario que están online.
     var $calculosOnline;
@@ -92,7 +92,7 @@ function syncLoad()
 /* Son los creados y aún no están sincronizados */
 function syncNew()
 {
-    contSync.find('img').remove();
+    contSync.find('span').remove();
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
@@ -109,7 +109,7 @@ function syncNew()
 /* Son los creados y editados antes de ser sincronizados */
 function syncNewEdit()
 {
-    contSync.find('img').remove();
+    contSync.find('span').remove();
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
@@ -126,7 +126,7 @@ function syncNewEdit()
 /* Son los que ya están sinos pero fueron editados */
 function syncEdit()
 {
-    contSync.find('img').remove();
+    contSync.find('span').remove();
     contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
@@ -144,7 +144,7 @@ function syncEdit()
 /* Son los que fueron borrados */
 function syncDeleted()
 {
-    contSync.find('img').remove();
+    contSync.find('span').remove();
     contSyncMessage.append('<li><p>Sincronizando cálculos eliminados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que han sido eliminados y actualizamos la BD
@@ -175,13 +175,13 @@ function _ajaxSendSync(rows, _action, _callback){
                 })
             }
         } else {
-            contSync.find('img').remove();
+            contSync.find('span').remove();
             contSyncMessage.append('<li><p>Error sincronizando</p></li>');
         }
         setTimeout(_callback, 1500);
         //_callback();
     }).error(function (jqXHR, textStatus, errorThrown) {
-        contSync.find('img').remove();
+        contSync.find('span').remove();
         contSyncMessage.append('<li><p>Error sincronizando</p></li>');
         syncEnd();
     });
