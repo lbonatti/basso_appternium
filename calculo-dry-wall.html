@@ -132,6 +132,10 @@
 		$('.boton.savePDF').on('click',function(){
 			var $this = $(this);
 			animateBtnStart( $this , 'Abriendo PDF ');
+
+			// guardamos el cálculo
+			saveNewCalcDryWall(0);
+
 			setTimeout(function(){
 				generateDivRenderDW();
 			}, 1000);
@@ -143,13 +147,16 @@
 			animateBtnStart($this, 'Guardando ');
 			setTimeout(function() {
 				//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-				saveNewCalcDryWall();
+				saveNewCalcDryWall(1);
 			}, 1000);
 		});
 
 		$('.boton.shareCalc').on('click',function(){
 			var $this = $(this);
 			animateBtnStart($this, 'Cargando ');
+
+			// guardamos el cálculo
+			saveNewCalcDryWall(0);
 
 			setTimeout(function() {
 				var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');

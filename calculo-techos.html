@@ -176,6 +176,10 @@
         $('.boton.savePDF').on('click',function(){
             var $this = $(this);
             animateBtnStart( $this , 'Abriendo PDF ');
+
+            // guardamos el cálculo
+            saveNewCalcTechos(values, 0);
+
             setTimeout(function(){
                 generateDivRenderT();
             }, 1000);
@@ -187,13 +191,16 @@
             animateBtnStart($this, 'Guardando ');
             setTimeout(function() {
                 //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-                saveNewCalcTechos(values);
+                saveNewCalcTechos(values, 1);
             }, 1000);
         });
 
         $('.boton.shareCalc').on('click',function(){
             var $this = $(this);
             animateBtnStart($this, 'Cargando ');
+
+            // guardamos el cálculo
+            saveNewCalcTechos(values, 0);
 
             setTimeout(function() {
                 var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');

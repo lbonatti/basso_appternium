@@ -428,7 +428,7 @@ function st_save_step4(){ //Almacenar tipo de techo
     sessionStorage.setItem('st-s4-tipotecho',parseFloat($_tipoTecho));
 }
 
-function saveNewCalc(){
+function saveNewCalc(showMessage) {
     var calculos;
     var currentTime = getCurrentTime();
 
@@ -477,38 +477,48 @@ function saveNewCalc(){
     if (estadoST == 0) { //Si el calculo es nuevo
         //Guardamos en bd local el calculo
         var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
-        if (logged == true){
+        if (logged == true) {
             var values = [sessionStorage.getItem('userId'),projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
-                if (result == 'ok'){
+                if (result == 'ok') {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
-                    alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
-                    $('.boton.saveCalc').fadeOut(600);
+                    if (showMessage !== 0) {
+                        alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        $('.boton.saveCalc').fadeOut(600);
+                    }
                     newSave = 1;
-                }else{
-                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                } else {
+                    if (showMessage !== 0) {
+                        alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                    }
                 }
             })
-        }else{
+        } else {
             var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
-                if (result == 'ok'){
+                if (result == 'ok') {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
-                    alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
-                    $('.boton.saveCalc').fadeOut(600);
+                    if (showMessage !== 0) {
+                        alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        $('.boton.saveCalc').fadeOut(600);
+                    }
                     newSave = 1;
-                }else{
-                    alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                } else {
+                    if (showMessage !== 0) {
+                        alertMsg('No se ha podido guardar', '', 'none', '', 1);
+                    }
                 }
             })
         }
-    }else if(estadoST == 2){ //Si el calculo ya existe y fue editado
+    } else if(estadoST == 2) { //Si el calculo ya existe y fue editado
         var pName = sessionStorage.getItem('projectName');
         var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
         db_updateQueryEdit($query, function(result,updatedID) {
-            if(result == 'ok'){
-                alertMsg('El calculo '+projectName+' ha sido editado', '', 'none', '', 1);
-                $('.boton.saveCalc').fadeOut(600);
+            if (result == 'ok') {
+                if (showMessage !== 0) {
+                    alertMsg('El calculo '+projectName+' ha sido editado', '', 'none', '', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                }
                 modoLectura();
                 newSave = 1;
             }

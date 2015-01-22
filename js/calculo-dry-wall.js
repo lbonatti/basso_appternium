@@ -193,7 +193,7 @@ function dw_calculateResult(){
     $('#m1-cdw-1 .tornillosT2').html(tornillosT2 + ' U.');
 }
 
-function saveNewCalcDryWall(){
+function saveNewCalcDryWall(showMessage) {
     var calculos;
     var currentTime = getCurrentTime();
     sessionStorage.setItem('calculos', JSON.stringify( {"tipo": { "dry_wall": {}  } } ) );
@@ -232,38 +232,48 @@ function saveNewCalcDryWall(){
     if (estadoST == 0) { //Si el calculo es nuevo
         //Guardamos en bd local el calculo
         var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
-        if (logged == true){
+        if (logged == true) {
             var values = [sessionStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
-                if (result == 'ok'){
+                if (result == 'ok') {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
-                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
-                    $('.boton.saveCalc').fadeOut(600);
+                    if (showMessage !== 0) {
+                        alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                        $('.boton.saveCalc').fadeOut(600);
+                    }
                     newSave = 1;
-                }else{
-                    alertMsg('No se ha podido guardar','dlg-dw');
+                } else {
+                    if (showMessage !== 0) {
+                        alertMsg('No se ha podido guardar','dlg-dw');
+                    }
                 }
             })
-        }else{
+        } else {
             var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
-                if (result == 'ok'){
+                if (result == 'ok') {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
-                    alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
-                    $('.boton.saveCalc').fadeOut(600);
+                    if (showMessage !== 0) {
+                        alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                        $('.boton.saveCalc').fadeOut(600);
+                    }
                     newSave = 1;
-                }else{
-                    alertMsg('No se ha podido guardar','dlg-dw');
+                } else {
+                    if (showMessage !== 0) {
+                        alertMsg('No se ha podido guardar','dlg-dw');
+                    }
                 }
             })
         }
-    }else if(estadoST == 2){ //Si el calculo ya existe y fue editado
+    } else if(estadoST == 2) { //Si el calculo ya existe y fue editado
         var pName = sessionStorage.getItem('projectName');
         var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
         db_updateQueryEdit($query, function(result,updatedID) {
             if(result == 'ok'){
-                alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
-                $('.boton.saveCalc').fadeOut(600);
+                if (showMessage !== 0) {
+                    alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
+                    $('.boton.saveCalc').fadeOut(600);
+                }
                 modoLectura();
                 newSave = 1;
             }

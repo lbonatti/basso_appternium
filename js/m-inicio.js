@@ -10,7 +10,6 @@ if (sessionStorage.getItem('username') != 'anonimo'){
 
 $(document).on("pageshow", function(event) {
     if ($('.bx-wrapper').length == 0) {
-        $('#m-inicio .bxslider').html('');
         loadMainSlider();
     }
 
@@ -226,7 +225,7 @@ function alertMsg(text, id, action, title, type, cb){
     $('.alertMsg').show();
 
 
-    $('.alertMsg .boton').on("click",function(e){
+    $('.alertMsg .boton, .alertMsg .cancelar').on("click",function(e){
         e.preventDefault();
         $(this).parent().remove();
         $('.shadow').css('height','0');

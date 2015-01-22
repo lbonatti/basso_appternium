@@ -86,27 +86,13 @@ function eventosMisCalculos(){
         var project_id = $(this).closest('.proyecto').attr('data-project-id');
         var $query = 'SELECT * FROM calculos WHERE project_name="'+pName+'" AND _id='+ project_id ;
         db_customQuery($query, function(pleaseWork) {
-            if(pleaseWork.length > 0){
+            if (pleaseWork.length > 0) {
                 var proj = pleaseWork[0];
                 var _projType = proj.calc_type;
                 var _projData = proj.data;
 
                 //Tomar nombre nuevo
-                var now = new Date();
-                var newNameSufix = pad(now.getFullYear(), 4).toString() + pad((now.getMonth()+1), 2).toString() + pad(now.getDate(), 2).toString() + pad(now.getHours(), 2).toString() + pad(now.getMinutes(), 2).toString() + pad(now.getSeconds(), 2).toString();
-                var newNameAux = pName.split('_');
-                var newName = newNameAux[0];
-                if(newNameAux.length > 1){
-                    for(var i= 1; i < newNameAux.length; i++){
-                        if( !isNaN(newNameAux[i]) && newNameAux[i].length == 14 ){
-                            newNameAux[i] = '';
-                        }
-                        else{
-                            newName += '_' + newNameAux[i];
-                        }
-                    }
-                }
-                newName += '_' + newNameSufix;
+                var newName = 'Copia - ' + pName;
 
                 // guardarNuevo
                 var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id'];
@@ -119,11 +105,11 @@ function eventosMisCalculos(){
                     values = [0,newName,_projType,_projData,currentTime,currentTime,0,0,0];
                 }
                 db_insert('calculos',fields, values,'',function(result){
-                    if (result == 'ok'){
+                    if (result == 'ok') {
                         newSave = 1;
                         alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
                         showMisCalculos();
-                    }else{
+                    } else {
                         alertMsg('No se ha podido guardar el proyecto', '', 'none', 'Duplicar Calculo', 1);
                     }
                 });

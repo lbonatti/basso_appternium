@@ -34,6 +34,10 @@ function syncEnd()
             contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span> </p></li>');
         });
     }, 2000);
+
+    if ($('.bx-wrapper').length == 0) {
+        loadMainSlider();
+    }
 }
 
 /* Se sincroniza con los calculos online */
@@ -96,7 +100,7 @@ function syncNew()
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
-    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0";
+    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
     db_customQuery($query, function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'new', syncNewEdit);
@@ -113,7 +117,7 @@ function syncNewEdit()
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0";
+    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
     db_customQuery($query, function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'new', syncEdit);
@@ -130,7 +134,7 @@ function syncEdit()
     contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0";
+    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
     db_customQuery($query,function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'edit', syncDeleted);
