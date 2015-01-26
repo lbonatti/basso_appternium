@@ -76,9 +76,13 @@
     setTimeout(function(){
         //$.mobile.changePage('m-inicio.html');
 
-        window.location.href="login.html";
-
+        if ( localStorage.getItem('username') ) {
+            window.location.href="m-inicio.html";
+        }else{
+            window.location.href="login.html";
+        }
     },1500);
+
 </script>
 </body>
 </html>
