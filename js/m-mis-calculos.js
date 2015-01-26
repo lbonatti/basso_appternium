@@ -106,7 +106,7 @@ function eventosMisCalculos(){
                 }
                 db_insert('calculos',fields, values,'',function(result){
                     if (result == 'ok') {
-                        newSave = 1;
+                        sessionStorage.setItem('newSave', 1);
                         alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
                         showMisCalculos();
                     } else {
@@ -135,7 +135,7 @@ function deleteCalc(project_id){
     })
 }
 function refreshList(){
-    newSave = 1;
+    sessionStorage.setItem('newSave', 1);
     console.log('Borrado Correcto, actualizando lista...');
     $('#m2-mc .paso.paso1').hide();
     showMisCalculos();

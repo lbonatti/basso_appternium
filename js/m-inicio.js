@@ -1,18 +1,13 @@
-var newSave = 1;
 var slider = null;
 
 if (localStorage.getItem('username') != 'anonimo'){
     setInterval(function(){
-        if($('.page-header h1').text() == 'Inicio' && newSave == 1){
+        if($('.page-header h1').text() == 'Inicio' && sessionStorage.getItem('newSave') == 1){
             syncDB();
-            newSave = 0;
+            sessionStorage.setItem('newSave', 0);
         }
     },1000);
 }
-
-$(document).on("pagebeforeshow", function(event) {
-    $('#m-inicio .bx-wrapper').hide();
-});
 
 $(document).on("pageshow", function(event) {
 
@@ -20,6 +15,10 @@ $(document).on("pageshow", function(event) {
     boton_menu($(source).attr('id'));
 
     loadMainSlider();
+    if(slider){
+        slider.destroySlider();
+        slider.reloadSlider();
+    }
 
     $('.btn-settings').click(function(){
         if($(this).hasClass('selected')){

@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var _sessionCode = randomString();
     sessionStorage.setItem('session_code', _sessionCode);
+    sessionStorage.setItem('newSave', 0);
 
     var facebook = new FacebookPlugin();
 
@@ -62,6 +63,7 @@ $(document).ready(function(){
                         localStorage.setItem("username", username);
                         localStorage.setItem("fbLogged", 0);
 
+                        sessionStorage.setItem('newSave', 1);
                         window.location.href="m-inicio.html";
                     }else{
                         mensaje(result.Message);

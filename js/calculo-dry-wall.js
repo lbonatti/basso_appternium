@@ -241,7 +241,7 @@ function saveNewCalcDryWall(showMessage) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
                         $('.boton.saveCalc').fadeOut(600);
                     }
-                    newSave = 1;
+                    sessionStorage.setItem('newSave', 1);
                 } else {
                     if (showMessage !== 0) {
                         alertMsg('No se ha podido guardar','dlg-dw');
@@ -257,7 +257,7 @@ function saveNewCalcDryWall(showMessage) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
                         $('.boton.saveCalc').fadeOut(600);
                     }
-                    newSave = 1;
+                    sessionStorage.setItem('newSave', 1);
                 } else {
                     if (showMessage !== 0) {
                         alertMsg('No se ha podido guardar','dlg-dw');
@@ -275,7 +275,7 @@ function saveNewCalcDryWall(showMessage) {
                     $('.boton.saveCalc').fadeOut(600);
                 }
                 modoLectura();
-                newSave = 1;
+                sessionStorage.setItem('newSave', 1);
             }
         })
     }
