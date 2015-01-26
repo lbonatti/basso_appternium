@@ -2,7 +2,7 @@ var slider = null;
 
 if (localStorage.getItem('username') != 'anonimo'){
     setInterval(function(){
-        if($('.page-header h1').text() == 'Inicio' && sessionStorage.getItem('newSave') == 1){
+        if($('.ui-page-active .page-header h1').text() == 'Inicio' && sessionStorage.getItem('newSave') == 1){
             syncDB();
             sessionStorage.setItem('newSave', 0);
         }
@@ -14,7 +14,7 @@ $(document).on("pageshow", function(event) {
     var source = event.target || event.srcElement;
     boton_menu($(source).attr('id'));
 
-    if (!slider)
+    if (!slider && $('.ui-page-active .page-header h1').text() == 'Inicio')
     {
         loadMainSlider();
     }
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 function loadMainSlider() {
 
-    $('#m-inicio .bxslider').html('');
+    //$('#m-inicio .bxslider').html('');
 
     var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 10';
     
