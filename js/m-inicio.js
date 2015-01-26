@@ -6,7 +6,7 @@ if (localStorage.getItem('username') != 'anonimo'){
             syncDB();
             sessionStorage.setItem('newSave', 0);
         }
-    },1000);
+    },500);
 }
 
 $(document).on("pageshow", function(event) {
@@ -14,10 +14,9 @@ $(document).on("pageshow", function(event) {
     var source = event.target || event.srcElement;
     boton_menu($(source).attr('id'));
 
-    loadMainSlider();
-    if(slider){
-        slider.destroySlider();
-        slider.reloadSlider();
+    if (!slider)
+    {
+        loadMainSlider();
     }
 
     $('.btn-settings').click(function(){
@@ -81,6 +80,7 @@ $(document).ready(function() {
 });
 
 function loadMainSlider() {
+
     $('#m-inicio .bxslider').html('');
 
     var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 10';
@@ -112,7 +112,6 @@ function loadMainSlider() {
         }
 
         slider = $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
-        $('#m-inicio .bx-wrapper').show();
     });
 
 }

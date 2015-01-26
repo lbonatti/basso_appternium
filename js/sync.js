@@ -33,6 +33,8 @@ function syncEnd()
             contSync.find('li').remove();
             contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span> </p></li>');
 
+            slider.destroySlider();
+            slider = null;
             loadMainSlider();
         });
     }, 2000);
