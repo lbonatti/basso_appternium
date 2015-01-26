@@ -47,10 +47,10 @@ function eventosRegister(){
                     mensaje(JSON.stringify(result.error));
                     ok = false;
                 }
-                sessionStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
-                sessionStorage.setItem("userId", result.Default.User.id);
-                sessionStorage.setItem("username", result.Default.User.email);
-                sessionStorage.setItem("fbLogged", 0);
+                localStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
+                localStorage.setItem("userId", result.Default.User.id);
+                localStorage.setItem("username", result.Default.User.email);
+                localStorage.setItem("fbLogged", 0);
                 window.location.href="m-inicio.html";
             },
             error:function(error){

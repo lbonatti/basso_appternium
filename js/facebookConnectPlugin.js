@@ -211,9 +211,9 @@ function getEmail(uID){
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
-            sessionStorage.setItem("username", theEmail);
-            sessionStorage.setItem("userId", uID);
-            sessionStorage.setItem("fbLogged", 1);
+            localStorage.setItem("username", theEmail);
+            localStorage.setItem("userId", uID);
+            localStorage.setItem("fbLogged", 1);
             switchFbId();
             window.location.href="m-inicio.html";
         },
@@ -227,11 +227,11 @@ function getRegEmail(uID){
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
-            sessionStorage.setItem("username", theEmail);
-            sessionStorage.setItem("userId", uID);
-            sessionStorage.setItem("last_name", JSON.stringify(response.last_name).replace(/"/g , ''));
-            sessionStorage.setItem("first_name", JSON.stringify(response.first_name).replace(/"/g , ''));
-            sessionStorage.setItem("birthday", response.birthday ? JSON.stringify(response.birthday).replace(/"/g , '') : '00-00-0000');
+            localStorage.setItem("username", theEmail);
+            localStorage.setItem("userId", uID);
+            localStorage.setItem("last_name", JSON.stringify(response.last_name).replace(/"/g , ''));
+            localStorage.setItem("first_name", JSON.stringify(response.first_name).replace(/"/g , ''));
+            localStorage.setItem("birthday", response.birthday ? JSON.stringify(response.birthday).replace(/"/g , '') : '00-00-0000');
 
             return getDataFbRegister();
         },

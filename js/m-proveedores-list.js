@@ -21,7 +21,18 @@ function eventosProveedores() {
 function sendTheMail() {
     var to = $('#m5-p .info2 span').html();
 
-    document.location.href = "mailto:"+to;
+    window.plugin.email.isServiceAvailable(
+        function (isAvailable) {
+            if (isAvailable) {
+                window.plugin.email.open({
+                    to: [to]
+                });
+            } else {
+                document.location.href = "mailto:"+to;
+            }
+        }
+    );
+
 }
 
 function showError(msg) {

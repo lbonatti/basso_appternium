@@ -1,7 +1,7 @@
 var projectName = '';
-if (sessionStorage.getItem('username') == 'anonimo'){
+if (localStorage.getItem('username') == 'anonimo'){
     var logged = false;
-}else if(sessionStorage.getItem('userId')){
+}else if(localStorage.getItem('userId')){
     var logged = true;
 }
 function eventosNuevoCalculo(){
@@ -22,7 +22,7 @@ function eventosNuevoCalculo(){
                 if ($this.hasClass('calc1')) {tipo = 1;}
                 else if ($this.hasClass('calc2')) {tipo = 2;}
                 else if ($this.hasClass('calc3')) {tipo = 3;}
-                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND user_id='+sessionStorage.getItem('userId');
+                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND user_id='+localStorage.getItem('userId');
                 db_customQuery($query, function(pleaseWork) {
                     if(pleaseWork.length > 0){
                         alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Duplicar Calculo', 1);

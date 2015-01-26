@@ -4,7 +4,7 @@ var userId = 0;
 
 function syncDB()
 {
-    userId = sessionStorage.getItem("userId");
+    userId = localStorage.getItem("userId");
 
     if (!userId) return;
     
@@ -16,7 +16,7 @@ function syncDB()
 
 
     //Aplicar a los projectos con user 0 (anonimo) el user logueado actualmente.
-    db_update('calculos', 'user_id=' + sessionStorage.getItem('userId'), 'user_id=0');
+    db_update('calculos', 'user_id=' + localStorage.getItem('userId'), 'user_id=0');
 
     // Traer todos los calculos que están onlien y chequear si están en local. El que no está se inserva en local.
     syncLoad();
@@ -32,12 +32,10 @@ function syncEnd()
         contSync.fadeOut(600, function(){
             contSync.find('li').remove();
             contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span> </p></li>');
+
+            loadMainSlider();
         });
     }, 2000);
-
-    if ($('.bx-wrapper').length == 0) {
-        loadMainSlider();
-    }
 }
 
 /* Se sincroniza con los calculos online */
@@ -51,7 +49,7 @@ function syncLoad()
         async: false,
         url: backend_url + "/calculos/getByUser",
         data: {
-            id: sessionStorage.getItem('userId')
+            id: localStorage.getItem('userId')
         },
         success: function(result) {
             $calculosOnline = result.Default;
@@ -100,7 +98,7 @@ function syncNew()
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
-    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
+    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
     db_customQuery($query, function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'new', syncNewEdit);
@@ -117,7 +115,7 @@ function syncNewEdit()
     contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
+    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
     db_customQuery($query, function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'new', syncEdit);
@@ -134,7 +132,7 @@ function syncEdit()
     contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
     //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+sessionStorage.getItem('userId')+")";
+    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
     db_customQuery($query,function(rows) {
         if (rows.length > 0) {
             _ajaxSendSync(rows, 'edit', syncDeleted);
@@ -175,7 +173,7 @@ function _ajaxSendSync(rows, _action, _callback){
             if (response.updates.length > 0)
             {
                 $.each(response.updates, function (index, value){
-                    db_update('calculos','sync=1, user_id='+sessionStorage.getItem('userId')+' ,remote_id=' + value.remote_id,'_id=' + value.id)
+                    db_update('calculos','sync=1, user_id='+localStorage.getItem('userId')+' ,remote_id=' + value.remote_id,'_id=' + value.id)
                 })
             }
         } else {

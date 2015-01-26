@@ -11,8 +11,8 @@ $(document).ready(function(){
 
     $('#page-1 .btn-footer.sin-cuenta').on('click', function(e) { //LOGIN
         e.preventDefault();
-        sessionStorage.setItem("username", 'anonimo');
-        sessionStorage.setItem("fbLogged", 0);
+        localStorage.setItem("username", 'anonimo');
+        localStorage.setItem("fbLogged", 0);
         window.location.href="m-inicio.html";
     });
 
@@ -57,10 +57,10 @@ $(document).ready(function(){
                 data:{username: username, password: pass},
                 success:function(result){
                     if(result.Default && result.Default != null){
-                        sessionStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
-                        sessionStorage.setItem("userId", result.Default.User.id);
-                        sessionStorage.setItem("username", username);
-                        sessionStorage.setItem("fbLogged", 0);
+                        localStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
+                        localStorage.setItem("userId", result.Default.User.id);
+                        localStorage.setItem("username", username);
+                        localStorage.setItem("fbLogged", 0);
 
                         window.location.href="m-inicio.html";
                     }else{

@@ -30,7 +30,7 @@ function eventosFeedback(){
 
 function getFeedbackData(msj){
     return {
-        user_id: sessionStorage.getItem('userId'),
+        user_id: localStorage.getItem('userId'),
         comentario_id: $('.comentarios').val(),
         mensaje: msj,
         leido: 2

@@ -25,19 +25,19 @@ function eventosEditarPerfil(){
 
 function loadFields(){
 
-    var fbLogged = sessionStorage.getItem('fbLogged');
+    var fbLogged = localStorage.getItem('fbLogged');
     var firstName = $('#u-ajustes .firstName .subtitulo');
     var lastName = $('#u-ajustes .lastName .subtitulo');
     var email = $('#u-ajustes .email .subtitulo');
 
     if(fbLogged == 0){
         $('#u-ajustes .email, #u-ajustes .pwd').show();
-        firstName.text($.parseJSON(sessionStorage.userInfo).nombre);
-        lastName.text($.parseJSON(sessionStorage.userInfo).apellido);
-        email.text($.parseJSON(sessionStorage.userInfo).email);
+        firstName.text($.parseJSON(localStorage.userInfo).nombre);
+        lastName.text($.parseJSON(localStorage.userInfo).apellido);
+        email.text($.parseJSON(localStorage.userInfo).email);
     }else{
-        firstName.text($.parseJSON(sessionStorage.userInfo).nombre);
-        lastName.text($.parseJSON(sessionStorage.userInfo).apellido);
+        firstName.text($.parseJSON(localStorage.userInfo).nombre);
+        lastName.text($.parseJSON(localStorage.userInfo).apellido);
     }
 
 }
@@ -125,7 +125,7 @@ function showEditField(field){
                 $('.shadow').css('height','0');
 
                 $.ajax({
-                    url: backend_url + '/users/editar_usuario?id=' + sessionStorage.getItem('userId')+'&'+field+'='+theInput,
+                    url: backend_url + '/users/editar_usuario?id=' + localStorage.getItem('userId')+'&'+field+'='+theInput,
                     success:function(result){
                         alertMsg('Campo guardado con exito', '', '', 'Editar Perfil', 1);
 
@@ -148,7 +148,7 @@ function showEditField(field){
 }
 
 function updateFieldInSession(field, value){
-    var sessionInfo = $.parseJSON(sessionStorage.userInfo);
+    var sessionInfo = $.parseJSON(localStorage.userInfo);
 
     switch (field){
         case 'nombre':
@@ -161,7 +161,7 @@ function updateFieldInSession(field, value){
             sessionInfo.email = value;
             break;
     }
-    sessionStorage.setItem('userInfo', JSON.stringify(sessionInfo) );
+    localStorage.setItem('userInfo', JSON.stringify(sessionInfo) );
 }
 
 

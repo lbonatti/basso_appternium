@@ -100,7 +100,7 @@ function eventosMisCalculos(){
                 var currentTime = getCurrentTime();
 
                 if (logged == true){
-                    values = [sessionStorage.getItem('userId'),newName,_projType,_projData,currentTime,currentTime,0,0,0];
+                    values = [localStorage.getItem('userId'),newName,_projType,_projData,currentTime,currentTime,0,0,0];
                 }else{
                     values = [0,newName,_projType,_projData,currentTime,currentTime,0,0,0];
                 }
@@ -141,7 +141,7 @@ function refreshList(){
     showMisCalculos();
 }
 function showMisCalculos(){
-    var $query =  'SELECT * FROM calculos WHERE user_id='+sessionStorage.getItem('userId')+' AND remove=0 ORDER BY project_name ASC';
+    var $query =  'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId')+' AND remove=0 ORDER BY project_name ASC';
     var abcd = {0:{},1:{},2:{},3:{},4:{},5:{},6:{},7:{},8:{},9:{},A:{}, B:{}, C:{}, D:{}, E:{}, F:{}, G:{}, H:{}, I:{}, J:{}, K:{}, L:{}, M:{}, N:{}, Ñ:{}, O:{}, P:{}, Q:{}, R:{}, S:{}, T:{}, U:{}, V:{}, W:{}, X:{}, Y:{}, Z:{}}
     var $html = '';
     var $icono = [];

@@ -38,18 +38,18 @@ function theLogOut(){
 }
 
 function cleanSession(){
-    if( sessionStorage.getItem("fbLogged") == 1 ){
+    if( localStorage.getItem("fbLogged") == 1 ){
         logout();
     }
-    sessionStorage.removeItem('fbLogged');
+    localStorage.removeItem('fbLogged');
     sessionStorage.removeItem('session_code');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('userInfo');
-    sessionStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('username');
 }
 
 function switchFbId(userId){
-    if( sessionStorage.getItem('fbLogged') ){
+    if( localStorage.getItem('fbLogged') ){
         $.ajax({
             async: false,
             url:backend_url+"/users/fbIdReplace",
@@ -57,8 +57,8 @@ function switchFbId(userId){
             data:{userId: userId},
             success:function(result){
                 if(result.Default && result.Default != null){
-                    sessionStorage.setItem("userId", result.Default.User.id);
-                    userId = sessionStorage.getItem("userId");
+                    localStorage.setItem("userId", result.Default.User.id);
+                    userId = localStorage.getItem("userId");
                 }else{
                     mensaje(result.Message);
                 }

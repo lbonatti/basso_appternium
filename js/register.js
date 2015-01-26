@@ -74,11 +74,11 @@ function getDataRegister(){
 }
 
 function getDataFbRegister() {
-    var userEmail = sessionStorage.getItem("username");
-    var userID = sessionStorage.getItem("userId");
-    var lastName = sessionStorage.getItem("last_name");
-    var firstName = sessionStorage.getItem("first_name");
-    var birthDate = sessionStorage.getItem("birthday");
+    var userEmail = localStorage.getItem("username");
+    var userID = localStorage.getItem("userId");
+    var lastName = localStorage.getItem("last_name");
+    var firstName = localStorage.getItem("first_name");
+    var birthDate = localStorage.getItem("birthday");
     var $pais_id;
 
     $.ajax({
@@ -112,7 +112,7 @@ function getDataFbRegister() {
         url: backend_url+"/users/registro",
         data: data,
         success: function(result) {
-            sessionStorage.setItem("fbLogged", 1);
+            localStorage.setItem("fbLogged", 1);
             switchFbId();
             window.location.href = "m-inicio.html";
         },

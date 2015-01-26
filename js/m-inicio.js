@@ -1,5 +1,7 @@
 var newSave = 1;
-if (sessionStorage.getItem('username') != 'anonimo'){
+var slider = null;
+
+if (localStorage.getItem('username') != 'anonimo'){
     setInterval(function(){
         if($('.page-header h1').text() == 'Inicio' && newSave == 1){
             syncDB();
@@ -8,10 +10,16 @@ if (sessionStorage.getItem('username') != 'anonimo'){
     },1000);
 }
 
+$(document).on("pagebeforeshow", function(event) {
+    $('#m-inicio .bx-wrapper').hide();
+});
+
 $(document).on("pageshow", function(event) {
-    if ($('.bx-wrapper').length == 0) {
-        loadMainSlider();
-    }
+
+    var source = event.target || event.srcElement;
+    boton_menu($(source).attr('id'));
+
+    loadMainSlider();
 
     $('.btn-settings').click(function(){
         if($(this).hasClass('selected')){
@@ -75,7 +83,9 @@ $(document).ready(function() {
 
 function loadMainSlider() {
     $('#m-inicio .bxslider').html('');
-    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+sessionStorage.getItem('userId') + ' AND remove = 0 ORDER BY modified DESC LIMIT 10';
+
+    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 10';
+    
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
             for(var i = 0; i < result.length; i++){
@@ -102,24 +112,25 @@ function loadMainSlider() {
             };
         }
 
-        $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
+        slider = $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
+        $('#m-inicio .bx-wrapper').show();
     });
 
 }
 
 function esAnonimo(){
-    var username = sessionStorage.getItem('username');
+    var username = localStorage.getItem('username');
     if(username === 'anonimo'){
-        sessionStorage.setItem('userId',0);
+        localStorage.setItem('userId',0);
         $('.menu-options .perfil').hide();
     }
 }
 
 function cargarSlide(){
-    var userType = sessionStorage.getItem("username");
+    var userType = localStorage.getItem("username");
 
     if (userType !== 'anonimo') {
-        var userID = sessionStorage.getItem("userId");
+        var userID = localStorage.getItem("userId");
 
         $.ajax({
             url:url_webservices+"/sliderHome.php",
@@ -150,8 +161,11 @@ function boton_menu(pag){
             snapper.close();
         }
     });
-    $('.page-header a.page-back').click(function(){
-        window.history.back();
+    $('.page-header a.page-back').click(function() {
+
+        if( ! $(this).hasClass('btnUtilidades') ) {
+            window.history.back();
+        }
     });
 
 
@@ -183,11 +197,6 @@ function boton_menu(pag){
         theLogOut();
     });
 }
-
-$(document).on("pageshow",function(evt){
-    var source = evt.target || evt.srcElement;
-    boton_menu($(source).attr('id'))
-});
 
 function blockScreen(){
     $('.shadow').height($('#m-inicio').height()).show();

@@ -233,7 +233,7 @@ function saveNewCalcDryWall(showMessage) {
         //Guardamos en bd local el calculo
         var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
         if (logged == true) {
-            var values = [sessionStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            var values = [localStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
@@ -267,7 +267,7 @@ function saveNewCalcDryWall(showMessage) {
         }
     } else if(estadoST == 2) { //Si el calculo ya existe y fue editado
         var pName = sessionStorage.getItem('projectName');
-        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+sessionStorage.getItem('userId')+' AND calc_type='+$calcType;
+        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
         db_updateQueryEdit($query, function(result,updatedID) {
             if(result == 'ok'){
                 if (showMessage !== 0) {
