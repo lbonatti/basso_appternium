@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 function loadMainSlider() {
 
-    //$('#m-inicio .bxslider').html('');
+    $('#m-inicio .bxslider').html('');
 
     var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 10';
     
