@@ -46,7 +46,8 @@ function _showLoading()
 {
     $('a.page-back').css({
         'display': 'block',
-        "background": "url('img/ajax-loader-arrows.gif') no-repeat center center scroll transparent"
+        "background": "url('img/ajax-loader-arrows.gif') no-repeat center center scroll transparent",
+        'background-size': 'inherit'
     });
 }
 
