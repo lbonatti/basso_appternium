@@ -1,19 +1,26 @@
-var contSync = null;
-var contSyncMessage = null;
+var $syncContImg = null;
+var $syncImg = null;
 var userId = 0;
+
+if (localStorage.getItem('username') != 'anonimo') {
+    setInterval(function() {
+        if (sessionStorage.getItem('newSave') == 1) {
+            syncDB();
+            sessionStorage.setItem('newSave', 0);
+        }
+    }, 1000);
+}
 
 function syncDB()
 {
     userId = localStorage.getItem("userId");
 
     if (!userId) return;
-    
-    contSync = $('#syncOverlay');
-    contSyncMessage = $('#syncOverlay ul');
 
-    // Mostrar un estado en la pantalla que se está sincronizando y no deja hacer nada
-    contSync.fadeIn(600);
-
+    $syncContImg = $('#syncOverlay li .spriteSync');
+    $syncImg = $('#syncOverlay li .spriteSync .theCircle');
+    $syncContImg.css({'background-position': '0 0', 'height': '47px'});
+    $syncImg.css({'background-position': '0 -47px', 'height': '0'});
 
     //Aplicar a los projectos con user 0 (anonimo) el user logueado actualmente.
     db_update('calculos', 'user_id=' + localStorage.getItem('userId'), 'user_id=0');
@@ -26,25 +33,14 @@ function syncDB()
 function syncEnd()
 {
     // Ocultar el overlay que bloquea la aplicación
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Finalizando sincronización &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     setTimeout(function () {
-        contSync.fadeOut(600, function(){
-            contSync.find('li').remove();
-            contSyncMessage.append('<li class="first"><p>Sincronizando con el servidor &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span> </p></li>');
-
-            slider.destroySlider();
-            slider = null;
-            loadMainSlider();
-        });
+        window.location.href="m-inicio.html";
     }, 2000);
 }
 
 /* Se sincroniza con los calculos online */
 function syncLoad()
 {
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Volcando los datos desde la web &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
     // Ajax para traer todos los calculos del usuario que están online.
     var $calculosOnline;
     $.ajax({
@@ -96,70 +92,78 @@ function syncLoad()
 /* Son los creados y aún no están sincronizados */
 function syncNew()
 {
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
-    //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
-    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query, function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'new', syncNewEdit);
-        } else {
-            syncNewEdit();
-        }
-    });
+    $syncImg.css({'height': '23px'});
+
+    setTimeout(function(){
+        //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
+        var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
+        db_customQuery($query, function(rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'new', syncNewEdit);
+            } else {
+                syncNewEdit();
+            }
+        });
+    }, 1000);
 }
 
 /* Son los creados y editados antes de ser sincronizados */
 function syncNewEdit()
 {
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Sincronizando nuevos cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
-    //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query, function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'new', syncEdit);
-        } else {
-            syncEdit();
-        }
-    });
+    $syncImg.css({'height': '47px'});
+
+    setTimeout(function() {
+        //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
+        $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id=0 AND (user_id=0 OR user_id=" + localStorage.getItem('userId') + ")";
+        db_customQuery($query, function (rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'new', syncEdit);
+            } else {
+                syncEdit();
+            }
+        });
+    }, 1000);
 }
 
 /* Son los que ya están sinos pero fueron editados */
 function syncEdit()
 {
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Sincronizando cálculos editados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
 
-    //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query,function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'edit', syncDeleted);
-        } else {
-            syncDeleted();
-        }
+    $syncContImg.css({'background-position': '0 -94px', 'height': '47px'});
+    $syncImg.css({'height': '23px'});
 
-    });
+    setTimeout(function() {
+        //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota
+        $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id=" + localStorage.getItem('userId') + ")";
+        db_customQuery($query, function (rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'edit', syncDeleted);
+            } else {
+                syncDeleted();
+            }
+
+        });
+    }, 1000);
 }
 
 /* Son los que fueron borrados */
 function syncDeleted()
 {
-    contSync.find('span').remove();
-    contSyncMessage.append('<li><p>Sincronizando cálculos eliminados &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
+    $syncImg.css({'height': '0'});
 
-    //Buscamos todos aquellos de la DB local que han sido eliminados y actualizamos la BD
-    $query = "SELECT * FROM calculos WHERE remove=1";
-    db_customQuery($query, function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'delete', syncEnd);
-        } else {
-            syncEnd();
-        }
-    });
+    setTimeout(function() {
+        //Buscamos todos aquellos de la DB local que han sido eliminados y actualizamos la BD
+        $query = "SELECT * FROM calculos WHERE remove=1 AND (user_id=0 OR user_id=" + localStorage.getItem('userId') + ")";
+        db_customQuery($query, function (rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'delete', syncEnd);
+            } else {
+                syncEnd();
+            }
+        });
+    }, 1000);
 }
 
 function _ajaxSendSync(rows, _action, _callback){
@@ -198,4 +202,3 @@ function getCurrentTime()
 
     return outStr;
 }
-

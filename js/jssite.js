@@ -33,8 +33,18 @@ function onConfirm(buttonIndex) {
 }
 
 function theLogOut(){
-    cleanSession();
-    window.location.href="login.html";
+    navigator.notification.confirm(
+        '¿Seguro deseas salir?', // message
+        onConfirmLogout, // callback to invoke with index of button pressed
+        'Cerrar Sesion', // title
+        ['Cancelar', 'Salir'] // buttonLabels
+    );
+}
+function onConfirmLogout(buttonIndex) {
+    if(buttonIndex == 2){
+        cleanSession();
+        window.location.href="login.html";
+    }
 }
 
 function cleanSession(){

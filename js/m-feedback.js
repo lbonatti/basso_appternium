@@ -37,4 +37,10 @@ function getFeedbackData(msj){
     };
 }
 
+function cargarComentarios() {
+    var result = JSON.parse(localStorage.getItem('comentarios'));
 
+    $.each(result, function(key, value) {
+        $('.comentarios').append($('<option>', { value : value.Comentario.id }).text(value.Comentario.nombre));
+    });
+}

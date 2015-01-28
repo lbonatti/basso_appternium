@@ -17,21 +17,7 @@
     </div>
 
     <script>
-        contSync = $('#syncOverlay');
-        contSyncMessage = $('#syncOverlay ul');
-        contSyncMessage.html('<li class="first"><p>Cargando &nbsp;&nbsp;&nbsp;&nbsp;<span>...</span></p></li>');
-        contSync.fadeIn(500);
-        $.ajax({
-            url: backend_url + "/comentarios/lists",
-            success: function(result) {
-                contSync.fadeOut();
-
-                $.each(result.Default, function(key, value) {
-                    $('.comentarios').append($('<option>', { value : value.Comentario.id }).text(value.Comentario.nombre));
-                });
-
-            }
-        });
+        cargarComentarios();
         eventosFeedback()
     </script>
 </div>

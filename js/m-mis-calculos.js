@@ -1,4 +1,8 @@
 
+// verifica si se esta editando un calculo
+var edit = false;
+var clickMessage = false;
+
 function abrirProyecto(p){
     cerrarTodos();
     $(p).addClass('open').animate({marginLeft:'-240px',right:'0px'});
@@ -49,6 +53,7 @@ function eventosMisCalculos(){
     });
 
     $('.editar').on('click', function () {
+        edit = true;
         var pName = $(this).parent('.panel').children().children('.titulo').text();
         var pId = $(this).closest('.proyecto').attr('data-project-id');
         var pType = $(this).parent('.panel').find('.icono').attr('class').replace('icono ', '');
@@ -78,6 +83,8 @@ function eventosMisCalculos(){
         }
         sessionStorage.setItem('calc_type', $calc_type);
 
+        syncNewOrEdit();
+
         $.mobile.changePage(page);
     });
 
@@ -92,7 +99,7 @@ function eventosMisCalculos(){
                 var _projData = proj.data;
 
                 //Tomar nombre nuevo
-                var newName = 'Copia - ' + pName;
+                var newName = pName + ' - Copia';
 
                 // guardarNuevo
                 var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id'];
@@ -108,7 +115,10 @@ function eventosMisCalculos(){
                     if (result == 'ok') {
                         sessionStorage.setItem('newSave', 1);
                         alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
+
                         showMisCalculos();
+
+                        _syncNew();
                     } else {
                         alertMsg('No se ha podido guardar el proyecto', '', 'none', 'Duplicar Calculo', 1);
                     }
@@ -122,15 +132,16 @@ function eventosMisCalculos(){
 
 }
 
-function deleteCalc(project_id){
+function deleteCalc(project_id) {
     project_id = project_id || 0;
     var $query = 'UPDATE calculos SET remove=1, sync=0 WHERE _id='+project_id;
 
-    $('#dlg-delete-calc .boton').on('click',function(){
-        if (project_id != 0){
-            db_customQuery($query,function(result){
+    $('#dlg-delete-calc .boton').on('click', function() {
+        if (project_id != 0) {
+            db_customQuery($query,function(result) {
                 refreshList();
-            })
+            });
+            _syncDeleted();
         }
     })
 }
@@ -151,10 +162,10 @@ function showMisCalculos(){
 
     db_customQuery($query,function(result){
         
-        $html += '<div class="content">'
+        $html += '<div class="content">';
         if (result.length == 0)
         {
-            $html += '<p align="center">No hay cálculos guardados.</div>';
+            $html += '<p align="center">No hay cálculos guardados.</p>';
         }
         else
         {

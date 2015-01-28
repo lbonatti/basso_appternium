@@ -64,7 +64,7 @@ $(document).ready(function(){
                         localStorage.setItem("fbLogged", 0);
 
                         sessionStorage.setItem('newSave', 1);
-                        window.location.href="m-inicio.html";
+                        window.location.href="sync.html";
                     }else{
                         mensaje(result.Message);
                     }

@@ -8,10 +8,12 @@
     width: 60%;
 }
 #m-u-c .right{
+    background: url('../img/bg-conversor-item.png') 0 center repeat-x scroll transparent;
     float: right;
     height: 100%;
     position: relative;
-    width: 38%;
+    width: 34%;
+    margin: 0 2%;
 }
 
 #m-u-c .left input,
@@ -29,7 +31,7 @@
     right: 0;
     text-align: center;
     top: 0;
-    width: 100%;
+    width: 90%;
 }
 #m-u-c .left .resultField{
     background: none no-repeat scroll 0 0 transparent;
@@ -85,18 +87,18 @@
     color: #fff;
     display: block;
     font-family: roboto-regular;
-    font-size: 20px;
+    font-size: 18px;
     float: none;
     line-height: 40px;
     margin: 0 auto;
     opacity: 0.4;
     transition: all 300ms ease 0s;
     vertical-align: middle;
-    width: 140px;
+    max-width: 140px;
 }
 #m-u-c .swiper-slide-active{
-    border-bottom: 2px solid #fff;
-    border-top: 2px solid #fff;
+    /*border-bottom: 2px solid #fff;*/
+    /*border-top: 2px solid #fff;*/
     opacity: 1;
 }
 #m-u-c .swiper-slide p{

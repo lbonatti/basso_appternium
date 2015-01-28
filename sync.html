@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ternium</title>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+
+	<script type="text/javascript">
+		var backend_url = 'http://projectsunderdev.com/app-ternium/backend-admin';
+		var url_webservices = 'http://projectsunderdev.com/app-ternium/webservices'
+	</script>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/jqm/jquery.mobile-1.3.2.min.js"></script>
+    <link rel="stylesheet" href="js/jqm/jquery.mobile-1.3.2.min.css" />
+
+    <script src="cordova.js"></script>
+
+    <script src="js/snap.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/jssite.js"></script>
+
+
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+
+    <script src="js/service.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/sync.js"></script>
+
+    <link rel="stylesheet" href="css/sync.css" />
+</head>
+
+<body>
+
+	<div id="syncOverlay">
+        <div class="ulContainer">
+            <ul>
+                <li class="first">
+                    <div class="spriteSync">
+                        <div class="theCircle"></div>
+                    </div>
+                    <p>Sincronizando...</p>
+                </li>
+                <li>
+                    <p>Estamos sincronizando sus datos</br>
+                    para que tenga una mejor experiencia.</p>
+                </li>
+            </ul>
+        </div>
+	</div>
+
+    <div data-role="page" id="m-sync">
+        <div class="page-header" ></div>
+        <div class="page-content"></div>
+    </div>
+</body>
+</html>

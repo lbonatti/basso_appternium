@@ -1,0 +1,66 @@
+#syncOverlay {
+    background: url('../img/bg-black-80.png') repeat 0 0 scroll transparent;
+    display: block;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+#syncOverlay .ulContainer {
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+#syncOverlay ul {
+    bottom: 0;
+    color: #ff9900;
+    height: 156px;
+    list-style: circle inside none;
+    margin: auto 0;
+    min-width: 320px;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+#syncOverlay li {
+    list-style: outside none none;
+    margin: 0 auto;
+    text-align: center;
+    width: 320px;
+}
+#syncOverlay li p {
+    color: #e4e4e4;
+    display: inline-block;
+    font-family: roboto-light;
+    font-size: 18px;
+    line-height: 22px;
+    text-shadow: none;
+    margin: 0;
+}
+#syncOverlay li.first p {
+    color: #ff9900;
+    font-size: 26px;
+    line-height: 30px;
+    margin: 0 0 20px;
+}
+#syncOverlay li .spriteSync{
+    background: url('../img/sprite-sync.png') no-repeat 0 0 scroll transparent;
+    display: block;
+    height: 47px;
+    margin: 0 auto 12px;
+    position: relative;
+    transition: height 1s linear 0s;
+    width: 49px;
+}
+#syncOverlay li .spriteSync .theCircle{
+    background: url('../img/sprite-sync.png') no-repeat 0 -47px scroll transparent;
+    display: block;
+    height: 0;
+    margin: 0 auto 12px;
+    overflow: hidden;
+    position: absolute;
+    transition: height 1s linear 0s;
+    width: 49px;
+}

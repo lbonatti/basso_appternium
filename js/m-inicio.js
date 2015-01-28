@@ -1,22 +1,20 @@
 var slider = null;
 
-if (localStorage.getItem('username') != 'anonimo'){
-    setInterval(function(){
-        if($('.ui-page-active .page-header h1').text() == 'Inicio' && sessionStorage.getItem('newSave') == 1){
-            syncDB();
-            sessionStorage.setItem('newSave', 0);
-        }
-    },500);
-}
-
 $(document).on("pageshow", function(event) {
 
     var source = event.target || event.srcElement;
     boton_menu($(source).attr('id'));
 
-    if (!slider && $('.ui-page-active .page-header h1').text() == 'Inicio')
+    // Si estamos en la home
+    if ( $(' #m-inicio.ui-page-active ').length > 0 )
     {
-        loadMainSlider();
+        // Si existe el slider
+        if (slider)
+        {
+            slider.reloadSlider();
+        }else{
+            loadMainSlider();
+        }
     }
 
     $('.btn-settings').click(function(){
@@ -40,7 +38,8 @@ $(document).on("pageshow", function(event) {
     $('.menu-options .terminos').click(function(){
         $.mobile.changePage('u-tos.html');
     });
-    $('.menu-options .logout').click(function(){
+    $('.menu-options .logout').on( 'touchend', function(e){
+        e.preventDefault();
         theLogOut();
     });
 
@@ -58,9 +57,6 @@ $(document).ready(function() {
 
     $('.menu-options .terminos').click(function(){
         $.mobile.changePage('u-tos.html');
-    });
-    $('.menu-options .logout').click(function(){
-        theLogOut();
     });
 
     esAnonimo();
@@ -83,14 +79,14 @@ function loadMainSlider() {
 
     $('#m-inicio .bxslider').html('');
 
-    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 10';
+    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 4';
     
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
             for(var i = 0; i < result.length; i++){
                 var pSlideName = result[i].project_name;
                 var pSlideType = result[i].calc_type;
-                var pSlideModDate = result[i].modified;
+                var pSlideModDate = formatDate( result[i].modified );
 
                 $('#m-inicio .bxslider').append('<li><img src="img/icon'+pSlideType+'.png" /><div class="titulo">'+pSlideName+'</div><div class="fecha">'+pSlideModDate+'</div></li>');
 
@@ -114,6 +110,13 @@ function loadMainSlider() {
         slider = $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
     });
 
+}
+
+function formatDate(date){
+    var year = date.substr(0, 4);
+    var month = date.substr(5, 2);
+    var day = date.substr(8, 2);
+    return day + '/' + month + '/' + year ;
 }
 
 function esAnonimo(){
@@ -191,9 +194,6 @@ function boton_menu(pag){
         $('.menu a[data-title="Feedback"]').addClass('selected');
     }
 
-    $('.menu a[data-title="Logout"]').click(function(){
-        theLogOut();
-    });
 }
 
 function blockScreen(){
@@ -236,6 +236,10 @@ function alertMsg(text, id, action, title, type, cb){
         e.preventDefault();
         $(this).parent().remove();
         $('.shadow').css('height','0');
+
+        if ($(this).hasClass('boton')) {
+            clickMessage = 1;
+        }
     });
 
     if(typeof cb == "function"){

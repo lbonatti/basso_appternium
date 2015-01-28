@@ -30,8 +30,9 @@ div[data-role="page"]{
 }
 
 .page-content{
-    overflow: auto;
+    /*height: 100% !important;*/
     margin-top: 55px;
+    overflow: auto;
 }
 
 #content{

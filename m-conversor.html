@@ -115,10 +115,6 @@
                         initialSlide: 1,
                         centeredSlides: true,
                         slidesPerView: 'auto',
-                        onSlideChangeEnd: function (swiper, direction) {
-                            first = 1;
-                            calcConversion();
-                        },
                         onTouchEnd: function (swiper) {
                             first = 1;
                             calcConversion();
@@ -129,24 +125,11 @@
                         initialSlide: 1,
                         centeredSlides: true,
                         slidesPerView: 'auto',
-                        onSlideChangeEnd: function (swiper, direction) {
-                            first = 1;
-                            calcConversion();
-                        },
                         onTouchEnd: function (swiper) {
                             first = 1;
                             calcConversion();
                         }
                     });
-
-                    mySwiper.wrapperTransitionEnd(function () {
-                        first = 1;
-                        calcConversion();
-                    }, true);
-                    mySwiper2.wrapperTransitionEnd(function () {
-                        first = 1;
-                        calcConversion();
-                    }, true);
                 });
 
                 function calcConversion() {
@@ -235,7 +218,7 @@
 
             <div class="panel-1">
                 <div class="left">
-                    <input type="text" class="field_1" data-role="none" type="number" step="0.01" step="0.01"/>
+                    <input class="field_1" data-role="none" type="number" step="0.01" step="0.01"/>
                 </div>
                 <div class="right">
                     <div class="swiper-container">

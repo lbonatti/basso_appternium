@@ -99,7 +99,7 @@
     font-family: "roboto-thin";
     color: #fff;
     text-shadow: none;
-    font-size: 35px;
+    font-size: 30px;
     text-overflow: ellipsis;
     margin-top: 13px;
     overflow: hidden;
@@ -110,7 +110,7 @@
     font-family: "roboto-thin";
     color: #fff;
     text-shadow: none;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .ini1, .ini2, .ini3, .ini4, .ini5, .ini6{

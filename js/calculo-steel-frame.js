@@ -528,10 +528,8 @@ function saveNewCalc(showMessage) {
     // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar
     // los calculos a la BD remota)
     estadoST = 1;
-    $('#back-sf').hide();
 
-    animateBtnEnd( 'saveCalc' , 'Guardar calculo ');
-
+    animateBtnEnd('saveCalc' , 'Guardar calculo ');
 }
 
 function calculateSF(){

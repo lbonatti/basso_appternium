@@ -24,9 +24,8 @@
 
 
 <div data-role="page" id="page-splash">
-    <a href="login.html#page-1" data-role="none" rel="external" >
+
         <img src="img/splash-img.png" />
-    </a>
 </div>
 
 <style>
@@ -78,12 +77,26 @@
 
         if ( localStorage.getItem('username') ) {
             sessionStorage.setItem('newSave', 1);
-            window.location.href="m-inicio.html";
+            window.location.href="sync.html";
         }else{
             window.location.href="login.html";
         }
     },1500);
 
+    ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
+    ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
+    ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
+    ajaxCallToLocalStorage('http://html5cooks.com/ternium/ternium/profesiones/lists', 'profesionales');
+    function ajaxCallToLocalStorage(url, localStorageKey) {
+        if (!localStorage.getItem(localStorageKey) || localStorageKey == 'proveedores') {
+            $.ajax({
+                url: url,
+                success: function(result) {
+                    localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
+                }
+            });
+        }
+    }
 </script>
 </body>
 </html>

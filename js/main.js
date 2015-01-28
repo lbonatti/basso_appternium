@@ -5,14 +5,30 @@ $(document).on("pageinit", function(event){
 });
 
 $(document).ready(function(){
-
+    $('.menu a[data-title="Logout"]').click(function(){
+        theLogOut();
+    });
 });
+
+$(document).on("pageshow", function(event) {
+    setTimeout(function(){
+        heightBug();
+    }, 500);
+});
+
+function heightBug(){
+    var winH = $(window).height();
+    var pageCH = winH - 55;
+    var $pageC = $('.ui-page-active .page-content');
+    $pageC.css('height', pageCH);
+}
+
 
 var snapper;
 
 function menuLateral(){
     snapper = new Snap({element:document.getElementById('content'), disable: 'right', hyperextensible: false});
-    boton_menu('m-inicio');
+    //boton_menu('m-inicio');
     $('.menu .item').click(function(e){
         e.preventDefault();
         //if($(this).hasClass('selected')){
