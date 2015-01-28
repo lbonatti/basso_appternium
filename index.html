@@ -77,7 +77,16 @@
 
         if (username && username !== 'anonimo') {
             sessionStorage.setItem('newSave', 1);
-            window.location.href="sync.html";
+            if ( checkConnection() !== 'none' ){
+                window.location.href="sync.html";
+            }else{
+                navigator.notification.alert(
+                    'No se han encontrado conecciones a internet',  // message
+                    alertDismissed,         // callback
+                    'Error al sincronizar',            // title
+                    'Aceptar'                  // buttonName
+                );
+            }
         } else {
             window.location.href="login.html";
         }
@@ -97,6 +106,16 @@
             });
         }
     }
+
+    function alertDismissed() {
+        window.location.href="m-inicio.html";
+    }
+
+    function checkConnection() {
+        var networkState = navigator.connection.type;
+        return networkState;
+    }
+
 </script>
 </body>
 </html>
