@@ -1,45 +1,52 @@
 
+var username = localStorage.getItem('username');
 
 /* Son los que ya están sinos pero fueron editados */
 function _syncNew()
 {
-    _showLoading();
-    var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query,function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'new', _hideLoading);
-        } else {
-            _hideLoading();
-        }
-    });
+    if (username && username !== 'anonimo') {
+        _showLoading();
+        var $query = "SELECT * FROM calculos WHERE sync=0 AND created=modified AND remove=0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
+        db_customQuery($query,function(rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'new', _hideLoading);
+            } else {
+                _hideLoading();
+            }
+        });
+    }
 }
 
 /* Son los que ya están sinos pero fueron editados */
 function _syncEdit()
 {
-    _showLoading();
-    $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query,function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'edit', _hideLoading);
-        } else {
-            _hideLoading();
-        }
-    });
+    if (username && username !== 'anonimo') {
+        _showLoading();
+        $query = "SELECT * FROM calculos WHERE created<>modified AND remove=0 AND sync=0 AND remote_id<>0 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
+        db_customQuery($query,function(rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'edit', _hideLoading);
+            } else {
+                _hideLoading();
+            }
+        });
+    }
 }
 
 /* Son los que ya están sinos pero fueron editados */
 function _syncDeleted()
 {
-    _showLoading();
-    $query = "SELECT * FROM calculos WHERE remove=1 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
-    db_customQuery($query,function(rows) {
-        if (rows.length > 0) {
-            _ajaxSendSync(rows, 'delete', _hideLoading);
-        } else {
-            _hideLoading();
-        }
-    });
+    if (username && username !== 'anonimo') {
+        _showLoading();
+        $query = "SELECT * FROM calculos WHERE remove=1 AND (user_id=0 OR user_id="+localStorage.getItem('userId')+")";
+        db_customQuery($query,function(rows) {
+            if (rows.length > 0) {
+                _ajaxSendSync(rows, 'delete', _hideLoading);
+            } else {
+                _hideLoading();
+            }
+        });
+    }
 }
 
 function _showLoading()
@@ -86,13 +93,15 @@ function _ajaxSendSync(rows, _action, _callback) {
 
 function syncNewOrEdit()
 {
-    setInterval(function () {
-        if (edit && clickMessage) {
-            clickMessage = false;
-            _syncEdit();
-        } else if (clickMessage) {
-            clickMessage = false;
-            _syncNew();
-        }
-    }, 1000);
+    if (username && username !== 'anonimo') {
+        setInterval(function () {
+            if (edit && clickMessage) {
+                clickMessage = false;
+                _syncEdit();
+            } else if (clickMessage) {
+                clickMessage = false;
+                _syncNew();
+            }
+        }, 1000);
+    }
 }

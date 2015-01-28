@@ -72,16 +72,16 @@
 
     $('#page-splash').height( $(window).height());
 
-    setTimeout(function(){
-        //$.mobile.changePage('m-inicio.html');
+    setTimeout(function() {
+        var username = localStorage.getItem('username');
 
-        if ( localStorage.getItem('username') ) {
+        if (username && username !== 'anonimo') {
             sessionStorage.setItem('newSave', 1);
             window.location.href="sync.html";
-        }else{
+        } else {
             window.location.href="login.html";
         }
-    },1500);
+    }, 1500);
 
     ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
     ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
