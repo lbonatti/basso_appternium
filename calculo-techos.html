@@ -4,6 +4,12 @@
         <a href="#" class="open-menu"></a>
         <h1 class="projectName">Proyecto 1</h1>
         <a  id="back-t" class="backBtn page-back"></a>
+        <a class="dot-menu"></a>
+        <div class="menu-options">
+            <div class="editar">Editar</div>
+            <div class="duplicar" >Duplicar</div>
+            <div class="eliminar">Eliminar</div>
+        </div>
     </div>
     <div class="page-content">
         <div class="paso paso1">
@@ -59,7 +65,7 @@
                 <div class="texto op7">Negro</div>
             </div>
 
-            <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
+            <div class="boton ultimo-elemento siguiente-paso saveCalc">Finalizar cálculo</div>
 
 
             <div id="infoBlock">
@@ -150,7 +156,6 @@
 			</div>
 
             <div class="boton savePDF">Ver PDF</div>
-			<div class="boton saveCalc">Guardar cálculo</div>
 			<div class="boton ultimo-elemento shareCalc">Compartir</div>
 
         </div>
@@ -169,30 +174,23 @@
             var $this = $(this);
             animateBtnStart( $this , 'Abriendo PDF ');
 
-            // guardamos el cálculo
-            saveNewCalcTechos(values, 0);
-
             setTimeout(function(){
                 generateDivRenderT();
             }, 1000);
         });
 
         //Guardar calculo en APP
-        $('.boton.saveCalc').on('click',function(){
-            var $this = $(this);
-            animateBtnStart($this, 'Guardando ');
-            setTimeout(function() {
-                //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-                saveNewCalcTechos(values, 1);
-            }, 1000);
-        });
+//        $('.boton.saveCalc').on('click',function(){
+//            console.log(stepCompleted);
+//            setTimeout(function() {
+//                //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+//                saveNewCalcTechos(values, 1);
+//            }, 1000);
+//        });
 
         $('.boton.shareCalc').on('click',function(){
             var $this = $(this);
             animateBtnStart($this, 'Cargando ');
-
-            // guardamos el cálculo
-            saveNewCalcTechos(values, 0);
 
             setTimeout(function() {
                 var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');

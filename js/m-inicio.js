@@ -71,6 +71,7 @@ $(document).ready(function() {
 
     esconderUserMenu();
 
+    precargarSectores();
     precargarPaises();
 
 });
@@ -86,9 +87,10 @@ function loadMainSlider() {
             for(var i = 0; i < result.length; i++){
                 var pSlideName = result[i].project_name;
                 var pSlideType = result[i].calc_type;
+                var pSlideId = result[i]._id;
                 var pSlideModDate = formatDate( result[i].modified );
 
-                $('#m-inicio .bxslider').append('<li><img src="img/icon'+pSlideType+'.png" /><div class="titulo">'+pSlideName+'</div><div class="fecha">'+pSlideModDate+'</div></li>');
+                $('#m-inicio .bxslider').append('<li data-id="'+pSlideId+'" data-name="'+pSlideName+'" data-type="'+pSlideType+'"><img src="img/icon'+pSlideType+'.png" /><div class="titulo">'+pSlideName+'</div><div class="fecha">'+pSlideModDate+'</div></li>');
 
             }
 
@@ -108,6 +110,28 @@ function loadMainSlider() {
         }
 
         slider = $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
+
+        $('#m-inicio .bxslider li').on('click', function() {
+            var $this = $(this);
+            var pId = $this.attr('data-id');
+            var pName = $this.attr('data-name');
+            var pType;
+
+            switch ($this.attr('data-type')) {
+                case '1':
+                    pType = 'sf';
+                    break;
+                case '2':
+                    pType = 'dw';
+                    break;
+                case '3':
+                    pType = 't';
+                    break;
+            }
+
+            sessionStorage.setItem('aResumen', 1);
+            editarCalculo(pName, pId, pType);
+        });
     });
 
 }

@@ -4,6 +4,7 @@ function eventosTechos(){
     if(sessionStorage.getItem('aEditar')){
 
         var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+        sessionStorage.setItem('editardesderesumen', pID);
         sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
         var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
         db_customQuery($getEditable, function(result) {
@@ -50,11 +51,15 @@ function eventosTechos(){
                     $.mobile.changePage("m-mis-calculos.html");
                 });
             }
+
         });
 
+        estadoST=2;
 
     }else{
         initNuevoCalculoT();
+        $('.paso.paso1').show();
+        $('.paso.paso2').hide();
     }
 
     $('#m1-ct-1 .paso1 .siguiente-paso').click(function(){
@@ -62,11 +67,11 @@ function eventosTechos(){
     });
 
     $('#m1-ct-1 .pie .p1').click(function(){
-        setEstadoPie(1,true);
+        if( ! $(this).hasClass('disabled') ) {
+            setEstadoPie(1, true);
+        }
     });
 
-    $('.paso1').show();
-    $('.paso2').hide();
 
     eventosCalculosGenerales();
 
@@ -81,10 +86,10 @@ function eventosTechos(){
     });
 
     $('.modelo').click(function(){
-        if(estadoST!=1){
+        //if(estadoST!=1){
             $('.modelo').removeClass('selected');
             $(this).addClass('selected');
-        }
+        //}
     });
 
     $('.modelo .mas').on('click', function(){
@@ -111,10 +116,10 @@ function eventosTechos(){
 
 
     $('.color div').click(function(){
-        if(estadoST!=1){
+        //if(estadoST!=1){
             $('.color div').removeClass('selected');
             $(this).addClass('selected');
-        }
+        //}
     });
 
 
@@ -129,6 +134,15 @@ function eventosTechos(){
         }
     });
 
+    if(sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1){
+        setTimeout(function (){
+            $('.paso1').hide();
+            $('.paso2').show();
+            roof_save_step();
+            modoLectura();
+            sessionStorage.removeItem('aResumen');
+        }, 100);
+    }
 
 }
 
@@ -189,7 +203,11 @@ function calculateResult(values){
     $('#m1-ct-1 .paso2 .resultado-aislacion').html(aislacion + ' m2.');
     $('#m1-ct-1 .paso2 .resultado-tornillos').html(cantTornillos + ' U.');
 
-    //save
+    if (sessionStorage.getItem('aResumen') != 1 ) {
+        //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+        saveNewCalcTechos(values, 1);
+    }
+
 }
 
 function saveNewCalcTechos(values, showMessage) {
@@ -226,6 +244,7 @@ function saveNewCalcTechos(values, showMessage) {
     var $user = sessionStorage.getItem('username');
     var $dataSaveBD = JSON.stringify(calculos.tipo.techos[$_name]);
     var $calcType = 3;
+
     if (estadoST == 0) { //Si el calculo es nuevo
         //Guardamos en bd local el calculo
         var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
@@ -236,7 +255,6 @@ function saveNewCalcTechos(values, showMessage) {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
-                        $('.boton.saveCalc').fadeOut(600);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -252,7 +270,6 @@ function saveNewCalcTechos(values, showMessage) {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
-                        $('.boton.saveCalc').fadeOut(600);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -269,7 +286,10 @@ function saveNewCalcTechos(values, showMessage) {
             if (result == 'ok') {
                 if (showMessage !== 0) {
                     alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', '', 1);
-                    $('.boton.saveCalc').fadeOut(600);
+                }
+                else
+                {
+                    alertMsg('NONO', '', 'none', '', 1);
                 }
                 modoLectura();
                 sessionStorage.setItem('newSave', 1);
@@ -280,11 +300,10 @@ function saveNewCalcTechos(values, showMessage) {
     // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar
     // los calculos a la BD remota)
     estadoST = 1;
-
-    animateBtnEnd('saveCalc', 'Guardar calculo ');
 }
 
 function initNuevoCalculoT(){
+    stepCompleted = 0;
     tipoC='t';
     estadoST=0;
     pasoSTactual = 1;

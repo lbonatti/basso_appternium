@@ -26,6 +26,11 @@
     background-position: 100% 0px;
 
 }
+#m5-pl select.dd-sector{
+    float: left;
+    width: 100%;
+    text-transform: capitalize;
+}
 
 #m5-pl .proveedor{
     padding: 18px 12px;

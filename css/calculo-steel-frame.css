@@ -331,6 +331,9 @@
     padding: 12px 21px;
     border-bottom: 1px solid #3C4749;
 }
+.menu-options div:active{
+    background: none no-repeat 0 0 scroll #FF9900;
+}
 
 #m1-csf-1 .valor .texto.mas {
     color: #F90 !important;

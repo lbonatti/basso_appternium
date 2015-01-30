@@ -5,6 +5,7 @@ function eventosDryWall(){
     if(sessionStorage.getItem('aEditar')){
 
         var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+        sessionStorage.setItem('editardesderesumen', pID);
         sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
         var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
         db_customQuery($getEditable, function(result) {
@@ -52,10 +53,13 @@ function eventosDryWall(){
                 });
             }
         });
+        estadoST=2;
 
 
     }else{
         initNuevoCalculoDW();
+        $('.paso.paso1').show();
+        $('.paso.paso2, .paso.paso3').hide();
     }
 
     $('#m1-cdw-1 .paso1 .siguiente-paso').click(function(){
@@ -67,15 +71,19 @@ function eventosDryWall(){
     });
 
     $('#m1-cdw-1 .pie .p1').click(function(){
-        setEstadoPie(1,true);
+        if( ! $(this).hasClass('disabled') ) {
+            setEstadoPie(1, true);
+        }
     });
     $('#m1-cdw-1 .pie .p2').click(function(){
-        if(stepCompleted >= 1) {
-            $('#m1-cdw-1 .paso1 .siguiente-paso')[0].click();
-            setEstadoPie(2, true);
-        }else{
-            alertMsg('Debe completar los pasos anteriores.','dlg-dw')
-            //alert('Debe completar los pasos anteriores.');
+        if( ! $(this).hasClass('disabled') ) {
+            if (stepCompleted >= 1) {
+                $('#m1-cdw-1 .paso1 .siguiente-paso')[0].click();
+                setEstadoPie(2, true);
+            } else {
+                alertMsg('Debe completar los pasos anteriores.', 'dlg-dw')
+                //alert('Debe completar los pasos anteriores.');
+            }
         }
     });
     $('#m1-cdw-1 .pie .p3').click(function(){
@@ -86,9 +94,6 @@ function eventosDryWall(){
             alertMsg('Debe completar los pasos anteriores.','dlg-dw')
         }
     });
-
-    $('.paso1').show();
-    $('.paso2, .paso3').hide();
 
     eventosCalculosGenerales();
 
@@ -103,6 +108,17 @@ function eventosDryWall(){
         }
     });
 
+
+    if(sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1){
+        setTimeout(function (){
+            $('.paso.paso1, .paso.paso2').hide();
+            $('.paso.paso3').show();
+            dry_wall_save_step1();
+            dry_wall_save_step2();
+            modoLectura();
+            sessionStorage.removeItem('aResumen');
+        }, 100);
+    }
 
 
 }
@@ -191,6 +207,11 @@ function dw_calculateResult(){
 
     $('#m1-cdw-1 .tornillosT1').html(tornillosT1 + ' U.');
     $('#m1-cdw-1 .tornillosT2').html(tornillosT2 + ' U.');
+
+
+    if (sessionStorage.getItem('aResumen') != 1 ){
+        saveNewCalcDryWall(1);
+    }
 }
 
 function saveNewCalcDryWall(showMessage) {
@@ -239,7 +260,6 @@ function saveNewCalcDryWall(showMessage) {
                     modoLectura(); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
-                        $('.boton.saveCalc').fadeOut(600);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -272,7 +292,6 @@ function saveNewCalcDryWall(showMessage) {
             if(result == 'ok'){
                 if (showMessage !== 0) {
                     alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
-                    $('.boton.saveCalc').fadeOut(600);
                 }
                 modoLectura();
                 sessionStorage.setItem('newSave', 1);
@@ -288,6 +307,7 @@ function saveNewCalcDryWall(showMessage) {
 }
 
 function initNuevoCalculoDW(){
+    stepCompleted = 0;
     tipoC='dw';
     estadoST=0;
     pasoSTactual = 1;

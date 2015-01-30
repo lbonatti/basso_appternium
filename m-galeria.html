@@ -13,9 +13,15 @@
 			<li class="tab-link" data-tab="Aberturas">Aberturas</li>
 		</ul>
 
-		<div id="Interiores" class="tab-content"></div>
-		<div id="Exteriores" class="tab-content current"></div>
-		<div id="Aberturas" class="tab-content"></div>
+		<div id="Interiores" class="tab-content">
+			<p style="color: #FF9900;font-family:'roboto-regular';font-size: 18px;margin: 40px auto 0;text-align: center;">Cargando...  <img src="./img/ajax-loader-snake.gif" style="margin: 0 0 0 20px;width: 20px;"/> </p>
+		</div>
+		<div id="Exteriores" class="tab-content current">
+			<p style="color: #FF9900;font-family:'roboto-regular';font-size: 18px;margin: 40px auto 0;text-align: center;">Cargando...  <img src="./img/ajax-loader-snake.gif" style="margin: 0 0 0 20px;width: 20px;"/> </p>
+		</div>
+		<div id="Aberturas" class="tab-content">
+			<p style="color: #FF9900;font-family:'roboto-regular';font-size: 18px;margin: 40px auto 0;text-align: center;">Cargando...  <img src="./img/ajax-loader-snake.gif" style="margin: 0 0 0 20px;width: 20px;"/> </p>
+		</div>
     </div>
 
     <script>
@@ -27,6 +33,8 @@
 				"background": "url('img/ajax-loader-arrows.gif') no-repeat center center scroll transparent",
 				'background-size': 'inherit'
 			});
+
+			setFullHeight('Exteriores');
 
 			setTimeout(function () {
 				updateGaleria($('ul.tabs li.current').attr('data-tab'));
@@ -49,6 +57,7 @@
 
 			function updateGaleria(id)
 			{
+				setFullHeight(id);
 				$.ajax({
 					async: false,
 					url: backend_url + "/galerias/getGalerias",
@@ -56,10 +65,17 @@
 						nombre: id
 					},
 					success: function(result) {
-						$.each(result.Default, function(key, value) {
-							var $galeria = value.Galeria;
-							$('#'+id).append('<div class="img-content"><img src="'+backend_url+'/app/webroot/uploads/galerias/'+$galeria.imagen+'" /><div class="infoImg"><span>'+$galeria.titulo+'<br/><span>'+$galeria.descripcion+'</span></span></div></div>');
-						});
+
+						console.log(result.Default);
+						if (result.Default)
+						{
+							$.each(result.Default, function(key, value) {
+								var $galeria = value.Galeria;
+								$('#'+id).append('<div class="img-content"><img src="'+backend_url+'/app/webroot/uploads/galerias/'+$galeria.imagen+'" /><div class="infoImg"><span>'+$galeria.titulo+'<br/><span>'+$galeria.descripcion+'</span></span></div></div>');
+							});
+						}else{
+							$('#'+id).html('<p style="color: #FF9900;font-family:roboto-regular;font-size: 18px;margin: 40px auto 0;text-align: center;">Proximamente...</p>');
+						}
 
 						$('a.page-back').css({
 							"background-image": "url('img/arrow-back.png')",
@@ -67,6 +83,13 @@
 						});
 					}
 				});
+			}
+
+			function setFullHeight(selector)
+			{
+				// Darle 100% de alto al contenedor. ( alto de window - header - tab menu. )
+				var tabContentH = $(window).height() - 130;
+				$('#'+selector).css('height', tabContentH);
 			}
 
 		})

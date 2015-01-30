@@ -159,3 +159,40 @@
 #m2-mc .letraContainer > div:first-child{
 
 }
+
+#m2-mc .primero .proyectSlide,
+#m2-mc .primero .actionsSlide{
+    border-top: 1px solid #ccc;
+}
+#m2-mc .proyectSlide .info{
+    background: none no-repeat 0 0 scroll transparent;
+    border-right: medium none;
+    float: left;
+    left: inherit;
+    position: relative;
+    right: inherit;
+    text-align: left;
+}
+#m2-mc .actionsSlide{
+    /*border-top: 1px solid #F7F5F6;*/
+    border-bottom: 1px solid #ccc;
+    height: 79px;
+}
+#m2-mc .actionsSlide > div.icono.arrow{
+    background: url('../img/arrow-calc.png') no-repeat center center scroll transparent;
+    border: medium none;
+    border-right: 5px solid #FF9900;
+    float: left;
+    height: 80px;
+    padding: 0;
+    width: 80px;
+}
+#m2-mc .actionsSlide.swiper-slide-visible.swiper-slide-active > div.icono.arrow{
+    background: url('../img/arrow-calc-back.png') no-repeat center center scroll transparent;
+    border-right: medium none;
+}
+#m2-mc .actionsSlide > div{
+    float: right;
+    position: relative;
+    right: inherit;
+}

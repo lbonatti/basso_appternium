@@ -141,7 +141,6 @@ function generateHtml(type)
         case 'dry-wall':
             $html = $('#myRenderSaveDW').clone();
             $html.find('.boton.savePDF').remove();
-            $html.find('.boton.saveCalc').remove();
             $html.find('.boton.shareCalc').remove();
         break;
     }

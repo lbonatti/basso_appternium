@@ -152,7 +152,7 @@
     width: 39px;
     background-color: #FF9900;
     position: absolute;
-    right: 0px;
+    right: -2px;
     top: 0px;
     background-image: url(../img/plus.png);
     background-repeat: no-repeat;

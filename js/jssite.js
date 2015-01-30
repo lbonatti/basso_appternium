@@ -1,3 +1,4 @@
+var edit = false;
 
 function deviceBackBtn(){
 
@@ -83,4 +84,174 @@ function switchFbId(userId){
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+}
+
+function editarCalculo(pName, pId, pType)
+{
+    var page;
+    var $calc_type;
+    edit = true;
+    sessionStorage.setItem("projectName", pName);
+    sessionStorage.setItem('aEditar', pId); // Generar bandera de edicion
+    // Redireccionar con estado de edicion segun tipo.
+    switch (pType) {
+        case 'sf':
+            initEditarCalculoSF();
+            page = "calculo-steel-frame.html";
+            $calc_type = 'Steelframe';
+
+            break;
+        case 'dw':
+            initEditarCalculoDW();
+            page = "calculo-dry-wall.html";
+            $calc_type = 'Drywall';
+
+            break;
+        case 't':
+            initEditarCalculoT();
+            page = "calculo-techos.html";
+            $calc_type = 'Techos';
+
+            break;
+    }
+    sessionStorage.setItem('calc_type', $calc_type);
+
+    syncNewOrEdit();
+
+    $.mobile.changePage(page);
+}
+
+
+function duplicarCalculo(pName, pId)
+{
+    var $query = 'SELECT * FROM calculos WHERE project_name="'+pName+'" AND _id='+ pId ;
+    db_customQuery($query, function(pleaseWork) {
+        if (pleaseWork.length > 0) {
+            var proj = pleaseWork[0];
+            var _projType = proj.calc_type;
+            var _projData = proj.data;
+
+            //Tomar nombre nuevo
+            var newName = pName + ' - Copia';
+
+            // guardarNuevo
+            var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id'];
+            var values;
+            var currentTime = getCurrentTime();
+
+            if (logged == true){
+                values = [localStorage.getItem('userId'),newName,_projType,_projData,currentTime,currentTime,0,0,0];
+            }else{
+                values = [0,newName,_projType,_projData,currentTime,currentTime,0,0,0];
+            }
+            db_insert('calculos',fields, values,'',function(result){
+                if (result == 'ok') {
+                    sessionStorage.setItem('newSave', 1);
+                    alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
+
+                    showMisCalculos();
+
+                    _syncNew();
+                } else {
+                    alertMsg('No se ha podido guardar el proyecto', '', 'none', 'Duplicar Calculo', 1);
+                }
+            });
+
+        }else{
+            alertMsg('No se encontró el proyecto', '', 'none', '', 1);
+        }
+    });
+}
+
+
+
+function activarDotMenu(){
+    $('.menu-options .editar').unbind('click').click(function(){
+        alertMsg('¿Seguro desea editar?', '', 'none', 'Editar Proyecto', 2, function(){
+            sessionStorage.setItem('aResumen', 0);
+            sessionStorage.setItem('aEditar', sessionStorage.getItem('editardesderesumen')); //  Tomar id de proy a editar.
+
+            var page;
+            switch ( $('.ui-page-active').attr('id') ) {
+                case 'm1-csf-1':
+                    page = "calculo-steel-frame.html";
+                    break;
+                case 'm1-cdw-1':
+                    page = "calculo-dry-wall.html";
+                    break;
+                case 'm1-ct-1':
+                    page = "calculo-techos.html";
+                    break;
+            }
+            $.mobile.changePage(page, {reloadPage: true});
+        });
+    });
+
+    $('.menu-options .duplicar').unbind('click').click(function(){
+        var pName = $('.projectName').text();
+        var pType;
+        var pId;
+        switch ( $('.ui-page-active').attr('id') ) {
+            case 'm1-csf-1':
+                pType = 1;
+                break;
+            case 'm1-cdw-1':
+                pType = 2;
+                break;
+            case 'm1-ct-1':
+                pType = 3;
+                break;
+        }
+
+        var $query = "SELECT _id FROM calculos WHERE project_name='" + pName + "' AND calc_type=" + pType;
+        db_customQuery($query, function(rows) {
+            var project = rows;
+            if (project && project.length > 0) {
+                pId = project[0]._id;
+
+                duplicarCalculo(pName, pId);
+                $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
+
+            }
+        });
+
+    });
+
+    $('.menu-options .eliminar').unbind('click').click(function(){
+        var pName = $('.projectName').text();
+        var pType;
+        var pId;
+
+        switch ( $('.ui-page-active').attr('id') ) {
+            case 'm1-csf-1':
+                pType = 1;
+                break;
+            case 'm1-cdw-1':
+                pType = 2;
+                break;
+            case 'm1-ct-1':
+                pType = 3;
+                break;
+        }
+
+        var $query = "SELECT _id FROM calculos WHERE project_name='" + pName + "' AND calc_type=" + pType;
+        db_customQuery($query, function(rows) {
+            var project = rows;
+            if (project && project.length > 0) {
+                pId = project[0]._id;
+
+                alertMsg('¿Está seguro que desea eliminar este cálculo?', '', 'none', 'Eliminar Proyecto', 2, function() {
+                    var $query = 'UPDATE calculos SET remove=1, sync=0 WHERE _id='+pId;
+                    db_customQuery($query, function(rows) {
+                        alertMsg('Eliminado con exito', '', 'none', 'Eliminar Proyecto', 1);
+                        $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
+                    });
+                });
+
+            }
+        });
+
+    });
+
+    $('.menu-options').hide();
 }

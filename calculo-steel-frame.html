@@ -3,6 +3,12 @@
         <a href="#" class="open-menu"></a>
         <h1 class="projectName">Proyecto 1</h1>
         <a  id="back-sf" class="backBtn page-back"></a>
+		<a class="dot-menu"></a>
+		<div class="menu-options">
+			<div class="editar">Editar</div>
+			<div class="duplicar" >Duplicar</div>
+			<div class="eliminar">Eliminar</div>
+		</div>
     </div>
     <div class="page-content">
         <div class="paso paso1">
@@ -114,7 +120,7 @@
             <div class="texto techo op3" data-value="3">Cubierta plana/vigas</div>
 
 
-            <div class="boton ultimo-elemento siguiente-paso">Finalizar cálculo</div>
+            <div class="boton ultimo-elemento siguiente-paso saveCalc">Finalizar cálculo</div>
 
         </div>
 
@@ -290,7 +296,6 @@
 			<div id="renderCanvas"></div>
 
 			<div class="boton savePDF">Ver PDF</div>
-			<div class="boton saveCalc">Guardar cálculo</div>
 			<div class="boton ultimo-elemento shareCalc">Compartir</div>
 
         </div>
@@ -345,17 +350,13 @@
 
 		$(document).ready(function(){
 			setTimeout(function () {
-				if( !sessionStorage.getItem('swiperActive')){
 					var mySwiper = new Swiper('.swiper-container',{
 						mode:'horizontal',
-						initialSlide: 2,
+						initialSlide: theSlide,
 						centeredSlides: true,
 						slidesPerView: 'auto'
 					});
-				}else{
-					sessionStorage.removeItem('swiperActive');
-				}
-			},400)
+			},1000)
 		});
 
 		//Mostrar PDF
@@ -363,30 +364,23 @@
 			var $this = $(this);
 			animateBtnStart( $this , 'Abriendo PDF ');
 
-			// guardamos el cálculo
-			saveNewCalc(0);
-
 			setTimeout(function(){
 				generateDivRenderSF();
 			}, 1000);
 		});
 
 		//Guardar calculo en APP
-		$('.boton.saveCalc').on('click',function(){
-			var $this = $(this);
-			animateBtnStart($this, 'Guardando ');
-			setTimeout(function() {
-				//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
-				saveNewCalc(1);
-			}, 1000);
-		});
+//		$('.boton.saveCalc').on('click',function(){
+//			console.log(stepCompleted);
+//			setTimeout(function() {
+//				//GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
+//				saveNewCalc(1);
+//			}, 1000);
+//		});
 
 		$('.boton.shareCalc').on('click',function(){
 			var $this = $(this);
 			animateBtnStart($this, 'Cargando ');
-
-			// guardamos el cálculo
-			saveNewCalc(0);
 
 			setTimeout(function() {
 				var filename = sessionStorage.getItem('username') + '_steel-frame_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');

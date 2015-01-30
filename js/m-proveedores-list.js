@@ -1,4 +1,5 @@
 function eventosProveedoresList() {
+    cargarSectores('#m5-pl .dd-sector');
     cargarPaises('#m5-pl .dd-pais','#m5-pl .dd-provincia');
 }
 
