@@ -97,14 +97,14 @@
     ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
     ajaxCallToLocalStorage('http://html5cooks.com/ternium/ternium/profesiones/lists', 'profesionales');
     function ajaxCallToLocalStorage(url, localStorageKey) {
-        //if (!localStorage.getItem(localStorageKey) || localStorageKey == 'proveedores') {
+        if (!localStorage.getItem(localStorageKey) || localStorageKey == 'proveedores') {
             $.ajax({
                 url: url,
                 success: function(result) {
                     localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
                 }
             });
-        //}
+        }
     }
 
     function alertDismissed() {
@@ -112,7 +112,6 @@
     }
 
     function checkConnection() {
-        return true;
         var networkState = navigator.connection.type;
         return networkState;
     }
