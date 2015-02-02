@@ -104,7 +104,7 @@ function showMisCalculos(){
                         }else{
                             $class = '';
                         }
-                        $html += '<div class="swiper-container '+$class+'" data-snap-ignore="1" data-project-id="' +value2._id+ '"><div class="swiper-wrapper"><div class="swiper-slide proyectSlide" style="width: '+psW+'px;">';
+                        $html += '<div class="swiper-container '+$class+'" data-snap-ignore="1" data-project-id="' +value2._id+ '"><div class="swiper-wrapper"><div class="swiper-slide proyectSlide">';
 
                         //ICONO
                         if (value2.calc_type == 1) {$icono['icono'] = 'sf'; $icono['txt'] = 'Steel Frame';}
@@ -124,7 +124,7 @@ function showMisCalculos(){
                         $date['año'] = $tmp[0];
                         $html += '<div class="fecha">Fecha: '+$date['dia']+' / '+$date['mes']+' / '+$date['año']+'</div>';
                         $html += '</div></div>'; //cierre info y proyectSlide;
-                        $html += '<div class="swiper-slide actionsSlide" style="width: '+asW+'px;"><div class="icono arrow"></div><div class="eliminar">Eliminar</div><div class="duplicar">Duplicar</div><div class="editar">Editar</div></div>';
+                        $html += '<div class="swiper-slide actionsSlide"><div class="icono arrow"></div><div class="eliminar">Eliminar</div><div class="duplicar">Duplicar</div><div class="editar">Editar</div></div>';
                         $html += '</div></div>'; //cierra swiper-wrapper y container
                     });
 
@@ -137,6 +137,10 @@ function showMisCalculos(){
         $('#m2-mc .paso.paso1').html($html);
         $('#m2-mc .paso.paso1').fadeIn(400,eventosMisCalculos);
 
+
+        $('.swiper-container').css('width', winW + 'px');
+        $('.swiper-slide.proyectSlide').css('width', psW + 'px');
+        $('.swiper-slide.actionsSlide').css('width', asW + 'px');
 
         var listadiv = $('.swiper-container');
         $.each(listadiv, function (){
