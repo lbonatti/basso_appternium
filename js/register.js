@@ -96,7 +96,7 @@ function getDataFbRegister() {
         data: data,
         success: function(result) {
             localStorage.setItem("fbLogged", 1);
-            switchFbId();
+            switchFbId(userID);
             window.location.href = "m-inicio.html";
         },
         error: function(error) {

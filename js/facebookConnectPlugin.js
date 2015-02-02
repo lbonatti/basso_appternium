@@ -215,7 +215,7 @@ function getEmail(uID){
             localStorage.setItem("username", theEmail);
             localStorage.setItem("userId", uID);
             localStorage.setItem("fbLogged", 1);
-            switchFbId();
+            switchFbId(uID);
             window.location.href="m-inicio.html";
         },
         function (response) {
