@@ -210,6 +210,20 @@ var registerFb = function () {
 function getEmail(uID){
     facebookConnectPlugin.api( "me/?fields=email,birthday,first_name,last_name", ["email", "public_profile"],
         function (response) {
+
+            var theRawEmail = JSON.stringify(response.email);
+            var theEmail = theRawEmail.replace(/"/g , '');
+            localStorage.setItem("username", theEmail);
+            localStorage.setItem("userId", uID);
+            localStorage.setItem("last_name", JSON.stringify(response.last_name).replace(/"/g , ''));
+            localStorage.setItem("first_name", JSON.stringify(response.first_name).replace(/"/g , ''));
+            localStorage.setItem("birthday", response.birthday ? JSON.stringify(response.birthday).replace(/"/g , '') : '00-00-0000');
+
+            getDataFbRegister();
+            //switchFbId(uID);
+            //window.location.href="m-inicio.html";
+
+            /*
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
 
@@ -218,6 +232,7 @@ function getEmail(uID){
             localStorage.setItem("fbLogged", 1);
             switchFbId(uID);
             window.location.href="m-inicio.html";
+            */
         },
         function (response) {
             var theR = JSON.stringify(response);

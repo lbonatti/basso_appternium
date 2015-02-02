@@ -36,8 +36,13 @@ function loadFields(){
         lastName.text($.parseJSON(localStorage.userInfo).apellido);
         email.text($.parseJSON(localStorage.userInfo).email);
     }else{
-        firstName.text($.parseJSON(localStorage.userInfo).nombre);
-        lastName.text($.parseJSON(localStorage.userInfo).apellido);
+        if(localStorage.userInfo){
+            firstName.text($.parseJSON(localStorage.userInfo).nombre);
+            lastName.text($.parseJSON(localStorage.userInfo).apellido);
+        }else{
+            mensaje('No se pudieron recuperar los datos de Facebook');
+        }
+
     }
 
 }
