@@ -117,7 +117,7 @@ function eventosDryWall(){
             dry_wall_save_step2();
             modoLectura();
             sessionStorage.removeItem('aResumen');
-        }, 100);
+        }, 600);
     }
 
 

@@ -86,6 +86,7 @@
 
 
     background-image:url(../img/arrow-calc.png);
+    background-size: inherit;
     background-repeat: no-repeat;
     background-position: 96%;
     border-right: 5px solid #FF9900;
@@ -180,6 +181,7 @@
 }
 #m2-mc .actionsSlide > div.icono.arrow{
     background: url('../img/arrow-calc.png') no-repeat center center scroll transparent;
+    background-size: inherit;
     border: medium none;
     border-right: 5px solid #FF9900;
     float: left;

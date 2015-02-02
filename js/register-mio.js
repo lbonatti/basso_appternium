@@ -46,15 +46,17 @@ function eventosRegister(){
                 if (result.error) {
                     mensaje(JSON.stringify(result.error));
                     ok = false;
+                }else{
+                    localStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
+                    localStorage.setItem("userId", result.Default.User.id);
+                    localStorage.setItem("username", result.Default.User.email);
+                    localStorage.setItem("fbLogged", 0);
+                    window.location.href="m-inicio.html";
                 }
-                localStorage.setItem('userInfo', JSON.stringify(result.Default.User) );
-                localStorage.setItem("userId", result.Default.User.id);
-                localStorage.setItem("username", result.Default.User.email);
-                localStorage.setItem("fbLogged", 0);
-                window.location.href="m-inicio.html";
             },
             error:function(error){
                 alert(JSON.stringify(error));
+                ok = false;
             }
         });
 

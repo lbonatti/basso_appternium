@@ -211,6 +211,7 @@ function getEmail(uID){
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
+
             localStorage.setItem("username", theEmail);
             localStorage.setItem("userId", uID);
             localStorage.setItem("fbLogged", 1);

@@ -210,7 +210,7 @@ function eventosSteelFrame(){
             calculateSF();
             modoLectura();
             sessionStorage.removeItem('aResumen');
-        }, 100);
+        }, 600);
     }
 
 }

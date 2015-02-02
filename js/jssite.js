@@ -67,7 +67,8 @@ function switchFbId(userId){
             type:'POST',
             data:{userId: userId},
             success:function(result){
-                if(result.Default && result.Default != null){
+                if (result.Default && result.Default != null) {
+                    localStorage.setItem('userInfo', JSON.stringify(result.Default.User));
                     localStorage.setItem("userId", result.Default.User.id);
                     userId = localStorage.getItem("userId");
                 }else{

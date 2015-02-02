@@ -141,7 +141,7 @@ function eventosTechos(){
             roof_save_step();
             modoLectura();
             sessionStorage.removeItem('aResumen');
-        }, 100);
+        }, 600);
     }
 
 }

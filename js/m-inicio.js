@@ -38,7 +38,7 @@ $(document).on("pageshow", function(event) {
     $('.menu-options .terminos').click(function(){
         $.mobile.changePage('u-tos.html');
     });
-    $('.menu-options .logout').on( 'touchend', function(e){
+    $('.menu-options .logout').unbind('click').on( 'click', function(e){
         e.preventDefault();
         theLogOut();
     });
