@@ -180,7 +180,7 @@ var login = function () {
         var appId = 324103614450696;
         facebookConnectPlugin.browserInit(appId);
     }
-    facebookConnectPlugin.login( ["email"],
+    facebookConnectPlugin.login( ["email", "public_profile"],
         function (response) {
             var uID = response.authResponse.userID;
             getEmail(uID);
@@ -196,18 +196,19 @@ var registerFb = function () {
         var appId = 324103614450696;
         facebookConnectPlugin.browserInit(appId);
     }
-    facebookConnectPlugin.login( ["email"],
+    facebookConnectPlugin.login( ["email", "public_profile"],
         function (response) {
             var uID = response.authResponse.userID;
             getRegEmail(uID);
         },
         function (response) {
+            var theR = JSON.stringify(response);
             mensaje('Error al intentar registrarse con Facebook');
         });
 }
 
 function getEmail(uID){
-    facebookConnectPlugin.api( "me/?fields=email", ["email"],
+    facebookConnectPlugin.api( "me/?fields=email,birthday,first_name,last_name", ["email", "public_profile"],
         function (response) {
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
