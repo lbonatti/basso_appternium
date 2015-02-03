@@ -115,7 +115,7 @@ function eventosDryWall(){
             $('.paso.paso3').show();
             dry_wall_save_step1();
             dry_wall_save_step2();
-            modoLectura();
+            modoLectura(3);
             sessionStorage.removeItem('aResumen');
         }, 600);
     }
@@ -257,7 +257,7 @@ function saveNewCalcDryWall(showMessage) {
             var values = [localStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(3); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
                     }
@@ -272,7 +272,7 @@ function saveNewCalcDryWall(showMessage) {
             var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(3); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
                         $('.boton.saveCalc').fadeOut(600);
@@ -293,7 +293,7 @@ function saveNewCalcDryWall(showMessage) {
                 if (showMessage !== 0) {
                     alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
                 }
-                modoLectura();
+                modoLectura(3);
                 sessionStorage.setItem('newSave', 1);
             }
         })

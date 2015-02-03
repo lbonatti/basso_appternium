@@ -208,7 +208,7 @@ function eventosSteelFrame(){
             st_save_step4();
             setEstadoPie(5,false);
             calculateSF();
-            modoLectura();
+            modoLectura(5);
             sessionStorage.removeItem('aResumen');
         }, 600);
     }
@@ -290,12 +290,18 @@ function setEstadoPie(paso, tab) {
         }
     }
 }
-function modoLectura(){
+
+function modoLectura(paso)
+{
     estadoST=1;
     $('#back-'+tipoC).hide();
     $('.dot-menu').show();
     //$('#m1-csf-1 .paso input[type=number]').attr('disabled', 'disabled');
     $('.pie div').addClass('disabled').removeClass('selected');
+
+    if (paso != null) {
+        $('.pie .p'+paso).removeClass('disabled').addClass('selected');
+    }
 }
 
 function esconderDotMenu(){
@@ -486,7 +492,7 @@ function saveNewCalc(showMessage) {
             var values = [localStorage.getItem('userId'),projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
                     }
@@ -501,7 +507,7 @@ function saveNewCalc(showMessage) {
             var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
                     }

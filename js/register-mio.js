@@ -74,12 +74,10 @@ function eventosRegister(){
         registerFb();
     });
 
-    $('.pais').change(function(){
-        getProvincia($(this).val());
-    });
-
     getProfesionales();
     getPaises();
 
-
+    $('.pais').change(function(){
+        getProvincia($(this).val());
+    });
 }

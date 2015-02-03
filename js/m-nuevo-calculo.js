@@ -35,7 +35,7 @@ function eventosNuevoCalculo() {
                 var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND user_id='+localStorage.getItem('userId');
                 db_customQuery($query, function(pleaseWork) {
                     if (pleaseWork.length > 0) {
-                        alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Duplicar Calculo', 1);
+                        alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Este proyecto ya existe', 1);
                     } else {
                         sessionStorage.setItem("projectName", projectName);
                         switch (tipo) {

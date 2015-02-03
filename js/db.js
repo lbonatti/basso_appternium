@@ -54,7 +54,7 @@ function db_customQuery(query, callBack){ // <-- extra param
                 }
             }
             callBack(result); // <-- new bit here
-        }, function(){alert('error!')});
+        }, function(){alert('Ocurrió un error!')});
     });
 }
 

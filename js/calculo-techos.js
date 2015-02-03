@@ -139,7 +139,7 @@ function eventosTechos(){
             $('.paso1').hide();
             $('.paso2').show();
             roof_save_step();
-            modoLectura();
+            modoLectura(2);
             sessionStorage.removeItem('aResumen');
         }, 600);
     }
@@ -252,7 +252,7 @@ function saveNewCalcTechos(values, showMessage) {
             var values = [localStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
                     }
@@ -267,7 +267,7 @@ function saveNewCalcTechos(values, showMessage) {
             var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
-                    modoLectura(); //si no hay error, pasamos el estado a solo lectura.
+                    modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
                     }
@@ -291,7 +291,7 @@ function saveNewCalcTechos(values, showMessage) {
                 {
                     alertMsg('NONO', '', 'none', '', 1);
                 }
-                modoLectura();
+                modoLectura(2);
                 sessionStorage.setItem('newSave', 1);
             }
         });

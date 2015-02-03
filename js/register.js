@@ -20,7 +20,7 @@ function getPaises() {
 
 function getProvincia(id) {
     $.ajax({
-        url:"http://html5cooks.com/ternium/ternium/provincias/lists",
+        url: backend_url + '/provincias/lists',
         data:{
             id: id
         },

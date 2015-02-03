@@ -6,13 +6,15 @@ $(document).on("pageshow", function(event) {
     boton_menu($(source).attr('id'));
 
     // Si estamos en la home
-    if ( $(' #m-inicio.ui-page-active ').length > 0 )
-    {
+    if ($(' #m-inicio.ui-page-active ').length > 0) {
         // Si existe el slider
-        if (slider)
-        {
-            slider.reloadSlider();
-        }else{
+        if (slider) {
+            $('.page-content .bx-wrapper').remove();
+            if ($('.page-content .bxslider').length == 0) {
+                $('.page-content').prepend('<ul class="bxslider" data-snap-ignore="1"></ul>');
+            }
+            loadMainSlider();
+        } else {
             loadMainSlider();
         }
     }
@@ -80,7 +82,8 @@ function loadMainSlider() {
 
     $('#m-inicio .bxslider').html('');
 
-    var $getEditable = 'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId') + ' AND remove = 0 ORDER BY created DESC LIMIT 4';
+    var user_id = localStorage.getItem('userId') ? localStorage.getItem('userId') : 0;
+    var $getEditable = 'SELECT * FROM calculos WHERE user_id=' + user_id + ' AND remove = 0 ORDER BY created DESC LIMIT 4';
     
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
