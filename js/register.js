@@ -97,7 +97,9 @@ function getDataFbRegister() {
         success: function(result) {
             localStorage.setItem("fbLogged", 1);
             switchFbId(userID);
-            window.location.href = "m-inicio.html";
+            
+            sessionStorage.setItem('newSave', 1);
+            window.location.href="sync.html";
         },
         error: function(error) {
             mensaje('El registro no se pudo realizar.');

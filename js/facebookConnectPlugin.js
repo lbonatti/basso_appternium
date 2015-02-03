@@ -220,19 +220,6 @@ function getEmail(uID){
             localStorage.setItem("birthday", response.birthday ? JSON.stringify(response.birthday).replace(/"/g , '') : '00-00-0000');
 
             getDataFbRegister();
-            //switchFbId(uID);
-            //window.location.href="m-inicio.html";
-
-            /*
-            var theRawEmail = JSON.stringify(response.email);
-            var theEmail = theRawEmail.replace(/"/g , '');
-
-            localStorage.setItem("username", theEmail);
-            localStorage.setItem("userId", uID);
-            localStorage.setItem("fbLogged", 1);
-            switchFbId(uID);
-            window.location.href="m-inicio.html";
-            */
         },
         function (response) {
             var theR = JSON.stringify(response);
