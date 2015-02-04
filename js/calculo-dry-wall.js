@@ -62,15 +62,15 @@ function eventosDryWall(){
         $('.paso.paso2, .paso.paso3').hide();
     }
 
-    $('#m1-cdw-1 .paso1 .siguiente-paso').click(function(){
+    $('#m1-cdw-1 .paso1 .siguiente-paso').unbind('click').click(function(){
         dry_wall_save_step1();
     });
 
-    $('#m1-cdw-1 .paso2 .siguiente-paso').click(function(){
+    $('#m1-cdw-1 .paso2 .siguiente-paso').unbind('click').click(function(){
         dry_wall_save_step2();
     });
 
-    $('#m1-cdw-1 .pie .p1').click(function(){
+    $('#m1-cdw-1 .pie .p1').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ) {
             setEstadoPie(1, true);
         }
@@ -86,7 +86,7 @@ function eventosDryWall(){
             }
         }
     });
-    $('#m1-cdw-1 .pie .p3').click(function(){
+    $('#m1-cdw-1 .pie .p3').unbind('click').click(function(){
         if(stepCompleted == 99) {
             $('#m1-cdw-1 .paso2 .siguiente-paso')[0].click();
             setEstadoPie(3, true);
@@ -99,7 +99,7 @@ function eventosDryWall(){
 
     setEstadoPie(1,true);
 
-    $('#back-dw').on('click',function(e){
+    $('#back-dw').unbind('click').on('click',function(e){
         e.preventDefault();
         if(pasoSTactual>1){
             setEstadoPie(pasoSTactual-1);

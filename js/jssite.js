@@ -167,7 +167,7 @@ function duplicarCalculo(pName, pId)
 
 
 function activarDotMenu(){
-    $('.menu-options .editar').unbind('click').click(function(){
+    $('.menu-options .editar').click(function(){
         alertMsg('¿Seguro desea editar?', '', 'none', 'Editar Proyecto', 2, function(){
             sessionStorage.setItem('aResumen', 0);
             sessionStorage.setItem('aEditar', sessionStorage.getItem('editardesderesumen')); //  Tomar id de proy a editar.
@@ -188,7 +188,7 @@ function activarDotMenu(){
         });
     });
 
-    $('.menu-options .duplicar').unbind('click').click(function(){
+    $('.menu-options .duplicar').click(function(){
         var pName = $('.projectName').text();
         var pType;
         var pId;
@@ -218,7 +218,7 @@ function activarDotMenu(){
 
     });
 
-    $('.menu-options .eliminar').unbind('click').click(function(){
+    $('.menu-options .eliminar').click(function(){
         var pName = $('.projectName').text();
         var pType;
         var pId;

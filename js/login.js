@@ -5,25 +5,25 @@ $(document).ready(function(){
 
     var facebook = new FacebookPlugin();
 
-    $('#page-1 .ingreso-fb').click(function(ev){
+    $('#page-1 .ingreso-fb').unbind('click').click(function(ev){
         ev.preventDefault();
         login();
     });
 
-    $('#page-1 .btn-footer.sin-cuenta').on('click', function(e) { //LOGIN
+    $('#page-1 .btn-footer.sin-cuenta').unbind('click').on('click', function(e) { //LOGIN
         e.preventDefault();
         localStorage.setItem("username", 'anonimo');
         localStorage.setItem("fbLogged", 0);
         window.location.href="m-inicio.html";
     });
 
-    $('#page-1 #loginForm').on('submit', function(e){
+    $('#page-1 #loginForm').unbind('click').on('submit', function(e){
         $('#page-1 .ingreso').trigger('click');
         e.preventDefault();
         return false;
     });
 
-    $('#page-1 .ingreso').on('click', function(e){ //LOGIN
+    $('#page-1 .ingreso').unbind('click').on('click', function(e){ //LOGIN
 
         e.preventDefault();
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
     });
 
 
-    $('#dlg-generico .boton').click(function(){
+    $('#dlg-generico .boton').unbind('click').click(function(){
         unblockScreen();
     })
 

@@ -1,6 +1,6 @@
 function eventosFeedback(){
 
-    $('#m6-f .boton').click(function() {
+    $('#m6-f .boton').unbind('click').click(function() {
 
         var theMsj = $('textarea').val();
 

@@ -1,11 +1,11 @@
 function eventosRegister(){
-    $('#register .page-back').click(function(){
+    $('#register .page-back').unbind('click').click(function(){
         window.history.back();
     });
 
     var facebook  = new FacebookPlugin();
 
-    $('#register .confirmar').click(function(ev){
+    $('#register .confirmar').unbind('click').click(function(ev){
         ev.preventDefault();
 
         var ok=true;
@@ -68,16 +68,19 @@ function eventosRegister(){
         //window.history.back();
     });
 
-    $('.fbRegister').click(function(ev){
+    $('.fbRegister').unbind('click').click(function(ev){
         ev.preventDefault();
 
         registerFb();
     });
-
+    
     getProfesionales();
     getPaises();
 
-    $('.pais').change(function(){
-        getProvincia($(this).val());
-    });
+    /* Cargamos los años en el combo */
+    for(i = 1920; i <= 2015; i++) {
+        $('#register .anio').prepend($('<option>', { value : i }).text(i));
+    }
+
+    
 }

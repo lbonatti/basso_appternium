@@ -5,7 +5,7 @@ function eventosProveedoresList() {
 
 
 function eventosProveedores() {
-    $('#m5-p .ultimo-elemento').on('click', function() {
+    $('#m5-p .ultimo-elemento').unbind('click').on('click', function() {
         $(this).css('margin-bottom', '40px !important');
 
         sendTheMail();

@@ -115,7 +115,7 @@ function cargarProveedores() {
     });
     $('#m5-pl .page-content').append(r);
 
-    $('#m5-pl .proveedor').click(function() {
+    $('#m5-pl .proveedor').unbind('click').click(function() {
         sessionStorage.idProveedor = $(this).attr('data-id');
         $.mobile.changePage('m-proveedores.html');
     });

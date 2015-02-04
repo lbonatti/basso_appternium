@@ -72,7 +72,24 @@
 
     $('#page-splash').height( $(window).height());
 
-    setTimeout(function() {
+    var isokdata = 0;
+    ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
+    ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
+    ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
+    ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
+    function ajaxCallToLocalStorage(url, localStorageKey) {
+        $.ajax({
+            url: url,
+            async:false,
+            success: function(result) {
+                localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
+                isokdata++;
+                //console.log(isokdata);
+            }
+        });
+    }
+
+    //setTimeout(function() {
         var username = localStorage.getItem('username');
 
         if (username && username !== 'anonimo') {
@@ -90,26 +107,14 @@
         } else {
             window.location.href="login.html";
         }
-    }, 1500);
-
-    ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
-    ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
-    ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
-    ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
-    function ajaxCallToLocalStorage(url, localStorageKey) {
-        $.ajax({
-            url: url,
-            success: function(result) {
-                localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
-            }
-        });
-    }
+    //}, 1500);
 
     function alertDismissed() {
         window.location.href="m-inicio.html";
     }
 
     function checkConnection() {
+		//return true;
         var networkState = navigator.connection.type;
         return networkState;
     }

@@ -347,7 +347,7 @@
 
     <script>
 
-		$(document).ready(function(){
+		$(document).on("pageshow", function(event) {
 			setTimeout(function () {
 					var mySwiper = new Swiper('.swiper-container',{
 						mode:'horizontal',
@@ -355,7 +355,7 @@
 						centeredSlides: true,
 						slidesPerView: 'auto'
 					});
-			},1200)
+			},2000)
 		});
 
 		//Mostrar PDF

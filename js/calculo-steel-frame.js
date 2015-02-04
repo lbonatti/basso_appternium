@@ -107,37 +107,37 @@ function eventosSteelFrame(){
         $('.paso2, .paso3, .paso4, .paso5').hide();
     }
 
-    $('#m1-csf-1 .paso1 .siguiente-paso').click(function(){
+    $('#m1-csf-1 .paso1 .siguiente-paso').unbind('click').click(function(){
         st_save_step1();
         snapper.enable();
         setEstadoPie(2,false);
     });
-    $('#m1-csf-1 .paso2 .siguiente-paso').click(function(){
+    $('#m1-csf-1 .paso2 .siguiente-paso').unbind('click').click(function(){
         st_save_step2(1);
     });
-    $('#m1-csf-1 .paso3 .siguiente-paso').click(function(){
+    $('#m1-csf-1 .paso3 .siguiente-paso').unbind('click').click(function(){
         st_save_step3(1);
     });
-    $('#m1-csf-1 .paso4 .siguiente-paso').click(function(){
+    $('#m1-csf-1 .paso4 .siguiente-paso').unbind('click').click(function(){
         st_save_step4();
         setEstadoPie(5,false);
         calculateSF();
     });
 
 
-    $('#m1-csf-1 .pie .p1').click(function(){
+    $('#m1-csf-1 .pie .p1').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ){
             snapper.disable();
             setEstadoPie(1,true);
         }
     });
-    $('#m1-csf-1 .pie .p2').click(function(){
+    $('#m1-csf-1 .pie .p2').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ) {
             $('#m1-csf-1 .paso1 .siguiente-paso')[0].click();
             setEstadoPie(2, true);
         }
     });
-    $('#m1-csf-1 .pie .p3').click(function(){
+    $('#m1-csf-1 .pie .p3').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ) {
             if (stepCompleted >= 2) {
                 $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
@@ -148,7 +148,7 @@ function eventosSteelFrame(){
             }
         }
     });
-    $('#m1-csf-1 .pie .p4').click(function(){
+    $('#m1-csf-1 .pie .p4').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ) {
             if (stepCompleted >= 3) {
                 $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
@@ -159,7 +159,7 @@ function eventosSteelFrame(){
             }
         }
     });
-    $('#m1-csf-1 .pie .p5').click(function(){
+    $('#m1-csf-1 .pie .p5').unbind('click').click(function(){
         if(stepCompleted == 99) {
             $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
             snapper.enable();
@@ -171,7 +171,7 @@ function eventosSteelFrame(){
 
     eventosCalculosGenerales();
 
-    $('.techo').click(function(){
+    $('.techo').unbind('click').click(function(){
         //if(estadoST!=1){
             $('.techo').removeClass('selected');
             $(this).addClass('selected');
@@ -181,7 +181,7 @@ function eventosSteelFrame(){
     setEstadoPie(1,true);
 
 
-    $('#back-sf').on('click',function(e){
+    $('#back-sf').unbind('click').on('click',function(e){
         e.preventDefault();
         if(pasoSTactual>1){
             setEstadoPie(pasoSTactual-1);
@@ -191,7 +191,7 @@ function eventosSteelFrame(){
     });
 
 
-    $('.plantaAltaBlock .copyTo').on('click', function(){
+    $('.plantaAltaBlock .copyTo').unbind('click').on('click', function(){
         $('#m1-csf-1 .paso2 .i5').val($('#m1-csf-1 .paso2 .i1').val());
         $('#m1-csf-1 .paso2 .i6').val($('#m1-csf-1 .paso2 .i2').val());
         $('#m1-csf-1 .paso2 .i7').val($('#m1-csf-1 .paso2 .i3').val());
@@ -217,7 +217,7 @@ function eventosSteelFrame(){
 
 
 function eventosCalculosGenerales(){
-    $('.grupo .op1,.grupo .op2').click(function(){
+    $('.grupo .op1,.grupo .op2').unbind('click').click(function(){
         //if(estadoST!=1){
             $('div',$(this).parent()).removeClass('selected');
             $(this).addClass('selected');
@@ -226,7 +226,7 @@ function eventosCalculosGenerales(){
 
 
     activarDotMenu();
-    $('.dot-menu').click(function(){
+    $('.dot-menu').unbind('click').click(function(){
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
             $('.menu-options').hide();
@@ -524,11 +524,11 @@ function saveNewCalc(showMessage) {
         var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
         db_updateQueryEdit($query, function(result,updatedID) {
             if (result == 'ok') {
+                modoLectura();
                 if (showMessage !== 0) {
                     alertMsg('El calculo '+projectName+' ha sido editado', '', 'none', '', 1);
                     $('.boton.saveCalc').fadeOut(600);
                 }
-                modoLectura();
                 sessionStorage.setItem('newSave', 1);
             }
         })

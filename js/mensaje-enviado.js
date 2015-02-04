@@ -1,5 +1,5 @@
 function eventosMensajeEnviado(){
-    $('#mensaje-enviado .boton').click(function(){
+    $('#mensaje-enviado .boton').unbind('click').click(function(){
         $.mobile.changePage('m-inicio.html');
     })
 }

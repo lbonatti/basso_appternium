@@ -9,7 +9,7 @@ if (localStorage.getItem('username') == 'anonimo') {
 
 function eventosNuevoCalculo() {
 
-    $('#m1-nuevo-calculo a.option').on('click', function(e) {
+    $('#m1-nuevo-calculo a.option').unbind('click').on('click', function(e) {
         var $this = $(this);
 
         e.preventDefault();

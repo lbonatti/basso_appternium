@@ -1,9 +1,9 @@
 function eventosRecuperarPwd(){
-    $('#recuperar-pwd .page-back').click(function(){
+    $('#recuperar-pwd .page-back').unbind('click').click(function(){
         window.history.back();
     })
 
-    $('#recuperar-pwd .boton').click(function(){
+    $('#recuperar-pwd .boton').unbind('click').click(function(){
 
         var email = $.trim( $('#recuperar-pwd .page-content input').val() );
 
@@ -31,10 +31,10 @@ function eventosRecuperarPwd(){
 }
 
 function eventosPasswordEnviada(){
-    $('#password-enviada .boton').click(function(){
+    $('#password-enviada .boton').unbind('click').click(function(){
         $.mobile.changePage('login.html')
     })
-    $('#password-enviada .page-back').click(function(){
+    $('#password-enviada .page-back').unbind('click').click(function(){
         window.history.back();
     })
 }

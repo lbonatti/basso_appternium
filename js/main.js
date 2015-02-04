@@ -4,16 +4,15 @@ $(document).on("pageinit", function(event){
    // $('#' + event.target.id).css('top', '-1px');
 });
 
-$(document).ready(function(){
-    $('.menu a[data-title="Logout"]').click(function(){
-        theLogOut();
-    });
-});
-
 $(document).on("pageshow", function(event) {
     setTimeout(function(){
         heightBug();
-    }, 500);
+
+        $('.menu a[data-title="Logout"]').unbind('click').click(function(){
+            theLogOut();
+        });
+    }, 1000);
+    
 });
 
 function heightBug(){
@@ -29,7 +28,7 @@ var snapper;
 function menuLateral(){
     snapper = new Snap({element:document.getElementById('content'), disable: 'right', hyperextensible: false});
     //boton_menu('m-inicio');
-    $('.menu .item').click(function(e){
+    $('.menu .item').unbind('click').click(function(e){
         e.preventDefault();
         //if($(this).hasClass('selected')){
         //}else{

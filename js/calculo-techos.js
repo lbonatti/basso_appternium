@@ -62,11 +62,11 @@ function eventosTechos(){
         $('.paso.paso2').hide();
     }
 
-    $('#m1-ct-1 .paso1 .siguiente-paso').click(function(){
+    $('#m1-ct-1 .paso1 .siguiente-paso').unbind('click').click(function(){
         roof_save_step();
     });
 
-    $('#m1-ct-1 .pie .p1').click(function(){
+    $('#m1-ct-1 .pie .p1').unbind('click').click(function(){
         if( ! $(this).hasClass('disabled') ) {
             setEstadoPie(1, true);
         }
@@ -75,7 +75,7 @@ function eventosTechos(){
 
     eventosCalculosGenerales();
 
-    $('.chapaTipo .op1, .chapaTipo .op2').click(function() {
+    $('.chapaTipo .op1, .chapaTipo .op2').unbind('click').click(function() {
         if($(this).hasClass('op2')){
             $('#m1-ct-1 .paso1 .chapaModeloAcanalada').hide();
             $('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo:first-child').addClass('selected');
@@ -85,14 +85,14 @@ function eventosTechos(){
         }
     });
 
-    $('.modelo').click(function(){
+    $('.modelo').unbind('click').click(function(){
         //if(estadoST!=1){
             $('.modelo').removeClass('selected');
             $(this).addClass('selected');
         //}
     });
 
-    $('.modelo .mas').on('click', function(){
+    $('.modelo .mas').unbind('click').on('click', function(){
         var model = $(this).prev().html();
         switch(model){
             case 'A-1086':
@@ -110,12 +110,12 @@ function eventosTechos(){
         }
     });
 
-    $('#infoBlock .infoClose').on('click', function(){
+    $('#infoBlock .infoClose').unbind('click').on('click', function(){
         closeInfo();
     });
 
 
-    $('.color div').click(function(){
+    $('.color div').unbind('click').click(function(){
         //if(estadoST!=1){
             $('.color div').removeClass('selected');
             $(this).addClass('selected');
@@ -125,7 +125,7 @@ function eventosTechos(){
 
     setEstadoPie(1,true);
 
-    $('#back-t').on('click',function(e){
+    $('#back-t').unbind('click').on('click',function(e){
         e.preventDefault();
         if(pasoSTactual>1){
             setEstadoPie(pasoSTactual-1);

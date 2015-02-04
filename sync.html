@@ -56,5 +56,12 @@
         <div class="page-header" ></div>
         <div class="page-content"></div>
     </div>
+    <script>
+        $(document).ready(function(){
+            if (sessionStorage.getItem('newSave') == 0){
+                window.location.href="m-inicio.html";
+            }
+        });
+    </script>
 </body>
 </html>

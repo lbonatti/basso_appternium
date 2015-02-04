@@ -1,21 +1,33 @@
 function getProfesionales() {
-    var profesionales = JSON.parse(localStorage.getItem('profesionales'));
+    if (localStorage.getItem('profesionales'))
+    {
+        var profesionales = JSON.parse(localStorage.getItem('profesionales'));
 
-    $('#register .profesion').empty();
+        $('#register .profesion').empty();
 
-    $.each(profesionales, function(key, value) {
-        $('#register .profesion').append($('<option>', { value : value.Profesione.id }).text(value.Profesione.nombre));
-    });
+        $.each(profesionales, function(key, value) {
+            $('#register .profesion').append($('<option>', { value : value.Profesione.id }).text(value.Profesione.nombre));
+        });
+    }
 }
 
 function getPaises() {
-    var paises = JSON.parse(localStorage.getItem('paises'));
+    if (localStorage.getItem('paises'))
+    {
+        var paises = JSON.parse(localStorage.getItem('paises'));
 
-    $('#register .pais').empty();
+        $('#register .pais').empty();
 
-    $.each(paises, function(key, value) {
-        $('#register .pais').append($('<option>', { value : value.Paise.id }).text(value.Paise.nombre));
+        $.each(paises, function(key, value) {
+            $('#register .pais').append($('<option>', { value : value.Paise.id }).text(value.Paise.nombre));
+        });
+        
+        //$('.pais')
+    }
+    $('.pais').change(function(){
+        getProvincia($(this).val());
     });
+    $('.pais').val(18).change();
 }
 
 function getProvincia(id) {
@@ -26,13 +38,15 @@ function getProvincia(id) {
         },
         success:function(result) {
             $('#register .provincia').empty();
-            $.each(result.Default, function(key, value) {
-                $('#register .provincia').append($('<option>', { value : value.Provincia.id }).text(value.Provincia.nombre));
-
-            });
+            if (result.Default != null)
+            {
+                $.each(result.Default, function(key, value) {
+                    $('#register .provincia').append($('<option>', { value : value.Provincia.id }).text(value.Provincia.nombre));
+                });
+            }
         },
         error:function(error) {
-            //alert(JSON.stringify(error));
+            $('#register .provincia').empty();
         }
     });
 }
