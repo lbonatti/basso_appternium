@@ -262,7 +262,7 @@ function alertMsg(text, id, action, title, type, cb){
     $('.alertMsg').show();
 
 
-    $('.alertMsg .boton, .alertMsg .cancelar').unbind('click').on("click",function(e){
+    $('.alertMsg .boton, .alertMsg .cancelar').on("click",function(e){
         e.preventDefault();
         $(this).parent().remove();
         $('.shadow').css('height','0');

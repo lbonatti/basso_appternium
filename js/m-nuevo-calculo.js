@@ -32,7 +32,7 @@ function eventosNuevoCalculo() {
                     tipo = 3;
                 }
 
-                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND user_id='+localStorage.getItem('userId');
+                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND remove=0 AND user_id='+localStorage.getItem('userId');
                 db_customQuery($query, function(pleaseWork) {
                     if (pleaseWork.length > 0) {
                         alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Este proyecto ya existe', 1);

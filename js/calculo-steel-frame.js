@@ -10,6 +10,7 @@ function eventosSteelFrame(){
     if(sessionStorage.getItem('aEditar')){
 
         var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+
         sessionStorage.setItem('editardesderesumen', pID);
         sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
 
@@ -497,12 +498,14 @@ function saveNewCalc(showMessage) {
                         alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
+                    //sessionStorage.setItem('aEditar', pId);
                 } else {
                     if (showMessage !== 0) {
                         alertMsg('No se ha podido guardar', '', 'none', '', 1);
                     }
                 }
-            })
+            });
+
         } else {
             var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
             db_insert('calculos',fields, values,'',function(result){

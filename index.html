@@ -73,7 +73,6 @@
     $(document).on("pageshow", function(event) {
         $('#page-splash').height( $(window).height());
 
-        var isokdata = 0;
         ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
         ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
         ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
@@ -84,9 +83,6 @@
                 async:false,
                 success: function(result) {
                     localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
-                    isokdata++;
-                    alert(isokdata);
-                    //console.log(isokdata);
                 }
             });
         }
@@ -118,7 +114,7 @@
     }
 
     function checkConnection() {
-		//return true;
+		return true;
         var networkState = navigator.connection.type;
         return networkState;
     }

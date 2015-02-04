@@ -96,6 +96,10 @@ function db_insert(table, fields, values, extraValues, callBack){
         var result;
         t.executeSql($query,values,function(t, rs){
                 var result='ok';
+                if (rs.insertId)
+                {
+                    sessionStorage.setItem('editardesderesumen', rs.insertId);
+                }
                 callBack(result);
             },function(rs){
                 var result='error';

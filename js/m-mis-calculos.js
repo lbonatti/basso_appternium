@@ -4,7 +4,7 @@ var clickMessage = false;
 
 function eventosMisCalculos(){
 
-    $('.proyectSlide').unbind('click').on('click', function () {
+    $('.proyectSlide').on('click', function () {
         var $this = $(this);
         var pName = $this.find('.titulo').text();
         var pId = $this.parent().parent().attr('data-project-id');
@@ -15,13 +15,14 @@ function eventosMisCalculos(){
 
     });
 
-    $('.eliminar').unbind('click').on('click', function () {
+    $('.eliminar').on('click', function () {
         var project_id = $(this).parent().parent().parent().attr('data-project-id');
+        //alertMsg('¿Está seguro que desea eliminar este cálculo?', '', 'none', 'Eliminar Proyecto', 2);
         alertMsg('Está seguro que desea eliminar este cálculo?','dlg-delete-calc','delete',null,2);
         deleteCalc(project_id);
     });
 
-    $('.editar').unbind('click').on('click', function () {
+    $('.editar').on('click', function () {
         var $this = $(this);
         var pName = $this.parent().parent().find('.proyectSlide .titulo').text();
         var pId = $this.parent().parent().parent().attr('data-project-id');
@@ -32,7 +33,7 @@ function eventosMisCalculos(){
 
     });
 
-    $('.duplicar').unbind('click').on('click', function () {
+    $('.duplicar').on('click', function () {
         var $this = $(this);
         var pName = $this.parent().parent().find('.proyectSlide .titulo').text();
         var pId = $this.parent().parent().parent().attr('data-project-id');
@@ -45,7 +46,7 @@ function deleteCalc(project_id) {
     project_id = project_id || 0;
     var $query = 'UPDATE calculos SET remove=1, sync=0 WHERE _id='+project_id;
 
-    $('#dlg-delete-calc .boton').unbind('click').on('click', function() {
+    $('#dlg-delete-calc .boton').on('click', function() {
         if (project_id != 0) {
             db_customQuery($query,function(result) {
                 refreshList();
