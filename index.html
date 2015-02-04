@@ -70,44 +70,48 @@
         StatusBar.hide();
     }
 
-    $('#page-splash').height( $(window).height());
+    $(document).on("pageshow", function(event) {
+        $('#page-splash').height( $(window).height());
 
-    var isokdata = 0;
-    ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
-    ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
-    ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
-    ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
-    function ajaxCallToLocalStorage(url, localStorageKey) {
-        $.ajax({
-            url: url,
-            async:false,
-            success: function(result) {
-                localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
-                isokdata++;
-                //console.log(isokdata);
-            }
-        });
-    }
-
-    //setTimeout(function() {
-        var username = localStorage.getItem('username');
-
-        if (username && username !== 'anonimo') {
-            sessionStorage.setItem('newSave', 1);
-            if ( checkConnection() !== 'none' ){
-                window.location.href="sync.html";
-            }else{
-                navigator.notification.alert(
-                    'No se han encontrado conecciones a internet',  // message
-                    alertDismissed,         // callback
-                    'Error al sincronizar',            // title
-                    'Aceptar'                  // buttonName
-                );
-            }
-        } else {
-            window.location.href="login.html";
+        var isokdata = 0;
+        ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
+        ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
+        ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
+        ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
+        function ajaxCallToLocalStorage(url, localStorageKey) {
+            $.ajax({
+                url: url,
+                async:false,
+                success: function(result) {
+                    localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
+                    isokdata++;
+                    alert(isokdata);
+                    //console.log(isokdata);
+                }
+            });
         }
-    //}, 1500);
+
+        setTimeout(function() {
+            var username = localStorage.getItem('username');
+
+            if (username && username !== 'anonimo') {
+                sessionStorage.setItem('newSave', 1);
+                if ( checkConnection() !== 'none' ){
+                    window.location.href="sync.html";
+                }else{
+                    navigator.notification.alert(
+                            'No se han encontrado conecciones a internet',  // message
+                            alertDismissed,         // callback
+                            'Error al sincronizar',            // title
+                            'Aceptar'                  // buttonName
+                    );
+                }
+            } else {
+                window.location.href="login.html";
+            }
+        }, 1500);
+
+    });
 
     function alertDismissed() {
         window.location.href="m-inicio.html";
