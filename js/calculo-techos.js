@@ -75,7 +75,7 @@ function eventosTechos(){
 
     eventosCalculosGenerales();
 
-    $('.chapaTipo .op1, .chapaTipo .op2').unbind('click').click(function() {
+    $('.chapaTipo .op1, .chapaTipo .op2').click(function() {
         if($(this).hasClass('op2')){
             $('#m1-ct-1 .paso1 .chapaModeloAcanalada').hide();
             $('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo:first-child').addClass('selected');
