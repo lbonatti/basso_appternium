@@ -145,7 +145,7 @@ function showMisCalculos(){
 
         var listadiv = $('.swiper-container');
         $.each(listadiv, function (){
-        var mySwiper = new Swiper(this,{
+            var mySwiper = new Swiper(this,{
                 slidesPerView: 'auto',
                 calculateHeight: true
             });

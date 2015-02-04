@@ -116,8 +116,13 @@
     }
 
     function checkConnection() {
-        var networkState = navigator.connection.type;
-        return networkState;
+        _status = true;
+        if (navigator.connection != undefined)
+        {
+            var networkState = navigator.connection.type;
+            _status = networkState;
+        }
+        return _status;
     }
 
 </script>

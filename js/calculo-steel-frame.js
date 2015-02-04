@@ -303,6 +303,11 @@ function modoLectura(paso)
     if (paso != null) {
         $('.pie .p'+paso).removeClass('disabled').addClass('selected');
     }
+
+    $('.pie div.disabled').on('click', function (){
+        $('.menu-options div.editar').trigger('click');
+        //alert('aca');
+    });
 }
 
 function esconderDotMenu(){
