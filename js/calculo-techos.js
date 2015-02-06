@@ -78,7 +78,11 @@ function eventosTechos(){
     $('.chapaTipo .op1, .chapaTipo .op2').click(function() {
         if($(this).hasClass('op2')){
             $('#m1-ct-1 .paso1 .chapaModeloAcanalada').hide();
-            $('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo:first-child').addClass('selected');
+            console.log($('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo.selected').length);
+            if ($('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo.selected').length != 1) {
+                $('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo:first-child').addClass('selected')
+            }
+            //$('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').show().find('.modelo:first-child').addClass('selected');
         }else{
             $('#m1-ct-1 .paso1 .chapaModeloTrapezoidal').hide().find('.selected').removeClass('selected');
             $('#m1-ct-1 .paso1 .chapaModeloAcanalada').show().find('.modelo:first-child').addClass('selected');
