@@ -150,7 +150,7 @@
 			animateBtnStart($this, 'Cargando ');
 
 			setTimeout(function() {
-				var filename = sessionStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
+				var filename = localStorage.getItem('username') + '_dry-wall_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
 				sharePDF(filename, 'dry-wall');
 			}, 1000);
 		});

@@ -87,6 +87,7 @@ function callAjaxPdf($html, filename)
     $.ajax({
         type: 'POST',
         url: url_webservices+'/download-pdf.php',
+        async: false,
         data: {
             content: $html,
             fileName: filename,
@@ -115,7 +116,6 @@ function createPDF($html, filename)
 
 function generateHtml(type)
 {
-
     var $html;
     var $_rt;
     var $_rm;
@@ -134,7 +134,15 @@ function generateHtml(type)
         break;
         case 'steel-frame':
         case 'steel_frame':
+            $_html = '';
             $html = $('#myRenderSave').clone();
+
+            $html.find('.resultado').attr('style', 'display:none !important;');
+
+
+
+
+
             $html.find('span.showMore').remove();
         break;
         case 'dry-wall':
@@ -155,3 +163,12 @@ function animateBtnEnd(btnClass, btnText) {
     var $this = $('.boton.'+btnClass);
     $this.html(btnText);
 }
+
+
+var mostrandoteclado;
+document.addEventListener("showkeyboard", function() {
+    mostrandoteclado = true;
+}, false);
+document.addEventListener("hidekeyboard", function() {
+    mostrandoteclado = false;
+}, false);

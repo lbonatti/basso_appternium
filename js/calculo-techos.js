@@ -241,7 +241,7 @@ function saveNewCalcTechos(values, showMessage) {
     //Mandamos el string de JSON a la BD -> ¡¡¡ SOLO EL STRING DEL CALCULO  !!!
     // ID calculo, ID usuario, tipo de calculo (1=SF, 2=DW, 3=T), json con los datos del calculo
     // con el success del ajax (guardado en la BD remota) cambiamos el valor sinc = 1 del calculo en sessionStorage
-    var $user = sessionStorage.getItem('username');
+    var $user = localStorage.getItem('username');
     var $dataSaveBD = JSON.stringify(calculos.tipo.techos[$_name]);
     var $calcType = 3;
 
@@ -343,6 +343,6 @@ function closeInfo(){
 
 function generateDivRenderT()
 {
-    var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName');
+    var filename = localStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName');
     viewPDF(filename, 'techo');
 }

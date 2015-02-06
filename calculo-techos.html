@@ -129,7 +129,6 @@
 
 				<div class="resultado">
 					<span class="texto">1. Chapas para techo</span>
-
 				</div>
 				<div class="valor ultimo">
 					<span class="texto">Cantidad</span>
@@ -193,7 +192,7 @@
             animateBtnStart($this, 'Cargando ');
 
             setTimeout(function() {
-                var filename = sessionStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
+                var filename = localStorage.getItem('username') + '_techos_' + sessionStorage.getItem('projectName').replace(/\s/g, '_');
                 sharePDF(filename, 'techo');
             }, 1000);
         });
