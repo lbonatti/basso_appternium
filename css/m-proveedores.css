@@ -20,22 +20,21 @@
 #m5-p .ultimo-elemento{
     margin-bottom: 84px !important;
 }
-#m5-p .titulo{
+#m5-p .titulo {
     background-color: #FF9900;
     text-align: left;
     text-shadow: none;
     color: #fff;
     padding: 0px;
-    font-size: 37px;
-    font-size: 8vmin;
+    font-size: 25px;
     font-family: roboto-thin;
     height: 100px;
     line-height: 1;
-    padding-left: 103px;
+    padding-left: 72px;
     padding-top: 22px;
     background-image: url(../img/proveedores/logo.png);
     background-repeat: no-repeat;
-    background-position: 30px 30px;
+    background-position: 4px 30px;
 }
 #m5-p .map{
     background-color: #FEC671;
