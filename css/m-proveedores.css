@@ -26,7 +26,7 @@
     text-shadow: none;
     color: #fff;
     padding: 0px;
-    /*font-size: 37px;*/
+    font-size: 37px;
     font-size: 8vmin;
     font-family: roboto-thin;
     height: 100px;
@@ -55,8 +55,7 @@
     font-family: roboto-regular;
     text-shadow: none;
     color: #fff;
-    /*font-size: 14px;*/
-    font-size: 3.4vmin !important;
+    font-size: 14px;
     padding: 8px 16px;
     box-sizing: border-box;
 }
