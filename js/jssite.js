@@ -34,10 +34,11 @@ function onConfirm(buttonIndex) {
 }
 
 function theLogOut(){
+    var title = localStorage.getItem('username') == 'anonimo' ? 'Iniciar sesión' : 'Cerrar sesión';
     navigator.notification.confirm(
         '¿Seguro deseas salir?', // message
         onConfirmLogout, // callback to invoke with index of button pressed
-        'Cerrar Sesion', // title
+        title, // title
         ['Cancelar', 'Salir'] // buttonLabels
     );
 }

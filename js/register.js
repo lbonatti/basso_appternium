@@ -109,11 +109,16 @@ function getDataFbRegister() {
         url: backend_url+"/users/registro",
         data: data,
         success: function(result) {
-            localStorage.setItem("fbLogged", 1);
-            switchFbId(userID);
-            
-            sessionStorage.setItem('newSave', 1);
-            window.location.href="sync.html";
+            var errorMessage = result.error;
+            if (!errorMessage) {
+                localStorage.setItem("fbLogged", 1);
+                switchFbId(userID);
+
+                sessionStorage.setItem('newSave', 1);
+                window.location.href="sync.html";
+            } else {
+                mensaje(errorMessage);
+            }
         },
         error: function(error) {
             mensaje('El registro no se pudo realizar.');

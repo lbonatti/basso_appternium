@@ -11,8 +11,11 @@ $(document).on("pageshow", function(event) {
         $('.menu a[data-title="Logout"]').unbind('click').click(function(){
             theLogOut();
         });
+
+        var htmlLogout = localStorage.getItem('username') == 'anonimo' ? 'Iniciar sesión' : 'Cerrar sesión';
+        $('.menu a[data-title="Logout"]').html(htmlLogout);
+        $('.logout').html(htmlLogout);
     }, 1000);
-    
 });
 
 function heightBug(){
