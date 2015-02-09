@@ -187,7 +187,7 @@ var login = function () {
         },
         function (response) {
             var theR = JSON.stringify(response);
-            console.log(theR);
+            mensaje(theR);
             mensaje('Error al intentar loguearse con Facebook');
         });
 }
