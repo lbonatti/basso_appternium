@@ -6,7 +6,7 @@
             <h1>Mis cálculos</h1>
             <a class="page-back"></a>
         </div>
-        <div class="page-content">
+        <div class="page-content" >
 
             <!--<div class="swiper-container" data-snap-ignore="1">-->
                 <!--<div class="swiper-wrapper">-->
@@ -52,6 +52,12 @@
         <script src="js/idangerous/idangerous.swiper.js"></script>
 
         <script>
+            $(document).ready(function (){
+                setTimeout(function (){
+                    alert('asd');
+                    $('#m2-mc .page-content').css('overflow', 'auto');
+                }, 600)
+            });
             showMisCalculos();
         </script>
     </div>
