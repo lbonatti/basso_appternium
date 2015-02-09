@@ -187,7 +187,6 @@ var login = function () {
         },
         function (response) {
             var theR = JSON.stringify(response);
-            mensaje(theR);
             mensaje('Error al intentar loguearse con Facebook');
         });
 }
@@ -213,13 +212,13 @@ function getEmail(uID){
 
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
-            localStorage.removeItem('fbLogged');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('userInfo');
-            localStorage.removeItem('username');
-            localStorage.removeItem('last_name');
-            localStorage.removeItem('first_name');
-            localStorage.removeItem('birthday');
+            //localStorage.removeItem('fbLogged');
+            //localStorage.removeItem('userId');
+            //localStorage.removeItem('userInfo');
+            //localStorage.removeItem('username');
+            //localStorage.removeItem('last_name');
+            //localStorage.removeItem('first_name');
+            //localStorage.removeItem('birthday');
 
             localStorage.setItem("username", theEmail);
             localStorage.setItem("userId", uID);
