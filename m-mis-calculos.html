@@ -54,19 +54,25 @@
         <script>
             function doOnOrientationChange()
             {
-                $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
-                /*
-                ScrrenOrientation="portrait";
-                if(window.orientation == -90 || window.orientation == 90) ScrrenOrientation = "landscape";
-                */
+                $.mobile.changePage(
+                        window.location.href,
+                        {
+                            allowSamePageTransition : true,
+                            transition              : 'none',
+                            showLoadMsg             : false,
+                            reloadPage              : true
+                        }
+                );
             }
 
-            window.addEventListener('orientationchange', doOnOrientationChange);
 
             $(document).ready(function (){
+                $(window).on('resize', doOnOrientationChange);
+
+
                 setTimeout(function (){
                     $('#m2-mc .page-content').css('overflow', 'auto');
-                }, 600)
+                }, 1000)
             });
             showMisCalculos();
         </script>
