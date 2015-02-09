@@ -57,7 +57,7 @@ function deleteCalc(project_id) {
 }
 function refreshList(){
     sessionStorage.setItem('newSave', 1);
-    console.log('Borrado Correcto, actualizando lista...');
+    //console.log('Borrado Correcto, actualizando lista...');
     $('#m2-mc .paso.paso1').hide();
     showMisCalculos();
 }

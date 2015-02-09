@@ -179,7 +179,7 @@ function cargarSlide(){
             }
         });
     } else {
-        console.log('es anonimo');
+        //console.log('es anonimo');
     }
 }
 

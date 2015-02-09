@@ -52,9 +52,19 @@
         <script src="js/idangerous/idangerous.swiper.js"></script>
 
         <script>
+            function doOnOrientationChange()
+            {
+                $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
+                /*
+                ScrrenOrientation="portrait";
+                if(window.orientation == -90 || window.orientation == 90) ScrrenOrientation = "landscape";
+                */
+            }
+
+            window.addEventListener('orientationchange', doOnOrientationChange);
+
             $(document).ready(function (){
                 setTimeout(function (){
-                    alert('asd');
                     $('#m2-mc .page-content').css('overflow', 'auto');
                 }, 600)
             });
