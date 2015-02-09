@@ -87,7 +87,7 @@ function loadMainSlider() {
 
     var user_id = localStorage.getItem('userId') ? localStorage.getItem('userId') : 0;
     var $getEditable = 'SELECT * FROM calculos WHERE user_id=' + user_id + ' AND remove = 0 ORDER BY created DESC LIMIT 4';
-    
+    var $noProyect = false;
     db_customQuery($getEditable, function(result) {
         if (result.length > 0) {
             for(var i = 0; i < result.length; i++){
@@ -104,9 +104,8 @@ function loadMainSlider() {
                 controls:false
             };
         } else {
-
+            $noProyect = true;
             $('#m-inicio .bxslider').append('<li style="width: 500px !important;"><div class="titulo" style="text-align: center;width: 100%;">No se encontraron proyectos</div><div class="fecha"></div></li>');
-
             $bxSliderOptions = {
                 controls:false,
                 infiniteLoop: false,
@@ -116,6 +115,11 @@ function loadMainSlider() {
         }
 
         slider = $('#m-inicio .bxslider').bxSlider($bxSliderOptions);
+
+        if ($noProyect) {
+            var style = $('.bx-wrapper').attr('style');
+            $('.bx-wrapper').attr('style', style + " margin-bottom: 0px !important;");
+        }
 
         $('#m-inicio .bxslider li').unbind('click').on('click', function() {
             var $this = $(this);
