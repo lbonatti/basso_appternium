@@ -259,7 +259,8 @@ function saveNewCalcDryWall(showMessage) {
                 if (result == 'ok') {
                     modoLectura(3); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
-                        alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                        //alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -275,6 +276,7 @@ function saveNewCalcDryWall(showMessage) {
                     modoLectura(3); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
                         alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', 'Guardar Calculo', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                         $('.boton.saveCalc').fadeOut(600);
                     }
                     sessionStorage.setItem('newSave', 1);
@@ -291,7 +293,7 @@ function saveNewCalcDryWall(showMessage) {
         db_updateQueryEdit($query, function(result,updatedID) {
             if(result == 'ok'){
                 if (showMessage !== 0) {
-                    alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', 'Editar Calculo', 1);
+                    alertMsg('Felicitaciones el cálculo "'+$_name+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
                 }
                 modoLectura(3);
                 sessionStorage.setItem('newSave', 1);

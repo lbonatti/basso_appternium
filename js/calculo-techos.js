@@ -258,7 +258,8 @@ function saveNewCalcTechos(values, showMessage) {
                 if (result == 'ok') {
                     modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
-                        alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                        //alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -273,7 +274,8 @@ function saveNewCalcTechos(values, showMessage) {
                 if (result == 'ok') {
                     modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
-                        alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                        //alertMsg('Nuevo calculo '+$_name+' guardado', '', 'none', '', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -289,7 +291,7 @@ function saveNewCalcTechos(values, showMessage) {
         db_updateQueryEdit($query, function(result,updatedID) {
             if (result == 'ok') {
                 if (showMessage !== 0) {
-                    alertMsg('El calculo '+$_name+' ha sido editado', '', 'none', '', 1);
+                    alertMsg('Felicitaciones el cálculo "'+$_name+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
                 }
                 else
                 {

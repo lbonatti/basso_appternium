@@ -244,7 +244,7 @@ function unblockScreen(){
 //Type 1: OK, type 2: Ok/Cancel
 function alertMsg(text, id, action, title, type, cb){
     type = type || 1;
-    title = title || 'Atención';
+    title = ((title != undefined && title != '') ? title : 'Atención');
     action = action || '';
     cb = cb || ''; // The Callback.
     var $html = '';

@@ -500,7 +500,8 @@ function saveNewCalc(showMessage) {
                 if (result == 'ok') {
                     modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
-                        alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        //alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
                     //sessionStorage.setItem('aEditar', pId);
@@ -517,7 +518,8 @@ function saveNewCalc(showMessage) {
                 if (result == 'ok') {
                     modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
                     if (showMessage !== 0) {
-                        alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        //alertMsg('Nuevo calculo '+projectName+' guardado', '', 'none', '', 1);
+                        alertMsg('Nuevo calculo guardado', '', 'none', 'Felicitaciones', 1);
                     }
                     sessionStorage.setItem('newSave', 1);
                 } else {
@@ -534,7 +536,7 @@ function saveNewCalc(showMessage) {
             if (result == 'ok') {
                 modoLectura();
                 if (showMessage !== 0) {
-                    alertMsg('El calculo '+projectName+' ha sido editado', '', 'none', '', 1);
+                    alertMsg('Felicitaciones el cálculo "'+projectName+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
                     $('.boton.saveCalc').fadeOut(600);
                 }
                 sessionStorage.setItem('newSave', 1);

@@ -149,7 +149,8 @@ function duplicarCalculo(pName, pId)
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     sessionStorage.setItem('newSave', 1);
-                    alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
+                    //alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
+                    alertMsg('Felicitaciones el cálculo "'+newName, '" se ha duplicado', 'none', 'Cálculo duplicado', 1);
 
                     showMisCalculos();
 
@@ -245,7 +246,7 @@ function activarDotMenu(){
                 alertMsg('¿Está seguro que desea eliminar este cálculo?', '', 'none', 'Eliminar Proyecto', 2, function() {
                     var $query = 'UPDATE calculos SET remove=1, sync=0 WHERE _id='+pId;
                     db_customQuery($query, function(rows) {
-                        alertMsg('Eliminado con exito', '', 'none', 'Eliminar Proyecto', 1);
+                        alertMsg('El cálculo ha sido eliminado.', '', 'none', 'Cálculo eliminado', 1);
                         $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
                     });
                 });
