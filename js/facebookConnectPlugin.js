@@ -213,6 +213,14 @@ function getEmail(uID){
 
             var theRawEmail = JSON.stringify(response.email);
             var theEmail = theRawEmail.replace(/"/g , '');
+            localStorage.removeItem('fbLogged');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userInfo');
+            localStorage.removeItem('username');
+            localStorage.removeItem('last_name');
+            localStorage.removeItem('first_name');
+            localStorage.removeItem('birthday');
+
             localStorage.setItem("username", theEmail);
             localStorage.setItem("userId", uID);
             localStorage.setItem("last_name", JSON.stringify(response.last_name).replace(/"/g , ''));
