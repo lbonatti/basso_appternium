@@ -5,7 +5,8 @@
 }
 #m1-cdw-1 .page-content{
     background-color: #fff;
-    heigth: 1
+    heigth: 1;
+    padding-top: 10px;
 }
 #m1-cdw-1 .texto{
     color: #7D7D7D;

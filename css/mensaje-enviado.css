@@ -21,6 +21,7 @@
 #mensaje-enviado .page-content{
     background-color: #3D464B;
     border-left: 1px solid #666;
+    padding-top: 10px;
 }
 
 #mensaje-enviado .subtitulo {
