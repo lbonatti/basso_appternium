@@ -206,6 +206,7 @@ function calculateResult(values){
     $('#m1-ct-1 .paso2 .resultado-chapas').html(cantChapas + ' U.');
     $('#m1-ct-1 .paso2 .resultado-aislacion').html(aislacion + ' m2.');
     $('#m1-ct-1 .paso2 .resultado-tornillos').html(cantTornillos + ' U.');
+    $('.elcolor').html(values.color);
 
     if (sessionStorage.getItem('aResumen') != 1 ) {
         //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
