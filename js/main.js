@@ -130,28 +130,121 @@ function generateHtml(type)
             $_rm = $html.find('.resultado-medida').text();
             $_rl = $html.find('.resultado-leyenda').text();
 
-            $html.find('.resultado-techo').html($_rt + ' ' + $_rm + ' ' + $_rl).css('font-size','20px').css('text-transform','uppercase').css('text-align','center');
-            $html.find('.boton.savePDF').remove();
-            $html.find('.resultado-medida').remove();
-            $html.find('.resultado-leyenda').remove();
+            $_html = '';
+            var $_temp_table_b = '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>';
+            var $_temp_table_e = '</tbody></table>';
+
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: TECHO</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $_rt + ' ' + $_rm + ' ' + $_rl +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            var $_temp_divs = $html.find('div');
+
+            $_temp_divs.each(function (k, ht){
+                $_div = $(ht);
+                if ($_div.hasClass('resultado'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">' + $_div.text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+                else if ($_div.hasClass('valor'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                    $_html += '    <td style="width: 60%; text-align: left;">' + $_div.find("span:eq(0)").text() +'</td>';
+                    $_html += '    <td style="width: 30%; text-align: center;">' + $_div.find("span:eq(1)").text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+            });
+
+            return $_html;
         break;
+
         case 'steel-frame':
         case 'steel_frame':
-            $_html = '';
             $html = $('#myRenderSave').clone();
-
-            $html.find('.resultado').attr('style', 'display:none !important;');
-
-
-
-
-
+            $html.find('div.mas').remove();
             $html.find('span.showMore').remove();
+
+            $_html = '';
+            var $_temp_table_b = '<table cellspacing="0" style="width: 750px; text-align: center; font-size: 10pt;"><tbody>';
+            var $_temp_table_e = '</tbody></table>';
+
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: STEEL FRAME</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            var $_temp_divs = $html.find('div.item > div');
+
+            $_temp_divs.each(function (k, ht){
+                $_div = $(ht);
+                if ($_div.hasClass('resultado'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">' + $_div.text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+                else if ($_div.hasClass('valor'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                    $_html += '    <td style="width: 60%; text-align: left;">' + $_div.find("span:eq(0)").text() +'</td>';
+                    $_html += '    <td style="width: 30%; text-align: center;">' + $_div.find("span:eq(1)").text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+            });
+
+            return $_html;
         break;
+
         case 'dry-wall':
             $html = $('#myRenderSaveDW').clone();
-            $html.find('.boton.savePDF').remove();
-            $html.find('.boton.shareCalc').remove();
+
+            $_html = '';
+            var $_temp_table_b = '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>';
+            var $_temp_table_e = '</tbody></table>';
+
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: DRY WALL</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            var $_temp_divs = $html.find('div:first > div');
+
+            $_temp_divs.each(function (k, ht){
+                $_div = $(ht);
+                if ($_div.hasClass('resultado'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">' + $_div.text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+                else if ($_div.hasClass('valor'))
+                {
+                    $_html += $_temp_table_b;
+                    $_html += '<tr>';
+                    $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                    $_html += '    <td style="width: 60%; text-align: left;">' + $_div.find("span:eq(0)").text() +'</td>';
+                    $_html += '    <td style="width: 30%; text-align: center;">' + $_div.find("span:eq(1)").text() +'</td>';
+                    $_html += '</tr>';
+                    $_html += $_temp_table_e;
+                }
+            });
+
+            return $_html;
         break;
     }
 
