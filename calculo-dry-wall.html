@@ -15,11 +15,11 @@
         <div class="paso paso1">
             <div class="texto t1">Metros lineales de las paredes interiores</div>
 
-            <div class="texto t2">Largo</div>
+            <div class="texto t2">Altura</div>
             <input data-role="none" class="i1" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
-            <div class="texto t2">Altura</div>
+            <div class="texto t2">Largo</div>
             <input data-role="none" class="i2" type="number" step="0.01" />
             <div class="texto t3">mts.</div>
 
@@ -31,6 +31,8 @@
 
             <div class="grupo placa">
                 <div class="texto">Tipo de placa</div>
+				<div class="op3" data-value="1">1 Cara</div>
+				<div class="op4 selected" data-value="2">2 Caras</div>
                 <div class="op1" data-value="1">Simple</div>
                 <div class="op2 selected" data-value="2">Doble</div>
             </div>
@@ -38,24 +40,24 @@
             <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
         </div>
 
-        <div class="paso paso2">
-            <div class="texto t1">Metros de cielo raso</div>
+        <!--<div class="paso paso2">-->
+            <!--<div class="texto t1">Metros de cielo raso</div>-->
 
-            <div class="texto t2">Largo</div>
-            <input data-role="none" class="i1" type="number" step="0.01" />
-            <div class="texto t3">mts.</div>
+            <!--<div class="texto t2">Largo</div>-->
+            <!--<input data-role="none" class="i1" type="number" step="0.01" />-->
+            <!--<div class="texto t3">mts.</div>-->
 
-            <div class="texto t2">Ancho</div>
-            <input data-role="none" class="i2" type="number" step="0.01" />
-            <div class="texto t3">mts.</div>
+            <!--<div class="texto t2">Ancho</div>-->
+            <!--<input data-role="none" class="i2" type="number" step="0.01" />-->
+            <!--<div class="texto t3">mts.</div>-->
 
-            <div class="boton siguiente-paso saveCalc">Finalizar cálculo</div>
+            <!--<div class="boton siguiente-paso saveCalc">Finalizar cálculo</div>-->
 
-        </div>
+        <!--</div>-->
 
 		<div id="myRenderSaveDW">
 
-			<div class="paso paso3">
+			<div class="paso paso2">
 				<div class="texto t1">Computo aproximado de materiales</div>
 
 
@@ -89,14 +91,14 @@
 				<div class="resultado">
 					<span class="texto">4. Placas de Yeso</span>
 				</div>
-				<div class="valor">
+				<div class="valor ultimo">
 					<span class="texto">Placa de Yeso para Paredes</span>
 					<span class="texto medida soleraYesoParedes">311 m2.</span>
 				</div>
-				<div class="valor ultimo">
-					<span class="texto">Placa de Yeso para cielorrasos</span>
-					<span class="texto medida soleraYesoCielorrasos">311 m2.</span>
-				</div>
+				<!--<div class="valor ultimo">-->
+					<!--<span class="texto">Placa de Yeso para cielorrasos</span>-->
+					<!--<span class="texto medida soleraYesoCielorrasos">311 m2.</span>-->
+				<!--</div>-->
 
 				<div class="resultado">
 					<span class="texto">5. Tornillos</span>
@@ -119,8 +121,8 @@
 
         <div class="pie">
             <div class="p1 selected">Dimensiones</div>
-            <div class="p2 disabled">Cielo raso</div>
-            <div class="p3 disabled">Resultados</div>
+            <!--<div class="p2 disabled">Cielo raso</div>-->
+            <div class="p2 disabled">Resultados</div>
         </div>
 
 

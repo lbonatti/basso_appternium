@@ -74,7 +74,9 @@
     padding: 32px;
     padding-bottom: 12px;
 }
-#m1-cdw-1 .grupo .op1{
+#m1-cdw-1 .grupo .op1,
+#m1-cdw-1 .grupo .op3
+{
     font-family: roboto-regular;
     text-shadow: none;
     width: 45%;
@@ -91,7 +93,9 @@
     height: 43px;
 }
 
-#m1-cdw-1 .grupo .op2{
+#m1-cdw-1 .grupo .op2,
+#m1-cdw-1 .grupo .op4
+{
     font-family: roboto-regular;
     font-size: 17px;
     height: 43px;
@@ -104,6 +108,12 @@
     box-sizing: border-box;
     text-align: center;
     text-shadow: none;
+}
+
+#m1-cdw-1 .grupo .op3,
+#m1-cdw-1 .grupo .op4
+{
+    margin-bottom: 20px;
 }
 
 #m1-cdw-1 .grupo .selected{
@@ -120,7 +130,7 @@
 
 #m1-cdw-1 .boton{
     clear: both;
-    margin: 37px 5%;
+    margin: 10px 5%;
 
     float: left;
     width: 90%;
@@ -146,7 +156,7 @@
 }
 
 #m1-cdw-1 .pie div{
-    width: 33.3%;
+    width: 50%;
     float: left;
     background-color: #495456;
     height: 100%;

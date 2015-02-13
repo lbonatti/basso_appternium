@@ -29,7 +29,7 @@
 #m5-pl select.dd-sector{
     float: left;
     width: 100%;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
 }
 
 #m5-pl .proveedor{

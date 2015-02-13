@@ -5,18 +5,18 @@ var tipoC="sf"; // sf dw t
 var theSlide = 2;
 var stepCompleted = 0;
 
-function eventosSteelFrame(){
-
-    if(sessionStorage.getItem('aEditar')){
-
-        var pID = sessionStorage.getItem('aEditar'); //  Tomar id de proy a editar.
+function eventosSteelFrame()
+{
+    var aEditar = sessionStorage.getItem('aEditar');
+    if (aEditar) {
+        var pID = aEditar; //  Tomar id de proy a editar.
 
         sessionStorage.setItem('editardesderesumen', pID);
         sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
 
         var $getEditable = 'SELECT * FROM calculos WHERE _id='+ pID ;
         db_customQuery($getEditable, function(result) {
-            if(result.length > 0) {
+            if (result.length > 0) {
                 var editablePName = result[0].project_name;
                 var editablePVars = $.parseJSON(result[0].data).vars;
 
@@ -26,16 +26,16 @@ function eventosSteelFrame(){
                 $('#m1-csf-1 .projectName').text(editablePName);
 
                 // Cantidad de plantas
-                if(editablePVars.plantas.cuantas == '1'){
+                if (editablePVars.plantas.cuantas == '1') {
                     $('#m1-csf-1 .paso1 .cantPlantas .op1').trigger('click');
-                }else{
+                } else {
                     $('#m1-csf-1 .paso1 .cantPlantas .op2').trigger('click');
                 }
 
                 // Tipo de entrepiso
-                if(editablePVars.entrepiso == 'seco') {
+                if (editablePVars.entrepiso == 'seco') {
                     $('#m1-csf-1 .paso1 .tipoEntrepiso .op1').trigger('click');
-                }else{
+                } else {
                     $('#m1-csf-1 .paso1 .tipoEntrepiso .op2').trigger('click');
                 }
 
@@ -92,17 +92,18 @@ function eventosSteelFrame(){
 
                 stepCompleted = 3; // Habilita hasta la 4ta pestaña
 
-            }else{
+                var pasoActual = sessionStorage.getItem('pasoSTactual');
+                if (pasoActual) {
+                    setEstadoPie(pasoActual, true);
+                }
+            } else {
                 alertMsg('Error al cargar el proyecto', '', 'none', 'Editar Proyecto', 1, function(){
                     $.mobile.changePage("m-mis-calculos.html");
                 });
             }
         });
-        estadoST=2;
-
-
-
-    }else{
+        estadoST = 2;
+    } else {
         initNuevoCalculoSF();
         $('.paso1').show();
         $('.paso2, .paso3, .paso4, .paso5').hide();
@@ -111,76 +112,96 @@ function eventosSteelFrame(){
     $('#m1-csf-1 .paso1 .siguiente-paso').unbind('click').click(function(){
         st_save_step1();
         snapper.enable();
-        setEstadoPie(2,false);
+        setEstadoPie(2, false);
+        sessionStorage.setItem('pasoSTactual', 2);
     });
     $('#m1-csf-1 .paso2 .siguiente-paso').unbind('click').click(function(){
         st_save_step2(1);
+        sessionStorage.setItem('pasoSTactual', 3);
     });
     $('#m1-csf-1 .paso3 .siguiente-paso').unbind('click').click(function(){
         st_save_step3(1);
+        sessionStorage.setItem('pasoSTactual', 4);
     });
     $('#m1-csf-1 .paso4 .siguiente-paso').unbind('click').click(function(){
         st_save_step4();
-        setEstadoPie(5,false);
+        setEstadoPie(5, false);
         calculateSF();
     });
 
-
+    var $pie;
     $('#m1-csf-1 .pie .p1').unbind('click').click(function(){
-        if( ! $(this).hasClass('disabled') ){
+        $pie = 1;
+        if (!$(this).hasClass('disabled')) {
             snapper.disable();
-            setEstadoPie(1,true);
+            setEstadoPie($pie, true);
+        } else {
+            $('.menu-options div.editar').trigger('click');
         }
+        sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p2').unbind('click').click(function(){
-        if( ! $(this).hasClass('disabled') ) {
+        $pie = 2;
+        if (!$(this).hasClass('disabled')) {
             $('#m1-csf-1 .paso1 .siguiente-paso')[0].click();
-            setEstadoPie(2, true);
+            setEstadoPie($pie, true);
+        } else {
+            $('.menu-options div.editar').trigger('click');
         }
+        sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p3').unbind('click').click(function(){
-        if( ! $(this).hasClass('disabled') ) {
+        $pie = 3;
+        if (!$(this).hasClass('disabled')) {
             if (stepCompleted >= 2) {
                 $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
                 snapper.enable();
-                setEstadoPie(3, true);
+                setEstadoPie($pie, true);
             } else {
                 alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             }
+        } else {
+            $('.menu-options div.editar').trigger('click');
         }
+        sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p4').unbind('click').click(function(){
-        if( ! $(this).hasClass('disabled') ) {
+        $pie = 4;
+        if (!$(this).hasClass('disabled')) {
             if (stepCompleted >= 3) {
                 $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
                 snapper.enable();
-                setEstadoPie(4, true);
+                setEstadoPie($pie, true);
             } else {
                 alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             }
+        } else {
+            $('.menu-options div.editar').trigger('click');
         }
+        sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p5').unbind('click').click(function(){
-        if(stepCompleted == 99) {
+        $pie = 5;
+        if (stepCompleted == 99) {
             $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
             snapper.enable();
-            setEstadoPie(5, true);
-        }else{
+            setEstadoPie($pie, true);
+        } else {
             alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
         }
+        sessionStorage.setItem('pasoSTactual', $pie);
     });
 
     eventosCalculosGenerales();
 
-    $('.techo').unbind('click').click(function(){
-        //if(estadoST!=1){
-            $('.techo').removeClass('selected');
-            $(this).addClass('selected');
-        //}
+    $('.techo').unbind('click').click(function() {
+        $('.techo').removeClass('selected');
+        $(this).addClass('selected');
     });
 
-    setEstadoPie(1,true);
-
+    if (!aEditar || sessionStorage.getItem('pasoSTactual') == 1) {
+        setEstadoPie(1, true);
+    }
 
     $('#back-sf').unbind('click').on('click',function(e){
         e.preventDefault();
@@ -199,32 +220,41 @@ function eventosSteelFrame(){
         $('#m1-csf-1 .paso2 .i8').val($('#m1-csf-1 .paso2 .i4').val());
     });
 
-    if(sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1){
-        setTimeout(function (){
+    if (sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1) {
+        setTimeout(function () {
+            $pie = 5;
             $('.paso.paso1, .paso.paso2, .paso.paso3, .paso.paso4').hide();
             $('.paso.paso5').show();
             st_save_step1();
             st_save_step2();
             st_save_step3();
             st_save_step4();
-            setEstadoPie(5,false);
+            setEstadoPie($pie, false);
             calculateSF();
-            modoLectura(5);
+            modoLectura($pie);
             sessionStorage.removeItem('aResumen');
         }, 600);
     }
-
 }
 
-
 function eventosCalculosGenerales(){
-    $('.grupo .op1,.grupo .op2').unbind('click').click(function(){
-        //if(estadoST!=1){
-            $('div',$(this).parent()).removeClass('selected');
-            $(this).addClass('selected');
-        //}
+    $('.grupo .op1,.grupo .op2,.grupo .op3,.grupo .op4').unbind('click').click(function() {
+        var $class;
+        if ($(this).hasClass('op1')) {
+            $class = '.op2';
+        }
+        if ($(this).hasClass('op2')) {
+            $class = '.op1';
+        }
+        if ($(this).hasClass('op3')) {
+            $class = '.op4';
+        }
+        if ($(this).hasClass('op4')) {
+            $class = '.op3';
+        }
+        $($class, $(this).parent()).removeClass('selected');
+        $(this).addClass('selected');
     });
-
 
     activarDotMenu();
     $('.dot-menu').unbind('click').click(function(){
@@ -237,20 +267,6 @@ function eventosCalculosGenerales(){
 
         }
     });
-
-    ////Delete Project
-    //$('#dlg-del-calculo[data-action=delete] .boton').on('click',function(){
-    //        var currentProjectName = $('h1.projectName').text();
-    //        var jsonCalc = $.parseJSON(sessionStorage.getItem('calculos'))
-    //        if(jsonCalc.tipo.steel_frame[currentProjectName]){
-    //            delete jsonCalc.tipo.steel_frame[currentProjectName];
-    //            sessionStorage.setItem('calculos', JSON.stringify(jsonCalc));
-    //            alertMsg('El calculo '+ currentProjectName + ' ha sido borrado.', '', 'none', 'Borrar calculo', 1);
-    //        }else{
-    //            alertMsg('No se puede eliminar el cálculo ya que no se encuentra guardado.', '', 'none', '', 1);
-    //        }
-    //})
-
 }
 
 function setEstadoPie(paso, tab) {
@@ -286,9 +302,6 @@ function setEstadoPie(paso, tab) {
     }
     if (paso == 5){
         $('.pie .p5').removeClass('disabled');
-        if(estadoST==2){
-            //$('.boton.saveCalc').show().html('Guardar edición');
-        }
     }
 }
 
@@ -297,17 +310,11 @@ function modoLectura(paso)
     estadoST=1;
     $('#back-'+tipoC).hide();
     $('.dot-menu').show();
-    //$('#m1-csf-1 .paso input[type=number]').attr('disabled', 'disabled');
     $('.pie div').addClass('disabled').removeClass('selected');
 
     if (paso != null) {
         $('.pie .p'+paso).removeClass('disabled').addClass('selected');
     }
-
-    $('.pie div.disabled').on('click', function (){
-        $('.menu-options div.editar').trigger('click');
-        //alert('aca');
-    });
 }
 
 function esconderDotMenu(){
@@ -315,9 +322,6 @@ function esconderDotMenu(){
     $('.dot-menu').removeClass('selected');
     $('.btn-settings').removeClass('selected');
 }
-
-
-
 
 function initNuevoCalculoSF(){
     stepCompleted = 0;
@@ -330,7 +334,6 @@ function initNuevoCalculoSF(){
     snapper.disable();
 
 }
-
 
 function initEditarCalculoSF(){
     tipoC='sf';
@@ -683,8 +686,8 @@ function calculateSF(){
     $('.paso5 span[data-result=pgu100]').text( Math.round($pgu100_total) + ' ml.');
     $('.paso5 span[data-result=anclajes]').text( Math.round($anclajes_total) + ' U.');
     //Diagrafagmas de rigidización
-    $('.paso5 span[data-result=diafragma1]').text( Math.round($exteriores_techos_timpanos) + ' ml.');
-    $('.paso5 span[data-result=diafragma2]').text(  Math.round($entrepisos_escaleras) + ' ml.');
+    $('.paso5 span[data-result=diafragma1]').html( Math.round($exteriores_techos_timpanos) + ' m<sup>2</sup>.');
+    $('.paso5 span[data-result=diafragma2]').html( Math.round($entrepisos_escaleras) + ' m<sup>2</sup>.');
     //AISLACIONES
     $('.paso5 span[data-result=aislaciones1]').html( Math.round($aislaciones1) + ' m<sup>2</sup>.');
     $('.paso5 span[data-result=aislaciones2]').html( Math.round($aislaciones2) + ' m<sup>2</sup>.');

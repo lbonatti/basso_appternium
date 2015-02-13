@@ -84,7 +84,7 @@ function cargarProveedores() {
             sel = 'selected';
             selectorrr = true;
         }
-        sectoresDropDown += '<option value="'+val+'" '+ sel +' >'+val.toLowerCase()+'</option>';
+        sectoresDropDown += '<option value="'+val+'" '+ sel +' >'+ucfirst(val.toLowerCase())+'</option>';
     });
     if (!selectorrr) idSector = '';
     $('#m5-pl .dd-sector').html(sectoresDropDown);
