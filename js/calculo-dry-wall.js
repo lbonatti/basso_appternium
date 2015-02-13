@@ -59,6 +59,8 @@ function eventosDryWall()
     $('#m1-cdw-1 .pie .p1').unbind('click').click(function() {
         if( ! $(this).hasClass('disabled') ) {
             setEstadoPie(1, true);
+        } else {
+            $('.menu-options div.editar').trigger('click');
         }
     });
 
