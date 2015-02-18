@@ -77,7 +77,8 @@ function switchFbId(userId){
                 }
             },
             error:function(error){
-                alert(JSON.stringify(error));
+                //alert(JSON.stringify(error));
+                alertMsg('Parece haber problemas de conexión', '', '', 'Error Login', '', '');
             }
         });
     }

@@ -22,7 +22,8 @@ function eventosRecuperarPwd(){
                     }
                 },
                 error:function(error){
-                    alert(JSON.stringify(error));
+                    alertMsg('Parece haber problemas de conexión', '', '', 'Error recuperar contraseña', '', '');
+                    //alert(JSON.stringify(error));
                 }
             });
         }

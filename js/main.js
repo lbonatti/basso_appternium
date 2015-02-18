@@ -102,7 +102,7 @@ function callAjaxPdf($html, filename)
             urlToFile = data;
         },
         error: function(error) {
-            alertMsg(JSON.stringify(error), '', '', 'Error PDF', '', '');
+            alertMsg('Parece haber problemas de conexión', '', '', 'Error PDF', '', '');
         }
     });
 }

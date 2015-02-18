@@ -122,7 +122,7 @@ function getDataFbRegister() {
         },
         error: function(error) {
             mensaje('El registro no se pudo realizar.');
-            JSON.stringify(error);
+            //JSON.stringify(error);
         }
     });
 }

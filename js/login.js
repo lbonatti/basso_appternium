@@ -70,7 +70,8 @@ $(document).ready(function(){
                     }
                 },
                 error:function(error){
-                    alert(JSON.stringify(error));
+                    mensaje('Parece haber problemas de conexión');
+                    //alert(JSON.stringify(error));
                 }
             });
         }
