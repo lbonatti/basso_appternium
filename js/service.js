@@ -163,6 +163,7 @@ function cargarProveedor() {
             $('#m5-p .descripcion').html(val.Proveedore.descripcion);
             $('#m5-p .info1 span').html(val.Proveedore.telefono);
             $('#m5-p .info2 span').html(val.Proveedore.email);
+            $('#m5-p .info3 span').html(val.Proveedore.sector);
         }
     });
 }
