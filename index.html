@@ -73,18 +73,20 @@
     $(document).on("pageshow", function(event) {
         $('#page-splash').height( $(window).height());
 
-        ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
-        ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
-        ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
-        ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
-        function ajaxCallToLocalStorage(url, localStorageKey) {
-            $.ajax({
-                url: url,
-                async:false,
-                success: function(result) {
-                    localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
-                }
-            });
+        if ( checkConnection() !== 'none' ){
+            ajaxCallToLocalStorage(backend_url + '/comentarios/lists', 'comentarios');
+            ajaxCallToLocalStorage(backend_url + '/paises/lists', 'paises');
+            ajaxCallToLocalStorage(backend_url + '/proveedores/lists', 'proveedores');
+            ajaxCallToLocalStorage(backend_url + '/profesiones/lists', 'profesionales');
+            function ajaxCallToLocalStorage(url, localStorageKey) {
+                $.ajax({
+                    url: url,
+                    async:false,
+                    success: function(result) {
+                        localStorage.setItem(localStorageKey, JSON.stringify(result.Default));
+                    }
+                });
+            }
         }
 
         setTimeout(function() {
