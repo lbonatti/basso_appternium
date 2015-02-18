@@ -54,19 +54,23 @@
         <script>
             function doOnOrientationChange()
             {
-                $.mobile.changePage(
-                        window.location.href,
-                        {
-                            allowSamePageTransition : true,
-                            transition              : 'none',
-                            showLoadMsg             : false,
-                            reloadPage              : true
-                        }
-                );
+                if( $('#m2-mc') &&  $('#m2-mc').hasClass('ui-page-active') ){
+                    $.mobile.changePage(
+                            window.location.href,
+                            {
+                                allowSamePageTransition : true,
+                                transition              : 'none',
+                                showLoadMsg             : false,
+                                reloadPage              : true
+                            }
+                    );
+                }
+
             }
 
 
             $(document).ready(function (){
+
                 $(window).unbind('resize').on('resize', doOnOrientationChange);
 
 
