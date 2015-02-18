@@ -267,6 +267,33 @@
 #m1-ct-1 .valor.ultimo{
     border-bottom: 0px;
 }
+#m1-ct-1 .valor.ultimo .colorSample{
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+}
+#m1-ct-1 .valor.ultimo .colorSample.blanco{
+    background-color: #ffffff;
+    border: 1px solid #E0DEDF;
+}
+#m1-ct-1 .valor.ultimo .colorSample.celeste{
+    background-color: #689ECA;
+}
+#m1-ct-1 .valor.ultimo .colorSample.azul{
+    background-color: #0A5994;
+}
+#m1-ct-1 .valor.ultimo .colorSample.rojo{
+    background-color: #DA4938;
+}
+#m1-ct-1 .valor.ultimo .colorSample.verde{
+    background-color: #106835;
+}
+#m1-ct-1 .valor.ultimo .colorSample.gris{
+    background-color: #999DA0;
+}
+#m1-ct-1 .valor.ultimo .colorSample.negro{
+    background-color: #000000;
+}
 
 #m1-ct-1 .valor .texto{
     max-width: 74%;

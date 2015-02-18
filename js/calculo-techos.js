@@ -208,11 +208,43 @@ function calculateResult(values){
     $('#m1-ct-1 .paso2 .resultado-chapas').html(cantChapas + ' U.');
     $('#m1-ct-1 .paso2 .resultado-aislacion').html(aislacion + ' m2.');
     $('#m1-ct-1 .paso2 .resultado-tornillos').html(cantTornillos + ' U.');
-    $('.elcolor').html(values.color);
+
+    setColorSample(values.color);
+
 
     if (sessionStorage.getItem('aResumen') != 1 ) {
         //GUARDAMOS EL CALCULO EN LA VARIABLE LOCAL DE LA APP.
         saveNewCalcTechos(values, 1);
+    }
+
+}
+
+function setColorSample(colorName){
+    $('.elcolor').html(colorName);
+    $colorSample = $('.colorSample');
+
+    switch(colorName){
+        case 'Blanco Nieve':
+            $colorSample.addClass('blanco');
+            break;
+        case 'Celeste':
+            $colorSample.addClass('celeste');
+            break;
+        case 'Azul Millenium':
+            $colorSample.addClass('azul');
+            break;
+        case 'Rojo teja':
+            $colorSample.addClass('rojo');
+            break;
+        case 'Verde Inglés':
+            $colorSample.addClass('verde');
+            break;
+        case 'Gris Pizarra':
+            $colorSample.addClass('gris');
+            break;
+        case 'Negro':
+            $colorSample.addClass('negro');
+            break;
     }
 
 }

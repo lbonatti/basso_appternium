@@ -134,7 +134,8 @@ function generateHtml(type)
             var $_temp_table_b = '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>';
             var $_temp_table_e = '</tbody></table>';
 
-            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: TECHO</td></tr>' + $_temp_table_e;
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: TECHO</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $_rt + ' ' + $_rm + ' ' + $_rl +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
@@ -157,9 +158,16 @@ function generateHtml(type)
                     $_html += '<tr>';
                     $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
                     $_html += '    <td style="width: 60%; text-align: left;">' + $_div.find("span:eq(0)").text() +'</td>';
-                    $_html += '    <td style="width: 30%; text-align: center;">' + $_div.find("span:eq(1)").text() +'</td>';
+                    if($_div.hasClass('colorValue')){
+                        var colorSample = $('.valor.ultimo.colorValue .colorSample').css('background-color');
+                        $_html += '    <td style="width: 30%; text-align: center;"><div style="display: block;background-color:'+ colorSample +';height:20px;width:20px;border-radius: 10px;margin: 0 auto;"></div></td>';
+                    }else{
+                        $_html += '    <td style="width: 30%; text-align: center;">' + $_div.find("span:eq(1)").text() +'</td>';
+                    }
+
                     $_html += '</tr>';
                     $_html += $_temp_table_e;
+
                 }
             });
 
@@ -176,7 +184,8 @@ function generateHtml(type)
             var $_temp_table_b = '<table cellspacing="0" style="width: 750px; text-align: center; font-size: 10pt;"><tbody>';
             var $_temp_table_e = '</tbody></table>';
 
-            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: STEEL FRAME</td></tr>' + $_temp_table_e;
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: STEEL FRAME</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
@@ -215,7 +224,8 @@ function generateHtml(type)
             var $_temp_table_b = '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>';
             var $_temp_table_e = '</tbody></table>';
 
-            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: DRY WALL</td></tr>' + $_temp_table_e;
+            $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: DRY WALL</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;

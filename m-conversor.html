@@ -101,14 +101,19 @@
                 var activeSlide2Unit = 0;
                 var mySwiper;
                 var mySwiper2;
-                var first = 0;
                 $(document).ready(function () {
 
                     deviceBackBtn();
 
                     $('.field_1').on('input', function () {
-                        first = 1;
-                        calcConversion();
+                        $this = $(this);
+                        if( $.trim($this.val()).length == 0 ){
+                            $this.val(0);
+                        }
+                        if( $.trim($this.val()).length > 1 && $this.val().substr(0,1) == '0'){
+                            $this.val($this.val().replace('0', ''));
+                        }
+                        calcConversion(0);
                     });
                     mySwiper = new Swiper('.swiper-container', {
                         mode: 'vertical',
@@ -116,8 +121,7 @@
                         centeredSlides: true,
                         slidesPerView: 'auto',
                         onTouchEnd: function (swiper) {
-                            first = 1;
-                            calcConversion();
+                            calcConversion(1);
                         }
                     });
                     mySwiper2 = new Swiper('.swiper-container2', {
@@ -126,85 +130,86 @@
                         centeredSlides: true,
                         slidesPerView: 'auto',
                         onTouchEnd: function (swiper) {
-                            first = 1;
-                            calcConversion();
+                            calcConversion(1);
                         }
                     });
                 });
 
-                function calcConversion() {
+                function calcConversion(where) {
+                    // where -> Si la accion viene del input o del slider. 0=input 1=slider
+
                     if ($.trim($('.field_1').val()).length > 0) {
-                        field1Val = parseInt($('.field_1').val());
+                        field1Val = parseFloat($('.field_1').val());
                     } else {
                         field1Val = 0;
                     }
                     activeSlide1Unit = $('.panel-1 .swiper-slide-active').attr('data-unit');
                     activeSlide2Unit = $('.panel-2 .swiper-slide-active').attr('data-unit');
 
-                    if (field1Val === 0 && first == 1) {
+                    if (field1Val === 0 && where == 1) {
                         alertMsg('Debes completar la medida 1', '', '', 'Campo Necesario', 1);
                     } else {
                         var operation = activeSlide1Unit + activeSlide2Unit;
                         switch (parseInt(operation)) {
                             case 14:
                                 //mm a pies
-                                $('.resultField').text((field1Val * 0.0033).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.0033).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Milímetro');
                                 $('.result .to').text('0,0033 Pie');
                                 break;
                             case 15:
                                 //mm a pulgadas
-                                $('.resultField').text((field1Val * 0.0394).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.0394).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Milímetro');
                                 $('.result .to').text('0,0394 Pulgadas');
                                 break;
                             case 16:
                                 //mm a millas
-                                $('.resultField').text((field1Val * 0.000001).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.000001).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Milímetro');
                                 $('.result .to').text('0,000001 Milla');
                                 break;
                             case 24:
                                 //cm a pies
-                                $('.resultField').text((field1Val * 0.0328).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.032808).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Centímetro');
                                 $('.result .to').text('0,0328 Pie');
                                 break;
                             case 25:
                                 //cm a pulgadas
-                                $('.resultField').text((field1Val * 0.3937).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.39370).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Centímetro');
                                 $('.result .to').text('0.3937 Pulgada');
                                 break;
                             case 26:
                                 //cm a millas
-                                $('.resultField').text((field1Val * 0.000006).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.0000062137).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Centímetro');
                                 $('.result .to').text('0,000006 Milla');
                                 break;
                             case 34:
                                 //pulgadas a pies
-                                $('.resultField').text((field1Val * 0.0833).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.0833).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Pulgada');
                                 $('.result .to').text('0,0833 Pie');
                                 break;
                             case 35:
                                 //pulgadas a pulgadas
-                                $('.resultField').text((field1Val).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Pulgada');
                                 $('.result .to').text('1 Pulgada');
                                 break;
                             case 36:
                                 //pulgadas a millas
-                                $('.resultField').text((field1Val * 0.000016).toFixed(4).toString().replace(/\./g, ','));
+                                $('.resultField').text((field1Val * 0.000016).toFixed(2).toString().replace(/\./g, ','));
 
                                 $('.result .from').text('1 Pulgada');
                                 $('.result .to').text('0,000016 Milla');
@@ -218,7 +223,7 @@
 
             <div class="panel-1">
                 <div class="left">
-                    <input class="field_1" data-role="none" type="number" step="0.01" step="0.01"/>
+                    <input class="field_1" data-role="none" type="number" step="0.01" step="0.01" value="0"/>
                 </div>
                 <div class="right">
                     <div class="swiper-container">

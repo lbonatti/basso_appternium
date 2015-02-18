@@ -54,6 +54,7 @@
         <script>
             function doOnOrientationChange()
             {
+                alert('orientatiton change');
                 $.mobile.changePage(
                         window.location.href,
                         {
@@ -67,7 +68,8 @@
 
 
             $(document).ready(function (){
-                $(window).on('resize', doOnOrientationChange);
+                $(window).unbind('resize').on('resize', doOnOrientationChange);
+
 
 
                 setTimeout(function (){
