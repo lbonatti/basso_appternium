@@ -1,3 +1,6 @@
+#m6-f {
+    background-color: #3D464B;
+}
 #m6-f .boton{
     clear: both;
     margin: 18px 5%;
@@ -14,7 +17,7 @@
     font-size: 20px;
 }
 #m6-f .ultimo-elemento{
-    margin-bottom: 84px !important;
+    /*margin-bottom: 84px !important;*/
 }
 
 #m6-f .page-content{

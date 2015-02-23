@@ -76,15 +76,6 @@ function eventosDryWall()
 
     setEstadoPie(1, true);
 
-    $('#back-dw').unbind('click').on('click', function(e) {
-        e.preventDefault();
-        if (pasoSTactual > 1) {
-            setEstadoPie(pasoSTactual-1);
-        } else {
-            window.history.back();
-        }
-    });
-
     if (sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1) {
         setTimeout(function () {
             $('.paso.paso1').hide();
@@ -163,7 +154,7 @@ function dw_calculateResult()
     // cambio el valor de label de montante y solera
     var $espesorPerfil = sessionStorage.getItem("dw-s1-ep");
     var $cm = 35;
-    console.log(sessionStorage.getItem("dw-s1-ep"));
+    //console.log(sessionStorage.getItem("dw-s1-ep"));
     if ($espesorPerfil) {
         switch ($espesorPerfil) {
             case '1':

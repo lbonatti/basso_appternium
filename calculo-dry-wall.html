@@ -129,6 +129,18 @@
     </div>
 
     <script>
+
+        $(document).ready(function(event) {
+            setTimeout(function () {
+                $('#back-dw.backBtn.page-back').unbind('click').on('click',function(e){
+                    e.preventDefault();
+                    optionMsg('¿Estas por abandonar el cálculo. Estás seguro?', '¿Abandonar?', function(){
+                        window.location.href="m-inicio.html";
+                    });
+                });
+            },1500)
+        });
+
 		//Mostrar PDF
 		$('.boton.savePDF').on('click',function(){
 			var $this = $(this);

@@ -42,6 +42,10 @@ $(document).on("pageshow", function(event) {
     $('.menu-options .terminos').unbind('click').click(function(){
         $.mobile.changePage('u-tos.html');
     });
+
+    $('.menu-options .version').unbind('click').click(function(){
+        showAppVersion();
+    });
     
     $('.menu-options .logout').unbind('click').on( 'click', function(e){
         e.preventDefault();
@@ -62,6 +66,10 @@ $(document).ready(function() {
 
     $('.menu-options .terminos').unbind('click').click(function(){
         $.mobile.changePage('u-tos.html');
+    });
+
+    $('.menu-options .version').unbind('click').click(function(){
+        showAppVersion();
     });
 
     esAnonimo();
@@ -199,7 +207,7 @@ function boton_menu(pag){
     $('.page-header a.page-back').unbind('click').click(function() {
 
         if( ! $(this).hasClass('btnUtilidades') ) {
-            window.history.back();
+            window.location.href="m-inicio.html";
         }
     });
 
@@ -281,3 +289,35 @@ function alertMsg(text, id, action, title, type, cb){
     }
 }
 
+function showAppVersion(){
+    $('.btn-settings.selected').click();
+    alertMsg(sessionStorage.getItem('appVersion'), 'popAppVersion', '', 'App Version', 1);
+}
+
+function optionMsg(text, title, cb){
+    title = ((title != undefined && title != '') ? title : 'Atención');
+
+    var $html = '';
+
+    $html += '<div class="dialogo alertMsg">';
+
+    $html += '<div class="titulo">'+title+'</div>';
+    $html += '<div class="mensaje">'+text+'</div>';
+    $html += '<div class="boton">Aceptar</div>';
+    $html += '<div class="cancelar">Cancelar</div>';
+    $html += '</div>'; //Cierra dlg
+
+    $('.shadow').css('height','100%').show();
+    $('.snap-content').after($html);
+    $('.alertMsg').show();
+
+    if(typeof cb == "function"){
+        $('.dialogo.alertMsg .boton').on('click', function(){ cb(); });
+    }
+
+    $('.alertMsg .boton, .alertMsg .cancelar').on("click",function(e){
+        e.preventDefault();
+        $(this).parent().remove();
+        $('.shadow').css('height','0');
+    });
+}

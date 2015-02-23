@@ -1,5 +1,6 @@
 var projectName = '';
 var logged;
+var tipo;
 
 if (localStorage.getItem('username') == 'anonimo') {
     logged = false;
@@ -9,63 +10,100 @@ if (localStorage.getItem('username') == 'anonimo') {
 
 function eventosNuevoCalculo() {
 
+    setTimeout(function(){
+        setBackBtn();
+
+        $('#m1-nuevo-calculo .blockName .btnChangeCalc').on('click', function(){
+            $('#m1-nuevo-calculo .blockName').hide();
+            $('#m1-nuevo-calculo .blockType').show();
+        });
+
+    },1000);
+
+
     $('#m1-nuevo-calculo a.option').unbind('click').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        setBackBtn('Nuevo');
+
         var $this = $(this);
 
+        if (!$this.hasClass('vacio')) {
+
+            $('.blockType').hide();
+            $('.blockName').show();
+
+            if ($this.hasClass('calc1')) {
+                tipo = 1;
+            } else if ($this.hasClass('calc2')) {
+                tipo = 2;
+            } else if ($this.hasClass('calc3')) {
+                tipo = 3;
+            }
+        }
+    });
+
+
+    $('#m1-nuevo-calculo a.btnNewCalc').unbind('click').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
         projectName = $.trim($('.projectName').val());
-        if (!$this.hasClass('vacio')) {
-            if (projectName.length === 0) {
-                alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Nuevo Calculo', 1);
-            } else {
-                //Hacemos un select para saber si el nombre del projecto ingresado ya existe.
-                var tipo;
-                var page;
 
-                if ($this.hasClass('calc1')) {
-                    tipo = 1;
-                } else if ($this.hasClass('calc2')) {
-                    tipo = 2;
-                } else if ($this.hasClass('calc3')) {
-                    tipo = 3;
-                }
+        if (projectName.length === 0) {
+            alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Nuevo Calculo', 1);
+        } else {
+            //Hacemos un select para saber si el nombre del projecto ingresado ya existe.
+            var page;
 
-                var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND remove=0 AND user_id='+localStorage.getItem('userId');
-                db_customQuery($query, function(pleaseWork) {
-                    if (pleaseWork.length > 0) {
-                        alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Este proyecto ya existe', 1);
-                    } else {
-                        sessionStorage.setItem("projectName", projectName);
-                        switch (tipo) {
-                            case 1:
-                                initNuevoCalculoSF();
-                                page = "calculo-steel-frame.html";
-                                $calc_type = 'Steelframe';
+            var $query = 'SELECT * FROM calculos WHERE project_name="'+projectName+'" AND calc_type='+tipo+' AND remove=0 AND user_id='+localStorage.getItem('userId');
+            db_customQuery($query, function(pleaseWork) {
+                if (pleaseWork.length > 0) {
+                    alertMsg('El nombre del proyecto ya existe. Intente con otro.', '', 'none', 'Este proyecto ya existe', 1);
+                } else {
+                    sessionStorage.setItem("projectName", projectName);
+                    switch (tipo) {
+                        case 1:
+                            initNuevoCalculoSF();
+                            page = "calculo-steel-frame.html";
+                            $calc_type = 'Steelframe';
 
-                                break;
-                            case 2:
-                                initNuevoCalculoDW();
-                                page = "calculo-dry-wall.html";
-                                $calc_type = 'Drywall';
+                            break;
+                        case 2:
+                            initNuevoCalculoDW();
+                            page = "calculo-dry-wall.html";
+                            $calc_type = 'Drywall';
 
-                                break;
-                            case 3:
-                                initNuevoCalculoT();
-                                page = "calculo-techos.html";
-                                $calc_type = 'Techos';
+                            break;
+                        case 3:
+                            initNuevoCalculoT();
+                            page = "calculo-techos.html";
+                            $calc_type = 'Techos';
 
-                                break;
-                        }
-                        sessionStorage.setItem('calc_type', $calc_type);
-
-                        syncNewOrEdit();
-
-                        $.mobile.changePage(page);
+                            break;
                     }
-                });
-            }
+                    sessionStorage.setItem('calc_type', $calc_type);
+
+                    syncNewOrEdit();
+
+                    $.mobile.changePage(page);
+                }
+            });
+        }
+    });
+}
+
+function setBackBtn(){
+
+    $('#m1-nuevo-calculo .page-back.ui-link').unbind('click').on('click', function(e) {
+        e.preventDefault();
+
+        if ($('.blockType:visible').length == 1) {
+            window.location.href="m-inicio.html";
+        } else {
+            $('#m1-nuevo-calculo .blockName').hide();
+            $('#m1-nuevo-calculo .blockType').show();
         }
     });
 }

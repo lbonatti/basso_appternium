@@ -352,8 +352,24 @@
 						centeredSlides: true,
 						slidesPerView: 'auto'
 					});
-			},2000)
+
+
+                $('#back-sf.backBtn.page-back.ui-link').unbind('click').on('click',function(e){
+                    e.preventDefault();
+                    if(pasoSTactual>1){
+                        setEstadoPie(pasoSTactual-1);
+                    }else{
+                        optionMsg('¿Estas por abandonar el cálculo. Estás seguro?', '¿Abandonar?', function(){
+                            window.location.href="m-inicio.html";
+                        });
+                    }
+                });
+
+
+			},1500)
 		});
+
+
 
 		//Mostrar PDF
 		$('.boton.savePDF').on('click',function(){
@@ -391,7 +407,7 @@
 			}else{
 				$('.grupo.tipoEntrepiso').fadeOut();
 			}
-		})
+		});
 
         $('.mas').on('click',function(){
 			var $_text = $(this).children().html();
@@ -399,12 +415,13 @@
 			$('.shadow').css('height','100%');
 			$('#dlg-calculo-mas').css('height','auto').css('top','50%').css('margin-top',-($('#dlg-calculo-mas').height()/2));
 			$('#dlg-calculo-mas').show();
-		})
+		});
 		$('#dlg-calculo-mas .boton').on('click',function(){
 			$('#dlg-calculo-mas').hide();
 			$('.shadow').css('height','auto');
-		})
-        eventosSteelFrame()
+		});
+
+        eventosSteelFrame();
     </script>
 
 

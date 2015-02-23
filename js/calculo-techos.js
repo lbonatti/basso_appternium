@@ -131,15 +131,6 @@ function eventosTechos(){
 
     setEstadoPie(1,true);
 
-    $('#back-t').unbind('click').on('click',function(e){
-        e.preventDefault();
-        if(pasoSTactual>1){
-            setEstadoPie(pasoSTactual-1);
-        }else{
-            window.history.back();
-        }
-    });
-
     if(sessionStorage.getItem('aResumen') && sessionStorage.getItem('aResumen') == 1){
         setTimeout(function (){
             $('.paso1').hide();

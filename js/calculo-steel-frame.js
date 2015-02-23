@@ -4,10 +4,12 @@ var pasoSTmaximo = 1;
 var tipoC="sf"; // sf dw t
 var theSlide = 2;
 var stepCompleted = 0;
+var aEditar;
+var aEditarStepError = 0;
 
 function eventosSteelFrame()
 {
-    var aEditar = sessionStorage.getItem('aEditar');
+    aEditar = sessionStorage.getItem('aEditar');
     if (aEditar) {
         var pID = aEditar; //  Tomar id de proy a editar.
 
@@ -72,6 +74,13 @@ function eventosSteelFrame()
                     $('#m1-csf-1 .paso2 .i6').val(editablePVars.plantas[2].largo);
                     $('#m1-csf-1 .paso2 .i7').val(editablePVars.plantas[2].alto);
                     $('#m1-csf-1 .paso2 .i8').val(editablePVars.plantas[2].paredes);
+                }else{
+                    // No tiene datos, ponerlos a 0 y ocultar.
+                    $('#m1-csf-1 .paso2 .i5').val(0);
+                    $('#m1-csf-1 .paso2 .i6').val(0);
+                    $('#m1-csf-1 .paso2 .i7').val(0);
+                    $('#m1-csf-1 .paso2 .i8').val(0);
+                    $('#m1-csf-1 .paso2 .plantaAltaBlock').hide();
                 }
 
                 // Metros Lineales
@@ -132,63 +141,98 @@ function eventosSteelFrame()
     var $pie;
     $('#m1-csf-1 .pie .p1').unbind('click').click(function(){
         $pie = 1;
-        if (!$(this).hasClass('disabled')) {
+
+        if (!$(this).hasClass('disabled')) { //Si el boton está habilitado
             snapper.disable();
             setEstadoPie($pie, true);
         } else {
-            $('.menu-options div.editar').trigger('click');
+            if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                $('.menu-options div.editar').trigger('click');
+            }
         }
+
         sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p2').unbind('click').click(function(){
         $pie = 2;
-        if (!$(this).hasClass('disabled')) {
+
+        if (!$(this).hasClass('disabled')) { //Si el boton está habilitado
             $('#m1-csf-1 .paso1 .siguiente-paso')[0].click();
             setEstadoPie($pie, true);
         } else {
-            $('.menu-options div.editar').trigger('click');
+            if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                $('.menu-options div.editar').trigger('click');
+            }
         }
+
         sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p3').unbind('click').click(function(){
         $pie = 3;
-        if (!$(this).hasClass('disabled')) {
+
+        if (!$(this).hasClass('disabled')) { //Si el boton está habilitado
             if (stepCompleted >= 2) {
                 $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
+
+                if (aEditarStepError != 0) return;
+
                 snapper.enable();
                 setEstadoPie($pie, true);
             } else {
                 alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             }
         } else {
-            $('.menu-options div.editar').trigger('click');
+            if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                $('.menu-options div.editar').trigger('click');
+            }
         }
+
         sessionStorage.setItem('pasoSTactual', $pie);
     });
     $('#m1-csf-1 .pie .p4').unbind('click').click(function(){
         $pie = 4;
-        if (!$(this).hasClass('disabled')) {
+
+        if (!$(this).hasClass('disabled')) { //Si el boton está habilitado
             if (stepCompleted >= 3) {
+
+
+                $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
+                if (aEditarStepError != 0) return;
+
                 $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
-                snapper.enable();
-                setEstadoPie($pie, true);
+                setTimeout(function (){
+                    if (aEditarStepError != 0) {
+                        return;
+                    }
+                    snapper.enable();
+                    setEstadoPie($pie, true);
+                }, 500)
+
+
+
+
             } else {
                 alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             }
         } else {
-            $('.menu-options div.editar').trigger('click');
+            if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                $('.menu-options div.editar').trigger('click');
+            }
         }
+
         sessionStorage.setItem('pasoSTactual', $pie);
     });
+
     $('#m1-csf-1 .pie .p5').unbind('click').click(function(){
         $pie = 5;
+
         if (stepCompleted == 99) {
+            //alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
             snapper.enable();
             setEstadoPie($pie, true);
-        } else {
-            alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
         }
+
         sessionStorage.setItem('pasoSTactual', $pie);
     });
 
@@ -202,16 +246,6 @@ function eventosSteelFrame()
     if (!aEditar || sessionStorage.getItem('pasoSTactual') == 1) {
         setEstadoPie(1, true);
     }
-
-    $('#back-sf').unbind('click').on('click',function(e){
-        e.preventDefault();
-        if(pasoSTactual>1){
-            setEstadoPie(pasoSTactual-1);
-        }else{
-            window.history.back();
-        }
-    });
-
 
     $('.plantaAltaBlock .copyTo').unbind('click').on('click', function(){
         $('#m1-csf-1 .paso2 .i5').val($('#m1-csf-1 .paso2 .i1').val());
@@ -300,8 +334,9 @@ function setEstadoPie(paso, tab) {
 
         $('.pie .p5').addClass('disabled');
     }
+
     if (paso == 5){
-        $('.pie .p5').removeClass('disabled');
+        $('.pie .p5').removeClass('disabled').addClass('selected');
     }
 }
 
@@ -365,6 +400,10 @@ function st_save_step1(){
         $('.plantaAltaBlock').show();
     }
 
+    if(stepCompleted < 1){
+        stepCompleted = 1; // Completó el paso 1
+    }
+
 }
 function st_save_step2(redirect){
 
@@ -421,25 +460,32 @@ function st_save_step2(redirect){
         sessionStorage.setItem("st-s2-p2-paredes", p2Paredes);
         if(redirect){
             if(stepCompleted < 2){
-                stepCompleted = 2;
+                stepCompleted = 2; // Completó el paso 2
             }
             setEstadoPie(3,false);
         }
+        aEditarStepError = 0;
+    } else{
+        aEditarStepError = 2;
     }
 }
 function st_save_step3(){
+
     var mts = $.trim( $('#m1-csf-1 .paso3 .i9').val() );
     if(mts.length === 0){
         alertMsg('Debe ingresar un valor para continuar.', '', 'none', '', 1);
+        aEditarStepError = 3;
     }else{
+        aEditarStepError = 0;
         sessionStorage.setItem("st-s3-mts", mts);
         if(stepCompleted < 3){
-            stepCompleted = 3;
+            stepCompleted = 3; // Completó el paso 3
         }
         setEstadoPie(4,false);
     }
 }
 function st_save_step4(){ //Almacenar tipo de techo
+
     var $_tipoTecho = $('.texto.techo.selected').attr('data-value');
     sessionStorage.setItem('st-s4-tipotecho',parseFloat($_tipoTecho));
 
@@ -537,7 +583,7 @@ function saveNewCalc(showMessage) {
         var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
         db_updateQueryEdit($query, function(result,updatedID) {
             if (result == 'ok') {
-                modoLectura();
+                modoLectura(5);
                 if (showMessage !== 0) {
                     alertMsg('Felicitaciones el cálculo "'+projectName+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
                     $('.boton.saveCalc').fadeOut(600);

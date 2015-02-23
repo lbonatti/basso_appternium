@@ -1,5 +1,4 @@
-.encabezado{
-
+.encabezado {
     height: 208px;
     background-color: #FF9900;
     text-shadow: none;
@@ -7,11 +6,13 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
-#m1-nuevo-calculo .option{
+
+#m1-nuevo-calculo .option {
     height: 28%;
     min-height: 154px;
 }
-#m1-nuevo-calculo .titulo{
+
+#m1-nuevo-calculo .titulo {
     font-family: roboto-thin;
     font-size: 16px;
     color: #fff;
@@ -19,7 +20,7 @@
     padding-top: 20px;
 }
 
-#m1-nuevo-calculo input{
+#m1-nuevo-calculo input {
     width: 90%;
     margin: 30px auto;
     display: block;
@@ -30,39 +31,92 @@
     font-size: 52px;
     font-family: roboto-thin;
     background: transparent;
-    color: #fff;
-    border-bottom: 1px solid #fff;
+    color: #4e4d4e;
+    border-bottom: 1px solid #b4b4b4;
     text-align: center;
 }
 
-#m1-nuevo-calculo .subtitulo{
+#m1-nuevo-calculo .subtitulo {
     font-family: roboto-thin;
     font-size: 14px;
     color: #fff;
     text-align: center;
 }
+
 /*#m1-nuevo-calculo .option img{
     margin-top: 12% !important;
 }*/
 
-#m1-nuevo-calculo .calc1{
-   /* background-image: url(../img/nuevo-calculo/c1.png);*/
+#m1-nuevo-calculo .calc1 {
+    /* background-image: url(../img/nuevo-calculo/c1.png);*/
     background-position: 17% 47%;
 }
 
-#m1-nuevo-calculo .calc2{
-   /* background-image: url(../img/nuevo-calculo/c2.png);*/
+#m1-nuevo-calculo .calc2 {
+    /* background-image: url(../img/nuevo-calculo/c2.png);*/
     background-position: 40% 47%;
 }
 
-#m1-nuevo-calculo .calc3{
-   /* background-image: url(../img/nuevo-calculo/c3.png);*/
+#m1-nuevo-calculo .calc3 {
+    /* background-image: url(../img/nuevo-calculo/c3.png);*/
     background-position: 62.7% 47%;
 }
 
-#m1-nuevo-calculo .calc3,#m1-nuevo-calculo .calc2,#m1-nuevo-calculo .calc1{
+#m1-nuevo-calculo .calc3, #m1-nuevo-calculo .calc2, #m1-nuevo-calculo .calc1 {
     background-repeat: no-repeat;
     background-size: 448%;
     background-image: url(../img/svg/iconos-tipos-calculos.svg)
 }
 
+#m1-nuevo-calculo .vacio {
+    background: none 0 0 no-repeat scroll transparent;
+    border-bottom: none medium;
+}
+
+#m1-nuevo-calculo h2{
+    background-color: #FF9900;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-family: "roboto-thin", sans-serif;
+    font-weight: normal;
+    text-shadow: none;
+    line-height: 30px;
+    margin: 0;
+}
+#m1-nuevo-calculo .blockType {
+    /*display: none;*/
+}
+#m1-nuevo-calculo .blockName {
+    display: none;
+}
+#m1-nuevo-calculo .blockName .btnNewCalc{
+    clear: both;
+    margin: 18px 5% 0;
+    float: left;
+    width: 90%;
+    background-color: #FF9900;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: 'roboto-thin';
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 15px;
+    text-decoration: none;
+}
+#m1-nuevo-calculo .blockName .btnChangeCalc{
+    clear: both;
+    margin: 60% 5% 0;
+    float: left;
+    width: 90%;
+    background-color: #938f8c;
+    text-align: center;
+    color: #fff;
+    text-shadow: none;
+    font-family: 'roboto-thin';
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 30px;
+    text-decoration: none;
+}
