@@ -21,8 +21,16 @@
         <div class="boton ultimo-elemento">Contactar proveedor</div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         cargarProveedor();
         eventosProveedores();
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('.page-back').unbind('click').on('click', function (){
+                    window.history.back();
+                 });
+            },1500)
+         });
     </script>
 </div>

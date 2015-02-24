@@ -133,6 +133,12 @@
                             calcConversion(1);
                         }
                     });
+                    
+                    $('.page-back').unbind('click').on('click', function (){
+                       window.history.back();
+                    });
+                    
+                    
                 });
 
                 function calcConversion(where) {

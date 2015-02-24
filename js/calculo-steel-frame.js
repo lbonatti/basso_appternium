@@ -428,24 +428,28 @@ function st_save_step2(redirect){
         itsOk = 1;
     }
 
-    if(sessionStorage.getItem("st-s1-plantas") === '2') {
-        if ($.trim($('#m1-csf-1 .paso2 .i5').val()).length === 0) {
-            alertMsg('Completa el ancho de la planta 2', '', 'none', '', 1);
-        } else if ($.trim($('#m1-csf-1 .paso2 .i6').val()).length === 0) {
-            alertMsg('Completa el largo de la planta 2', '', 'none', '', 1);
-        } else if ($.trim($('#m1-csf-1 .paso2 .i7').val()).length === 0) {
-            alertMsg('Completa el alto de la planta 2', '', 'none', '', 1);
-        } else if ($.trim($('#m1-csf-1 .paso2 .i8').val()).length === 0) {
-            alertMsg('Completa la cantidad de paredes de la planta 2', '', 'none', '', 1);
-        } else {
-            p2Ancho = $.trim($('#m1-csf-1 .paso2 .i5').val());
-            p2Largo = $.trim($('#m1-csf-1 .paso2 .i6').val());
-            p2Alto = $.trim($('#m1-csf-1 .paso2 .i7').val());
-            p2Paredes = $.trim($('#m1-csf-1 .paso2 .i8').val());
+    if (itsOk == 1)
+    {
+        if(sessionStorage.getItem("st-s1-plantas") === '2') {
+            if ($.trim($('#m1-csf-1 .paso2 .i5').val()).length === 0) {
+                alertMsg('Completa el ancho de la planta 2', '', 'none', '', 1);
+            } else if ($.trim($('#m1-csf-1 .paso2 .i6').val()).length === 0) {
+                alertMsg('Completa el largo de la planta 2', '', 'none', '', 1);
+            } else if ($.trim($('#m1-csf-1 .paso2 .i7').val()).length === 0) {
+                alertMsg('Completa el alto de la planta 2', '', 'none', '', 1);
+            } else if ($.trim($('#m1-csf-1 .paso2 .i8').val()).length === 0) {
+                alertMsg('Completa la cantidad de paredes de la planta 2', '', 'none', '', 1);
+            } else {
+                p2Ancho = $.trim($('#m1-csf-1 .paso2 .i5').val());
+                p2Largo = $.trim($('#m1-csf-1 .paso2 .i6').val());
+                p2Alto = $.trim($('#m1-csf-1 .paso2 .i7').val());
+                p2Paredes = $.trim($('#m1-csf-1 .paso2 .i8').val());
+
+                itsOk = 2;
+            }
+        }else {
             itsOk = 2;
         }
-    }else if(itsOk === 1){
-        itsOk = 2;
     }
 
     if(itsOk === 2){

@@ -49,7 +49,7 @@ function eventosDryWall()
     } else {
         initNuevoCalculoDW();
         $('.paso.paso1').show();
-        $('.paso.paso2, .paso.paso3').hide();
+        $('.paso.paso2').hide();
     }
 
     $('#m1-cdw-1 .paso1 .siguiente-paso').unbind('click').click(function() {
@@ -64,6 +64,7 @@ function eventosDryWall()
         }
     });
 
+    /*
     $('#m1-cdw-1 .pie .p2').unbind('click').click(function() {
         if (stepCompleted == 99) {
             setEstadoPie(2, true);
@@ -71,6 +72,7 @@ function eventosDryWall()
             alertMsg('Debe completar los pasos anteriores.','dlg-dw')
         }
     });
+    */
 
     eventosCalculosGenerales();
 
@@ -276,7 +278,7 @@ function initEditarCalculoDW(){
     tipoC='dw';
     estadoST=2;
     pasoSTactual = 1;
-    pasoSTmaximo = 2;
+    pasoSTmaximo = 1;
     $('#m1-cdw-1 .paso input[type=number]').removeAttr('disabled');
 }
 
