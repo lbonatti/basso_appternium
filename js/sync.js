@@ -75,9 +75,9 @@ function syncLoad()
             $.each($calculosOnline, function(key, value) {
                 if (value != null)
                 {
-                    var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id'];
+                    var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version'];
                     var $calculo = value.Calculo;
-                    var values = [$calculo.users_id, $calculo.nombre, $calculo.calculo_tipo_id, $calculo.data, $calculo.created, $calculo.created, 1, 0, $calculo.id];
+                    var values = [$calculo.users_id, $calculo.nombre, $calculo.calculo_tipo_id, $calculo.data, $calculo.created, $calculo.created, 1, 0, $calculo.id, $calculo.version];
                     db_insert('calculos', fields, values, '', function(rows) {});
                 }
             });

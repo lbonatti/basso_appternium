@@ -12,7 +12,6 @@ function eventosSteelFrame()
     aEditar = sessionStorage.getItem('aEditar');
     if (aEditar) {
         var pID = aEditar; //  Tomar id de proy a editar.
-
         sessionStorage.setItem('editardesderesumen', pID);
         sessionStorage.removeItem('aEditar');  //  Eliminar bandera de edicion.
 
@@ -21,6 +20,9 @@ function eventosSteelFrame()
             if (result.length > 0) {
                 var editablePName = result[0].project_name;
                 var editablePVars = $.parseJSON(result[0].data).vars;
+
+                var _version = result[0].version;
+                sessionStorage.setItem('editar_version', (_version != '' ? _version : 1));
 
                 // Cargar campos con data.
 
@@ -550,9 +552,9 @@ function saveNewCalc(showMessage) {
     var $calcType = 1;
     if (estadoST == 0) { //Si el calculo es nuevo
         //Guardamos en bd local el calculo
-        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id']
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version']
         if (logged == true) {
-            var values = [localStorage.getItem('userId'),projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            var values = [localStorage.getItem('userId'),projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
@@ -570,7 +572,7 @@ function saveNewCalc(showMessage) {
             });
 
         } else {
-            var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0]
+            var values = [0,projectName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1]
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     modoLectura(5); //si no hay error, pasamos el estado a solo lectura.
@@ -588,7 +590,11 @@ function saveNewCalc(showMessage) {
         }
     } else if(estadoST == 2) { //Si el calculo ya existe y fue editado
         var pName = sessionStorage.getItem('projectName');
-        var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
+
+        //var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
+        var _version = (parseInt(sessionStorage.getItem('editar_version')) + 1);
+        var $query = 'UPDATE calculos SET version=' + _version + ', modified=\''+currentTime+'\', sync=0 WHERE _id=\''+sessionStorage.getItem('editardesderesumen')+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
+
         db_updateQueryEdit($query, function(result,updatedID) {
             if (result == 'ok') {
                 modoLectura(5);
@@ -599,6 +605,13 @@ function saveNewCalc(showMessage) {
                 sessionStorage.setItem('newSave', 1);
             }
         })
+
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version']
+        var values = [localStorage.getItem('userId'),projectName + ' v' + _version,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
+        db_insert('calculos',fields, values,'',function(result){
+            // No hacemos nada
+        })
+
     }
     // Si el usuario es anonimo, solo tendremos acceso a la variable local, asi que no haremos nada.
     // por que los datos ya se encuentran en sessionStorage. (y le dejamos el sync en 0 para cuando loguee mandar

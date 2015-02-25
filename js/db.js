@@ -16,7 +16,7 @@ function DBConnect(){
 
 /* creamos la tabla CALCULOS */
 //fields: id, user_id, project_name, calc_type, data, created, modified
-var fields_calculos = "_id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER,project_name VARCHAR(100),calc_type INTEGER,data text,created VARCHAR(19), modified VARCHAR(19), sync INTEGER, remove INTEGER(1), remote_id INTEGER";
+var fields_calculos = "_id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER,project_name VARCHAR(100),calc_type INTEGER,data text,created VARCHAR(19), modified VARCHAR(19), sync INTEGER, remove INTEGER(1), remote_id INTEGER, version INTEGER";
 db_createTable('calculos', fields_calculos);
 
 /* FUNCIONES PERSONALIZADAS */
@@ -50,7 +50,8 @@ function db_customQuery(query, callBack){ // <-- extra param
                     data: row['data'],
                     created: row['created'],
                     modified: row['modified'],
-                    remote_id: row['remote_id']
+                    remote_id: row['remote_id'],
+                    version: row['version']
                 }
             }
             callBack(result); // <-- new bit here
