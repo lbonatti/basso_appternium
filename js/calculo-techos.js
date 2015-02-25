@@ -161,8 +161,8 @@ function roof_save_step(){
         return;
     }else{
         t_name = sessionStorage.getItem("projectName");
-        t_largo = parseInt( $.trim( $('#m1-ct-1 .paso1 .i1').val() ) );
-        t_ancho = parseInt( $.trim( $('#m1-ct-1 .paso1 .i2').val() ) );
+        t_largo = parseFloat( $.trim( $('#m1-ct-1 .paso1 .i1').val() ) );
+        t_ancho = parseFloat( $.trim( $('#m1-ct-1 .paso1 .i2').val() ) );
         t_tipo = $.trim( $('#m1-ct-1 .paso1 .chapaTipo .selected').html() );
         t_modelo = $.trim( $('#m1-ct-1 .paso1 .modelo.selected .texto').html() );
         t_color = $.trim( $('#m1-ct-1 .paso1 .color .selected').html() );

@@ -151,18 +151,18 @@ function duplicarCalculo(pName, pId)
                 if (result == 'ok') {
                     sessionStorage.setItem('newSave', 1);
                     //alertMsg('Se ha guardado el proyecto: '+newName, '', 'none', 'Duplicar Calculo', 1);
-                    alertMsg('Felicitaciones el cálculo "'+newName, '" se ha duplicado', 'none', 'Cálculo duplicado', 1);
+                    alertMsg('Felicitaciones el cálculo "' + newName + '" se ha duplicado', '', 'none', 'Cálculo duplicado', 1);
 
                     showMisCalculos();
 
                     _syncNew();
                 } else {
-                    alertMsg('No se ha podido guardar el proyecto', '', 'none', 'Duplicar Calculo', 1);
+                    alertMsg('No se ha podido guardar el cálculo', '', 'none', 'Duplicar Calculo', 1);
                 }
             });
 
         }else{
-            alertMsg('No se encontró el proyecto', '', 'none', '', 1);
+            alertMsg('No se encontró el cálculo', '', 'none', '', 1);
         }
     });
 }
@@ -171,7 +171,7 @@ function duplicarCalculo(pName, pId)
 
 function activarDotMenu(){
     $('.menu-options .editar').click(function(){
-        alertMsg('¿Seguro desea editar?', '', 'none', 'Editar Proyecto', 2, function(){
+        alertMsg('¿Seguro desea editar?', '', 'none', 'Editar cálculo', 2, function(){
             sessionStorage.setItem('aResumen', 0);
 
             if( sessionStorage.getItem('desdePie') != 1 ){
@@ -202,30 +202,32 @@ function activarDotMenu(){
         var pName = $('.projectName').text();
         var pType;
         var pId;
-        switch ( $('.ui-page-active').attr('id') ) {
-            case 'm1-csf-1':
-                pType = 1;
-                break;
-            case 'm1-cdw-1':
-                pType = 2;
-                break;
-            case 'm1-ct-1':
-                pType = 3;
-                break;
-        }
-
-        var $query = "SELECT _id FROM calculos WHERE project_name='" + pName + "' AND calc_type=" + pType;
-        db_customQuery($query, function(rows) {
-            var project = rows;
-            if (project && project.length > 0) {
-                pId = project[0]._id;
-
-                duplicarCalculo(pName, pId);
-                $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
-
+        
+        alertMsg('¿Desea duplicar el cálculo?', '', 'none', 'Duplicar cálculo', 2, function (){
+            switch ( $('.ui-page-active').attr('id') ) {
+                case 'm1-csf-1':
+                    pType = 1;
+                    break;
+                case 'm1-cdw-1':
+                    pType = 2;
+                    break;
+                case 'm1-ct-1':
+                    pType = 3;
+                    break;
             }
-        });
 
+            var $query = "SELECT _id FROM calculos WHERE project_name='" + pName + "' AND calc_type=" + pType;
+            db_customQuery($query, function(rows) {
+                var project = rows;
+                if (project && project.length > 0) {
+                    pId = project[0]._id;
+
+                    duplicarCalculo(pName, pId);
+                    $.mobile.changePage("m-mis-calculos.html", {reloadPage: true});
+
+                }
+            });
+        });
     });
 
     $('.menu-options .eliminar').click(function(){
@@ -251,7 +253,7 @@ function activarDotMenu(){
             if (project && project.length > 0) {
                 pId = project[0]._id;
 
-                alertMsg('¿Está seguro que desea eliminar este cálculo?', '', 'none', 'Eliminar Proyecto', 2, function() {
+                alertMsg('¿Está seguro que desea eliminar este cálculo?', '', 'none', 'Eliminar cálculo', 2, function() {
                     var $query = 'UPDATE calculos SET remove=1, sync=0 WHERE _id='+pId;
                     db_customQuery($query, function(rows) {
                         alertMsg('El cálculo ha sido eliminado.', '', 'none', 'Cálculo eliminado', 1);

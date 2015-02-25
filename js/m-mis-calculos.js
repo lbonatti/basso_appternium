@@ -38,8 +38,12 @@ function eventosMisCalculos(){
         var $this = $(this);
         var pName = $this.parent().parent().find('.proyectSlide .titulo').text();
         var pId = $this.parent().parent().parent().attr('data-project-id');
-        duplicarCalculo(pName, pId);
-    })
+        
+        alertMsg('¿Desea duplicar el cálculo?', '', 'none', 'Duplicar cálculo', 2, function (){
+            duplicarCalculo(pName, pId);
+        });
+
+    });
 
 }
 
