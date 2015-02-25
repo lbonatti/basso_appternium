@@ -147,6 +147,7 @@ function eventosSteelFrame()
             setEstadoPie($pie, true);
         } else {
             if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                sessionStorage.setItem('desdePie', 1);
                 $('.menu-options div.editar').trigger('click');
             }
         }
@@ -161,6 +162,7 @@ function eventosSteelFrame()
             setEstadoPie($pie, true);
         } else {
             if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                sessionStorage.setItem('desdePie', 1);
                 $('.menu-options div.editar').trigger('click');
             }
         }
@@ -183,6 +185,7 @@ function eventosSteelFrame()
             }
         } else {
             if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                sessionStorage.setItem('desdePie', 1);
                 $('.menu-options div.editar').trigger('click');
             }
         }
@@ -216,6 +219,7 @@ function eventosSteelFrame()
             }
         } else {
             if(stepCompleted == 99){ //Si es nuevo y ya mostró el resumen, cualquier tab edita.
+                sessionStorage.setItem('desdePie', 1);
                 $('.menu-options div.editar').trigger('click');
             }
         }
