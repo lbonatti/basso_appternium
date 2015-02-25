@@ -148,6 +148,7 @@ function loadMainSlider() {
             }
 
             sessionStorage.setItem('aResumen', 1);
+            sessionStorage.setItem('pasoSTactual', 1);
             editarCalculo(pName, pId, pType);
         });
     });

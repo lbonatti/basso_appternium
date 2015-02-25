@@ -173,6 +173,7 @@ function activarDotMenu(){
     $('.menu-options .editar').click(function(){
         alertMsg('¿Seguro desea editar?', '', 'none', 'Editar Proyecto', 2, function(){
             sessionStorage.setItem('aResumen', 0);
+            sessionStorage.setItem('pasoSTactual', 1);
             sessionStorage.setItem('aEditar', sessionStorage.getItem('editardesderesumen')); //  Tomar id de proy a editar.
 
             var page;

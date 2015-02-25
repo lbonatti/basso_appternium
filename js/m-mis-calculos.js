@@ -29,6 +29,7 @@ function eventosMisCalculos(){
         var pType = $this.parent().parent().find('.proyectSlide .icono').attr('class').replace('icono ', '');
 
         sessionStorage.setItem('aResumen', 0);
+        sessionStorage.setItem('pasoSTactual', 1);
         editarCalculo(pName, pId, pType);
 
     });
