@@ -14,8 +14,9 @@ function eventosNuevoCalculo() {
         setBackBtn();
 
         $('#m1-nuevo-calculo .blockName .btnChangeCalc').on('click', function(){
-            $('#m1-nuevo-calculo .blockName').hide();
-            $('#m1-nuevo-calculo .blockType').show();
+            window.location.reload();
+            //$('#m1-nuevo-calculo .blockName').hide();
+            //$('#m1-nuevo-calculo .blockType').show();
         });
 
     },1000);

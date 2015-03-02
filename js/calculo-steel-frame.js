@@ -6,6 +6,7 @@ var theSlide = 2;
 var stepCompleted = 0;
 var aEditar;
 var aEditarStepError = 0;
+var editablePVars = null;
 
 function eventosSteelFrame()
 {
@@ -19,7 +20,7 @@ function eventosSteelFrame()
         db_customQuery($getEditable, function(result) {
             if (result.length > 0) {
                 var editablePName = result[0].project_name;
-                var editablePVars = $.parseJSON(result[0].data).vars;
+                editablePVars = $.parseJSON(result[0].data).vars;
 
                 var _version = result[0].version;
                 sessionStorage.setItem('editar_version', (_version != '' ? _version : 1));
@@ -390,11 +391,11 @@ function st_save_step1(){
     if (plantas > 1) {
         var entrepiso = $('#m1-csf-1 .paso1 .tipoEntrepiso').find('.selected').data('value');
     }else{
-        entrepiso = '';
+        //entrepiso = '';
+        var entrepiso = $('#m1-csf-1 .paso1 .tipoEntrepiso').find('.selected').data('value');
     }
-
     var luz = $('#m1-csf-1 .swiper-slide-active p').html();
-
+    if (!luz) luz = editablePVars.luzmax;
 
     sessionStorage.setItem("st-s1-plantas", plantas);
     sessionStorage.setItem("st-s1-entrepiso", entrepiso);
@@ -641,37 +642,37 @@ function calculateSF(){
     if(entrepiso === 'humedo'){
         switch(luzmax){
             case 4:
-                perfilPGC = 'Perfiles PGC 200 x 1,25';
+                perfilPGC = 'PGC 200 x 1,25';
                 break;
             case 4.5:
-                perfilPGC = 'Perfiles PGC 200 x 2,00';
+                perfilPGC = 'PGC 200 x 2,00';
                 break;
             case 5:
-                perfilPGC = 'Perfiles PGC 250 x 1,60';
+                perfilPGC = 'PGC 250 x 1,60';
                 break;
             case 5.5:
-                perfilPGC = 'Perfiles PGC 250 x 2,00';
+                perfilPGC = 'PGC 250 x 2,00';
                 break;
             case 6:
-                perfilPGC = 'Perfiles PGC 250 x 2,50';
+                perfilPGC = 'PGC 250 x 2,50';
                 break;
         }
     }else{
         switch(luzmax){
             case 4:
-                perfilPGC = 'Perfiles PGC 200 x 1,25';
+                perfilPGC = 'PGC 200 x 1,25';
                 break;
             case 4.5:
-                perfilPGC = 'Perfiles PGC 200 x 1,25';
+                perfilPGC = 'PGC 200 x 1,25';
                 break;
             case 5:
-                perfilPGC = 'Perfiles PGC 200 x 2,00';
+                perfilPGC = 'PGC 200 x 2,00';
                 break;
             case 5.5:
-                perfilPGC = 'Perfiles PGC 250 x 1,60';
+                perfilPGC = 'PGC 250 x 1,60';
                 break;
             case 6:
-                perfilPGC = 'Perfiles PGC 250 x 2,00';
+                perfilPGC = 'PGC 250 x 2,00';
                 break;
         }
     }
@@ -681,37 +682,37 @@ function calculateSF(){
     if(entrepiso === 'humedo'){
         switch(luzmax){
             case 4:
-                perfilPGU = 'Perfiles PGU 200 x 1,25';
+                perfilPGU = 'PGU 200 x 1,25';
                 break;
             case 4.5:
-                perfilPGU = 'Perfiles PGU 200 x 2,00';
+                perfilPGU = 'PGU 200 x 2,00';
                 break;
             case 5:
-                perfilPGU = 'Perfiles PGU 250 x 1,6';
+                perfilPGU = 'PGU 250 x 1,6';
                 break;
             case 5.5:
-                perfilPGU = 'Perfiles PGU 250 x 2,00';
+                perfilPGU = 'PGU 250 x 2,00';
                 break;
             case 6:
-                perfilPGU = 'Perfiles PGU 250 x 2,50';
+                perfilPGU = 'PGU 250 x 2,50';
                 break;
         }
     }else{
         switch(luzmax){
             case 4:
-                perfilPGU = 'Perfiles PGU 200 x 1,25';
+                perfilPGU = 'PGU 200 x 1,25';
                 break;
             case 4.5:
-                perfilPGU = 'Perfiles PGU 200 x 1,25';
+                perfilPGU = 'PGU 200 x 1,25';
                 break;
             case 5:
-                perfilPGU = 'Perfiles PGU 200 x 1,25';
+                perfilPGU = 'PGU 200 x 1,25';
                 break;
             case 5.5:
-                perfilPGU = 'Perfiles PGU 250 x 1,6';
+                perfilPGU = 'PGU 250 x 1,6';
                 break;
             case 6:
-                perfilPGU = 'Perfiles PGU 250 x 2,50';
+                perfilPGU = 'PGU 250 x 2,50';
                 break;
         }
     }

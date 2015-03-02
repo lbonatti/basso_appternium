@@ -3,9 +3,9 @@ var db;
 //DB Connect
 DBConnect();
 function DBConnect(){
-    var version = '1.0';
-    var dbName = "app_ternium_db";
-    var dbDisplayName = "app_ternium_db";
+    var version = '2.0';
+    var dbName = "app_ternium_dbV2";
+    var dbDisplayName = "app_ternium_dbV2";
     var dbSize = 2 * 1024 * 1024;
     db = openDatabase(dbName, version, dbDisplayName, dbSize,
         function(database)

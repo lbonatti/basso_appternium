@@ -195,11 +195,13 @@ function calculateResult(values){
             break;
     }
     var cantChapas = Math.ceil( values.ancho / anchoUtil  );
+    var cantLinealesChapas = Math.ceil( values.largo );
     var aislacion = values.largo * values.ancho * 1;
     var cantTornillos = Math.ceil( aCubrir * 6 );
 
     $('#m1-ct-1 .paso2 .resultado-techo').html(aCubrir);
     $('#m1-ct-1 .paso2 .resultado-chapas').html(cantChapas + ' U.');
+    $('#m1-ct-1 .paso2 .resultado-lineales-chapas').html(cantLinealesChapas + ' ml.');
     $('#m1-ct-1 .paso2 .resultado-aislacion').html(aislacion + ' m2.');
     $('#m1-ct-1 .paso2 .resultado-tornillos').html(cantTornillos + ' U.');
 

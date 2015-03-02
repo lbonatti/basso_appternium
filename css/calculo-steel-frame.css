@@ -233,6 +233,10 @@
     background-image: url(../img/steel-frame/5-selected.png);
 }
 
+#m1-csf-1 .paso{
+    margin: 0 auto;
+    max-width: 550px;
+}
 
 #m1-csf-1 .paso3 .t1{
     margin: 22px auto;

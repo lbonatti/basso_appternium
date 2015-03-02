@@ -1,6 +1,36 @@
 var slider = null;
 
+var isLandscapeMode = window.innerWidth > window.innerHeight;
+
+$(window).on("orientationchange", function(e) {
+    $('body').removeClass('landscape portrait').addClass(e.orientation);
+    adjustBtns(e.orientation);
+});
+
+
+function adjustBtns(o){
+    if(o == 'landscape'){
+        var winW = $(window).innerWidth();
+        var winH = $(window).innerHeight();
+        var heightFix = winH - 55; // 55 Header
+        var theBtnsH = winW * .333;
+
+        if( $('#m-inicio.ui-page-active').length > 0 ){
+            $('.page-content').css('height', heightFix);
+        }
+        if( $('#m1-nuevo-calculo.ui-page-active').length > 0 ){
+            $('.botongrissuave.option').css('padding-top', theBtnsH);
+            $('.page-content').css('height', heightFix);
+
+        }
+    }
+}
+
 $(document).on("pageshow", function(event) {
+
+    setTimeout(function(){
+        $(window).trigger("orientationchange");
+    },100);
 
     var source = event.target || event.srcElement;
     boton_menu($(source).attr('id'));

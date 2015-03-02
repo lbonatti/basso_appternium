@@ -148,6 +148,19 @@
     background-repeat: no-repeat;
 }
 
+.landscape #m-inicio .ini1,
+.landscape #m-inicio .ini2,
+.landscape #m-inicio .ini3,
+.landscape #m-inicio .ini4,
+.landscape #m-inicio .ini5,
+.landscape #m-inicio .ini6{
+    width: 33%;
+}
+.landscape #m-inicio .ini2,
+.landscape #m-inicio .ini4{
+    border-right: 1px solid #DBD9DA;
+}
+
 
 .shadow{
     opacity: 0.6;
