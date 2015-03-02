@@ -31,10 +31,11 @@
 
             <div class="grupo placa">
                 <div class="texto">Tipo de placa</div>
-				<div class="op3" data-value="1">1 Cara</div>
-				<div class="op4 selected" data-value="2">2 Caras</div>
-                <div class="op1" data-value="1">Simple</div>
-                <div class="op2 selected" data-value="2">Doble</div>
+				<div class="op3 selected" data-value="1">1 Cara</div>
+				<div class="op4" data-value="2">2 Caras</div>
+
+                <div class="op1 selected" data-value="1">Simple</div>
+                <div class="op2" data-value="2">Doble</div>
             </div>
 
             <div class="boton ultimo-elemento siguiente-paso">Siguiente paso</div>
@@ -58,8 +59,47 @@
 		<div id="myRenderSaveDW">
 
 			<div class="paso paso2">
-				<div class="texto t1">Computo aproximado de materiales</div>
 
+                <div class="texto t1 resumenDatos">Resumen de datos ingresados</div>
+
+                <div class="item10 item resumItem">
+                    <div class="resultado">
+                        <span class="texto title">Metros lineales de paredes interiores</span>
+                    </div>
+                    <div class="valor altura">
+                        <span class="texto">Altura</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor ultimo largo">
+                        <span class="texto">Largo</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item11 item resumItem">
+                    <div class="resultado">
+                        <span class="texto title">Espesor del perfil</span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto">Espesor del perfil</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item12 item resumItem">
+                    <div class="resultado">
+                        <span class="texto title">Tipo de pared</span>
+                    </div>
+                    <div class="valor cara">
+                        <span class="texto"></span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+                <hr class="dataSeparator" />
+
+
+                <div class="texto t1 computoAprox">Computo aproximado de materiales</div>
 
 				<div class="resultado montante">
 					<span class="texto">1. Montante 35cm</span>

@@ -203,6 +203,18 @@ function calculateResult(values){
     var aislacion = values.largo * values.ancho * 1;
     var cantTornillos = Math.ceil( aCubrir * 6 );
 
+
+    //Cargar resumen de datos ingresados.
+    $('#m1-ct-1 .paso2 .item10 .largo .medida').html(values.largo + ' m.');
+    $('#m1-ct-1 .paso2 .item10 .ancho .medida').html(values.ancho + ' m.');
+    if(values.modelo == 'A-1086'){
+        $('#m1-ct-1 .paso2 .item11 .tipo').html('Acanalada');
+    }else{
+        $('#m1-ct-1 .paso2 .item11 .tipo').html('Trapezoidal');
+    }
+    $('#m1-ct-1 .paso2 .item11 .ultimo').html(values.modelo);
+
+
     $('#m1-ct-1 .paso2 .resultado-techo').html(aCubrir);
     $('#m1-ct-1 .paso2 .resultado-chapas').html(cantChapas + ' U.');
     $('#m1-ct-1 .paso2 .resultado-lineales-chapas').html(cantLinealesChapas + ' ml.');

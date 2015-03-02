@@ -35,12 +35,16 @@ function eventosDryWall()
                 }
 
                 // tipo placa
-                if (editablePVars.tipoPlaca == '1') {
-                    $('#m1-cdw-1 .paso1 .placa .op1').trigger('click');
+                if (editablePVars.caraPlaca == '1') {
                     $('#m1-cdw-1 .paso1 .placa .op3').trigger('click');
                 } else {
-                    $('#m1-cdw-1 .paso1 .placa .op2').trigger('click');
                     $('#m1-cdw-1 .paso1 .placa .op4').trigger('click');
+                }
+
+                if (editablePVars.tipoPlaca == '1') {
+                    $('#m1-cdw-1 .paso1 .placa .op1').trigger('click');
+                } else {
+                    $('#m1-cdw-1 .paso1 .placa .op2').trigger('click');
                 }
                 stepCompleted = 1; // Habilita 2da pestaña
 
@@ -99,7 +103,20 @@ function dry_wall_save_step1()
     var largoParedes = $.trim( $('#m1-cdw-1 .paso1 .i1').val() );
     var altoParedes = $.trim( $('#m1-cdw-1 .paso1 .i2').val() );
     var espesorPerfil = $('#m1-cdw-1 .paso1 .espesor .selected').data('value');
-    var tipoPlaca = $('#m1-cdw-1 .paso1 .placa .selected').data('value');
+    var carasPlaca;
+    if( $('#m1-cdw-1 .paso1 .placa .op3').hasClass('selected') ){
+        carasPlaca = $('#m1-cdw-1 .paso1 .placa .op3').data('value');
+    }else{
+        carasPlaca = $('#m1-cdw-1 .paso1 .placa .op4').data('value');
+    }
+
+    var tipoPlaca;
+    if( $('#m1-cdw-1 .paso1 .placa .op1').hasClass('selected') ){
+        tipoPlaca = $('#m1-cdw-1 .paso1 .placa .op1').data('value');
+    }else{
+        tipoPlaca = $('#m1-cdw-1 .paso1 .placa .op2').data('value');
+    }
+
 
     if (largoParedes.length === 0 || isNaN(largoParedes)) {
         alertMsg('Debe ingresar el largo de las paredes interiores (numérico con punto decimal).','dlg-dw');
@@ -116,6 +133,7 @@ function dry_wall_save_step1()
         sessionStorage.setItem("dw-s1-ap", altoParedes);
         sessionStorage.setItem("dw-s1-ep", espesorPerfil);
         sessionStorage.setItem("dw-s1-tp", tipoPlaca);
+        sessionStorage.setItem("dw-s1-cp", carasPlaca);
         if (stepCompleted < 1) {
             stepCompleted = 1;
         }
@@ -132,6 +150,7 @@ function dw_calculateResult()
     var altoParedes = parseFloat(sessionStorage.getItem('dw-s1-ap'));
     var espesorPerfil = parseFloat(sessionStorage.getItem('dw-s1-ep'));
     var tipoPlaca = parseFloat(sessionStorage.getItem('dw-s1-tp'));
+    var carasPlaca = parseFloat(sessionStorage.getItem('dw-s1-cp'));
 
     var espesorPerfilValor = 70;
     if (espesorPerfil == 1) {
@@ -144,6 +163,25 @@ function dw_calculateResult()
     var yesoParedes = dw_yeso_paredes(largoParedes, altoParedes);
     var tornillosT1 = dw_tornillosT1(largoParedes, altoParedes);
     var tornillosT2 = dw_tornillosT2(largoParedes, altoParedes);
+
+    //Cargar resumen de datos ingresados.
+    $('#m1-cdw-1 .paso2 .item10 .altura .medida').html(altoParedes + ' m.');
+    $('#m1-cdw-1 .paso2 .item10 .largo .medida').html(largoParedes + ' m.');
+    $('#m1-cdw-1 .paso2 .item11 .medida').html(espesorPerfilValor);
+
+    if( carasPlaca == '1' ){
+        $('#m1-cdw-1 .paso2 .item12 .cara .texto').html('1 Cara');
+    }else{
+        $('#m1-cdw-1 .paso2 .item12 .cara .texto').html('2 Caras');
+    }
+
+    if( tipoPlaca == '1' ){
+        $('#m1-cdw-1 .paso2 .item12 .ultimo .texto').html('Placa Simple');
+    }else{
+        $('#m1-cdw-1 .paso2 .item12 .ultimo .texto').html('Placa Doble');
+    }
+
+
 
     $('#m1-cdw-1 .montante b').html(espesorPerfilValor + ' cm.');
     $('#m1-cdw-1 .montantePaneles').html(montantePaneles + ' ml.');
@@ -192,6 +230,7 @@ function saveNewCalcDryWall(showMessage)
     var $_altoParedes = sessionStorage.getItem('dw-s1-ap');
     var $_espesorPerfil = sessionStorage.getItem('dw-s1-ep');
     var $_tipoPlaca = sessionStorage.getItem('dw-s1-tp');
+    var $_caraPlaca = sessionStorage.getItem('dw-s1-cp');
 
     //Si hay datos en CALCULOS, concatenamos el nuevo proyecto
     calculos.tipo.dry_wall[$_name] =
@@ -200,7 +239,8 @@ function saveNewCalcDryWall(showMessage)
             "largoParedes": $_largoParedes,
             "altoParedes": $_altoParedes,
             "espesorPerfil": $_espesorPerfil,
-            "tipoPlaca": $_tipoPlaca
+            "tipoPlaca": $_tipoPlaca,
+            "caraPlaca": $_caraPlaca
         }
     };
 

@@ -78,6 +78,7 @@ function sharePDF(filename, type)
 function viewPDF(filename, type)
 {
     var $html = generateHtml(type);
+
     callAjaxPdf($html, filename);
 
     animateBtnEnd('savePDF', 'Ver PDF');
@@ -137,12 +138,60 @@ function generateHtml(type)
             $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: TECHO</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            // Resumen de datos
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.resumenDatos').text() +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Superficie de techo</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Largo</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item10 .largo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Ancho</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item10 .ancho .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Tipo de chapa</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item11 .tipo').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item11 .ultimo').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+
+            $_html += '<br /><br /><br />';
+
+
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $_rt + ' ' + $_rm + ' ' + $_rl +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
 
-            var $_temp_divs = $html.find('div');
+            var $_temp_divs = $html.find('div').not('.resumItem');
 
             $_temp_divs.each(function (k, ht){
+
                 $_div = $(ht);
                 if ($_div.hasClass('resultado'))
                 {
@@ -187,7 +236,139 @@ function generateHtml(type)
             $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: STEEL FRAME</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
-            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
+
+
+            // Resumen de datos
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.resumenDatos').text() +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Vigas de entrepiso y cubierta plana</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Lux máx entre apoyos</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item10 .ultimo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Entrepisos</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item11 .ultimo .texto').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Planta Baja</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Ancho</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .ancho .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Largo</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .largo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Altura</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .altura .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Paredes Interiores</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .ultimo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            if( $('.item13:visible').length > 0 ) {
+
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Planta Alta</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 60%; text-align: left;">Ancho</td>';
+                $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .ancho .medida').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 60%; text-align: left;">Largo</td>';
+                $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .largo .medida').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 60%; text-align: left;">Altura</td>';
+                $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .altura .medida').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 60%; text-align: left;">Paredes Interiores</td>';
+                $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .ultimo .medida').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+
+            }
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Metros lineales de aberturas en paneles portantes</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Metros lineales de aberturas en paneles portantes</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item14 .ultimo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Tipo de techo</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item15 .ultimo .texto').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+
+            $_html += '<br /><br /><br />';
+
+            // Computo de datos
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.computoAprox').text() +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
 
             var $_temp_divs = $html.find('div.item > div');
@@ -227,13 +408,72 @@ function generateHtml(type)
             $_html = $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">NOMBRE DE PROYECTO: '+ sessionStorage.getItem("projectName")+'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important; color: #bbbbba;  font-size: 15pt;">TIPO DE CÁLCULO: DRY WALL</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%; border: none !important;">&nbsp;</td></tr>' + $_temp_table_e;
-            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1').text() +'</td></tr>' + $_temp_table_e;
+
+            // Resumen de datos
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.resumenDatos').text() +'</td></tr>' + $_temp_table_e;
+            $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Metros Lineales de paredes interiores</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Altura</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item10 .altura .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Largo</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item10 .largo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Espesor del perfil</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Espesor del perfil</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item11 .ultimo .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Tipo de pared</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item12 .cara .texto').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item12 .ultimo .texto').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+
+            $_html += '<br /><br /><br />';
+
+            // Computo de datos
+            $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.computoAprox').text() +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
 
             var $_temp_divs = $html.find('div:first > div');
 
             $_temp_divs.each(function (k, ht){
-                $_div = $(ht);
+                var $_div = $(ht);
                 if ($_div.hasClass('resultado'))
                 {
                     $_html += $_temp_table_b;
@@ -253,7 +493,6 @@ function generateHtml(type)
                     $_html += $_temp_table_e;
                 }
             });
-
             return $_html;
         break;
     }

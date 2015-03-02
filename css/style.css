@@ -59,3 +59,9 @@ div[data-role="page"]{
 .botonazul:active {
     background-color: #396AAA !important;
 }
+
+hr.dataSeparator{
+    background: none no-repeat 0 0 scroll #FF9900;
+    border: medium none;
+    height: 6px;
+}

@@ -749,6 +749,32 @@ function calculateSF(){
     var $pgu200 = PGU200(largoPB, anchoPB, largoPA, anchoPA, aberturas, tipoTecho, plantas);
 
 
+    //Cargar resumen de datos ingresados.
+    $('.paso5 .item10 .medida').text(luzmax + ' m.');
+    $('.paso5 .item11 .ultimo .texto').text(entrepiso);
+    $('.paso5 .item12 .ancho .medida').text(anchoPB + ' m.');
+    $('.paso5 .item12 .largo .medida').text(largoPB + ' m.');
+    $('.paso5 .item12 .altura .medida').text(altoPB + ' m.');
+    $('.paso5 .item12 .ultimo .medida').text(paredesInternasPB + ' m.');
+
+    if(plantas == 1){
+        $('.paso5 .item13').hide();
+    }
+    $('.paso5 .item13 .ancho .medida').text(anchoPA + ' m.');
+    $('.paso5 .item13 .largo .medida').text(largoPA + ' m.');
+    $('.paso5 .item13 .altura .medida').text(altoPA + ' m.');
+    $('.paso5 .item13 .ultimo .medida').text(paredesInternasPA + ' m.');
+    $('.paso5 .item14 .ultimo .medida').text(aberturas + ' m.');
+
+    if(tipoTecho == 1){
+        $('.paso5 .item15 .ultimo .texto').text('Cubierta inclinada/cabriadas');
+    }else if(tipoTecho == 2){
+        $('.paso5 .item15 .ultimo .texto').text('Cubierta inclinada/vigas a 10°');
+    }else{
+        $('.paso5 .item15 .ultimo .texto').text('Cubierta plana/vigas');
+    }
+
+
     //TOTALES EN DIVS
     $('.paso5 span[data-result=pgc100]').text( Math.round($pgc100_total) + ' ml.');
     $('.paso5 span[data-result=pgu100]').text( Math.round($pgu100_total) + ' ml.');

@@ -124,7 +124,90 @@
         <div class="paso paso5">
             <div id="myRenderSave">
 
-                <div class="texto t1">Cómputo aproximado de materiales</div>
+                <div class="texto t1 resumenDatos">Resumen de datos ingresados</div>
+
+                <div class="item10 item">
+                    <div class="resultado">
+                        <span class="texto title">Vigas de entrepiso y cubierta plana</span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto">Luz máx entre apoyos</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item11 item">
+                    <div class="resultado">
+                        <span class="texto title">Entrepisos</span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto"></span>
+                    </div>
+                </div>
+                <div class="item12 item">
+                    <div class="resultado">
+                        <span class="texto title">Planta Baja</span>
+                    </div>
+                    <div class="valor ancho">
+                        <span class="texto">Ancho</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor largo">
+                        <span class="texto">Largo</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor altura">
+                        <span class="texto">Altura</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto">Paredes interiores</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item13 item">
+                    <div class="resultado">
+                        <span class="texto title">Planta Alta</span>
+                    </div>
+                    <div class="valor ancho">
+                        <span class="texto">Ancho</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor largo">
+                        <span class="texto">Largo</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor altura">
+                        <span class="texto">Altura</span>
+                        <span class="texto medida"></span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto">Paredes interiores</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item14 item">
+                    <div class="resultado">
+                        <span class="texto title">Metros lineales de aberturas en paneles portantes</span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto">Metros lineales de aberturas en paneles portantes</span>
+                        <span class="texto medida"></span>
+                    </div>
+                </div>
+                <div class="item15 item">
+                    <div class="resultado">
+                        <span class="texto title">Tipo de techo</span>
+                    </div>
+                    <div class="valor ultimo">
+                        <span class="texto"></span>
+                    </div>
+                </div>
+
+
+                <hr class="dataSeparator" />
+
+
+                <div class="texto t1 computoAprox">Cómputo aproximado de materiales</div>
 
                 <!-- Perfiles PGC -->
                 <div class="item1 item">
@@ -375,6 +458,7 @@
                         $('.grupo.tipoEntrepiso').fadeIn();
                     } else {
                         $('.grupo.tipoEntrepiso').fadeOut();
+                        $('.grupo.tipoEntrepiso .op2').click();
                     }
                 });
 
