@@ -366,6 +366,19 @@
                 });
 
 
+                if( $('.paso1 .cantPlantas div.op2').hasClass('selected') ){
+                    $('.grupo.tipoEntrepiso').fadeIn();
+                }
+                $('.paso1 .cantPlantas div.op1, .paso1 .cantPlantas div.op2').on('click', function () {
+                    var _this = $(this).data('value');
+                    if (_this == 2) {
+                        $('.grupo.tipoEntrepiso').fadeIn();
+                    } else {
+                        $('.grupo.tipoEntrepiso').fadeOut();
+                    }
+                });
+
+
             }, 1500)
         });
 
@@ -400,14 +413,7 @@
             }, 1000);
         });
 
-        $('.paso1 .cantPlantas div.op1, .paso1 .cantPlantas div.op2').on('click', function () {
-            var _this = $(this).data('value');
-            if (_this == 2) {
-                $('.grupo.tipoEntrepiso').fadeIn();
-            } else {
-                $('.grupo.tipoEntrepiso').fadeOut();
-            }
-        });
+
 
         $('.mas').on('click', function () {
             var $_text = $(this).children().html();

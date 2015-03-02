@@ -158,8 +158,12 @@ function roof_save_step(){
         alertMsg('Debe ingresar el largo del techo (numérico con punto decimal).', '', 'none', '', 1);
         $(this).val('');
         return;
+    }else if( parseFloat($.trim($('#m1-ct-1 .paso1 .i1').val())) > 12 ){
+        alertMsg('El largo máximo es de 12 metros.', '', 'none', '', 1);
+        $(this).val('');
+        return;
     }else if( $.trim( $('#m1-ct-1 .paso1 .i2').val() ).length === 0 || isNaN($.trim($('#m1-ct-1 .paso1 .i2').val() ) ) ){
-        alertMsg('Debe ingresar el largo del techo (numérico con punto decimal).', '', 'none', '', 1);
+        alertMsg('Debe ingresar el ancho del techo (numérico con punto decimal).', '', 'none', '', 1);
         $(this).val('');
         return;
     }else{
