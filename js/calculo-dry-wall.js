@@ -160,9 +160,12 @@ function dw_calculateResult()
     var montantePaneles = dw_montante_paneles_interiores(largoParedes, altoParedes);
     var soleraPaneles = dw_solera_paneles_interiores(altoParedes);
     var aislacion = dw_aislacion(largoParedes, altoParedes);
-    var yesoParedes = dw_yeso_paredes(largoParedes, altoParedes);
+    var yesoParedes = dw_yeso_paredes(largoParedes, altoParedes, carasPlaca, tipoPlaca);
     var tornillosT1 = dw_tornillosT1(largoParedes, altoParedes);
-    var tornillosT2 = dw_tornillosT2(largoParedes, altoParedes);
+    var tornillosT2 = dw_tornillosT2(yesoParedes);
+
+    // Fin de calculo, para mostrar redondeo
+    yesoParedes = Math.ceil(yesoParedes);
 
     //Cargar resumen de datos ingresados.
     $('#m1-cdw-1 .paso2 .item10 .altura .medida').html(altoParedes + ' m.');
@@ -354,9 +357,27 @@ function dw_aislacion(largoPI, altoPI){
     result = Math.ceil( largoPI * altoPI * 1 );
     return result;
 }
-function dw_yeso_paredes(largoPI, altoPI){
+function dw_yeso_paredes(largoPI, altoPI, caras, tipo){
+    var dig2 = 0;
+    var dig3 = 0;
+    var dig4 = 0;
+    var sumaDig = 0;
     var result = 0;
-    result = Math.ceil( ( ( largoPI * altoPI ) * 2 ) * 1 );
+
+    if (caras == '2'){
+        dig2 = 1;
+        dig4 = 1;
+    }
+    if (tipo == '1'){
+        dig3 = 1;
+    }
+    if (tipo == '2'){
+        dig4 += 2;
+    }
+    sumaDig = dig2 + dig3 + dig4;
+
+    result = ( ( largoPI * altoPI ) * sumaDig ) * 1.15;
+
     return result;
 }
 function dw_yeso_cielo_raso(largoCR, anchoCR){
@@ -369,9 +390,9 @@ function dw_tornillosT1(largoPI, altoPI){
     result = Math.ceil( ( largoPI * altoPI ) * 10 );
     return result;
 }
-function dw_tornillosT2(largoPI, altoPI){
+function dw_tornillosT2(placaYeso){
     var result = 0;
-    result = Math.ceil( ( largoPI * altoPI ) * 30 );
+    result = Math.ceil( placaYeso * 30 );
     return result;
 }
 
