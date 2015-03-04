@@ -364,14 +364,17 @@ function generateHtml(type)
             $_html += '</tr>';
             $_html += $_temp_table_e;
 
-
-            $_html += '<br /><br /><br />';
+            // Relleno para el salto de pagina.
+            $_html += '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '</tbody></table>';
 
             // Computo de datos
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.computoAprox').text() +'</td></tr>' + $_temp_table_e;
             $_html += $_temp_table_b + '<tr><td style="width: 100%;">&nbsp;</td></tr>' + $_temp_table_e;
 
-            var $_temp_divs = $html.find('div.item > div');
+            var $_temp_divs = $html.find('div.item > div').not('.resumItem');
 
             $_temp_divs.each(function (k, ht){
                 $_div = $(ht);
@@ -464,7 +467,11 @@ function generateHtml(type)
             $_html += '</tr>';
             $_html += $_temp_table_e;
 
-            $_html += '<br /><br /><br />';
+            // Relleno para el salto de pagina.
+            $_html += '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '</tbody></table>';
 
             // Computo de datos
             $_html += $_temp_table_b + '<tr><td style="width: 100%; background-color: #bbbbba;">' + $html.find('.texto.t1.computoAprox').text() +'</td></tr>' + $_temp_table_e;
@@ -493,6 +500,13 @@ function generateHtml(type)
                     $_html += $_temp_table_e;
                 }
             });
+
+            $_html += '<table cellspacing="0" style="width: 100%; text-align: center; font-size: 10pt;"><tbody>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+            '           <tr><td style="border: medium none;width: 100%;">&nbsp;</td></tr>' +
+                    '</tbody></table>';
+
             return $_html;
         break;
     }
