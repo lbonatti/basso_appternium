@@ -373,9 +373,10 @@
 #m1-ct-1 #infoBlock{
     background: none no-repeat scroll 0 0 #6b7576;
     display: none;
-    height: 90%;
+    height: 100%;
+    left: 0;
     position: absolute;
-    top: 55px;
+    top: 0;
     width: 100%;
 }
 #m1-ct-1 #infoBlock > div{
@@ -383,6 +384,7 @@
     display: none;
     margin: 20px auto;
     padding: 0 0 20px;
+    position: relative;
     width: 90%;
 }
 #m1-ct-1 #infoBlock > div h1{
@@ -401,7 +403,7 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 38px;
-    right: 30px;
+    right: 5%;
     position: absolute;
     top: 20px;
     z-index: 2;

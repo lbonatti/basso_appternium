@@ -382,18 +382,25 @@ function initEditarCalculoT(){
 function openInfo(block){
     $('#infoBlock').fadeIn();
     $('#infoBlock > div').hide();
+
+    var $content = $('#content');
+    var scrolledContent = $content.scrollTop() + 55;
+    var $closeBtn = $('#m1-ct-1 #infoBlock .infoClose');
+
+    $closeBtn.css('top', scrolledContent + 20);
+
     switch (block){
         case 1:
-            $('#infoBlock .modelData1').show();
+            $('#infoBlock .modelData1').css('top', scrolledContent).show();
             break;
         case 2:
-            $('#infoBlock .modelData2').show();
+            $('#infoBlock .modelData2').css('top', scrolledContent).show();
             break;
         case 3:
-            $('#infoBlock .modelData3').show();
+            $('#infoBlock .modelData3').css('top', scrolledContent).show();
             break;
         case 4:
-            $('#infoBlock .modelData4').show();
+            $('#infoBlock .modelData4').css('top', scrolledContent).show();
             break;
     }
 }

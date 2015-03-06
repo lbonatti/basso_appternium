@@ -258,9 +258,9 @@ function saveNewCalcDryWall(showMessage)
     var $calcType = 2;
     if (estadoST == 0) { //Si el calculo es nuevo
         //Guardamos en bd local el calculo
-        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version']
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version'];
         if (logged == true) {
-            var values = [localStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1]
+            var values = [localStorage.getItem('userId'),$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
@@ -276,7 +276,7 @@ function saveNewCalcDryWall(showMessage)
                 }
             })
         } else {
-            var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1]
+            var values = [0,$_name,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {
                     modoLectura(2); //si no hay error, pasamos el estado a solo lectura.
@@ -310,7 +310,7 @@ function saveNewCalcDryWall(showMessage)
             }
         })
 
-        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version']
+        var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version'];
         var values = [localStorage.getItem('userId'),$_name + ' v' + _version,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
         db_insert('calculos',fields, values,'',function(result){
             // No hacemos nada
@@ -366,13 +366,15 @@ function dw_yeso_paredes(largoPI, altoPI, caras, tipo){
 
     if (caras == '2'){
         dig2 = 1;
-        dig4 = 1;
     }
     if (tipo == '1'){
         dig3 = 1;
     }
     if (tipo == '2'){
         dig4 += 2;
+        if(caras == '2'){
+            dig4 += 1;
+        }
     }
     sumaDig = dig2 + dig3 + dig4;
 

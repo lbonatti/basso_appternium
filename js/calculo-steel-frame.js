@@ -391,7 +391,7 @@ function st_save_step1(){
     if (plantas > 1) {
         var entrepiso = $('#m1-csf-1 .paso1 .tipoEntrepiso').find('.selected').data('value');
     }else{
-        entrepiso = 'humedo';
+        entrepiso = 'Húmedo';
         //var entrepiso = $('#m1-csf-1 .paso1 .tipoEntrepiso').find('.selected').data('value');
     }
     var luz = $('#m1-csf-1 .swiper-slide-active p').html();

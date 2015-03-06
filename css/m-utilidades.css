@@ -7,9 +7,17 @@
 #m4-u .option b{
     top: 58%;
 }
+
+.landscape #m4-u .option {
+    width: 25%;
+}
+.landscape #m4-u .option.util2 {
+    border-right: 1px solid #DBD9DA;
+}
+
+
 .option.disabled b{
     color:#D2D0D1;
-
 }
 
 .option.disabled img{
