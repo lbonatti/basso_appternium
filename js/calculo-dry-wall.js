@@ -13,7 +13,7 @@ function eventosDryWall()
             if(result.length > 0) {
                 var editablePName = result[0].project_name;
                 var editablePVars = $.parseJSON(result[0].data).vars;
-                
+
                 var _version = result[0].version;
                 sessionStorage.setItem('editar_version', (_version != '' ? _version : 1));
 
@@ -296,14 +296,22 @@ function saveNewCalcDryWall(showMessage)
     } else if(estadoST == 2) { //Si el calculo ya existe y fue editado
         var pName = sessionStorage.getItem('projectName');
 
-        //var $query = 'UPDATE calculos SET data=\''+$dataSaveBD+'\', modified=\''+currentTime+'\', sync=0 WHERE project_name=\''+pName+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
         var _version = (parseInt(sessionStorage.getItem('editar_version')) + 1);
+        sessionStorage.setItem('editar_version', _version);
+
+        /* Le cambiamos el nombre al proyceto nuevo generado */
+        $_newName = $_name + ' v' + _version;
+        sessionStorage.setItem('projectName', $_newName);
+
+
+
         var $query = 'UPDATE calculos SET version=' + _version + ', modified=\''+currentTime+'\', sync=0 WHERE _id=\''+sessionStorage.getItem('editardesderesumen')+'\' AND user_id='+localStorage.getItem('userId')+' AND calc_type='+$calcType;
 
         db_updateQueryEdit($query, function(result,updatedID) {
             if(result == 'ok'){
                 if (showMessage !== 0) {
-                    alertMsg('Felicitaciones el cálculo "'+$_name+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
+                    alertMsg('Felicitaciones el cálculo "'+$_newName+'" ha sido editado.', '', 'none', 'Cálculo editado', 1);
+                    $('#m1-cdw-1 .projectName').text($_newName);
                 }
                 modoLectura(2);
                 sessionStorage.setItem('newSave', 1);
@@ -311,7 +319,7 @@ function saveNewCalcDryWall(showMessage)
         })
 
         var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version'];
-        var values = [localStorage.getItem('userId'),$_name + ' v' + _version,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
+        var values = [localStorage.getItem('userId'),$_newName,$calcType,$dataSaveBD,currentTime,currentTime,0,0,0,1];
         db_insert('calculos',fields, values,'',function(result){
             // No hacemos nada
         })

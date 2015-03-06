@@ -255,17 +255,19 @@ function generateHtml(type)
             $_html += '</tr>';
             $_html += $_temp_table_e;
 
-            $_html += $_temp_table_b;
-            $_html += '<tr>';
-            $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Entrepisos</td>';
-            $_html += '</tr>';
-            $_html += $_temp_table_e;
-            $_html += $_temp_table_b;
-            $_html += '<tr>';
-            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
-            $_html += '    <td style="width: 90%; text-align: left;">' + $('.item11 .ultimo .texto').html() + '</td>';
-            $_html += '</tr>';
-            $_html += $_temp_table_e;
+            if( $('.item11:visible').length > 0 ) {
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 100%; text-align: left; background-color: #bbbbba;">Entrepisos</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 90%; text-align: left;">' + $('.item11 .ultimo .texto').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+            }
 
             $_html += $_temp_table_b;
             $_html += '<tr>';
