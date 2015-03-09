@@ -9,6 +9,7 @@ $(window).on("orientationchange", function(e) {
 
 
 function adjustBtns(o){
+    console.log(o);
     if(o == 'landscape'){
         var winW = $(window).innerWidth();
         var winH = $(window).innerHeight();
@@ -18,9 +19,21 @@ function adjustBtns(o){
 
         if( $('#m-inicio.ui-page-active').length > 0 ){
             $('.page-content').css('height', heightFix);
+
+            //$('.botongrissuave.option').css('padding-top', theBtnsH);
+            $('.botongrissuave.option').css({
+                'padding-top': '0px',
+                'height': theBtnsH
+            });
+
         }
         if( $('#m1-nuevo-calculo.ui-page-active').length > 0 ){
-            $('.botongrissuave.option').css('padding-top', theBtnsH);
+            //$('.botongrissuave.option').css('padding-top', theBtnsH);
+            $('.botongrissuave.option').css({
+                'padding-top': '0px',
+                'height': theBtnsH
+            });
+
             $('.page-content').css('height', heightFix);
         }
         if( $('#m4-u.ui-page-active').length > 0 ){
@@ -37,10 +50,15 @@ function adjustBtns(o){
     }
 }
 
+$(document).on('pagebeforeshow', function(){
+    $('.botongrissuave.option').hide();
+});
+
 $(document).on("pageshow", function(event) {
 
     setTimeout(function(){
         $(window).trigger("orientationchange");
+        $('.botongrissuave.option').show();
     },100);
 
     var source = event.target || event.srcElement;
