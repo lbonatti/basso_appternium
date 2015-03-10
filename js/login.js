@@ -86,10 +86,12 @@ $(document).ready(function(){
 });
 
 function mensaje(msg){
+    if( !msg || $.trim(msg).length === 0 || msg == '' ){
+        msg = 'Error desconocido';
+    }
     $('.shadow').height( $.mobile.activePage.height()).show();
     $('#dlg-generico').css('top',($.mobile.activePage.height()/2)-150 ).show();
     $('#dlg-generico .mensaje').html(msg);
-
 }
 
 
