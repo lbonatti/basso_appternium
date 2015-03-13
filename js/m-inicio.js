@@ -9,7 +9,7 @@ $(window).on("orientationchange", function(e) {
 
 
 function adjustBtns(o){
-    console.log(o);
+    //console.log(o);
     if(o == 'landscape'){
         var winW = $(window).innerWidth();
         var winH = $(window).innerHeight();

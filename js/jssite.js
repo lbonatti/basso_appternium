@@ -138,14 +138,14 @@ function duplicarCalculo(pName, pId)
             var newName = pName + ' - Copia';
 
             // guardarNuevo
-            var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id'];
+            var fields = ['user_id', 'project_name', 'calc_type', 'data', 'created', 'modified','sync','remove','remote_id','version'];
             var values;
             var currentTime = getCurrentTime();
 
             if (logged == true){
-                values = [localStorage.getItem('userId'),newName,_projType,_projData,currentTime,currentTime,0,0,0];
+                values = [localStorage.getItem('userId'),newName,_projType,_projData,currentTime,currentTime,0,0,0,1];
             }else{
-                values = [0,newName,_projType,_projData,currentTime,currentTime,0,0,0];
+                values = [0,newName,_projType,_projData,currentTime,currentTime,0,0,0,1];
             }
             db_insert('calculos',fields, values,'',function(result){
                 if (result == 'ok') {

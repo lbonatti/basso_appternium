@@ -94,6 +94,7 @@ function getDataFbRegister() {
     }
 
     var data = {
+        isFb: 1,
         uid: userID,
         nombre: firstName,
         apellido: lastName,

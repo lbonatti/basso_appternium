@@ -19,8 +19,8 @@ function syncDB()
 
     $syncContImg = $('#syncOverlay li .spriteSync');
     $syncImg = $('#syncOverlay li .spriteSync .theCircle');
-    $syncContImg.css({'background-position': '0 0', 'height': '47px'});
-    $syncImg.css({'background-position': '0 -47px', 'height': '0'});
+    $syncContImg.css({'background-position': '0 0', 'height': '48px'});
+    $syncImg.css({'background-position': '0 -48px', 'height': '0'});
 
     //Aplicar a los projectos con user 0 (anonimo) el user logueado actualmente.
     db_update('calculos', 'user_id=' + localStorage.getItem('userId'), 'user_id=0');
@@ -93,7 +93,7 @@ function syncLoad()
 function syncNew()
 {
 
-    $syncImg.css({'height': '23px'});
+    $syncImg.css({'height': '24px'});
 
     setTimeout(function(){
         //Buscamos todos aquellos de la DB local que tengan el sync en 0 y que no han sido editados ni borrados
@@ -112,7 +112,7 @@ function syncNew()
 function syncNewEdit()
 {
 
-    $syncImg.css({'height': '47px'});
+    $syncImg.css({'height': '48px'});
 
     setTimeout(function() {
         //Buscamos todos aquellos de la DB local que hayan sido creados y editados de manera offline (nunca existieron en la bd remota)
@@ -131,8 +131,8 @@ function syncNewEdit()
 function syncEdit()
 {
 
-    $syncContImg.css({'background-position': '0 -94px', 'height': '47px'});
-    $syncImg.css({'height': '23px'});
+    $syncContImg.css({'background-position': '0 -96px', 'height': '48px'});
+    $syncImg.css({'height': '24px'});
 
     setTimeout(function() {
         //Buscamos todos aquellos de la DB local que hayan sido editados de manera offline y aun no han sido actualizados en la BD remota

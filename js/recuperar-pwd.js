@@ -1,6 +1,6 @@
 function eventosRecuperarPwd(){
     $('#recuperar-pwd .page-back').unbind('click').click(function(){
-        window.history.back();
+        $.mobile.changePage('login.html');
     })
 
     $('#recuperar-pwd .boton').unbind('click').click(function(){
@@ -36,6 +36,6 @@ function eventosPasswordEnviada(){
         $.mobile.changePage('login.html')
     })
     $('#password-enviada .page-back').unbind('click').click(function(){
-        window.history.back();
+        $.mobile.changePage('login.html');
     })
 }

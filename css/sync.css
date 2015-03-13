@@ -48,19 +48,19 @@
 #syncOverlay li .spriteSync{
     background: url('../img/sprite-sync.png') no-repeat 0 0 scroll transparent;
     display: block;
-    height: 47px;
+    height: 48px;
     margin: 0 auto 12px;
     position: relative;
     transition: height 1s linear 0s;
-    width: 49px;
+    width: 48px;
 }
 #syncOverlay li .spriteSync .theCircle{
-    background: url('../img/sprite-sync.png') no-repeat 0 -47px scroll transparent;
+    background: url('../img/sprite-sync.png') no-repeat 0 -48px scroll transparent;
     display: block;
     height: 0;
     margin: 0 auto 12px;
     overflow: hidden;
     position: absolute;
     transition: height 1s linear 0s;
-    width: 49px;
+    width: 48px;
 }

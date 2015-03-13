@@ -74,6 +74,11 @@ function cargarProveedores() {
     var idSector = $('#m5-pl .dd-sector').val();
     if (idSector == null) idSector = '';
 
+    if( sessionStorage.getItem('proveedoresProvinciaFilter') != null){
+        idProv = sessionStorage.getItem('proveedoresProvinciaFilter');
+        sessionStorage.removeItem('proveedoresProvinciaFilter');
+    }
+
     tempSectoresJson = sectoresProvincias[parseInt(idProv)];
     tempSectoresJson.sort();
     sectoresDropDown = '<option value="" >- Seleccione sector -</option>';
@@ -117,6 +122,10 @@ function cargarProveedores() {
 
     $('#m5-pl .proveedor').unbind('click').click(function() {
         sessionStorage.idProveedor = $(this).attr('data-id');
+
+        var laProv = $('#m5-pl .dd-provincia').val();
+        sessionStorage.setItem('proveedoresProvinciaFilter', laProv);
+
         $.mobile.changePage('m-proveedores.html');
     });
 }
@@ -127,12 +136,19 @@ function cargarPaises(ddPais,ddProvincia){
         var idPais=$(this).val();
         $(ddProvincia+' option').remove();
 
+        var selectedProv = sessionStorage.getItem('proveedoresProvinciaFilter');
+
         $.each( paisesJson , function( key, val ) {
             if(val.Paise.id==idPais){
                 var prov="";
                 $.each( val.Provincia , function( keyP, valP ) {
                     if (provinciasProveedores[idPais].indexOf(parseInt(valP.id)) != -1) {
-                        prov+='<option value="'+valP.id+'">'+valP.nombre+'</option>';
+
+                        if(valP.id == selectedProv){
+                            prov+='<option value="'+valP.id+'" selected="selected">'+valP.nombre+'</option>';
+                        }else{
+                            prov+='<option value="'+valP.id+'">'+valP.nombre+'</option>';
+                        }
                     }
                 });
                 $(ddProvincia).html(prov);
@@ -145,6 +161,7 @@ function cargarPaises(ddPais,ddProvincia){
 
     $(ddProvincia).change(function(){
         //$('#m5-pl .dd-sector').val('');
+        sessionStorage.removeItem('proveedoresProvinciaFilter');
         cargarProveedores();
     });
 
