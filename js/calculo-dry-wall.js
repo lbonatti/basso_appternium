@@ -100,8 +100,8 @@ function eventosDryWall()
 
 function dry_wall_save_step1()
 {
-    var largoParedes = $.trim( $('#m1-cdw-1 .paso1 .i1').val() );
-    var altoParedes = $.trim( $('#m1-cdw-1 .paso1 .i2').val() );
+    var altoParedes = $.trim( $('#m1-cdw-1 .paso1 .i1').val() );
+    var largoParedes = $.trim( $('#m1-cdw-1 .paso1 .i2').val() );
     var espesorPerfil = $('#m1-cdw-1 .paso1 .espesor .selected').data('value');
     var carasPlaca;
     if( $('#m1-cdw-1 .paso1 .placa .op3').hasClass('selected') ){

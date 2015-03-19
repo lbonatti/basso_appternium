@@ -22,7 +22,9 @@
     background-color: #3D464B;
     background-image: none;
 }
-
+#recuperar-pwd .page-content {
+    overflow: hidden;
+}
 #recuperar-pwd .subtitulo {
     margin: 38px auto;
     width: 252px;

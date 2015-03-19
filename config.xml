@@ -6,15 +6,11 @@
         versionCode = "100"
         version   = "1.0.0">
 
-   <name>Ternium</name>
+   <name>Construcción en Acero</name>
 
-   <description>
+   <description>Construcción en Acero</description>
 
-   </description>
-
-   <author href="http://phonegap.com" email="support@phonegap.com">
-
-   </author>
+   <author href="http://phonegap.com" email="support@phonegap.com">Construcción en Acero Dev Team</author>
 
    <!--
        If you do not want any permissions to be added to your app, add the
@@ -89,7 +85,7 @@
 	
 	<gap:plugin name="com.phonegap.plugins.facebookconnect">
         <param name="APP_ID" value="324103614450696" />
-        <param name="APP_NAME" value="ternium" />
+        <param name="APP_NAME" value="Construcción en Acero" />
     </gap:plugin>
 	
 	<feature name="SQLitePlugin">
