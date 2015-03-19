@@ -14,38 +14,38 @@ function adjustBtns(o){
         var winW = $(window).innerWidth();
         var winH = $(window).innerHeight();
         var heightFix = winH - 55; // 55 Header
-        var theBtnsH = winW * .333;
-        var theUtilBtnsH = winW * .25;
+        //var theBtnsH = winW * .333;
+        //var theUtilBtnsH = winW * .25;
 
         if( $('#m-inicio.ui-page-active').length > 0 ){
             $('.page-content').css('height', heightFix);
 
             //$('.botongrissuave.option').css('padding-top', theBtnsH);
-            $('.botongrissuave.option').css({
-                'padding-top': '0px',
-                'height': theBtnsH
-            });
+            //$('.botongrissuave.option').css({
+            //    'padding-top': '0px',
+            //    'height': theBtnsH
+            //});
 
         }
         if( $('#m1-nuevo-calculo.ui-page-active').length > 0 ){
             //$('.botongrissuave.option').css('padding-top', theBtnsH);
-            $('.botongrissuave.option').css({
-                'padding-top': '0px',
-                'height': theBtnsH
-            });
+            //$('.botongrissuave.option').css({
+            //    'padding-top': '0px',
+            //    'height': theBtnsH
+            //});
 
             $('.page-content').css('height', heightFix);
         }
         if( $('#m4-u.ui-page-active').length > 0 ){
-            $('.botongrissuave.option').css('padding-top', theUtilBtnsH);
+            //$('.botongrissuave.option').css('padding-top', '25%');
 
         }
     }else{
         if( $('#m1-nuevo-calculo.ui-page-active').length > 0 ) {
-            $('.botongrissuave.option').css('padding-top', '50%');
+            //$('.botongrissuave.option').css('padding-top', '50%');
         }
         if( $('#m4-u.ui-page-active').length > 0 ){
-            $('.botongrissuave.option').css('padding-top', '50%');
+            //$('.botongrissuave.option').css('padding-top', '50%');
         }
     }
 }
