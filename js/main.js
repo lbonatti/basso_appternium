@@ -299,6 +299,13 @@ function generateHtml(type)
             $_html += '<tr>';
             $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
             $_html += '    <td style="width: 60%; text-align: left;">Paredes Interiores</td>';
+            $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .paredesInteriores .medida').html() + '</td>';
+            $_html += '</tr>';
+            $_html += $_temp_table_e;
+            $_html += $_temp_table_b;
+            $_html += '<tr>';
+            $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+            $_html += '    <td style="width: 60%; text-align: left;">Superficie</td>';
             $_html += '    <td style="width: 30%; text-align: center;">' + $('.item12 .ultimo .medida').html() + '</td>';
             $_html += '</tr>';
             $_html += $_temp_table_e;
@@ -335,6 +342,13 @@ function generateHtml(type)
                 $_html += '<tr>';
                 $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
                 $_html += '    <td style="width: 60%; text-align: left;">Paredes Interiores</td>';
+                $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .paredesInteriores .medida').html() + '</td>';
+                $_html += '</tr>';
+                $_html += $_temp_table_e;
+                $_html += $_temp_table_b;
+                $_html += '<tr>';
+                $_html += '    <td style="width: 10%; text-align: left;">&nbsp;</td>';
+                $_html += '    <td style="width: 60%; text-align: left;">Superficie</td>';
                 $_html += '    <td style="width: 30%; text-align: center;">' + $('.item13 .ultimo .medida').html() + '</td>';
                 $_html += '</tr>';
                 $_html += $_temp_table_e;

@@ -772,7 +772,8 @@ function calculateSF(){
     $('.paso5 .item12 .ancho .medida').text(anchoPB + ' m.');
     $('.paso5 .item12 .largo .medida').text(largoPB + ' m.');
     $('.paso5 .item12 .altura .medida').text(altoPB + ' m.');
-    $('.paso5 .item12 .ultimo .medida').text(paredesInternasPB + ' m.');
+    $('.paso5 .item12 .paredesInteriores .medida').text(paredesInternasPB + ' m.');
+    $('.paso5 .item12 .ultimo .medida').text( (anchoPB * largoPB) + ' m^2.');
 
     if(plantas == 1){
         $('.paso5 .item13').hide();
@@ -780,7 +781,8 @@ function calculateSF(){
     $('.paso5 .item13 .ancho .medida').text(anchoPA + ' m.');
     $('.paso5 .item13 .largo .medida').text(largoPA + ' m.');
     $('.paso5 .item13 .altura .medida').text(altoPA + ' m.');
-    $('.paso5 .item13 .ultimo .medida').text(paredesInternasPA + ' m.');
+    $('.paso5 .item13 .paredesInteriores .medida').text(paredesInternasPA + ' m.');
+    $('.paso5 .item13 .ultimo .medida').text( (anchoPA * largoPA) + ' m^2.');
     $('.paso5 .item14 .ultimo .medida').text(aberturas + ' m.');
 
     if(tipoTecho == 1){
