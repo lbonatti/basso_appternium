@@ -2,6 +2,11 @@ var projectName = '';
 var logged;
 var tipo;
 
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 if (localStorage.getItem('username') == 'anonimo') {
     logged = false;
 } else if(localStorage.getItem('userId')) {
@@ -50,7 +55,7 @@ function eventosNuevoCalculo() {
         e.preventDefault();
         e.stopPropagation();
 
-        projectName = $.trim($('.projectName').val());
+        projectName = $.trim($('.projectName').val()).capitalize();
 
         if (projectName.length === 0) {
             alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Nuevo Calculo', 1);

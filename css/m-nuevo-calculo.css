@@ -22,7 +22,7 @@
 
 
 #m1-nuevo-calculo .titulo {
-    font-family: roboto-thin;
+    font-family: "roboto-thin", sans-serif;
     font-size: 16px;
     color: #fff;
     text-align: center;
@@ -30,23 +30,24 @@
 }
 
 #m1-nuevo-calculo input {
-    width: 90%;
-    margin: 30px auto;
-    display: block;
-    outline: none;
-    border: none;
-    padding: 0px 10px;
-    box-sizing: border-box;
-    font-size: 52px;
-    font-family: roboto-thin;
     background: transparent;
-    color: #4e4d4e;
+    border: none;
     border-bottom: 1px solid #b4b4b4;
+    box-sizing: border-box;
+    color: #4e4d4e;
+    display: block;
+    font-family: "roboto-thin", sans-serif;
+    font-size: 52px;
+    margin: 30px auto;
+    outline: none;
+    padding: 0px 10px;
     text-align: center;
+    text-transform: capitalize;
+    width: 90%;
 }
 
 #m1-nuevo-calculo .subtitulo {
-    font-family: roboto-thin;
+    font-family: "roboto-thin", sans-serif;
     font-size: 14px;
     color: #fff;
     text-align: center;
@@ -104,7 +105,7 @@
     text-align: center;
     color: #fff;
     text-shadow: none;
-    font-family: 'roboto-thin';
+    font-family: "roboto-thin", sans-serif;
     box-sizing: border-box;
     font-size: 20px;
     padding: 15px;
@@ -119,7 +120,7 @@
     text-align: center;
     color: #fff;
     text-shadow: none;
-    font-family: 'roboto-thin';
+    font-family: "roboto-thin", sans-serif;
     box-sizing: border-box;
     font-size: 16px;
     line-height: 45px;

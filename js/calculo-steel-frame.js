@@ -199,23 +199,27 @@ function eventosSteelFrame()
         $pie = 4;
 
         if (!$(this).hasClass('disabled')) { //Si el boton está habilitado
-            if (stepCompleted >= 3) {
 
+            if (stepCompleted >= 3) {
 
                 $('#m1-csf-1 .paso2 .siguiente-paso')[0].click();
                 if (aEditarStepError != 0) return;
 
                 $('#m1-csf-1 .paso3 .siguiente-paso')[0].click();
+
+
+                $('#m1-csf-1 .pie .p5').unbind('click'); // Evitar que se clickee la solapa
+
                 setTimeout(function (){
                     if (aEditarStepError != 0) {
                         return;
                     }
                     snapper.enable();
-                    setEstadoPie($pie, true);
+                    $('#m1-csf-1 .pie .p5').click(function(){   // Habilitar click de nuevo.
+                        p5Click();
+                    });
+                    setEstadoPie($pie);
                 }, 500)
-
-
-
 
             } else {
                 alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
@@ -231,8 +235,11 @@ function eventosSteelFrame()
     });
 
     $('#m1-csf-1 .pie .p5').unbind('click').click(function(){
-        $pie = 5;
+        p5Click();
+    });
 
+    function p5Click(){
+        $pie = 5;
         if (stepCompleted == 99) {
             //alertMsg('Debe completar los pasos anteriores', '', 'none', '', 1);
             $('#m1-csf-1 .paso4 .siguiente-paso')[0].click();
@@ -241,7 +248,7 @@ function eventosSteelFrame()
         }
 
         sessionStorage.setItem('pasoSTactual', $pie);
-    });
+    }
 
     eventosCalculosGenerales();
 
@@ -311,6 +318,7 @@ function eventosCalculosGenerales(){
 }
 
 function setEstadoPie(paso, tab) {
+
     var pestana = $('.pie .p' + paso);
     var todasPestanas = $('.pie div');
 
