@@ -52,10 +52,11 @@
 }
 #m-u-c .panel-3{
     background-color: #F7F5F6;
-    height: 20%;
+    min-height: 20%;
 }
 #m-u-c .panel-3 .result{
     height: 100%;
+    min-height: 124px;
     position: relative;
     width: 98%;
 }
@@ -64,7 +65,7 @@
     font-family: roboto-thin;
     font-size: 30px;
     height: 84px;
-    left: 10%;
+    padding: 0 20px;
     line-height: 40px;
     margin: auto;
     position: absolute;

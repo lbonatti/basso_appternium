@@ -103,6 +103,11 @@
                 var mySwiper2;
                 $(document).ready(function () {
 
+                    $('.panel-3 .result').css('height', $('.panel-3').height());
+                    if( $(window).width() < 330 ){
+                        $('#m-u-c .panel-3 .result p').css('height', 124);
+                    }
+
                     deviceBackBtn();
 
                     $('.field_1').on('input', function () {

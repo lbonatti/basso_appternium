@@ -158,7 +158,7 @@ function dw_calculateResult()
     }
 
     var montantePaneles = dw_montante_paneles_interiores(largoParedes, altoParedes);
-    var soleraPaneles = dw_solera_paneles_interiores(altoParedes);
+    var soleraPaneles = dw_solera_paneles_interiores(largoParedes);
     var aislacion = dw_aislacion(largoParedes, altoParedes);
     var yesoParedes = dw_yeso_paredes(largoParedes, altoParedes, carasPlaca, tipoPlaca);
     var tornillosT1 = dw_tornillosT1(largoParedes, altoParedes);
