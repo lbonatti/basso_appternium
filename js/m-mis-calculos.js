@@ -68,7 +68,7 @@ function refreshList(){
 }
 function showMisCalculos(){
     var $query =  'SELECT * FROM calculos WHERE user_id='+localStorage.getItem('userId')+' AND remove=0 ORDER BY project_name ASC';
-    var abcd = {0:{},1:{},2:{},3:{},4:{},5:{},6:{},7:{},8:{},9:{},A:{}, B:{}, C:{}, D:{}, E:{}, F:{}, G:{}, H:{}, I:{}, J:{}, K:{}, L:{}, M:{}, N:{}, Ñ:{}, O:{}, P:{}, Q:{}, R:{}, S:{}, T:{}, U:{}, V:{}, W:{}, X:{}, Y:{}, Z:{}}
+    var abcd = {'.':{},0:{},1:{},2:{},3:{},4:{},5:{},6:{},7:{},8:{},9:{},A:{}, B:{}, C:{}, D:{}, E:{}, F:{}, G:{}, H:{}, I:{}, J:{}, K:{}, L:{}, M:{}, N:{}, Ñ:{}, O:{}, P:{}, Q:{}, R:{}, S:{}, T:{}, U:{}, V:{}, W:{}, X:{}, Y:{}, Z:{}}
     var $html = '';
     var $icono = [];
     var $date = [];
