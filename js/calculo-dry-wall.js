@@ -22,10 +22,10 @@ function eventosDryWall()
                 $('#m1-cdw-1 .projectName').text(editablePName);
 
                 // Alto paredes
-                $('#m1-cdw-1 .paso1 .i1').val(editablePVars.largoParedes);
+                $('#m1-cdw-1 .paso1 .i1').val(editablePVars.altoParedes);
 
                 // largo paredes
-                $('#m1-cdw-1 .paso1 .i2').val(editablePVars.altoParedes);
+                $('#m1-cdw-1 .paso1 .i2').val(editablePVars.largoParedes);
 
                 // espesor perfil
                 if (editablePVars.espesorPerfil == '1') {

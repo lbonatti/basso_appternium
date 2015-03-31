@@ -92,7 +92,7 @@
             <h1>Conversor de medidas</h1>
             <a class="page-back"></a>
 
-            <link href="js/idangerous/idangerous.swiper.css" rel="stylesheet"/>
+            <link href="js/idangerous/idangerous.swiper.css" rel="stylesheet" />
             <script src="js/idangerous/idangerous.swiper.js"></script>
 
             <script type="text/javascript">
@@ -103,15 +103,18 @@
                 var mySwiper2;
                 $(document).ready(function () {
 
-                    $('.panel-3 .result').css('height', $('.panel-3').height());
+                    $('.panel-3 .result').css('height', $('.panel-3').height() );
                     if( $(window).width() < 330 ){
-                        $('#m-u-c .panel-3 .result p').css('height', 124);
+                        $('#m-u-c .panel-3 .result p').css({
+                            'height': 84,
+                            'font-size': 26
+                        });
                     }
 
                     deviceBackBtn();
 
                     $('.field_1').on('input', function () {
-                        $this = $(this);
+                        var $this = $(this);
                         if( $.trim($this.val()).length == 0 ){
                             $this.val(0);
                         }
@@ -149,8 +152,9 @@
                 function calcConversion(where) {
                     // where -> Si la accion viene del input o del slider. 0=input 1=slider
 
-                    if ($.trim($('.field_1').val()).length > 0) {
-                        field1Val = parseFloat($('.field_1').val());
+                    var field1Val = $('.field_1').val();
+                    if ($.trim( field1Val ).length > 0) {
+                        field1Val = parseFloat( field1Val );
                     } else {
                         field1Val = 0;
                     }
@@ -161,69 +165,71 @@
                         alertMsg('Debes completar la medida 1', '', '', 'Campo Necesario', 1);
                     } else {
                         var operation = activeSlide1Unit + activeSlide2Unit;
+                        var $rField = $('.resultField');
+                        var $rFrom = $('.result .from');
+                        var $rTo = $('.result .to');
                         switch (parseInt(operation)) {
                             case 14:
                                 //mm a pies
-                                $('.resultField').text((field1Val * 0.0033).toFixed(2));
-
-                                $('.result .from').text('1 Milímetro');
-                                $('.result .to').text('0.0033 Pie');
+                                $rField.text((field1Val * 0.0033).toFixed(2));
+                                $rFrom.text('1 Milímetro');
+                                $rTo.text('0.0033 Pie');
                                 break;
                             case 15:
                                 //mm a pulgadas
-                                $('.resultField').text((field1Val * 0.0394).toFixed(2));
+                                $rField.text((field1Val * 0.0394).toFixed(2));
 
-                                $('.result .from').text('1 Milímetro');
-                                $('.result .to').text('0.0394 Pulgadas');
+                                $rFrom.text('1 Milímetro');
+                                $rTo.text('0.0394 Pulgadas');
                                 break;
                             case 16:
                                 //mm a millas
-                                $('.resultField').text((field1Val * 0.000001).toFixed(2));
+                                $rField.text((field1Val * 0.000001).toFixed(2));
 
-                                $('.result .from').text('1 Milímetro');
-                                $('.result .to').text('0.000001 Milla');
+                                $rFrom.text('1 Milímetro');
+                                $rTo.text('0.000001 Milla');
                                 break;
                             case 24:
                                 //cm a pies
-                                $('.resultField').text((field1Val * 0.032808).toFixed(2));
+                                $rField.text((field1Val * 0.032808).toFixed(2));
 
-                                $('.result .from').text('1 Centímetro');
-                                $('.result .to').text('0.0328 Pie');
+                                $rFrom.text('1 Centímetro');
+                                $rTo.text('0.0328 Pie');
                                 break;
                             case 25:
                                 //cm a pulgadas
-                                $('.resultField').text((field1Val * 0.39370).toFixed(2));
+                                $rField.text((field1Val * 0.39370).toFixed(2));
 
-                                $('.result .from').text('1 Centímetro');
-                                $('.result .to').text('0.3937 Pulgada');
+                                $rFrom.text('1 Centímetro');
+                                $rTo.text('0.3937 Pulgada');
                                 break;
                             case 26:
                                 //cm a millas
-                                $('.resultField').text((field1Val * 0.0000062137).toFixed(2));
+                                $rField.text((field1Val * 0.0000062137).toFixed(2));
 
-                                $('.result .from').text('1 Centímetro');
-                                $('.result .to').text('0.000006 Milla');
+                                $rFrom.text('1 Centímetro');
+                                $rTo.text('0.000006 Milla');
                                 break;
                             case 34:
                                 //pulgadas a pies
-                                $('.resultField').text((field1Val * 0.0833).toFixed(2));
+                                $rField.text((field1Val * 0.0833).toFixed(2));
 
-                                $('.result .from').text('1 Pulgada');
-                                $('.result .to').text('0.0833 Pie');
+                                $rFrom.text('1 Pulgada');
+                                $rTo.text('0.0833 Pie');
                                 break;
                             case 35:
                                 //pulgadas a pulgadas
-                                $('.resultField').text((field1Val).toFixed(2));
+                                $rField.text((field1Val).toFixed(2));
 
-                                $('.result .from').text('1 Pulgada');
-                                $('.result .to').text('1 Pulgada');
+                                $rFrom.text('1 Pulgada');
+                                $rTo.text('1 Pulgada');
                                 break;
                             case 36:
                                 //pulgadas a millas
-                                $('.resultField').text((field1Val * 0.000016).toFixed(2));
+                                $rField.text((field1Val * 0.000016).toFixed(2));
 
-                                $('.result .from').text('1 Pulgada');
-                                $('.result .to').text('0.000016 Milla');
+                                $rFrom.text('1 Pulgada');
+                                $rTo.text('0.000016 Milla');
                                 break;
                         }
                     }
@@ -234,7 +240,7 @@
 
             <div class="panel-1">
                 <div class="left">
-                    <input class="field_1" data-role="none" type="number" step="0.01" step="0.01" value="0"/>
+                    <input class="field_1" data-role="none" type="number" step="0.01" value="0"/>
                 </div>
                 <div class="right">
                     <div class="swiper-container">

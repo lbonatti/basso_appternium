@@ -269,7 +269,17 @@ function activarDotMenu(){
     $('.menu-options').hide();
 }
 
+function showDecimals(n, d){
+    var r = n;
+    d = typeof d !== 'undefined' ? d : 2;
+    if(Math.round(n) !== n) {
+        r = n.toFixed(d);
+    }
+    return r;
+}
 
+
+// Funcion para poner primer letra de oracion en mayuscula
 function ucfirst(str) {
     str += '';
     var f = str.charAt(0)

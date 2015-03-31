@@ -37,6 +37,14 @@
     padding-top: 27px;
     margin-top: 15px;
 }
+#m1-cdw-1 .paredesLeyenda{
+    color: #7D7D7D;
+    float: left;
+    font-family: "roboto-regular", "Open Sans", sans-serif;
+    font-size: 12px;
+    margin: 4px 14px;
+    text-shadow: none;
+}
 
 #m1-cdw-1 input{
     outline: none;

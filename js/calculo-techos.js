@@ -182,7 +182,7 @@ function roof_save_step(){
 }
 
 function calculateResult(values){
-    var aCubrir = values.largo * values.ancho;
+    var aCubrir = showDecimals( values.largo * values.ancho );
     var anchoUtil = 0;
     switch (values.modelo){
         case 'A-1086':
@@ -200,7 +200,7 @@ function calculateResult(values){
     }
     var cantChapas = Math.ceil( values.ancho / anchoUtil  );
     var cantLinealesChapas = Math.ceil( values.largo );
-    var aislacion = values.largo * values.ancho * 1;
+    var aislacion = showDecimals( values.largo * values.ancho * 1 );
     var cantTornillos = Math.ceil( aCubrir * 6 );
 
 
@@ -208,11 +208,11 @@ function calculateResult(values){
     $('#m1-ct-1 .paso2 .item10 .largo .medida').html(values.largo + ' m.');
     $('#m1-ct-1 .paso2 .item10 .ancho .medida').html(values.ancho + ' m.');
     if(values.modelo == 'A-1086'){
-        $('#m1-ct-1 .paso2 .item11 .tipo').html('Acanalada');
+        $('#m1-ct-1 .paso2 .item11 .tipo .texto').html('Acanalada');
     }else{
-        $('#m1-ct-1 .paso2 .item11 .tipo').html('Trapezoidal');
+        $('#m1-ct-1 .paso2 .item11 .tipo .texto').html('Trapezoidal');
     }
-    $('#m1-ct-1 .paso2 .item11 .ultimo').html(values.modelo);
+    $('#m1-ct-1 .paso2 .item11 .ultimo .texto').html(values.modelo);
 
 
     $('#m1-ct-1 .paso2 .resultado-techo').html(aCubrir);
