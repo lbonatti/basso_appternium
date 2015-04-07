@@ -24,6 +24,13 @@ function eventosNuevoCalculo() {
             //$('#m1-nuevo-calculo .blockType').show();
         });
 
+
+        $('#m1-nuevo-calculo input').on('paste keyup', function(){
+            var $this = $(this);
+            var valu = $this.val();
+            $this.val( valu.capitalize() );
+        });
+
     },1000);
 
 
@@ -55,7 +62,7 @@ function eventosNuevoCalculo() {
         e.preventDefault();
         e.stopPropagation();
 
-        projectName = $.trim($('.projectName').val()).capitalize();
+        projectName = $.trim($('.projectName').val());
 
         if (projectName.length === 0) {
             alertMsg('Debe ingresar un nombre de proyecto', '', 'none', 'Nuevo Calculo', 1);
