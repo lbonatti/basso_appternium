@@ -22,7 +22,11 @@ function heightBug(){
     var winH = $(window).height();
     var pageCH = winH - 55;
     var $pageC = $('.ui-page-active .page-content');
-    $pageC.css('height', pageCH);
+    if( $('#u-tos.ui-page-active').length > 0 ){
+        $pageC.css('height', 'inherit');
+    }else{
+        $pageC.css('height', pageCH);
+    }
 }
 
 

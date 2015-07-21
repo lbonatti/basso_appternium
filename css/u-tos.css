@@ -85,5 +85,12 @@
 #u-tos .info span{
     font-family: roboto-thin;
 }
+#u-tos .boton.btnChangeCalc{
+    float: none;
+    display: block;
+    margin: 18px auto;
+    text-decoration: none;
+    font-size: 18px;
+}
 
 
