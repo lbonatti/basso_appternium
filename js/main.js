@@ -5,6 +5,12 @@ $(document).on("pageinit", function(event){
 });
 
 $(document).on("pageshow", function(event) {
+    if( $('#u-tos.ui-page-active').length > 0 ){
+        $('#u-tos .btnChangeCalc').on('click', function(e){
+            e.preventDefault();
+            window.open('http://www.ternium.com/argentina/appsteelframing/privacypolicy.html', '_system', 'location=yes');
+        });
+    }
     setTimeout(function(){
         heightBug();
 
