@@ -40,7 +40,6 @@ function adjustBtns(o){
             //$('.botongrissuave.option').css('padding-top', '25%');
 
         }
-
     }else{
         if( $('#m1-nuevo-calculo.ui-page-active').length > 0 ) {
             //$('.botongrissuave.option').css('padding-top', '50%');
